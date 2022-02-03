@@ -98,16 +98,16 @@ class DriverSignupController extends LoginController
         if ($validate_exists_mobile) {
             $this->throwCustomException('Provided mobile has already been taken');
         }
-        if ($request->has('refferal_code')) {
-            // Validate Referral code
-            $referred_user_record = $this->user->belongsTorole(Role::DRIVER)->where('refferal_code', $request->refferal_code)->first();
-            if (!$referred_user_record) {
-                $this->throwCustomException('Provided Referral code is not valid', 'refferal_code');
-            }
-            // Add referral commission to the referred user
-            $referred_user_record = $referred_user_record->driver;
-            $this->addCommissionToRefferedUser($referred_user_record);
-        }
+        // if ($request->has('refferal_code')) {
+        //     // Validate Referral code
+        //     $referred_user_record = $this->user->belongsTorole(Role::DRIVER)->where('refferal_code', $request->refferal_code)->first();
+        //     if (!$referred_user_record) {
+        //         $this->throwCustomException('Provided Referral code is not valid', 'refferal_code');
+        //     }
+        //     // Add referral commission to the referred user
+        //     $referred_user_record = $referred_user_record->driver;
+        //     $this->addCommissionToRefferedUser($referred_user_record);
+        // }
 
         if (!$country_code) {
             $this->throwCustomException('unable to find country');
