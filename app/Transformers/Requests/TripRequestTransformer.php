@@ -76,6 +76,8 @@ class TripRequestTransformer extends Transformer
             'rental_package_name'=>$request->rentalPackage?$request->rentalPackage->name:'-',
             'show_drop_location'=>false,
             'show_otp_feature'=>true,
+            'request_eta_amount'=>$request->request_eta_amount
+            
 
         ];
 

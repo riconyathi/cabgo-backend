@@ -73,7 +73,10 @@ class CronTripRequestTransformer extends Transformer
             'is_rental'=>(bool)$request->is_rental,
             'rental_package_id'=>$request->rental_package_id,
             'rental_package_name'=>$request->rentalPackage?$request->rentalPackage->name:'-',
-
+            'show_drop_location'=>false,
+            'show_otp_feature'=>true,
+            'request_eta_amount'=>$request->request_eta_amount
+            
 
         ];
 
