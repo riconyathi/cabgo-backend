@@ -75,8 +75,8 @@ class CronTripRequestTransformer extends Transformer
             'rental_package_name'=>$request->rentalPackage?$request->rentalPackage->name:'-',
             'show_drop_location'=>false,
             'show_otp_feature'=>true,
-            'request_eta_amount'=>$request->request_eta_amount
-            
+            'request_eta_amount'=>$request->request_eta_amount,
+            'show_request_eta_amount'=>true
 
         ];
 
