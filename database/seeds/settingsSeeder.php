@@ -103,7 +103,7 @@ class SettingsSeeder extends Seeder
         ],
         SettingSlug::APP_NAME => [
             'category'=>SettingCategory::GENERAL,
-            'value' => 'Tagyourtaxi',
+            'value' => 'Tagxi',
             'field' => SettingValueType::TEXT,
             'option_value' => null,
             'group_name' => null,
@@ -202,7 +202,7 @@ class SettingsSeeder extends Seeder
         ],
             SettingSlug::BRAINTREE_DEFAULT_MERCHANT => [
             'category'=>SettingCategory::INSTALLATION,
-            'value' => 'tagyourtaxi',
+            'value' => 'tagxi',
             'field' => SettingValueType::TEXT,
             'option_value' => null,
             'group_name' => SettingSubGroup::BRAINTREE_SETTINGS,

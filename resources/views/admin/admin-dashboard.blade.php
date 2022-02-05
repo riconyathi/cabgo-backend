@@ -135,7 +135,7 @@
                         </h4>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item flexbox" href="#">
-                            <span>Tagyourtaxi</span>
+                            <span>Tagxi</span>
                             <span class="badge badge-pill badge-dark">5</span>
                         </a>
                         <a class="dropdown-item" href="#">Tagyourtruck</a>
@@ -449,7 +449,7 @@
                                                 </h4>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item flexbox" href="#">
-                                                    <span>Tagyourtaxi</span>
+                                                    <span>Tagxi</span>
                                                     <span class="badge badge-pill badge-dark">5</span>
                                                 </a>
                                                 <a class="dropdown-item" href="#">Tagyourtruck</a>
@@ -626,7 +626,7 @@
                                                 </h4>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item flexbox" href="#">
-                                                    <span>Tagyourtaxi</span>
+                                                    <span>Tagxi</span>
                                                     <span class="badge badge-pill badge-dark">5</span>
                                                 </a>
                                                 <a class="dropdown-item" href="#">Tagyourtruck</a>
@@ -765,7 +765,7 @@
                                                 </h4>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item flexbox" href="#">
-                                                    <span>Tagyourtaxi</span>
+                                                    <span>Tagxi</span>
                                                     <span class="badge badge-pill badge-dark">5</span>
                                                 </a>
                                                 <a class="dropdown-item" href="#">Tagyourtruck</a>
@@ -879,7 +879,7 @@
                                                     </h4>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item flexbox" href="#">
-                                                        <span>Tagyourtaxi</span>
+                                                        <span>Tagxi</span>
                                                         <span class="badge badge-pill badge-dark">5</span>
                                                     </a>
                                                     <a class="dropdown-item" href="#">Tagyourtruck</a>
@@ -1115,7 +1115,7 @@
                                                     </h4>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item flexbox" href="#">
-                                                        <span>Tagyourtaxi</span>
+                                                        <span>Tagxi</span>
                                                         <span class="badge badge-pill badge-dark">5</span>
                                                     </a>
                                                     <a class="dropdown-item" href="#">Tagyourtruck</a>
@@ -1211,7 +1211,6 @@
 
     </section>
 
-    <script src="http://localhost/tagyourtaxi/future/public/assets/vendor_components/jquery.peity/jquery.peity.js"></script>
 
     <script>
         $(function() {

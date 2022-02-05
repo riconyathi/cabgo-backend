@@ -24,7 +24,7 @@ Major things to do:
 
         ```java
         public interface URL {
-           String BaseURL = "https://admin.tagyourtaxi.com/";
+           String BaseURL = "https://admin.tagxi.com/";
         }
         
         ```
@@ -50,7 +50,7 @@ Major things to do:
 4. After created & enabled the billing from google cloud & map console
         * We need to create nodes in firebase realtime database, please find the sample json database below.
 
-    - [Sample-json](https://admin.tagyourtaxi.com/firebase-database.json)
+    - [Sample-json](https://admin.tagxi.com/firebase-database.json)
 
         * call_FB_OTP node is used to configure whether the firebase otp should used or dummy otp should use for our testing purpose
 

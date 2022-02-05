@@ -22,8 +22,8 @@ You are almost finished and ready to setup your back end part. once you setup je
 * Create a database using phpmyadmin
 * Setup DB config in .env file
     ```php
-    APP_URL=http://tagyourtaxi.com/future/public
-    NODE_APP_URL=http://tagyourtaxi.com
+    APP_URL=http://tagxi.com/future/public
+    NODE_APP_URL=http://tagxi.com
     NODE_APP_PORT=3000
     SOCKET_PORT=3001
     ```
@@ -37,7 +37,7 @@ DB_PASSWORD=tyt_user@2020
 
    * Sample .env file
    ```php
-APP_NAME=Tagyourtaxi
+APP_NAME=tagxi
 APP_ENV=local
 APP_KEY=base64:8zIYjbZv9brVUOy0XdixW2Oxpkg7S7DCe20ptOMbaRU=
 APP_DEBUG=true
@@ -68,8 +68,8 @@ MAIL_PORT=587
 MAIL_USERNAME=apikey
 MAIL_PASSWORD=SG.TFEnUh_uSBS65fg.qAmjKNd4LUxxowWdtklHgamytGu_mIBGMQhHVINFZiY
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=support@tagyourtaxi.com
-MAIL_FROM_NAME="tagyourtaxi"
+MAIL_FROM_ADDRESS=support@tagxi.com
+MAIL_FROM_NAME="tagxi"
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 AWS_DEFAULT_REGION=us-east-1
@@ -92,10 +92,10 @@ SOCKET_SSL_CERT_PATH="/var/www/html/fullchain.pem"
 FIREBASE_CREDENTIALS=/var/www/html/tyt-backend/public/push-configurations/firebase.json
 FACEBOOK_CLIENT_ID=304838750171093
 FACEBOOK_CLIENT_SECRET=7ece5eca2fe9f042407153d3beac459c
-FACEBOOK_REDIRECT=https://admin.tagyourtaxi.com/login/callback/facebook
+FACEBOOK_REDIRECT=https://admin.tagxi.com/login/callback/facebook
 GOOGLE_CLIENT_ID=656697310655-63gcms9rdtc85sk3iga03b8bfcht5sdj.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=13ChTdELEf8gUXI7SwyQK3Dn
-GOOGLE_REDIRECT=https://admin.tagyourtaxi.com/login/callback/google
+GOOGLE_REDIRECT=https://admin.tagxi.com/login/callback/google
 FIREBASE_DATABASE_URL=https://cabeezie.firebaseio.com/
 PAYMENT_GATEWAY=braintree
 GOOGLE_MAP_KEY=AIzaSyBeVRuuicwooRpk7ErjCEQCwu0OQowVt9I

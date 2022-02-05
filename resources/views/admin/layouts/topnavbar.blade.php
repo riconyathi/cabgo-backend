@@ -11,10 +11,10 @@
          <b class="logo-mini">
              <span class="light-logo" style="display: flex;align-items: end;"><img
                      src="{{ app_logo() ?? asset('images/email/logo.svg') }}" style="width: 26px;padding-right: 5px;"
-                     alt="logo">{{ app_name() ?? 'Tagyourtaxi' }}</span>
+                     alt="logo">{{ app_name() ?? 'Tagxi' }}</span>
              <span class="dark-logo" style="display: flex;align-items: end;"><img
                      src="{{ app_logo() ?? asset('images/email/logo.svg') }}" style="width: 26px;padding-right: 5px;"
-                     alt="logo">{{ app_name() ?? 'Tagyourtaxi' }}</span>
+                     alt="logo">{{ app_name() ?? 'Tagxi' }}</span>
          </b>
          <!-- logo-->
          <!--  <span class="logo-lg">

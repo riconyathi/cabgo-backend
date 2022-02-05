@@ -22,8 +22,8 @@
     <div class="footer-space"></div>
 
     <p class="footer-text">
-        <a href="https://tagyourtaxi.com" target="_blank">Home</a>
+        <a href="https://ondemandappz.com" target="_blank">Home</a>
         <span class="divider">|</span>
-        <a href="https://tagyourtaxi.com/contact-us" target="_blank">Contact Us</a>
+        <a href="https://ondemandappz.com/contact-us" target="_blank">Contact Us</a>
     </p>
 </div>
