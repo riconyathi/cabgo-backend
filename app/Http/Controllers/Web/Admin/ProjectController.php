@@ -331,20 +331,7 @@ class ProjectController extends BaseController
         $message = trans('succes_messages.project_flavour_updated_succesfully');
         return redirect('project/added/flavour/'.$project_id)->with('success', $message);
     }
-    //  public function toggleflavoueStatus(User $user){
-    //     $status = $user->active == 1 ? 0 : 1;
-    //     $user->update([
-    //         'active' => $status
-    //     ]);
-
-    //     $project = PocClient::where('user_id',$user->id)->first();
-
-    //     $project_id = $project->project_id;
-
-    //     $message = trans('succes_messages.client_status_changed_succesfully');
-    //     return redirect('project/added/clients/'.$project_id)->with('success', $message);
-    // }
-
+    
     /**
     * Delete flavour    *
     */

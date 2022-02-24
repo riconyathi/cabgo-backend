@@ -330,14 +330,12 @@ class DriverController extends BaseController
         $message = trans('succes_messages.driver_deleted_succesfully');
         return $message;
 
-        // return redirect('drivers')->with('success', $message);
     }
 
     public function getCarModel()
     {
         $carModel = request()->car_make;
 
-        // return CarModel::where('make_id',$carModel)->where('active','1')->get();
         return CarModel::active()->whereMakeId($carModel)->get();
     }
 
@@ -374,19 +372,13 @@ class DriverController extends BaseController
     }
 
     public function hireDriver(Request $request){
-        // dd(auth()->user()->owner->id);
         Validator::make($request->all(),[
             'driver' => 'required|exists:drivers,uuid'
         ])->validate();
 
         $uuid = $request->driver;
         $driver = Driver::whereUuid($uuid)->first();
-        // dd($driver);
-
-        // if($driver->owner_id){
-        //     $message = trans('success_messages.driver_already_hired_by_one');
-        //     return back()->with('warning', $message);
-        // }
+        
         
         if(!OwnerHiredDriver::whereDriverId($driver->id)->whereOwnerId(auth()->user()->owner->id)->exists()){
             OwnerHiredDriver::create([
@@ -402,7 +394,6 @@ class DriverController extends BaseController
             'owner_id' => auth()->user()->owner->id
         ]);
 
-        // $driver->update(['owner_id' => auth()->user()->owner->id]);
 
         $message = trans('succes_messages.driver_hired_succesfully');
 
@@ -427,7 +418,6 @@ class DriverController extends BaseController
 
         $driver->privilegedVehicle()->delete();
         foreach($request->fleets as $fleet){
-             // dd($driver->privilegedVehicle());
             $driver->privilegedVehicle()->create([
                 'fleet_id' => $fleet,
                 'owner_id' => auth()->user()->owner->id

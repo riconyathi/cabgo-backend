@@ -108,7 +108,6 @@ class ServiceLocationController extends BaseController
         $message = trans('succes_messages.service_location_deleted_succesfully');
 
         return $message;
-        // return redirect('service_location')->with('success', $message);
     }
 
     public function getCurrencyByCountry(Request $request)

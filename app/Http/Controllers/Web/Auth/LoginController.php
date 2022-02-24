@@ -159,9 +159,7 @@ class LoginController extends ApiController
      */
     protected function loginUserAccount($request, $role, $needsToken = true, array $conditions = [])
     {
-        // if ($needsToken && !$request->has(['client_id', 'client_secret'])) {
-        //     return $this->respondBadRequest('Missing password grant client credentials');
-        // }
+        
 
         if ($request->has('social_id')) {
             return $this->setLoginIdentifier('social_id')

@@ -50,6 +50,7 @@
     @endif
     <td>
 
+    @if(env('APP_FOR')!='demo')
     <div class="dropdown">
     <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('view_pages.action')
     </button>
@@ -72,6 +73,9 @@
             <i class="fa fa-trash-o"></i>@lang('view_pages.delete')</a> -->
         </div>
     </div>
+    @else
+    --
+    @endif
 
     </td>
     </tr>

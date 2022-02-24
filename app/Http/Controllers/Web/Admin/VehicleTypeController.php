@@ -103,7 +103,6 @@ class VehicleTypeController extends BaseController
      */
     public function store(CreateVehicleTypeRequest $request)
     {
-        // cache()->tags('vehilce_types')->flush();
         $created_params = $request->only(['name', 'capacity','is_accept_share_ride','description','supported_vehicles','short_description']);
         if ($uploadedFile = $this->getValidatedUpload('icon', $request)) {
             $created_params['icon'] = $this->imageUploader->file($uploadedFile)
@@ -191,6 +190,5 @@ class VehicleTypeController extends BaseController
 
         $message = trans('succes_messages.vehicle_type_deleted_succesfully');
         return $message;
-        // return redirect('types')->with('success', $message);
     }
 }

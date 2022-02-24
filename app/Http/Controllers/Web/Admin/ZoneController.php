@@ -89,7 +89,6 @@ class ZoneController extends BaseController
         $main_menu = 'map';
         $sub_menu = 'zone';
 
-        // $admins = User::doesNotBelongToRole(RoleSlug::SUPER_ADMIN)->get();
         $services = ServiceLocation::companyKey()->whereActive(true)->get();
         $cities = $this->getCityBySearch();
 
@@ -153,7 +152,6 @@ class ZoneController extends BaseController
      */
     public function store(CreateZoneRequest $request)
     {
-        // dd($request->all());
         $created_params = $request->only(['unit']);
         $created_params['service_location_id'] = $request->admin_id;
         $set = [];
@@ -185,21 +183,11 @@ class ZoneController extends BaseController
 
         $created_params['coordinates'] = $multi_polygon;
 
-        // dd($created_params);
         $created_params['company_key'] = auth()->user()->company_key;
 
         $zone = $this->zone->create($created_params);
 
-        // foreach ($input as $key => $value) {
-        //     $zone->zoneBound()->create([
-        //         'north' => $value[0],
-        //         'east' => $value[1],
-        //         'south' => $value[2],
-        //         'west' => $value[3]
-        //         ]);
-        // }
-
-        // return true;
+        
         $message = trans('succes_messages.zone_added_succesfully');
 
         return redirect('zone')->with('success', $message);
@@ -344,26 +332,18 @@ class ZoneController extends BaseController
             'price_type' => zoneRideType::RIDENOW,
             'base_price' => $request->ride_now_base_price,
             'price_per_distance' => $request->ride_now_price_per_distance,
-            // 'free_waiting_time' => $request->ride_now_free_waiting_time,
-            // 'waiting_charge' => $request->ride_now_waiting_charge,
             'cancellation_fee' => $request->ride_now_cancellation_fee,
             'base_distance' => $request->ride_now_base_distance ? $request->ride_now_base_distance : 0,
             'price_per_time' => $request->ride_now_price_per_time ? $request->ride_now_price_per_time : 0.00,
-            // 'admin_service_fee' => $request->ride_now_admin_service_fee ? $request->ride_now_admin_service_fee : 0.00,
-            // 'admin_service_fee_type' => $request->ride_now_admin_service_fee_type ? $request->ride_now_admin_service_fee_type : 0
         ]);
 
         $zoneType->zoneTypePrice()->create([
             'price_type' => zoneRideType::RIDELATER,
             'base_price' => $request->ride_later_base_price,
             'price_per_distance' => $request->ride_later_price_per_distance,
-            // 'free_waiting_time' => $request->ride_later_free_waiting_time,
-            // 'waiting_charge' => $request->ride_later_waiting_charge,
             'cancellation_fee' => $request->ride_later_cancellation_fee,
             'base_distance' => $request->ride_later_base_distance ? $request->ride_later_base_distance : 0,
             'price_per_time' => $request->ride_later_price_per_time ? $request->ride_later_price_per_time : 0.00,
-            // 'admin_service_fee' => $request->ride_later_admin_service_fee ? $request->ride_later_admin_service_fee : 0.00,
-            // 'admin_service_fee_type' => $request->ride_later_admin_service_fee_type ? $request->ride_later_admin_service_fee_type : 0
         ]);
 
         $message = trans('succes_messages.type_assigned_succesfully');
@@ -380,7 +360,6 @@ class ZoneController extends BaseController
         $zone->delete();
         $message = trans('succes_messages.zone_deleted_succesfully');
         return $message;
-        // return redirect('zone')->with('success', $message);
     }
 
 
@@ -416,25 +395,18 @@ class ZoneController extends BaseController
         $zone_type->zoneTypePrice()->where('price_type', zoneRideType::RIDENOW)->update([
             'base_price' => $request->ride_now_base_price,
             'price_per_distance' => $request->ride_now_price_per_distance,
-            // 'free_waiting_time' => $request->ride_now_free_waiting_time,
-            // 'waiting_charge' => $request->ride_now_waiting_charge,
             'cancellation_fee' => $request->ride_now_cancellation_fee,
             'base_distance' => $request->ride_now_base_distance ? $request->ride_now_base_distance : 0,
             'price_per_time' => $request->ride_now_price_per_time ? $request->ride_now_price_per_time : 0.00,
-            // 'admin_service_fee' => $request->ride_now_admin_service_fee ? $request->ride_now_admin_service_fee : 0.00,
-            // 'admin_service_fee_type' => $request->ride_now_admin_service_fee_type ? $request->ride_now_admin_service_fee_type : 0
+            
         ]);
 
         $zone_type->zoneTypePrice()->where('price_type', zoneRideType::RIDELATER)->update([
             'base_price' => $request->ride_later_base_price,
             'price_per_distance' => $request->ride_later_price_per_distance,
-            // 'free_waiting_time' => $request->ride_later_free_waiting_time,
-            // 'waiting_charge' => $request->ride_later_waiting_charge,
             'cancellation_fee' => $request->ride_later_cancellation_fee,
             'base_distance' => $request->ride_later_base_distance ? $request->ride_later_base_distance : 0,
             'price_per_time' => $request->ride_later_price_per_time ? $request->ride_later_price_per_time : 0.00,
-            // 'admin_service_fee' => $request->ride_later_admin_service_fee ? $request->ride_later_admin_service_fee : 0.00,
-            // 'admin_service_fee_type' => $request->ride_later_admin_service_fee_type ? $request->ride_later_admin_service_fee_type : 0
         ]);
 
         $message = trans('succes_messages.type_assigned_succesfully');
@@ -708,14 +680,14 @@ class ZoneController extends BaseController
     public function PackagetoggleStatus(ZoneTypePackagePrice $package)
     {
         $status = $package->active == 1 ? 0 : 1;
-        // dd($status);
+        
         $pack = ZoneTypePackagePrice::find($package->id);
         $pack->active = $status;
         $pack->save();
-        // $package->update(['active' => $status]);
+        
 
         $message = trans('succes_messages.zone_type_package_status_changed_succesfully');
         return redirect()->back()->with('success', $message);
-        // return $message;
+        
     }
 }

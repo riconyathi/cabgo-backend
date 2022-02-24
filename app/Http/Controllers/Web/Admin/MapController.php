@@ -23,7 +23,6 @@ class MapController extends Controller
                 $q->where('id', $request->zone_id);
             })->get();
 
-        // return $results;
         } else {
             $results = RequestRequest::companyKey()->get();
         }

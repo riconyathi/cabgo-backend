@@ -321,77 +321,12 @@ class AdminViewController extends BaseController
         // set default locale if none selected @TODO
         Session::put('applocale', 'en');
 
-        // $userCount = User::companyKey()->belongsToRole(Role::USER)->count();
-        // $driverCount = User::companyKey()->belongsToRole(Role::DRIVER)->count();
-        // $completedTrips = Request::companyKey()->whereIsCompleted(true)->count();
-        // $cancelledTrips = Request::companyKey()->whereIsCancelled(true)->count();
-
-        // $card = [];
-        // $card['users']          = ['name' => 'user_count', 'display_name' => 'Total Users', 'count' => $userCount, 'icon' => 'fa fa-user-plus text-info'];
-        // $card['drivers']        = ['name' => 'driver_count', 'display_name' => 'Total Drivers', 'count' => $driverCount, 'icon' => 'fa fa-id-card text-warning'];
-        // $card['completed_trip'] = ['name' => 'trips_completed', 'display_name' => 'Completed Trips', 'count' => $completedTrips, 'icon' => 'fa fa-flag-checkered text-green'];
-        // $card['cancelled_trip'] = ['name' => 'trips_cancelled', 'display_name' => 'Cancelled Trips', 'count' => $cancelledTrips, 'icon' => 'fa fa-ban text-red'];
-
-        // // Bar chart- Trip overview
-        // $to = Carbon::now()->month; //Get current month
-        // $from = Carbon::now()->subMonths(5)->month; // Get last six months data
-        // $data = [];
-        // foreach (range($from, $to) as $month) {
-        //     $data[$month]['y'] = Carbon::now()->month($month)->shortEnglishMonth;
-        //     $data[$month]['a'] = Request::companyKey()->whereMonth('created_at', $month)->whereIsCompleted(true)->count();
-        //     $data[$month]['b'] = Request::companyKey()->whereMonth('created_at', $month)->whereIsCancelled(true)->count();
-        // }
-
-        // // Earnings Overview
-        // $earningsData = [];
-        // foreach (range($from, $to) as $month) {
-        //     $earningsData[$month]['y'] = $month;
-        //     $earningsData[$month]['a'] = RequestBill::whereHas('requestDetail', function ($query) {
-        //         $query->where('company_key', auth()->user()->company_key);
-        //     })->whereMonth('created_at', $month)->sum('total_amount');
-        // }
-
-        // if (access()->hasRole(Role::DEVELOPER) || access()->hasRole(Role::CLIENT)) {
-        //     return redirect('builds/projects');
-        // }
-
+        
         $page = trans('pages_names.dashboard');
 
         $main_menu = 'dashboard';
 
         $sub_menu = null;
-
-        // // Map view
-        // $default_lat = env('DEFAULT_LAT');
-        // $default_lng = env('DEFAULT_LNG');
-
-        // $zone = Zone::active()->companyKey()->first();
-
-        // if ($zone) {
-        //     if (access()->hasRole(Role::SUPER_ADMIN) || access()->hasRole(Role::OWNER)) {
-        //     } else {
-        //         $admin_detail = auth()->user()->admin;
-        //         $zone = $admin_detail->serviceLocationDetail->zones()->first();
-        //     }
-
-        //     $coordinates = $zone->coordinates->toArray();
-
-        //     $multi_polygon = [];
-
-        //     foreach ($coordinates as $key => $coordinate) {
-        //         $polygon = [];
-        //         foreach ($coordinate[0] as $key => $point) {
-        //             $pp = new \stdClass;
-        //             $pp->lat = $point->getLat();
-        //             $pp->lng = $point->getLng();
-        //             $polygon[] = $pp;
-        //         }
-        //         $multi_polygon[] = $polygon;
-        //     }
-
-        //     $default_lat = $polygon[0]->lat;
-        //     $default_lng = $polygon[0]->lng;
-        // }
 
         //card
        

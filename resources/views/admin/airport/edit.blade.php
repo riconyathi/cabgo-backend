@@ -202,10 +202,7 @@ var default_lat = '{{$default_lat}}';
 var default_lng = '{{$default_lng}}';
 var data= '{{$zone_coordinates}}';
 let zones = JSON.parse(data.replace(/&quot;/g,'"'));
-// functie care copiaza textul primit ca parametru in clipboard
-// Primeste ca parametri:
-// text - document.getElementById('id-element').innerHTML,
-// copymsg - document.getElementById('id-element')
+
 function copyToClipboard(text, copymsg) {
     var temp = document.createElement('input');
     temp.type = 'input';

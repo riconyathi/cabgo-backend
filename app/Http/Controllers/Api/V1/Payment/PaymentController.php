@@ -322,12 +322,18 @@ class PaymentController extends BaseController
                 $this->throwCustomException('Yout wallet balance is too low than your requested amount');
 
             }
+
+            // $user_info->withdrawalRequestsHistory()->where('status',WithdrawalRequestStatus::REQUESTED)->exists();
+
+            $exists_request = WalletWithdrawalRequest::where('driver_id',$user_info->id)->where('status',0)->exists();
+            
+            if($exists_request){
+                $this->throwCustomException('You cannot make multiple request. please wait for your existing request approval');
+            }
+
         }
 
-        $user_info->withdrawalRequestsHistory()->where('status',WithdrawalRequestStatus::REQUESTED)->exists();
-        if($user_info){
-            $this->throwCustomException('You cannot make multiple request. please wait for your existing request approval');
-        }
+        
 
         WalletWithdrawalRequest::create($created_params);
 

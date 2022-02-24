@@ -134,7 +134,7 @@ class EtaTransformer extends Transformer
 
 
 
-        // $driver_to_pickup = $this->db_query_previous_pickup_dropoff($driver_lat, $driver_lng, $pick_lat, $pick_lng);
+        
 
         // $driver_to_pickup_response = json_decode($driver_to_pickup->json_result);
         if ($zone_type->zone->unit==1) {
@@ -186,10 +186,7 @@ class EtaTransformer extends Transformer
         $response['unit_in_words_without_lang'] = $unit_in_words;
         $response['unit_in_words'] = $translated_unit_in_words;
         $response['driver_arival_estimation'] = $driver_arival_estimation;
-        // dd($ride);
-
-        // dd($previous_pickup_dropoff);
-
+        
 
 
         return $response;
@@ -281,9 +278,7 @@ class EtaTransformer extends Transformer
         $discount_tax_amount = $coupon_applied_sub_total * ($tax_percent / 100);
         $discounted_total_price = $coupon_applied_sub_total + $discount_tax_amount + $discount_admin_commision;
 
-        // if (!request()->has('drop_lat') && !request()->has('drop_lng')) {
-        //     $total_price = 0;
-        // }
+        
         $pickup_duration = $pickup_time_in_seconds / 60;
         $dropoff_duration = $dropoff_time_in_seconds / 60;
         $wait_duration = $wait_time_in_seconds / 60;
@@ -320,7 +315,6 @@ class EtaTransformer extends Transformer
     //vehicle type id should be zone_type id
     private function findNearestDriver($pick_lat, $pick_lng, $vehicle_type)
     {
-        // $settings = json_decode(Redis::get('settings'));
 
         $driver_search_radius = get_settings('driver_search_radius')?:30;
 

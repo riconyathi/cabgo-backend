@@ -57,7 +57,6 @@ class DriverDocumentController extends BaseController
         if ($needed_document->driverDocument) {
             $driverDoc = $needed_document->driverDocument->where('driver_id', $driver->id)->whereDocumentId($needed_document->id)->first();
         }
-        // dd($needed_document);
 
         $page = trans('pages_names.driver_document');
         $main_menu = 'drivers';
@@ -68,7 +67,6 @@ class DriverDocumentController extends BaseController
 
     public function uploadDocument(DriverDocumentUploadRequest $request, Driver $driver, DriverNeededDocument $needed_document)
     {
-        // dd("hi");
         $created_params = $request->only(['identify_number','expiry_date']);
 
         $created_params['driver_id'] = $driver->id;
@@ -151,10 +149,7 @@ class DriverDocumentController extends BaseController
         $socket_data->success_message  = $socket_success_message;
         $socket_data->data  = $socket_params;
 
-        // Form a socket sturcture using users'id and message with event name
-        // $socket_message = structure_for_socket($driver_details->id, 'driver', $socket_data, 'approval_status');
-        // dispatch(new NotifyViaSocket('transfer_msg', $socket_message));
-
+        
         dispatch(new NotifyViaMqtt('approval_status_'.$driver_details->id, json_encode($socket_data), $driver_details->id));
 
         $user->notify(new AndroidPushNotification($title, $body, $push_data));

@@ -132,7 +132,6 @@ class UserController extends BaseController
 
         $user->attachRole(RoleSlug::USER);
 
-        // $user->userDetails()->create($created_params);
 
         $message = trans('succes_messages.user_added_succesfully');
 
@@ -204,7 +203,6 @@ class UserController extends BaseController
         $message = trans('succes_messages.user_deleted_succesfully');
 
         return $message;
-        // return redirect('users')->with('success', $message);
     }
 
     public function UserTripRequest(QueryFilterContract $queryFilter, User $user)
@@ -227,7 +225,6 @@ class UserController extends BaseController
          $query = RequestRequest::where('user_id',$user->id);
         $results = $queryFilter->builder($query)->customFilter(new RequestFilter)->defaultSort('-created_at')->paginate();
 
-        // dd($results);
 
         return view('admin.users.user-request-list', compact('results','card','main_menu','sub_menu'));
     }

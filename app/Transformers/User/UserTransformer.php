@@ -55,6 +55,7 @@ class UserTransformer extends Transformer
             'rating' => round($user->rating, 2),
             'no_of_ratings' => $user->no_of_ratings,
             'refferal_code'=>$user->refferal_code,
+            'country_code'=>$user->countryDetail->code,
             'currency_code'=>$user->countryDetail->currency_code,
             'currency_symbol'=>$user->countryDetail->currency_symbol,
             'map_key'=>env('GOOGLE_MAP_KEY'),

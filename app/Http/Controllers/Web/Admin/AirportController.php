@@ -183,16 +183,7 @@ class AirportController extends BaseController
 
         $airport = $this->airport->create($created_params);
 
-        // foreach ($input as $key => $value) {
-        //     $airport->zoneBound()->create([
-        //         'north' => $value[0],
-        //         'east' => $value[1],
-        //         'south' => $value[2],
-        //         'west' => $value[3]
-        //         ]);
-        // }
-
-        // return true;
+        
         $message = trans('succes_messages.airport_added_succesfully');
 
         return redirect('airport')->with('success', $message);

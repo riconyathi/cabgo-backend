@@ -65,12 +65,7 @@ class FleetController extends BaseController
 
         $carmake = CarMake::active()->get();
          $carmodel = CarModel::active()->get();
-        // $types = AreaType::whereActive(true);
-
-        // if(auth()->user()->hasRole(RoleSlug::OWNER)){
-        //     $types = $types->whereServiceLocationId(auth()->user()->owner->service_location_id);
-        // }
-        // $types = $types->get();
+       
         $types = VehicleType::active()->get();
 
         return view('admin.fleets.create', compact('page', 'main_menu', 'sub_menu','carmake','types','carmodel'));
@@ -129,7 +124,7 @@ class FleetController extends BaseController
 
         $carmake = CarMake::active()->get();
          $carmodel = CarModel::active()->get();
-        // $types = AreaType::whereActive(true)->whereServiceLocationId($fleet->user->owner->service_location_id)->get();
+        
         $types = VehicleType::active()->get();
 
         return view('admin.fleets.update', compact('page', 'item', 'main_menu', 'sub_menu','types','carmake','carmodel'));
@@ -141,12 +136,7 @@ class FleetController extends BaseController
         $updated_params = $request->only(['brand','model','license_number','permission_number']);
         $updated_params['vehicle_type'] = $request->type;
 
-        // if($request->has('class_one'))
-        //     $updated_params['class_one'] = true;
-
-        // if($request->has('class_two'))
-        //     $updated_params['class_two'] = true;
-
+        
         $fleet->update($updated_params);
    
         if ($uploadedFile = $this->getValidatedUpload('registration_certificate', $request)) {

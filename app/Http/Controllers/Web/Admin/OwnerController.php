@@ -56,7 +56,6 @@ class OwnerController extends BaseController
         $page = trans('pages_names.owners');
         $main_menu = 'manage_owners';
         $sub_menu = $area->name;
-        // ->whereServiceLocationId($area->id)
         $activeOwners = Owner::whereApprove(true)->whereServiceLocationId($area->id)->count();
         $inactiveOwners = Owner::whereApprove(false)->whereServiceLocationId($area->id)->count();
 
@@ -186,10 +185,7 @@ class OwnerController extends BaseController
         $status = $owner->approve == 1 ? 0 : 1;
         
         if($status){
-            // if(!$owner->user->email_confirmed){
-            //     $message = trans('success_messages.owner_email_not_verified');
-            //     return redirect("owners/by_area/$owner->service_location_id")->with('warning', $message);
-            // }
+            
     
             $err = false;
             $neededDoc = OwnerNeededDocument::where('active','1')->count();

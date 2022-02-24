@@ -201,13 +201,6 @@ class DriverController extends BaseController
 
         $user->attachRole(RoleSlug::DRIVER);
 
-        // if (access()->hasRole(RoleSlug::ADMIN))
-        // {
-        //  $this->validateAdmin();
-
-        //  $created_params['admin_id'] = $this->user->id;
-
-        // }
 
         $created_params['active'] = false;
 
@@ -345,11 +338,7 @@ class DriverController extends BaseController
         $socket_data->success_message  = $socket_success_message;
         $socket_data->data  = $socket_params;
 
-        // return response()->json($socket_data);
-        // Form a socket sturcture using users'id and message with event name
-        // $socket_message = structure_for_socket($driver_details->id, 'driver', $socket_data, 'approval_status');
-        // dispatch(new NotifyViaSocket('transfer_msg', $socket_message));
-
+         
         dispatch(new NotifyViaMqtt('approval_status_'.$driver_details->id, json_encode($socket_data), $driver_details->id));
 
         $user->notify(new AndroidPushNotification($title, $body, $push_data));
@@ -413,26 +402,14 @@ class DriverController extends BaseController
         $sub_menu = 'driver_details';
         $items = $driver->id;
 
-
-
-        //  $query = RequestRequest::where('driver_id',$driver->id);
-        // $results = $queryFilter->builder($query)->customFilter(new RequestFilter)->defaultSort('-created_at')->paginate();
-
-        // dd($results);
-
         return view('admin.drivers.driver-request-list', compact('card','main_menu','sub_menu','items'));
     }
      public function DriverTripRequest(QueryFilterContract $queryFilter, Driver $driver)
         {
-           
             $items = $driver->id;
-
-
 
              $query = RequestRequest::where('driver_id',$driver->id);
             $results = $queryFilter->builder($query)->customFilter(new RequestFilter)->defaultSort('-created_at')->paginate();
-
-            // dd($results);
 
             return view('admin.drivers.driver-request-list-view', compact('results','items'));
         }
@@ -463,19 +440,15 @@ class DriverController extends BaseController
     public function StoreDriverPaymentHistory(AddDriverMoneyToWalletRequest $request,Driver $driver)
     {
         
-         $user_currency_code = env('SYSTEM_DEFAULT_CURRENCY');
-         // $user_currency_code = auth()->user()->countryDetail->currency_code?:env('SYSTEM_DEFAULT_CURRENCY');
-
-          // Convert the amount to USD to any currency
+        $user_currency_code = env('SYSTEM_DEFAULT_CURRENCY');
+         
         $converted_amount_array =  convert_currency_to_usd($user_currency_code, $request->input('amount'));
 
-        // dd($converted_amount_array);
         $converted_amount = $converted_amount_array['converted_amount'];
         $converted_type = $converted_amount_array['converted_type'];
         $conversion = $converted_type.':'.$request->amount.'-'.$converted_amount;
         $transaction_id = Str::random(6);
-        // dd($transaction_id);
-
+        
        
             $wallet_model = new DriverWallet();
             $wallet_add_history_model = new DriverWalletHistory();
@@ -487,7 +460,6 @@ class DriverController extends BaseController
         $user_wallet->amount_added += $request->amount;
         $user_wallet->amount_balance += $request->amount;
         $user_wallet->save();
-        // $user_wallet->fresh();
 
         $wallet_add_history_model::create([
             'user_id'=>$user_id,
@@ -579,8 +551,7 @@ class DriverController extends BaseController
         $amount = DriverWallet::where('user_id',$driver->id)->first();
 
          $card = [];
-        // $card['total_amount'] = ['name' => 'total_amount', 'display_name' => 'Total Amount ', 'count' => $amount->amount_added, 'icon' => 'fa fa-flag-checkered text-green'];
-        // $card['amount_spent'] = ['name' => 'amount_spent', 'display_name' => 'Spend Amount ', 'count' => $amount->amount_spent, 'icon' => 'fa fa-ban text-red'];
+        
         $card['balance_amount'] = ['name' => 'balance_amount', 'display_name' => 'Balance Amount', 'count' => $amount->amount_balance, 'icon' => 'fa fa-ban text-red'];
 
         return view('admin.drivers.DriverWalletWithdrawalRequestDetail', compact('page', 'main_menu', 'sub_menu','history','card'));
@@ -593,8 +564,6 @@ class DriverController extends BaseController
      * 
      * */
     public function approveWithdrawalRequest(WalletWithdrawalRequest $wallet_withdrawal_request){
-
-        // dd($wallet_withdrawal_request);
 
         $driver_wallet = DriverWallet::firstOrCreate([
             'user_id'=>$wallet_withdrawal_request->driver_id]);

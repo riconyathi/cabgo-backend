@@ -195,9 +195,7 @@ margin: 5px;
     });
 
     function getCoordsByKeyword(keyword){
-        // $('#loader').css('display','block');
-        // $('#map').css('display','none');
-
+        
         $.ajax({
             url: "{{ url('zone/coords/by_keyword') }}/"+keyword,
             data: '',
@@ -205,11 +203,6 @@ margin: 5px;
             success: function(results){
                 if(results){
                     $('#city_polygon').val(results);
-
-                    // setTimeout(function(){
-                        // $('#loader').css('display','none');
-                        // $('#map').css('display','block');
-                    // }, 1000);
                     window.onload = initMap()
                 }
             }

@@ -58,7 +58,7 @@ class DispatcherCreateRequestController extends BaseController
         * assing driver to the trip depends the assignment method
         * send emails and sms & push notifications to the user& drivers as well.
         */
-        // dd($request->all());
+        
         // Validate payment option is available.
         if ($request->has('is_later') && $request->is_later) {
             return $this->createRideLater($request);
@@ -138,11 +138,7 @@ class DispatcherCreateRequestController extends BaseController
             $selected_drivers[$i]["created_at"] = date('Y-m-d H:i:s');
             $selected_drivers[$i]["updated_at"] = date('Y-m-d H:i:s');
             if ($i == 0) {
-                // if ($driver->user->login_by == 1) {
-                //     $notification_android[] = $driver->user->device_token;
-                // } else {
-                //     $notification_ios[] = $driver->user->device_token;
-                // }
+                
             }
             $i++;
         }
@@ -157,10 +153,7 @@ class DispatcherCreateRequestController extends BaseController
         $mqtt_object->result = $request_result;
 
         $driver = Driver::find($first_meta_driver);
-        // // Form a socket sturcture using users'id and message with event name
-        // $socket_message = structure_for_socket($driver->id, 'driver', $socket_data, 'create_request');
-        // dispatch(new NotifyViaSocket('transfer_msg', $socket_message));
-
+       
         // Send notify via Mqtt
         dispatch(new NotifyViaMqtt('create_request_'.$driver->id, json_encode($mqtt_object), $driver->id));
 
