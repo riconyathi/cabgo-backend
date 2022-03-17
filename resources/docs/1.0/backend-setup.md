@@ -149,33 +149,17 @@ FIREBASE_DATABASE_URL=https://your-app.firebaseio.com/
 ![image](../../images/user-manual-docs/firebase-web-config.png)
 
 
-* Find the below configs in all the files of the project and replace your updated config.
-```javascript
-  apiKey: "AIzaSyBVEkdnjgbnjgjkerngjrjfjfmr",
-  authDomain: "your-app.firebaseapp.com",
-  databaseURL: "https://your-app.firebaseio.com",
-  projectId: "your-app",
-  storageBucket: "your-app.appspot.com",
-  messagingSenderId: "1545454545454545",
-  appId: "1:656697310655:web:nsbff5r454erjwhfjhfj54",
-  measurementId: "G-TJZ64EJUNJB0"
-
-```
-
-* you may replace in below files
-    * resources/views/admin/map/map-data.blade.php
-    * resources/views/admin/map/map.blade.php
-    * resources/views/track-request.blade.php
-    * resources/views/admin/driver-profile-dashboard-view.blade.php
-    * resources/views/admin/driver-profile-dashboard.blade.php
-    * resources/views/admin/index-demo.blade.php
-    * resources/views/admin/layouts/common_scripts.blade.php
-    * resources/views/dispatch/home-new.blade.php
-    * resources/views/dispatch/home.blade.php
-    * resources/views/dispatch/request_detail.blade.php
 ```php
 GOOGLE_MAP_KEY=AIzaSyBeTRs1icwooRpk7ErjCEQCwu0OQowVt9I
 ```
+
+* Generate firebase.json content and replace it in the below paths. Please find the image for how to generate firebase.json file.
+
+    * node/firebase.json
+    * public/push-configurations/firebase.json
+
+![image](../../images/user-manual-docs/project-settings–firebase-console.png)
+
 
 <a name="section-6"></a>
 ## Queue Setup
