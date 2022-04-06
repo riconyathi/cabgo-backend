@@ -54,6 +54,8 @@ class DriverProfileTransformer extends Transformer
             'uploaded_document'=>false,
             'declined_reason'=>$user->reason,
             'service_location_id'=>$user->service_location_id,
+            'service_location_name'=>$user->serviceLocation->name,
+            'vehicle_year'=>$user->vehicle_year,
             'vehicle_type_id'=> $user->vehicle_type,
             'vehicle_type_name'=>$user->vehicle_type_name,
             'car_make'=>$user->car_make,
