@@ -53,6 +53,7 @@ class DriverTransformer extends Transformer
             'uploaded_document'=>false,
             'declined_reason'=>$user->reason,
             'service_location_id'=>$user->service_location_id,
+            'service_location_name'=>$user->serviceLocation->name,
             'vehicle_type_id'=> $user->vehicle_type,
             'vehicle_type_name'=>$user->vehicle_type_name,
             'car_make'=>$user->car_make,
@@ -69,7 +70,7 @@ class DriverTransformer extends Transformer
             'refferal_code'=>$user->user->refferal_code,
             'map_key'=>env('GOOGLE_MAP_KEY'),
             'company_key'=>$user->user->company_key,
-            'show_instant_ride'=>true,
+            'show_instant_ride'=>false,
             'currency_symbol' => $user->user->countryDetail?$user->user->countryDetail->currency_symbol:'₹'
         ];
 
