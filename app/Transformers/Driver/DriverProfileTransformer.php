@@ -60,7 +60,7 @@ class DriverProfileTransformer extends Transformer
             'vehicle_year'=>$user->vehicle_year,
             'vehicle_type_id'=> $user->vehicle_type,
             'vehicle_type_name'=>$user->vehicle_type_name,
-            'vehicle_type_image'=>$user->vehicle_type_name,
+            'vehicle_type_image'=>$user->vehicle_type_image,
             'car_make'=>$user->car_make,
             'car_model'=>$user->car_model,
             'car_make_name'=>$user->car_make_name,
