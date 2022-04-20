@@ -40,7 +40,6 @@ class CreateRequestController extends BaseController
     * @bodyParam drop_lng double required drop lng of the user
     * @bodyParam drivers json required drivers json can be fetch from firebase db
     * @bodyParam vehicle_type string required id of zone_type_id
-    * @bodyParam ride_type tinyInteger required type of ride whther ride now or scheduele trip
     * @bodyParam payment_opt tinyInteger required type of ride whther cash or card, wallet('0 => card,1 => cash,2 => wallet)
     * @bodyParam pick_address string required pickup address of the trip request
     * @bodyParam drop_address string required drop address of the trip request
@@ -96,11 +95,7 @@ class CreateRequestController extends BaseController
         $currency_code = $service_location->currency_code;
         //Find the zone using the pickup coordinates & get the nearest drivers
 
-        if ($request->drivers) {
-            $nearest_drivers =  $this->getDrivers($request, $type_id);
-        } else {
-            $nearest_drivers =  $this->getFirebaseDrivers($request, $type_id);
-        }
+        $nearest_drivers =  $this->getFirebaseDrivers($request, $type_id);
 
         // fetch unit from zone
         $unit = $zone_type_detail->zone->unit;
@@ -155,14 +150,13 @@ class CreateRequestController extends BaseController
         }
 
         $request_params['company_key'] = auth()->user()->company_key;
-        
+
         if($request->has('request_eta_amount') && $request->request_eta_amount){
 
            $request_params['request_eta_amount'] = $request->request_eta_amount;
 
         }
         
-
         // store request details to db
         // DB::beginTransaction();
         // try {
@@ -177,6 +171,12 @@ class CreateRequestController extends BaseController
             'drop_address'=>$request->drop_address];
         // store request place details
         $request_detail->requestPlace()->create($request_place_params);
+        $request_result =  fractal($request_detail, new TripRequestTransformer)->parseIncludes('userDetail');
+        
+        // Send Request to the nearest Drivers
+         if (!$nearest_drivers) {
+                goto no_drivers_available;
+            }
         $selected_drivers = [];
         $i = 0;
         foreach ($nearest_drivers as $driver) {
@@ -192,7 +192,6 @@ class CreateRequestController extends BaseController
 
         // Send notification to the very first driver
         $first_meta_driver = $selected_drivers[0]['driver_id'];
-        $request_result =  fractal($request_detail, new TripRequestTransformer)->parseIncludes('userDetail');
         $pus_request_detail = $request_result->toJson();
         $push_data = ['notification_enum'=>PushEnums::REQUEST_CREATED,'result'=>$pus_request_detail];
         $title = trans('push_notifications.new_request_title');
@@ -206,11 +205,11 @@ class CreateRequestController extends BaseController
         $driver = Driver::find($first_meta_driver);
 
         $notifable_driver = $driver->user;
-        $notifable_driver->notify(new AndroidPushNotification($title, $body, $push_data));
+        $notifable_driver->notify(new AndroidPushNotification($title, $body));
 
         $device_token = $notifable_driver->fcm_token;
         // Send FCM Notification
-        dispatch(new FcmPushNotification($title,$push_data,$device_token));
+        // dispatch(new FcmPushNotification($title,$push_data,$device_token));
 
 
         // Form a socket sturcture using users'id and message with event name
@@ -223,6 +222,9 @@ class CreateRequestController extends BaseController
         foreach ($selected_drivers as $key => $selected_driver) {
             $request_detail->requestMeta()->create($selected_driver);
         }
+
+        no_drivers_available:
+
         // @TODO send sms & email to the user
         // } catch (\Exception $e) {
         //     DB::rollBack();
@@ -236,54 +238,6 @@ class CreateRequestController extends BaseController
     }
 
 
-    /**
-    * Get nearest Drivers using requested co-ordinates
-    *  @param request
-    */
-    public function getDrivers($request, $type_id)
-    {
-        $driver_detail = [];
-        $driver_ids = [];
-
-        if (!$request->drivers) {
-            $this->throwCustomException('no drivers available');
-        }
-        foreach (json_decode($request->drivers) as $key => $driver) {
-            $driver_data = new \stdClass();
-            $driver_data->id = (integer)$driver->driver_id;
-            $driver_data->lat = (double)$driver->driver_lat;
-            $driver_data->lng = (double)$driver->driver_lng;
-            $driver_ids[]= $driver_data->id;
-            $driver_detail []= $driver_data;
-        }
-
-        $pick_lat = $request->pick_lat;
-        $pick_lng = $request->pick_lng;
-        $driver_search_radius = get_settings('driver_search_radius')?:30;
-
-        $haversine = "(6371 * acos(cos(radians($pick_lat)) * cos(radians(pick_lat)) * cos(radians(pick_lng) - radians($pick_lng)) + sin(radians($pick_lat)) * sin(radians(pick_lat))))";
-
-        // Get Drivers who are all going to accept or reject the some request that nears the user's current location.
-
-        // whereHas('request.requestPlace', function ($query) use ($haversine,$driver_search_radius) {
-        //     $query->select('request_places.*')->selectRaw("{$haversine} AS distance")
-        //         ->whereRaw("{$haversine} < ?", [$driver_search_radius]);
-        // })->
-        $meta_drivers = RequestMeta::whereIn('driver_id', $driver_ids)->pluck('driver_id')->toArray();
-
-        // $driver_haversine = "(6371 * acos(cos(radians($pick_lat)) * cos(radians(latitude)) * cos(radians(longitude) - radians($pick_lng)) + sin(radians($pick_lat)) * sin(radians(latitude))))";
-        // get nearest driver exclude who are all struck with request meta
-        // ->whereHas('driverDetail', function ($query) use ($driver_haversine,$driver_search_radius,$type_id) {
-        //     $query->select('driver_details.*')->selectRaw("{$driver_haversine} AS distance")
-        //         ->whereRaw("{$driver_haversine} < ?", [$driver_search_radius]);
-        // })
-        $drivers = Driver::with(['user'])->where('active', 1)->where('approve', 1)->where('available', 1)->where('vehicle_type', $type_id)->whereIn('id', $driver_ids)->whereNotIn('id', $meta_drivers)->limit(10)->get();
-
-        if ($drivers->isEmpty()) {
-            $this->throwCustomException('all drivers are busy');
-        }
-        return $drivers;
-    }
     /**
     * Get Drivers from firebase
     */
@@ -300,7 +254,7 @@ class CreateRequestController extends BaseController
         if ($res->getStatusCode() == 200) {
             $fire_drivers = \GuzzleHttp\json_decode($res->getBody()->getContents());
             if (empty($fire_drivers->data)) {
-                $this->throwCustomException('no drivers available');
+                // $this->throwCustomException('no drivers available');
             } else {
                 $nearest_driver_ids = [];
                 foreach ($fire_drivers->data as $key => $fire_driver) {
@@ -318,9 +272,9 @@ class CreateRequestController extends BaseController
 
                 $nearest_drivers = Driver::where('active', 1)->where('approve', 1)->where('available', 1)->where('vehicle_type', $type_id)->whereIn('id', $nearest_driver_ids)->whereNotIn('id', $meta_drivers)->limit(10)->get();
 
-                if ($nearest_drivers->isEmpty()) {
-                    $this->throwCustomException('all drivers are busy');
-                }
+                // if ($nearest_drivers->isEmpty()) {
+                //     $this->throwCustomException('all drivers are busy');
+                // }
 
                 return $nearest_drivers;
             }
@@ -380,7 +334,8 @@ class CreateRequestController extends BaseController
             'payment_opt'=>$request->payment_opt,
             'unit'=>$unit,
             'requested_currency_code'=>$currency_code,
-            'service_location_id'=>$service_location->id];
+            'service_location_id'=>$service_location->id,
+            'ride_otp'=>rand(1111, 9999)];
 
         $request_params['company_key'] = auth()->user()->company_key;
         

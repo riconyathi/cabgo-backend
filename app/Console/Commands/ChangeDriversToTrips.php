@@ -80,7 +80,7 @@ class ChangeDriversToTrips extends Command
 
             $no_driver_request_ids = array_diff($array_request_ids, $array_updated_request_ids);
             // Send Notifications to users
-            dispatch(new NoDriverFoundNotifyJob($no_driver_request_ids));
+            // dispatch(new NoDriverFoundNotifyJob($no_driver_request_ids));
             // Send Request to other drivers
             dispatch(new SendRequestToNextDriversJob($next_driver_request_meta_id));
 

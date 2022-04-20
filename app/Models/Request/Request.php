@@ -64,7 +64,7 @@ class Request extends Model
     
     public function requestRating()
     {
-        return $this->belongsTo(RequestRating::class, 'id','request_id');
+        return $this->hasMany(RequestRating::class, 'request_id','id');
     }
 
     /**

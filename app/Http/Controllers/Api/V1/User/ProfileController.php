@@ -137,7 +137,7 @@ class ProfileController extends ApiController
 
         $user->update($user_params);
 
-        $driver_params = $request->only(['vehicle_type','car_make','car_model','car_color','car_number','name','email','vehicle_year']);
+        $driver_params = $request->only(['vehicle_type','car_make','car_model','car_color','car_number','name','email']);
 
         $user->driver()->update($driver_params);
 

@@ -14,6 +14,8 @@ use App\Models\Admin\DriverNeededDocument;
 use App\Transformers\Access\RoleTransformer;
 use App\Transformers\Requests\TripRequestTransformer;
 use App\Base\Constants\Setting\Settings;
+use App\Models\Admin\Sos;
+use App\Transformers\Common\SosTransformer;
 
 class DriverProfileTransformer extends Transformer
 {
@@ -32,7 +34,7 @@ class DriverProfileTransformer extends Transformer
     * @var array
     */
     protected $defaultIncludes = [
-
+        'sos'
     ];
 
     /**
@@ -54,8 +56,6 @@ class DriverProfileTransformer extends Transformer
             'uploaded_document'=>false,
             'declined_reason'=>$user->reason,
             'service_location_id'=>$user->service_location_id,
-            'service_location_name'=>$user->serviceLocation->name,
-            'vehicle_year'=>$user->vehicle_year,
             'vehicle_type_id'=> $user->vehicle_type,
             'vehicle_type_name'=>$user->vehicle_type_name,
             'car_make'=>$user->car_make,
@@ -129,6 +129,24 @@ class DriverProfileTransformer extends Transformer
 
         return $request
         ? $this->item($request, new TripRequestTransformer)
+        : $this->null();
+    }
+
+    /**
+    * Include the request meta of the user.
+    *
+    * @param User $user
+    * @return \League\Fractal\Resource\Collection|\League\Fractal\Resource\NullResource
+    */
+    public function includeSos(Driver $user)
+    {
+        $request = Sos::select('id', 'name', 'number', 'user_type', 'created_by')
+        ->where('created_by', auth()->user()->id)
+        ->orderBy('created_at', 'Desc')
+        ->companyKey()->get();
+
+        return $request
+        ? $this->collection($request, new SosTransformer)
         : $this->null();
     }
 

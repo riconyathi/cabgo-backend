@@ -155,7 +155,7 @@ class UserCancelRequestController extends BaseController
             // Send data via Mqtt
             dispatch(new NotifyViaMqtt('request_handler_'.$driver->id, json_encode($socket_data), $driver->id));
 
-            $notifiable_driver->notify(new AndroidPushNotification($title, $body, $push_data));
+            $notifiable_driver->notify(new AndroidPushNotification($title, $body));
         }
         // Delete meta records
         // RequestMeta::where('request_id', $request_detail->id)->delete();

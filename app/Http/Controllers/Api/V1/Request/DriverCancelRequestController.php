@@ -13,6 +13,7 @@ use App\Transformers\Requests\TripRequestTransformer;
 use App\Models\Admin\CancellationReason;
 use App\Base\Constants\Masters\zoneRideType;
 use App\Base\Constants\Masters\WalletRemarks;
+use App\Models\Request\DriverRejectedRequest;
 
 
 /**
@@ -44,6 +45,7 @@ class DriverCancelRequestController extends BaseController
         // Update the availble status
         $driver->available = true;
         $driver->save();
+        $driver->fresh();
 
         $request_detail = $driver->requestDetail()->where('id', $request->request_id)->first();
         // Throw an exception if the user is not authorised for this request
@@ -56,6 +58,12 @@ class DriverCancelRequestController extends BaseController
             'custom_reason'=>$request->custom_reason,
             'cancel_method'=>UserType::DRIVER,
         ]);
+
+        DriverRejectedRequest::create([
+            'request_id'=>$request_detail->id,
+            'is_after_accept'=>true,
+            'driver_id'=>$driver->id,'reason'=>$request->reason,
+            'custom_reason'=>$request->custom_reason]);
 
         /**
         * Apply Cancellation Fee
@@ -130,7 +138,7 @@ class DriverCancelRequestController extends BaseController
             // dispatch(new NotifyViaSocket('transfer_msg', $socket_message));
 
             dispatch(new NotifyViaMqtt('trip_status_'.$user->id, json_encode($socket_data), $user->id));
-            $user->notify(new AndroidPushNotification($title, $body, $push_data));
+            $user->notify(new AndroidPushNotification($title, $body));
         }
 
         return $this->respondSuccess(null, 'driver_cancelled_trip');

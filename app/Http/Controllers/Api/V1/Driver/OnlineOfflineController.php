@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1\Driver;
 
 use App\Models\Admin\Driver;
 use Illuminate\Support\Carbon;
-use App\Transformers\Driver\DriverTransformer;
+use App\Transformers\Driver\DriverProfileTransformer;
 use App\Http\Controllers\Api\V1\BaseController;
 
 class OnlineOfflineController extends BaseController
@@ -90,7 +90,7 @@ class OnlineOfflineController extends BaseController
         $driver->save();
         $driver->fresh();
 
-        $user = filter()->transformWith(new DriverTransformer)
+        $user = filter()->transformWith(new DriverProfileTransformer)
             ->loadIncludes($driver);
 
         return $this->respondSuccess($user, $success_message);

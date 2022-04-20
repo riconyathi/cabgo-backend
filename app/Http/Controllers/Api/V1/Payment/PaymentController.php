@@ -304,6 +304,11 @@ class PaymentController extends BaseController
 
             }
 
+            $user_info->withdrawalRequestsHistory()->where('status',WithdrawalRequestStatus::REQUESTED)->exists();
+            if($user_info){
+                $this->throwCustomException('You cannot make multiple request. please wait for your existing request approval');
+            }
+
         }else{
             
             $user_info = auth()->user()->driver;
@@ -323,11 +328,11 @@ class PaymentController extends BaseController
 
             }
 
-            // $user_info->withdrawalRequestsHistory()->where('status',WithdrawalRequestStatus::REQUESTED)->exists();
+            // $user_info->withdrawalRequestsHistory()->where('status',0)->exists();
 
             $exists_request = WalletWithdrawalRequest::where('driver_id',$user_info->id)->where('status',0)->exists();
-            
-            if($exists_request){
+
+            if($exists_request==true){
                 $this->throwCustomException('You cannot make multiple request. please wait for your existing request approval');
             }
 

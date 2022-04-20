@@ -4,11 +4,12 @@ namespace App\Transformers\Requests;
 
 use Carbon\Carbon;
 use App\Transformers\Transformer;
-use App\Transformers\User\UserTransformer;
+use App\Transformers\User\TripUserTransformer;
 use App\Transformers\Driver\DriverTransformer;
 use App\Models\Request\Request as RequestModel;
 use App\Transformers\User\AdHocUserTransformer;
 use App\Transformers\Requests\RequestBillTransformer;
+use App\Base\Constants\Masters\PaymentType;
 
 class CronTripRequestTransformer extends Transformer
 {
@@ -29,7 +30,7 @@ class CronTripRequestTransformer extends Transformer
      */
     public function transform(RequestModel $request)
     {
-        $param =  [
+        $params =  [
             'id' => $request->id,
             'request_number' => $request->request_number,
             'ride_otp'=>$request->ride_otp,
@@ -76,15 +77,49 @@ class CronTripRequestTransformer extends Transformer
             'show_drop_location'=>false,
             'show_otp_feature'=>true,
             'request_eta_amount'=>$request->request_eta_amount,
-            'show_request_eta_amount'=>true
+            'show_request_eta_amount'=>true,
+            'if_dispatch'=>$request->if_dispatch
 
         ];
 
         $timezone = $request->userDetail->timezone?:env('SYSTEM_DEFAULT_TIMEZONE');
 
-        $param['trip_start_time'] =  Carbon::parse($request->trip_start_time)->setTimezone($timezone)->format('jS M h:i A');
 
-        return $param;
+        if($request->payment_opt ==PaymentType::CARD){
+            
+            $params['payment_type_string'] = 'card';
+
+        }elseif($request->payment_opt ==PaymentType::CASH){
+
+            $params['payment_type_string'] = 'cash';
+        }else{
+
+            $params['payment_type_string'] = 'wallet';
+
+        }
+
+        if($request->if_dispatch){
+
+            $params['if_dispatch'] = true;
+            $params['show_request_eta_amount'] = false;
+            $params['show_otp_feature'] = false;
+        }
+
+         if ($request->trip_start_time==null) {
+            $params['cv_trip_start_time'] = null;
+        }
+
+        $timezone = $request->serviceLocationDetail->timezone?:env('SYSTEM_DEFAULT_TIMEZONE');
+
+        $params['cv_trip_start_time'] = Carbon::parse($request->trip_start_time)->setTimezone($timezone)->format('h:i A');
+
+        if ($request->completed_at==null) {
+            $params['cv_completed_at'] = null;
+        }
+        $params['cv_completed_at'] = Carbon::parse($request->completed_at)->setTimezone($timezone)->format('h:i A');
+
+
+        return $params;
     }
     /**
      * Include the user of the request.
@@ -103,7 +138,7 @@ class CronTripRequestTransformer extends Transformer
         } else {
             $userDetail = $request->userDetail;
             return $userDetail
-        ? $this->item($userDetail, new UserTransformer)
+        ? $this->item($userDetail, new TripUserTransformer)
         : $this->null();
         }
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateRequestsBillForAirportFee extends Migration
+class UpdateRequestsTableForEtaAmount extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class UpdateRequestsBillForAirportFee extends Migration
      */
     public function up()
     {
-         if (Schema::hasTable('request_bills')) {
-            if (!Schema::hasColumn('request_bills', 'airport_surge_fee')) {
-                Schema::table('request_bills', function (Blueprint $table) {
-                    $table->double('airport_surge_fee',10, 2)->after('time_price')->default(0);
+         if (Schema::hasTable('requests')) {
+            if (!Schema::hasColumn('requests', 'request_eta_amount')) {
+                Schema::table('requests', function (Blueprint $table) {
+                    $table->double('request_eta_amount',15,2)->after('is_paid')->default(0);
                 });
             }
-
         }
     }
 

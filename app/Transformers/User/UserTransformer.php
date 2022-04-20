@@ -45,7 +45,7 @@ class UserTransformer extends Transformer
             'last_name' => $user->last_name,
             'username' => $user->username,
             'email' => $user->email,
-            'mobile' => $user->mobile,
+            'mobile' => $user->countryDetail->dial_code.$user->mobile,
             'profile_picture' => $user->profile_picture,
             'active' => $user->active,
             'email_confirmed' => $user->email_confirmed,
@@ -55,7 +55,6 @@ class UserTransformer extends Transformer
             'rating' => round($user->rating, 2),
             'no_of_ratings' => $user->no_of_ratings,
             'refferal_code'=>$user->refferal_code,
-            'country_code'=>$user->countryDetail->code,
             'currency_code'=>$user->countryDetail->currency_code,
             'currency_symbol'=>$user->countryDetail->currency_symbol,
             'map_key'=>env('GOOGLE_MAP_KEY'),
@@ -123,7 +122,6 @@ class UserTransformer extends Transformer
     {
         $request = Sos::select('id', 'name', 'number', 'user_type', 'created_by')
         ->where('created_by', auth()->user()->id)
-        ->orWhere('user_type', 'admin')
         ->orderBy('created_at', 'Desc')
         ->companyKey()->get();
 

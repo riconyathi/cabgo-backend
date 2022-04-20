@@ -54,6 +54,28 @@ class ChatController extends BaseController
     }
 
     /**
+     * Update Seen
+     * 
+     * 
+     * */
+    public function updateSeen(Request $request){
+
+        if (access()->hasRole(Role::USER)) {
+            $seen_from_type = 2;
+        } else {
+            $seen_from_type = 1;
+        }
+
+        $request_detail = RequestModel::find($request->request_id);
+
+        $request_detail->requestChat()->where('from_type',$seen_from_type)->update(['seen'=>true]);
+
+        return $this->respondSuccess(null, 'message_seen_successfully');
+
+
+    }
+
+    /**
      * Send Chat Message
      * @bodyParam request_id uuid required request id of the trip
      * @bodyParam message string required message of chat

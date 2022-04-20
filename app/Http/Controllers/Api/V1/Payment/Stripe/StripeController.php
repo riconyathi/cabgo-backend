@@ -18,7 +18,7 @@ use App\Transformers\Payment\DriverWalletHistoryTransformer;
 use App\Models\Payment\UserWallet;
 use App\Models\Payment\DriverWallet;
 use App\Base\Constants\Masters\WalletRemarks;
-
+use App\Models\Payment\DriverSubscription;
 
 /**
  * @group Stripe Payment Gateway
@@ -171,6 +171,29 @@ class StripeController extends ApiController
         }
 
         return $this->respondSuccess($result, 'money_added_successfully');
+    }
+
+    /**
+     * Add/update Subscription
+     * 
+     * */
+    public function addOrUpdateSubscription(Request $request)
+    {
+
+        $driver_id = auth()->user()->driver->id;
+
+        $driver_subscription = DriverSubscription::create([
+            'driver_id'=>$driver_id,
+            'subscription_type'=>$request->subscription_type,
+            'paid_amount'=>$request->paid_amount,
+            'expired_at'=>$request->expired_at,
+            'transaction_id'=>$request->transaction_id]);
+
+        $result =  fractal($user_wallet, new DriverSubscriptionTransformer);
+
+        return $this->respondSuccess($result, 'subscription_added_successfully');
+
+
     }
 
     

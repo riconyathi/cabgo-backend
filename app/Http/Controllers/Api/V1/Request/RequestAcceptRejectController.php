@@ -14,6 +14,7 @@ use App\Models\Request\Request as RequestModel;
 use App\Http\Requests\Request\AcceptRejectRequest;
 use App\Jobs\Notifications\AndroidPushNotification;
 use App\Transformers\Requests\TripRequestTransformer;
+use App\Models\Request\DriverRejectedRequest;
 
 /**
  * @group Driver-trips-apis
@@ -90,7 +91,12 @@ class RequestAcceptRejectController extends BaseController
             accet_dispatch_notify:
         // @TODO send sms,email & push notification with request detail
         } else {
+
             $request_result =  fractal($request_detail, new TripRequestTransformer)->parseIncludes('userDetail');
+            // Save Driver Reject Requests
+            DriverRejectedRequest::create(['request_id'=>$request_detail->id,
+                'driver_id'=>$driver->id]);
+
             $push_request_detail = $request_result->toJson();
             // Delete Driver record from meta table
             RequestMeta::where('request_id', $request->input('request_id'))->where('driver_id', $driver->id)->delete();
@@ -116,6 +122,7 @@ class RequestAcceptRejectController extends BaseController
                 // dispatch(new NotifyViaSocket('transfer_msg', $socket_message));
                 dispatch(new NotifyViaMqtt('create_request_'.$driver->id, json_encode($socket_data), $driver->id));
             } else {
+                goto no_drivers_available;
 
                 // Cancell the request as automatic cancell state
                 $request_detail->update(['is_cancelled'=>true,'cancel_method'=>0]);
@@ -140,6 +147,7 @@ class RequestAcceptRejectController extends BaseController
                 // dispatch(new NotifyViaSocket('transfer_msg', $socket_message));
                 dispatch(new NotifyViaMqtt('trip_status_'.$user->id, json_encode($socket_data), $user->id));
                 dispatch_notify:
+                no_drivers_available:
             }
         }
 

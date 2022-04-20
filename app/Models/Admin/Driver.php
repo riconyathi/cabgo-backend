@@ -15,6 +15,8 @@ use App\Models\Payment\DriverWalletHistory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use App\Models\Payment\WalletWithdrawalRequest;
+use App\Models\Payment\DriverSubscription;
+use App\Models\Request\DriverRejectedRequest;
 
 class Driver extends Model
 {
@@ -32,7 +34,7 @@ class Driver extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','owner_id','service_location_id', 'name','mobile','email','address','state','city','country','postal_code','gender','vehicle_type','car_make','car_model','car_color','car_number','today_trip_count','total_accept','total_reject','acceptance_ratio','last_trip_date','active','approve','available','reason','uuid','fleet_id','vehicle_year'
+        'user_id','owner_id','service_location_id', 'name','mobile','email','address','state','city','country','postal_code','gender','vehicle_type','car_make','car_model','car_color','car_number','today_trip_count','total_accept','total_reject','acceptance_ratio','last_trip_date','active','approve','available','reason','uuid','fleet_id'
     ];
     /**
     * The accessors to append to the model's array form.
@@ -113,6 +115,20 @@ class Driver extends Model
     public function requestDetail()
     {
         return $this->hasMany(Request::class, 'driver_id', 'id');
+    }
+    public function rejectedRequestDetail()
+    {
+        return $this->hasMany(DriverRejectedRequest::class, 'driver_id', 'id');
+    }
+    public function subscriptions()
+    {
+        return $this->hasMany(DriverSubscription::class, 'driver_id', 'id');
+    }
+
+    public function currentRide(){
+
+        return $this->requestDetail()->where('is_completed',false)->where('is_cancelled',false)->exists();
+        
     }
     public function driverAvailabilities()
     {

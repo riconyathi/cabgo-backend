@@ -18,6 +18,7 @@ use App\Jobs\Notifications\AndroidPushNotification;
 use App\Transformers\Requests\TripRequestTransformer;
 use App\Models\Admin\ZoneTypePackagePrice;
 use Illuminate\Support\Facades\Log;
+use App\Models\Request\RequestCancellationFee;
 
 /**
  * @group Driver-trips-apis
@@ -34,8 +35,8 @@ class DriverEndRequestController extends BaseController
     * Driver End Request
     * @bodyParam request_id uuid required id request
     * @bodyParam distance double required distance of request
-    * @bodyParam before_arrival_waiting_time double required before arrival waiting time of request
-    * @bodyParam after_arrival_waiting_time double required after arrival waiting time of request
+    * @bodyParam before_trip_start_waiting_time double required before arrival waiting time of request
+    * @bodyParam after_trip_start_waiting_time double required after arrival waiting time of request
     * @bodyParam drop_lat double required drop lattitude of request
     * @bodyParam drop_lng double required drop longitude of request
     * @bodyParam drop_address double required drop drop Address of request
@@ -101,19 +102,19 @@ class DriverEndRequestController extends BaseController
         $distance = (double)$request->distance;
         $duration = $this->calculateDurationOfTrip($request_detail->trip_start_time);
 
-        if ($distance_matrix->status =="OK" && $distance_matrix->rows[0]->elements[0]->status != "ZERO_RESULTS") {
-            $distance_in_meters = get_distance_value_from_distance_matrix($distance_matrix);
-            $distance = $distance_in_meters / 1000;
+        // if ($distance_matrix->status =="OK" && $distance_matrix->rows[0]->elements[0]->status != "ZERO_RESULTS") {
+        //     $distance_in_meters = get_distance_value_from_distance_matrix($distance_matrix);
+        //     $distance = $distance_in_meters / 1000;
 
-            if ($distance < $request->distance) {
-                $distance = (double)$request->distance;
-            }
+        //     if ($distance < $request->distance) {
+        //         $distance = (double)$request->distance;
+        //     }
 
-            //If we need we can use these lines
-            // $duration = get_duration_text_from_distance_matrix($distance_matrix);
-            // $duration_in_mins = explode(' ', $duration);
-            // $duration = (double)$duration_in_mins[0];
-        }
+        //     //If we need we can use these lines
+        //     // $duration = get_duration_text_from_distance_matrix($distance_matrix);
+        //     // $duration_in_mins = explode(' ', $duration);
+        //     // $duration = (double)$duration_in_mins[0];
+        // }
         if ($request_detail->unit==UnitType::MILES) {
             $distance = kilometer_to_miles($distance);
         }
@@ -126,7 +127,20 @@ class DriverEndRequestController extends BaseController
             'total_distance'=>$distance,
             'total_time'=>$duration,
             ]);
-        $waiting_time = ($request->input('before_arrival_waiting_time')+$request->input('after_arrival_waiting_time'));
+
+        $before_trip_start_waiting_time = $request->input('before_trip_start_waiting_time');
+        $after_trip_start_waiting_time = $request->input('after_trip_start_waiting_time');
+
+        $subtract_with_free_waiting_before_trip_start = ($before_trip_start_waiting_time - $zone_type_price->free_waiting_time_in_mins_before_trip_start);
+
+        $subtract_with_free_waiting_after_trip_start = ($after_trip_start_waiting_time - $zone_type_price->free_waiting_time_in_mins_after_trip_start);
+
+        $waiting_time = ($subtract_with_free_waiting_before_trip_start+$subtract_with_free_waiting_after_trip_start);
+
+        if($waiting_time<0){
+            $waiting_time = 0;
+        }
+
         // Calculated Fares
         $promo_detail =null;
 
@@ -136,8 +150,12 @@ class DriverEndRequestController extends BaseController
 
         $calculated_bill =  $this->calculateRideFares($zone_type_price, $distance, $duration, $waiting_time, $promo_detail,$request_detail);
 
-    
-    if($request_detail->is_rental && $request_detail->rental_package_id){
+        $calculated_bill['before_trip_start_waiting_time'] = $before_trip_start_waiting_time;
+        $calculated_bill['after_trip_start_waiting_time'] = $after_trip_start_waiting_time;
+        $calculated_bill['calculated_waiting_time'] = $waiting_time;
+        $calculated_bill['waiting_charge_per_min'] = $zone_type_price->waiting_charge;
+
+        if($request_detail->is_rental && $request_detail->rental_package_id){
 
             $chosen_package_price = ZoneTypePackagePrice::where('zone_type_id',$request_detail->zone_type_id)->where('package_type_id',$request_detail->rental_package_id)->first();
 
@@ -190,7 +208,7 @@ class DriverEndRequestController extends BaseController
 
           $calculated_bill =  $this->calculateRentalRideFares($zone_type_price, $distance, $duration, $waiting_time, $promo_detail,$request_detail);
 
-          Log::info($calculated_bill);
+          // Log::info($calculated_bill);
             
         }
 
@@ -267,7 +285,7 @@ class DriverEndRequestController extends BaseController
 
         $bill = $request_detail->requestBill()->create($calculated_bill);
     
-        Log::info($bill);
+        // Log::info($bill);
 
         $request_result = fractal($request_detail, new TripRequestTransformer)->parseIncludes(['requestBill','userDetail','driverDetail']);
 
@@ -378,10 +396,24 @@ class DriverEndRequestController extends BaseController
         $sub_total = $base_price+$distance_price+$time_price+$waiting_charge + $airport_surge_fee;
 
 
+        // Check for Cancellation fee
+
+        $cancellation_fee = RequestCancellationFee::where('user_id',$request_detail->user_id)->where('is_paid',0)->sum('cancellation_fee');
+
+        if($cancellation_fee >0){
+
+            RequestCancellationFee::where('user_id',$request_detail->user_id)->update([
+                'is_paid'=>1,
+                'paid_request_id'=>$request_detail->id]);
+
+            $sub_total += $cancellation_fee;
+
+        }
+
         $discount_amount = 0;
         if ($coupon_detail) {
             if ($coupon_detail->minimum_trip_amount && $coupon_detail->minimum_trip_amount < $sub_total) {
-                $discount_amount = $sub_total * ($coupon_detail->coupon_detail/100);
+                $discount_amount = $sub_total * ($coupon_detail->discount_percent/100);
                 if ($discount_amount > $coupon_detail->maximum_discount_amount) {
                     $discount_amount = $coupon_detail->maximum_discount_amount;
                 }
@@ -423,7 +455,8 @@ class DriverEndRequestController extends BaseController
         'total_amount'=>$total_amount,
         'total_distance'=>$distance,
         'total_time'=>$duration,
-        'airport_surge_fee'=>$airport_surge_fee
+        'airport_surge_fee'=>$airport_surge_fee,
+        'cancellation_fee'=>$cancellation_fee
         ];
     }
 
@@ -550,22 +583,27 @@ class DriverEndRequestController extends BaseController
     */
     public function validateAndGetPromoDetail($promo_code_id)
     {
-        $user = auth()->user();
-        // Validate if the promo is expired
+       // Validate if the promo is expired
         $current_date = Carbon::today()->toDateTimeString();
 
         $expired = Promo::where('id', $promo_code_id)->where('from', '<=', $current_date)->orWhere('to', '>=', $current_date)->first();
 
-        if ($expired) {
+        Log::info($expired);
+
+        if ($expired==null) {
+
             return null;
         }
-        $exceed_usage = PromoUser::where('promo_code_id', $expired->id)->where('user_id', $user->id)->get()->count();
-        if ($exceed_usage >= $expired->uses_per_user) {
-            return null;
-        }
-        if ($expired->total_uses > $expired->total_uses+1) {
-            return null;
-        }
-        return $expired;
+
+        // $exceed_usage = PromoUser::where('promo_code_id', $expired->id)->where('user_id', $user_id)->get()->count();
+
+        // if ($exceed_usage >= $expired->uses_per_user) {
+        //     return null;
+        // }
+
+        // if ($expired->total_uses > $expired->total_uses+1) {
+        //     return null;
+        // }
+        
     }
 }

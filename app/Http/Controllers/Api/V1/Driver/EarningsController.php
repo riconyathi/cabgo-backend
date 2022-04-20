@@ -109,11 +109,12 @@ class EarningsController extends BaseController
 
         $weekDays = [];
 
-        $week_days_string = ['sun','mon','tues','wed','thurs','fri','sat'];
+        $week_days_string = ['mon','tues','wed','thurs','fri','sat','sun'];
 
 
         for ($i = 0; $i < 7; $i++) {
             $week_date =  Carbon::parse($start_of_week)->addDay($i)->format('Y-m-d');
+            // dd($week_date);
             $weekly_total_earnings = RequestBill::whereHas('requestDetail', function ($query) use ($driver,$week_date) {
                 $query->where('driver_id', $driver->id)->where('is_completed', 1)->whereDate('trip_start_time', $week_date);
             })->sum('driver_commision');
@@ -126,7 +127,7 @@ class EarningsController extends BaseController
 
         $weeks = [$start_of_week,$end_of_week];
 
-        $converted_current_date = Carbon::parse($current_date)->setTimezone($timezone)->format('jS M Y');
+        $converted_current_date = Carbon::parse(Carbon::now())->setTimezone($timezone)->format('jS M Y');
 
         $total_trips = $this->request->where('driver_id', $driver->id)->where('is_completed', 1)->whereBetween('trip_start_time', $weeks)->get()->count();
 

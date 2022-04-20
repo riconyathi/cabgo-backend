@@ -76,13 +76,35 @@ class TripRequestTransformer extends Transformer
             'rental_package_name'=>$request->rentalPackage?$request->rentalPackage->name:'-',
             'show_drop_location'=>false,
             'show_otp_feature'=>true,
-            'request_eta_amount'=>$request->request_eta_amount
-            
-
+            'request_eta_amount'=>$request->request_eta_amount,
+            'show_request_eta_amount'=>true,
+            'ride_user_rating'=>0,
+            'ride_driver_rating'=>0,
+            'if_dispatch'=>false
         ];
 
+        if (!$request->is_later) {
+            $ride_type = 1;
+        } else {
+            $ride_type = 2;
+        }
+
+        $zone_type_price = $request->zoneType->zoneTypePrice()->where('price_type', $ride_type)->first();
+
+        $params['free_waiting_time_in_mins_before_trip_start'] = $zone_type_price->free_waiting_time_in_mins_before_trip_start;
+
+        $params['free_waiting_time_in_mins_before_trip_start'] = $zone_type_price->free_waiting_time_in_mins_before_trip_start;
+        
+        if($request->requestRating()->exists()){
+
+            $params['ride_user_rating'] = $request->requestRating()->where('user_id',$request->user_id)->pluck('rating')->first();
+
+            $params['ride_driver_rating'] = $request->requestRating()->where('driver_id',$request->driver_id)->pluck('rating')->first();
+        }
         if($request->if_dispatch){
 
+            $params['if_dispatch'] = true;
+            $params['show_request_eta_amount'] = false;
             $params['show_otp_feature'] = false;
         }
         

@@ -42,7 +42,7 @@ class OfflineUnAvailableDrivers extends Command
     public function handle()
     {
         $current_timestamp = Carbon::now()->timestamp;
-        $conditional_timestamp = Carbon::now()->subMinutes(15)->timestamp;
+        $conditional_timestamp = Carbon::now()->subMinutes(60)->timestamp;
 
         $drivers = $this->database->getReference('drivers')->orderByChild('is_active')->equalTo(1)->getValue();
 
@@ -51,7 +51,10 @@ class OfflineUnAvailableDrivers extends Command
             if ($conditional_timestamp > $driver_updated_at->timestamp) {
                 $updatable_offline_date_time = Carbon::createFromTimestamp($driver_updated_at->timestamp);
                 $mysql_driver = Driver::where('id', $driver['id'])->first();
-
+                // Check if the driver is on trip
+                if($mysql_driver && $mysql_driver->currentRide){
+                    goto end;
+                }
                 // Get last online record
                 if ($mysql_driver && $mysql_driver->driverAvailabilities()) {
                     $availability = $mysql_driver->driverAvailabilities()->where('is_online', true)->orderBy('online_at', 'desc')->first();
@@ -69,6 +72,7 @@ class OfflineUnAvailableDrivers extends Command
                     $mysql_driver->active = 0;
                     $mysql_driver->save();
                 }
+                end:
                 
                 
             }

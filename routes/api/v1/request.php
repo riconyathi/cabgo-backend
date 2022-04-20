@@ -66,4 +66,7 @@ Route::prefix('request')->namespace('Request')->middleware('auth')->group(functi
     Route::get('chat-history/{request}','ChatController@history');
     //Send Sms
     Route::post('send','ChatController@send');
+    // Update Seen
+    Route::post('seen','ChatController@updateSeen');
+    
 });

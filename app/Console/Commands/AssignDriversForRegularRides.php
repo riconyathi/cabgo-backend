@@ -17,21 +17,21 @@ use App\Transformers\Requests\TripRequestTransformer;
 use App\Transformers\Requests\CronTripRequestTransformer;
 use App\Models\Request\DriverRejectedRequest;
 
-class AssignDriversForScheduledRides extends Command
+class AssignDriversForRegularRides extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'assign_drivers:for_schedule_rides';
+    protected $signature = 'assign_drivers:for_regular_rides';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Assign Drivers for schdeulesd rides';
+    protected $description = 'Assign Drivers for regular rides';
 
     /**
      * Create a new command instance.
@@ -50,13 +50,16 @@ class AssignDriversForScheduledRides extends Command
      */
     public function handle()
     {
-        $current_date = Carbon::now()->format('Y-m-d H:i:s');
-        $add_45_min = Carbon::now()->addMinutes(45)->format('Y-m-d H:i:s');
+        $current_time = Carbon::now()->format('Y-m-d H:i:s');
+        $sub_5_min = Carbon::now()->subMinutes(7)->format('Y-m-d H:i:s');
         // DB::enableQueryLog();
-        $requests = Request::where('is_later', 1)
-                    ->where('trip_start_time', '<=', $add_45_min)
-                    ->where('trip_start_time', '>', $current_date)
+        $requests = Request::where('is_later', 0)
+                    ->where('created_at', '<=', $current_time)
+                    ->where('created_at', '>', $sub_5_min)
                     ->where('is_completed', 0)->where('is_cancelled', 0)->where('is_driver_started', 0)->get();
+        // dd($current_time);
+
+        // dd($sub_5_min);
 
         if ($requests->count()==0) {
             return $this->info('no-schedule-rides-found');
@@ -107,11 +110,12 @@ class AssignDriversForScheduledRides extends Command
                         $nearest_driver_ids[] = $fire_driver->id;
                     }
 
+                    // Already rejected drivers
                     $rejected_drivers = DriverRejectedRequest::where('request_id',$request->id)->pluck('driver_id')->toArray();
-                    
+
                     $nearest_drivers = Driver::where('active', 1)->where('approve', 1)->where('available', 1)->where('vehicle_type', $type_id)->whereIn('id', $nearest_driver_ids)->whereNotIn('id', $meta_drivers)->whereNotIn('id',$rejected_drivers)->limit(10)->get();
 
-                    if ($nearest_drivers->isEmpty()) {
+                    if (!$nearest_drivers) {
                         $this->info('no-drivers-available');
                         // @TODO Update attempt to the requests
                         $request->attempt_for_schedule += 1;
