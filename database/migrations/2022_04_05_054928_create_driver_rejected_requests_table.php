@@ -14,7 +14,7 @@ class CreateDriverRejectedRequestsTable extends Migration
     public function up()
     {
         Schema::create('driver_rejected_requests', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->uuid('request_id');
             $table->unsignedInteger('driver_id');
             $table->boolean('is_after_accept')->default(false);
