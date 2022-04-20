@@ -81,9 +81,9 @@
           </li>
           @endif  
           @if(auth()->user()->can('manage-owner-needed-document'))
-          <li class="{{ 'owner_needed_document' == $sub_menu ? 'active' : '' }}">
+         <!--  <li class="{{ 'owner_needed_document' == $sub_menu ? 'active' : '' }}">
             <a href="{{url('/owner_needed_doc')}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.owner_needed_doc')</a>
-          </li>
+          </li> -->
           @endif 
           @if(auth()->user()->can('package-type'))
           <li class="{{ 'package_type' == $sub_menu ? 'active' : '' }}">
@@ -107,7 +107,7 @@
       @endphp
 
         @if(auth()->user()->can('manage-owner'))
-        <li class="treeview {{ 'manage_owners' == $main_menu ? 'active menu-open' : '' }}">
+       <!--  <li class="treeview {{ 'manage_owners' == $main_menu ? 'active menu-open' : '' }}">
         <a href="javascript: void(0);">
           <i class="fa fa-code-fork"></i>
           <span> @lang('pages_names.owners') </span>
@@ -124,17 +124,17 @@
          </ul>
            
             </li>
-        
+         -->
             @endif
 
     
              @if(auth()->user()->can('manage-fleet'))
-            <li class="{{ $main_menu == 'manage_fleet' ? 'active' : ''}}">
+           <!--  <li class="{{ $main_menu == 'manage_fleet' ? 'active' : ''}}">
                 <a href="{{ route('viewFleet') }}">
                     <i class="fa fa-bus"></i>
                     <span> {{ trans('pages_names.manage_fleet') }} </span>
                 </a>
-            </li>
+            </li> -->
             @endif
 
       @if(auth()->user()->can('admin'))
