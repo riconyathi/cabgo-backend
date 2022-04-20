@@ -72,7 +72,7 @@ class DriverSignupController extends LoginController
         $mobileUuid = $request->input('uuid');
 
 
-        $created_params = $request->only(['service_location_id', 'name','mobile','email','address','state','city','country','gender','vehicle_type','car_make','car_model','car_color','car_number']);
+            $created_params = $request->only(['service_location_id', 'name','mobile','email','address','state','city','country','gender','vehicle_type','car_make','car_model','car_color','car_number','vehicle_year']);
 
         $created_params['postal_code'] = $request->postal_code;
 

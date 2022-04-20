@@ -34,7 +34,7 @@ class Driver extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','owner_id','service_location_id', 'name','mobile','email','address','state','city','country','postal_code','gender','vehicle_type','car_make','car_model','car_color','car_number','today_trip_count','total_accept','total_reject','acceptance_ratio','last_trip_date','active','approve','available','reason','uuid','fleet_id'
+        'user_id','owner_id','service_location_id', 'name','mobile','email','address','state','city','country','postal_code','gender','vehicle_type','car_make','car_model','car_color','car_number','today_trip_count','total_accept','total_reject','acceptance_ratio','last_trip_date','active','approve','available','reason','uuid','fleet_id','vehicle_year'
     ];
     /**
     * The accessors to append to the model's array form.
@@ -42,7 +42,7 @@ class Driver extends Model
     * @var array
     */
     protected $appends = [
-        'profile_picture','vehicle_type_name','car_make_name','car_model_name','rating','no_of_ratings','timezone'
+        'profile_picture','vehicle_type_name','car_make_name','car_model_name','rating','no_of_ratings','timezone','vehicle_type_image'
     ];
 
 
@@ -95,6 +95,10 @@ class Driver extends Model
     public function getVehicleTypeNameAttribute()
     {
         return $this->vehicleType?$this->vehicleType->name:null;
+    }
+    public function getVehicleTypeImageAttribute()
+    {
+        return $this->vehicleType?$this->vehicleType->icon:null;
     }
     public function getCarMakeNameAttribute()
     {
