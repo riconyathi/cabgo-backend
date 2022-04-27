@@ -442,5 +442,23 @@ return array(
     'balance_amount'=>'Balance Amount',
 
     'assign_driver' => 'Assign Driver',
-    'select_driver' => 'Select Driver'
+    'select_driver' => 'Select Driver',
+    'enable-paystack'=>'Enable Paystack',
+    'paystack-environment'=>'Paystack Environment',
+    'paystack-test-secret-key'=>'Paystack Test Secret Key',
+    'paystack-production-secret-key'=>'Paystack Production Secret Key',
+    'enable-flutter-wave'=>'Enable Flutter-wave',
+    'flutter-wave-environment'=>'Flutter-wave Environment',
+    'flutter-wave-test-secret-key'=>'Flutter-wave Test Secret Key',
+    'flutter-wave-production-secret-key'=>'Flutter-wave Production Secret Key',
+    'paystack_settings'=>'Paystack Settings',
+    'flutter_wave_settings'=>'Flutter-wave Settings',
+    'cashfree_settings'=>'Cashfree Settings',
+    'cash_free_environment'=>'Cashfree Environment',
+    'cash_free_app_id'=>'Cashfree Test App Id',
+    'cash_free_production_app_id'=>'Cashfree Production App Id',
+    'cash_free_secret_key'=>'Cashfree Test Secret Key',
+    'cash_free_production_secret_key'=>'Cashfree Production Secret Key',
+    'test'=>'Test',
+    'production'=>'Production'
 );

@@ -46,4 +46,23 @@ class Settings
     const FIREBASE_MESSAGIN_SENDER_ID='firebase-messaging-sender-id';
     const FIREBASE_APP_ID='firebase-app-id';
     const FIREBASE_MEASUREMENT_ID='firebase-measurement-id';
+    const ENABLE_PAYSTACK='enable-paystack';
+    const PAYSTACK_ENVIRONMENT='paystack-environment';
+    const PAYSTACK_TEST_SECRET_KEY='paystack-test-secret-key';
+    const PAYSTACK_PRODUCTION_SECRET_KEY='paystack-production-secret-key';
+    const ENABLE_FLUTTER_WAVE='enable-flutter-wave';
+    const FLUTTER_WAVE_ENVIRONMENT='flutter-wave-environment';
+    const FLUTTER_WAVE_TEST_SECRET_KEY='flutter-wave-test-secret-key';
+    const FLUTTER_WAVE_PRODUCTION_SECRET_KEY='flutter-wave-production-secret-key';
+
+    const CASH_FREE_ENVIRONMENT ='cash_free_environment';
+    const CASH_FREE_TEST_APP_ID = 'cash_free_app_id';
+    const CASH_FREE_PRODUCTION_APP_ID = 'cash_free_production_app_id';
+    const CASH_FREE_SECRET_KEY='cash_free_secret_key';
+    const CASH_FREE_PRODUCTION_SECRET_KEY='cash_free_production_secret_key';
+    const CASH_FREE_TEST_CLIENT_ID_FOR_PAYOUT = 'cash_free_test_app_id_for_payout';
+    const CASH_FREE_PRODUCTION_CLIENT_ID_FOR_PAYOUT = 'cash_free_production_app_id_for_payout'; 
+    const CASH_FREE_TEST_CLIENT_SECRET_FOR_PAYOUT = 'cash_free_test_secret_for_payout';
+    const CASH_FREE_PRODUCTION_CLIENT_SECRET_FOR_PAYOUT = 'cash_free_production_secret_for_payout';
+
 }

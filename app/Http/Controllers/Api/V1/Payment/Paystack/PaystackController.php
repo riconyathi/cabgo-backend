@@ -36,8 +36,17 @@ class PaystackController extends ApiController
 
         $paystack_initialize_url = 'https://api.paystack.co/transaction/initialize';
 
+        if(get_settings(Settings::PAYSTACK_ENVIRONMENT)=='test'){
+
+            $secret_key = get_settings(Settings::PAYSTACK_TEST_SECRET_KEY);
+
+        }else{
+
+            $secret_key = get_settings(Settings::PAYSTACK_PRODUCTION_SECRET_KEY);
+            
+        }
         $headers = [
-            'Authorization:Bearer '.env('PAYSTACK_TEST_SECRET_KEY'),
+            'Authorization:Bearer '.$secret_key,
             'Content-Type:application/json'
             ];
 

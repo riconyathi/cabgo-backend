@@ -165,13 +165,7 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => SettingSubGroup::BRAINTREE_SETTINGS,
         ],
-        SettingSlug::ENABLE_BRAIN_TREE => [
-            'category'=>SettingCategory::INSTALLATION,
-            'value' => '1',
-            'field' => SettingValueType::SELECT,
-            'option_value' => '{"yes":1,"no":0}',
-            'group_name' => SettingSubGroup::BRAINTREE_SETTINGS,
-        ],
+        
             SettingSlug::BRAINTREE_MERCHANT_ID => [
             'category'=>SettingCategory::INSTALLATION,
             'value' => 'pwc2hd46g93s4zy2',
@@ -207,6 +201,87 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => SettingSubGroup::BRAINTREE_SETTINGS,
         ],
+
+         SettingSlug::PAYSTACK_ENVIRONMENT => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => 'test',
+            'field' => SettingValueType::TEXT,
+             'option_value' => '{"test":"test","production":"production"}',
+            'group_name' => SettingSubGroup::PAYSTACK_SETTINGS,
+        ],
+        SettingSlug::PAYSTACK_TEST_SECRET_KEY => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => 'sk_test_afe3ea4a86db618f26157dcbb69aa4998db4cb99',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => SettingSubGroup::PAYSTACK_SETTINGS,
+        ],
+        SettingSlug::PAYSTACK_PRODUCTION_SECRET_KEY => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => 'sk_test_afe3ea4a86db618f26157dcbb69aa4998db4cb99',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => SettingSubGroup::PAYSTACK_SETTINGS,
+        ],
+
+         SettingSlug::FLUTTER_WAVE_ENVIRONMENT => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => 'test',
+            'field' => SettingValueType::TEXT,
+            'option_value' => '{"test":"test","production":"production"}',
+            'group_name' => SettingSubGroup::FLUTTERWAVE_SETTINGS,
+        ],
+        SettingSlug::FLUTTER_WAVE_TEST_SECRET_KEY => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => 'FLWPUBK_TEST-9e6ca8625f1660a249809d7d979a0a72-X',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => SettingSubGroup::FLUTTERWAVE_SETTINGS,
+        ],
+        SettingSlug::FLUTTER_WAVE_PRODUCTION_SECRET_KEY => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => 'FLWPUBK_TEST-9e6ca8625f1660a249809d7d979a0a72-X',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => SettingSubGroup::FLUTTERWAVE_SETTINGS,
+        ],
+
+        SettingSlug::CASH_FREE_ENVIRONMENT => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => 'test',
+            'field' => SettingValueType::SELECT,
+            'option_value' => '{"test":"test","production":"production"}',
+            'group_name' => SettingSubGroup::CASH_FREE_SETTINGS,
+        ],
+        SettingSlug::CASH_FREE_TEST_APP_ID => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => '141912279e955aa28f1630dc0e219141',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => SettingSubGroup::CASH_FREE_SETTINGS,
+        ],
+        SettingSlug::CASH_FREE_PRODUCTION_APP_ID => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => '141912279e955aa28f1630dc0e219141',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => SettingSubGroup::CASH_FREE_SETTINGS,
+        ],
+            SettingSlug::CASH_FREE_SECRET_KEY => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => 'c07b52495da5f0cfd2e91f6c75b715718cf1b425',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => SettingSubGroup::CASH_FREE_SETTINGS,
+        ],
+        SettingSlug::CASH_FREE_PRODUCTION_SECRET_KEY => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => 'c07b52495da5f0cfd2e91f6c75b715718cf1b425',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => SettingSubGroup::CASH_FREE_SETTINGS,
+        ],
+
         SettingSlug::REFERRAL_COMMISION_FOR_USER => [
             'category'=>SettingCategory::REFERRAL,
             'value' => 30,
