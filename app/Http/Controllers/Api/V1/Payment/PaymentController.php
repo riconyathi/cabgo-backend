@@ -230,7 +230,70 @@ class PaymentController extends BaseController
             $bank_info_exists = true;
         }
 
-        return response()->json(['success'=>true,'message'=>'wallet_history_listed','wallet_balance'=>$wallet_balance,'default_card_id'=>$default_card_id,'currency_code'=>$currency_code,'currency_symbol'=>$currency_symbol,'wallet_history'=>$result,'braintree_tree'=>true,'stripe'=>true,'razer_pay'=>false,'paystack'=>false,'cash_free'=>false,'bank_info_exists'=>$bank_info_exists]);
+        $enable_brain_tree = false;
+
+        if(get_settings(Settings::ENABLE_BRAIN_TREE)==1){
+
+            $enable_brain_tree = true;
+        }
+
+        $enable_stripe = false;
+        
+        if(get_settings(Settings::ENABLE_STRIPE)==1){
+
+            $enable_stripe = true;
+        }
+
+         $enable_paystack = false;
+        
+        if(get_settings(Settings::ENABLE_PAYSTACK)==1){
+
+            $enable_paystack = true;
+        }
+
+        $enable_flutter_wave = false;
+        
+        if(get_settings(Settings::ENABLE_FLUTTER_WAVE)==1){
+
+            $enable_flutter_wave = true;
+        }
+
+        $enable_cashfree = false;
+        
+        if(get_settings(Settings::ENABLE_CASH_FREE)==1){
+
+            $enable_cashfree = true;
+        }
+
+        $enable_razor_pay = false;
+        
+        if(get_settings(Settings::ENABLE_RAZOR_PAY)==1){
+
+            $enable_razor_pay = true;
+        }
+
+         $enable_paymob = false;
+        
+        if(get_settings(Settings::ENABLE_PAYMOB)==1){
+
+            $enable_paymob = true;
+        }
+
+        return response()->json(['success'=>true,
+            'message'=>'wallet_history_listed',
+            'wallet_balance'=>$wallet_balance,
+            'default_card_id'=>$default_card_id,
+            'currency_code'=>$currency_code,
+            'currency_symbol'=>$currency_symbol,
+            'wallet_history'=>$result,
+            'braintree_tree'=>$enable_brain_tree,
+            'stripe'=>$enable_stripe,
+            'razor_pay'=>$enable_razor_pay,
+            'paystack'=>$enable_paystack,
+            'cash_free'=>$enable_cashfree,
+            'flutter_wave'=>$enable_flutter_wave,
+            'paymob'=>$enable_paymob,
+            'bank_info_exists'=>$bank_info_exists]);
 
         // return $this->respondSuccess($result, 'wallet_history_listed');
     }

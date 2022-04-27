@@ -10,6 +10,8 @@ class SettingSubGroup {
 	const PAYSTACK_SETTINGS = 'paystack_settings';
 	const FLUTTERWAVE_SETTINGS = 'flutter_wave_settings';
 	const CASH_FREE_SETTINGS = 'cashfree_settings';
+	const RAZOR_PAY_SETTINGS = 'cashfree_settings';
+	const PAYMOB_SETTINGS = 'cashfree_settings';
 	
 	
 }

@@ -72,5 +72,7 @@ class Settings
     const CASH_FREE_PRODUCTION_CLIENT_ID_FOR_PAYOUT = 'cash_free_production_app_id_for_payout'; 
     const CASH_FREE_TEST_CLIENT_SECRET_FOR_PAYOUT = 'cash_free_test_secret_for_payout';
     const CASH_FREE_PRODUCTION_CLIENT_SECRET_FOR_PAYOUT = 'cash_free_production_secret_for_payout';
+    const ENABLE_RAZOR_PAY='enable-razor-pay';
+    const ENABLE_PAYMOB='enable-paymob';
 
 }

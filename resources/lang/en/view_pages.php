@@ -462,5 +462,10 @@ return array(
     'test'=>'Test',
     'production'=>'Production',
     'enable-cashfree '=>'Enable Cashfree',
-    'enable-stripe'=>'Enable Stripe'
+    'enable-stripe'=>'Enable Stripe',
+    'stripe-environment'=>'Stripe Environment',
+    'stripe-test-secret Key'=>'Stripe Test Secret Key',
+    'stripe-live-secret Key'=>'Stripe Live Secret Key',
+    'enable-razor-pay'=>'Enable Razor Pay',
+    'enable-paymob'=>'Enable Paymob'
 );

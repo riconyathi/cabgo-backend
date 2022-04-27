@@ -343,6 +343,22 @@ class SettingsSeeder extends Seeder
             'group_name' => SettingSubGroup::CASH_FREE_SETTINGS,
         ],
 
+        SettingSlug::ENABLE_RAZOR_PAY => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => '1',
+            'field' => SettingValueType::SELECT,
+            'option_value' => '{"yes":1,"no":0}',
+            'group_name' => SettingSubGroup::RAZOR_PAY_SETTINGS,
+        ],
+
+         SettingSlug::ENABLE_PAYMOB => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => '1',
+            'field' => SettingValueType::SELECT,
+            'option_value' => '{"yes":1,"no":0}',
+            'group_name' => SettingSubGroup::PAYMOB_SETTINGS,
+        ],
+
         SettingSlug::REFERRAL_COMMISION_FOR_USER => [
             'category'=>SettingCategory::REFERRAL,
             'value' => 30,
