@@ -16,7 +16,7 @@ use App\Transformers\Payment\DriverWalletHistoryTransformer;
 use App\Models\Payment\UserWallet;
 use App\Models\Payment\DriverWallet;
 use App\Base\Constants\Masters\WalletRemarks;
-
+use App\Base\Constants\Setting\Settings;
 
 /**
  * @group Paystack Payment Gateway
@@ -43,7 +43,7 @@ class PaystackController extends ApiController
         }else{
 
             $secret_key = get_settings(Settings::PAYSTACK_PRODUCTION_SECRET_KEY);
-            
+
         }
         $headers = [
             'Authorization:Bearer '.$secret_key,
