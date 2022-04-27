@@ -57,7 +57,8 @@ class Settings
     const FLUTTER_WAVE_PRODUCTION_SECRET_KEY='flutter-wave-production-secret-key';
 
     const ENABLE_ENABLE_STRIPE='enable-stripe';
-    const STRIPE_ENVIRONMENT='stripe-environment'
+    const STRIPE_ENVIRONMENT='stripe-environment';
+    
     const STRIPE_TEST_SECRET_KEY='stripe-test-secret Key';
     const STRIPE_LIVE_SECRET_KEY='stripe-live-secret Key';
 
