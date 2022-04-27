@@ -69,6 +69,35 @@ Route::prefix('payment')->namespace('Payment')->middleware('auth')->group(functi
     Route::prefix('razerpay')->namespace('Razerpay')->group(function(){
 
         Route::post('add/money', 'RazerpayController@addMoneyToWallet');
+    });
+
+    /**
+     * PayMob Payment Gateway
+     * 
+     * */
+
+    Route::prefix('paymob')->namespace('Paymob')->group(function(){
+
+        Route::post('add/money', 'PaymobController@addMoneyToWallet');
+    });
+
+    /**
+     * Paystack Payment Gateway
+     * 
+     * */
+    Route::prefix('paystack')->namespace('Paystack')->group(function(){
+        Route::post('initialize','PaystackController@initialize');
+        Route::post('add-money', 'PaystackController@addMoneyToWallet');
+
+    });
+
+      /**
+     * Flutterwave Payment Gateway
+     * 
+     * */
+    Route::prefix('flutter-wave')->namespace('FlutterWave')->group(function(){
+        // Route::post('initialize','FlutterWaveController@initialize');
+        Route::post('add-money', 'FlutterWaveController@addMoneyToWallet');
 
     });
 
