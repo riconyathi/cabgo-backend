@@ -19,6 +19,7 @@ use App\Transformers\Payment\WalletWithdrawalRequestsTransformer;
 use App\Models\Payment\WalletWithdrawalRequest;
 use App\Http\Controllers\Api\V1\BaseController;
 use App\Base\Constants\Masters\WithdrawalRequestStatus;
+use App\Base\Constants\Setting\Settings;
 
 /**
  * @group Payment
