@@ -223,7 +223,7 @@ class SettingsSeeder extends Seeder
             'value' => 'test',
             'field' => SettingValueType::TEXT,
              'option_value' => '{"test":"test","production":"production"}',
-            'group_name' => SettingSubGroup::PAYSTACK_SETTINGS,
+            'group_name' => SettingSubGroup::STRIPE_SETTINGS,
         ],
 
         SettingSlug::STRIPE_TEST_SECRET_KEY => [
@@ -231,7 +231,7 @@ class SettingsSeeder extends Seeder
             'value' => 'sk_test_51IuYWUSBCHfacuRqT79sG9pzvqyQqpwClyvlcrEm4ZvshYDdS5TGkYfIS2uYbcxcwhNES1J2cI03l8zxFPelK0yk007d8XvEAd',
             'field' => SettingValueType::TEXT,
             'option_value' => null,
-            'group_name' => SettingSubGroup::PAYSTACK_SETTINGS,
+            'group_name' => SettingSubGroup::STRIPE_SETTINGS,
         ],
 
         SettingSlug::STRIPE_LIVE_SECRET_KEY => [
@@ -239,7 +239,7 @@ class SettingsSeeder extends Seeder
             'value' => 'sk_test_51IuYWUSBCHfacuRqT79sG9pzvqyQqpwClyvlcrEm4ZvshYDdS5TGkYfIS2uYbcxcwhNES1J2cI03l8zxFPelK0yk007d8XvEAd',
             'field' => SettingValueType::TEXT,
             'option_value' => null,
-            'group_name' => SettingSubGroup::PAYSTACK_SETTINGS,
+            'group_name' => SettingSubGroup::STRIPE_SETTINGS,
         ],
          SettingSlug::PAYSTACK_ENVIRONMENT => [
             'category'=>SettingCategory::INSTALLATION,

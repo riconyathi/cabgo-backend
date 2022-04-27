@@ -460,5 +460,7 @@ return array(
     'cash_free_secret_key'=>'Cashfree Test Secret Key',
     'cash_free_production_secret_key'=>'Cashfree Production Secret Key',
     'test'=>'Test',
-    'production'=>'Production'
+    'production'=>'Production',
+    'enable-cashfree '=>'Enable Cashfree',
+    'enable-stripe'=>'Enable Stripe'
 );
