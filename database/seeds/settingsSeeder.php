@@ -158,6 +158,14 @@ class SettingsSeeder extends Seeder
         //     'option_value' => null,
         //     'group_name' => SettingSubGroup::TWILLO_SETTINGS,
         // ],
+
+        SettingSlug::ENABLE_BRAIN_TREE => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => '1',
+            'field' => SettingValueType::SELECT,
+            'option_value' => '{"yes":1,"no":0}',
+            'group_name' => SettingSubGroup::BRAINTREE_SETTINGS,
+        ],
         SettingSlug::BRAINTREE_ENVIRONMENT => [
             'category'=>SettingCategory::INSTALLATION,
             'value' => 'sandbox',
@@ -202,11 +210,50 @@ class SettingsSeeder extends Seeder
             'group_name' => SettingSubGroup::BRAINTREE_SETTINGS,
         ],
 
+        SettingSlug::ENABLE_STRIPE => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => '1',
+            'field' => SettingValueType::SELECT,
+            'option_value' => '{"yes":1,"no":0}',
+            'group_name' => SettingSubGroup::STRIPE_SETTINGS,
+        ],
+
+         SettingSlug::STRIPE_ENVIRONMENT => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => 'test',
+            'field' => SettingValueType::TEXT,
+             'option_value' => '{"test":"test","production":"production"}',
+            'group_name' => SettingSubGroup::PAYSTACK_SETTINGS,
+        ],
+
+        SettingSlug::STRIPE_TEST_SECRET_KEY => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => 'sk_test_51IuYWUSBCHfacuRqT79sG9pzvqyQqpwClyvlcrEm4ZvshYDdS5TGkYfIS2uYbcxcwhNES1J2cI03l8zxFPelK0yk007d8XvEAd',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => SettingSubGroup::PAYSTACK_SETTINGS,
+        ],
+
+        SettingSlug::STRIPE_LIVE_SECRET_KEY => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => 'sk_test_51IuYWUSBCHfacuRqT79sG9pzvqyQqpwClyvlcrEm4ZvshYDdS5TGkYfIS2uYbcxcwhNES1J2cI03l8zxFPelK0yk007d8XvEAd',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => SettingSubGroup::PAYSTACK_SETTINGS,
+        ],
          SettingSlug::PAYSTACK_ENVIRONMENT => [
             'category'=>SettingCategory::INSTALLATION,
             'value' => 'test',
             'field' => SettingValueType::TEXT,
              'option_value' => '{"test":"test","production":"production"}',
+            'group_name' => SettingSubGroup::PAYSTACK_SETTINGS,
+        ],
+
+        SettingSlug::ENABLE_PAYSTACK => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => '1',
+            'field' => SettingValueType::SELECT,
+            'option_value' => '{"yes":1,"no":0}',
             'group_name' => SettingSubGroup::PAYSTACK_SETTINGS,
         ],
         SettingSlug::PAYSTACK_TEST_SECRET_KEY => [
@@ -224,6 +271,13 @@ class SettingsSeeder extends Seeder
             'group_name' => SettingSubGroup::PAYSTACK_SETTINGS,
         ],
 
+        SettingSlug::ENABLE_FLUTTER_WAVE => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => '1',
+            'field' => SettingValueType::SELECT,
+            'option_value' => '{"yes":1,"no":0}',
+            'group_name' => SettingSubGroup::FLUTTERWAVE_SETTINGS,
+        ],
          SettingSlug::FLUTTER_WAVE_ENVIRONMENT => [
             'category'=>SettingCategory::INSTALLATION,
             'value' => 'test',
@@ -246,6 +300,13 @@ class SettingsSeeder extends Seeder
             'group_name' => SettingSubGroup::FLUTTERWAVE_SETTINGS,
         ],
 
+        SettingSlug::ENABLE_CASH_FREE => [
+            'category'=>SettingCategory::INSTALLATION,
+            'value' => '1',
+            'field' => SettingValueType::SELECT,
+            'option_value' => '{"yes":1,"no":0}',
+            'group_name' => SettingSubGroup::CASH_FREE_SETTINGS,
+        ],
         SettingSlug::CASH_FREE_ENVIRONMENT => [
             'category'=>SettingCategory::INSTALLATION,
             'value' => 'test',

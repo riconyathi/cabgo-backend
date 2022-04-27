@@ -50,11 +50,18 @@ class Settings
     const PAYSTACK_ENVIRONMENT='paystack-environment';
     const PAYSTACK_TEST_SECRET_KEY='paystack-test-secret-key';
     const PAYSTACK_PRODUCTION_SECRET_KEY='paystack-production-secret-key';
+
     const ENABLE_FLUTTER_WAVE='enable-flutter-wave';
     const FLUTTER_WAVE_ENVIRONMENT='flutter-wave-environment';
     const FLUTTER_WAVE_TEST_SECRET_KEY='flutter-wave-test-secret-key';
     const FLUTTER_WAVE_PRODUCTION_SECRET_KEY='flutter-wave-production-secret-key';
 
+    const ENABLE_ENABLE_STRIPE='enable-stripe';
+    const STRIPE_ENVIRONMENT='stripe-environment'
+    const STRIPE_TEST_SECRET_KEY='stripe-test-secret Key';
+    const STRIPE_LIVE_SECRET_KEY='stripe-live-secret Key';
+
+    const ENABLE_CASH_FREE='enable-cashfree';
     const CASH_FREE_ENVIRONMENT ='cash_free_environment';
     const CASH_FREE_TEST_APP_ID = 'cash_free_app_id';
     const CASH_FREE_PRODUCTION_APP_ID = 'cash_free_production_app_id';
