@@ -68,7 +68,7 @@ Route::prefix('payment')->namespace('Payment')->middleware('auth')->group(functi
      * */
     Route::prefix('razerpay')->namespace('Razerpay')->group(function(){
 
-        Route::post('add/money', 'RazerpayController@addMoneyToWallet');
+        Route::post('add-money', 'RazerpayController@addMoneyToWallet');
     });
 
     /**
