@@ -106,7 +106,7 @@ Route::prefix('payment')->namespace('Payment')->middleware('auth')->group(functi
      * 
      * */
     Route::prefix('cashfree')->namespace('Cashfree')->group(function(){
-        Route::post('generate-cftoken','CashfreePaymentController@initialize');
+        Route::post('generate-cftoken','CashfreePaymentController@generateCftoken');
         Route::any('add-money-to-wallet-webhooks', 'CashfreePaymentController@addMoneyToWalletwebHooks');
 
     });
