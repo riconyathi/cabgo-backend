@@ -101,6 +101,15 @@ Route::prefix('payment')->namespace('Payment')->middleware('auth')->group(functi
 
     });
 
+    /**
+     * Cashfree Payment Gateway
+     * 
+     * */
+    Route::prefix('cashfree')->namespace('Cashfree')->group(function(){
+        Route::post('generate-cftoken','CashfreePaymentController@initialize');
+        Route::any('add-money-to-wallet-webhooks', 'CashfreePaymentController@addMoneyToWalletwebHooks');
+
+    });
 
     });
 
