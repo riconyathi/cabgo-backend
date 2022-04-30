@@ -107,7 +107,7 @@ class FlutterWaveController extends ApiController
         $transaction_id = $request->payment_id;
 
             $user = auth()->user();
-            
+
             if (access()->hasRole('user')) {
             $wallet_model = new UserWallet();
             $wallet_add_history_model = new UserWalletHistory();
@@ -132,13 +132,6 @@ class FlutterWaveController extends ApiController
             'conversion'=>$conversion,
             'remarks'=>WalletRemarks::MONEY_DEPOSITED_TO_E_WALLET,
             'is_credit'=>true]);
-
-
-        if (access()->hasRole(Role::USER)) {
-            $result =  fractal($user_wallet, new WalletTransformer);
-        } else {
-            $result =  fractal($user_wallet, new DriverWalletTransformer);
-        }
 
                 $pus_request_detail = json_encode($request->all());
         
