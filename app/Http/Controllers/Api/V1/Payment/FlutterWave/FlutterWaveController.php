@@ -16,6 +16,9 @@ use App\Transformers\Payment\DriverWalletHistoryTransformer;
 use App\Models\Payment\UserWallet;
 use App\Models\Payment\DriverWallet;
 use App\Base\Constants\Masters\WalletRemarks;
+use App\Jobs\Notifications\AndroidPushNotification;
+use App\Jobs\NotifyViaMqtt;
+use App\Base\Constants\Masters\PushEnums;
 
 
 /**
@@ -103,14 +106,16 @@ class FlutterWaveController extends ApiController
         $conversion = $converted_type.':'.$request->amount.'-'.$converted_amount;
         $transaction_id = $request->payment_id;
 
+            $user = auth()->user();
+            
             if (access()->hasRole('user')) {
             $wallet_model = new UserWallet();
             $wallet_add_history_model = new UserWalletHistory();
-            $user_id = auth()->user()->id;
+            $user_id = $user->id;
         } else {
             $wallet_model = new DriverWallet();
             $wallet_add_history_model = new DriverWalletHistory();
-            $user_id = auth()->user()->driver->id;
+            $user_id = $user->driver->id;
         }
 
         $user_wallet = $wallet_model::firstOrCreate([
@@ -134,6 +139,26 @@ class FlutterWaveController extends ApiController
         } else {
             $result =  fractal($user_wallet, new DriverWalletTransformer);
         }
+
+                $pus_request_detail = json_encode($request->all());
+        
+                $socket_data = new \stdClass();
+                $socket_data->success = true;
+                $socket_data->success_message  = PushEnums::AMOUNT_CREDITED;
+                $socket_data->result = $request->all();
+
+                $title = trans('push_notifications.amount_credited_to_your_wallet_title');
+                $body = trans('push_notifications.amount_credited_to_your_wallet_body');
+
+                dispatch(new NotifyViaMqtt('add_money_to_wallet_status'.$user_id, json_encode($socket_data), $user_id));
+                
+                $user->notify(new AndroidPushNotification($title, $body));
+
+                if (access()->hasRole(Role::USER)) {
+                $result =  fractal($user_wallet, new WalletTransformer);
+                } else {
+                $result =  fractal($user_wallet, new DriverWalletTransformer);
+                }
 
         return $this->respondSuccess($result, 'money_added_successfully');
     }
