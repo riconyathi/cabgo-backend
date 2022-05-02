@@ -2,6 +2,7 @@
     - [Server-Installation](/{{route}}/{{version}}/server-setup)
     - [Backend Configuration](/{{route}}/{{version}}/backend-setup)
     - [Native-Android Setup](/{{route}}/{{version}}/android-setup)
+    - [Flutter-Android Setup](/{{route}}/{{version}}/flutter-android-setup)
     - [Native-Ios Setup](/{{route}}/{{version}}/ios-setup)
     - [Native-App-Translation Setup](/{{route}}/{{version}}/translation-setup)
 
