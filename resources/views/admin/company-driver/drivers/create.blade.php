@@ -85,7 +85,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                           <!--  <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="password">@lang('view_pages.password') <span class="text-danger">*</span></label>
@@ -103,7 +103,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="row">
 
