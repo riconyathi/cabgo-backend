@@ -18,6 +18,10 @@ In this article, we are going to set up the TYT Admin App’s initial setup for 
 	
 We need to create vehicle types & needed documents as a required configurations
 
+Before Getting in to the Pricing we need to create a Vehicle types for the system. please refer the below image to create a vehicle types.
+
+![image](../../images/user-manual-docs/list-vehicle-types.png)
+![image](../../images/user-manual-docs/create-vehicle-type.png)
 
 ### 2. Create Service Location
 
@@ -40,12 +44,6 @@ Please refer the following image to create a zone
 ![image](../../images/user-manual-docs/create-zone.png)
 ![image](../../images/user-manual-docs/list-zones.png)
 
-
-
-Before Getting in to the Pricing we need to create a Vehicle types for the system. please refer the below image to create a vehicle types.
-
-![image](../../images/user-manual-docs/list-vehicle-types.png)
-![image](../../images/user-manual-docs/create-vehicle-type.png)
 
 ## 4. Assign Type along with pricing
 
