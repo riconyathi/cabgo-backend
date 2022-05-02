@@ -14,6 +14,7 @@
 - [Install Jenkins](#section-10)
 - [Install Nodejs & Pm2](#section-11)
 - [Setup Laravel Supervisor](#section-12)
+- [Install EMQX server](#section-13)
 
 <a name="section-1"></a>
 ## Introduction
@@ -135,6 +136,7 @@ Follow the instructions from the reference link below.
 Reference Link: https://laravel.com/docs/8.x/queues#supervisor-configuration
 
 
+<a name="section-13"></a>
 ## 11.Install EMQX server
 
 Follow the instructions below & from the reference link.
