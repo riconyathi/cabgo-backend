@@ -6,6 +6,22 @@
 - [Setup Instructions](#section-2)
 - [Change Base Url](#section-3)
 - [Change the MQTT_URL](#section-4)
+- [Change Website URL](#section-5)
+- [Google Map & Cloud Configure](#section-6)
+- [Change Package Name](#section-7)
+- [Change Icons](#section-8)
+- [Change Display Name](#section-9)
+- [Payment gateway Setup](#section-10)
+- [Change app version](#section-11)
+- [Create release keys](#section-12)
+- [ Replace the jks key](#section-13)
+- [Generate SHA-1](#section-14)
+- [Google Map Services Setup](#section-15)
+- [Generate APK](#section-16)
+- [Generate bundle file](#section-17)
+- [Final Steps](#section-18)
+
+
 
 <a name="section-1"></a>
 ## Introduction
@@ -27,6 +43,9 @@ In this article, we are going to set up the TYT App’s initial setup for real-t
 
 ### Major things to do:
 <a name="section-3"></a>
+
+## Change Base Url
+
 1. Change the BASE_URL Variable Presented in the Constants File. 
 
     * It just updates your server’s primary URL to access all types of API Services From the App to your Server.
@@ -40,6 +59,9 @@ In this article, we are going to set up the TYT App’s initial setup for real-t
 
 ```
 <a name="section-4"></a>
+
+## Change the MQTT URL
+
 2. Change the MQTT_URL value of the Variable which is presented in the SocketHelper File which is presented in the Utils Package.
 
 * It is used to make a Socket Connection between APP and the Server. So Update this value very carefully with your server’s right IP Address.
@@ -52,6 +74,9 @@ In this article, we are going to set up the TYT App’s initial setup for real-t
 String mqttUrl = 'your mqtt url here';
 int mqttPort = 1883; // port number
 ```
+<a name="section-5"></a>
+## Change Website URL
+
 3. change website url in given files,
 	
 	* <strong> Note : File Location project/lib/pages/login/login.dart</strong>
@@ -182,14 +207,17 @@ color: textColor),
 ),
 ```
 
-3. Create & configure account for map using Google map & Cloud by following below documents.
+<a name="section-6"></a>
+## Google Map & Cloud Configure
+
+1. Create & configure account for map using Google map & Cloud by following below documents.
 
 	* Google Cloud console link: https://developers.google.com/maps/documentation/android-sdk/cloud-setup
 
 	* firebase setup doc: https://firebase.google.com/docs/android/setup
 
 
-4. After created & enabled the billing from google cloud & map console
+2. After created & enabled the billing from google cloud & map console
 
 	* add map api key change the map keys in given locations
 
@@ -217,23 +245,17 @@ String mapkey = 'your map key here';
 
 * <strong> call_FB_OTP </strong> node is used to configure whether the firebase otp should used or dummy otp should use for our testing purpose
 
-5. replace translations at given file if you need,
 
-* <strong> Note : File Location "project/lib/translation/translation.dart" </strong>
 
-```flutter
-Map<String, dynamic> languages = {
+<a name="section-7"></a>
+## Change Package Name
 
-"en": {
-
-```
-
-6. Download & Paste the google-services.json into the 'project/android/app' folder properly to make proper communication from your App which is a client to FireBase.
+1. Download & Paste the google-services.json into the 'project/android/app' folder properly to make proper communication from your App which is a client to FireBase.
 
 ![image](../../images/flutter-doc/firebase-setup.png)
 
 
-7. copy the package name from firebase and paste it in the following files
+2. copy the package name from firebase and paste it in the following files
 
 * <strong> Note : File Location "project/andrroid/app/src/main/AndroidManifest.xml" </strong>
 
@@ -271,13 +293,18 @@ applicationId "package name here"
 
 	* add package name here
 
-8. change folder name
+3. change folder name
 
  if your package name is com.package.android then,
 
         project/android/app/src/main/kotlin/com/something/something/ to project/android/app/src/main/kotlin/com/package/android
 
-9. replace icons images in following folders in given name 
+
+<a name="section-8"></a>
+## Change Icons
+
+
+1. replace icons images in following folders in given name 
 	
 	* project/assets/images/ - logo.png
 
@@ -292,7 +319,10 @@ applicationId "package name here"
 	* project/android/app/src/main/res/mipmap-xxxhdpi - ic_launcher.png (192x192)
 
 
-10. change app display name in file,
+<a name="section-9"></a>
+## Change Display Name
+
+1. change app display name in file,
 
 * <strong> Note : File Location "project/android/app/src/main/AndroidManifest.xml" </strong>
 
@@ -307,7 +337,10 @@ android:label="project name"
 
  ```
 
-11. change payment gateway keys,
+<a name="section-10"></a>
+## change payment gateway keys
+
+1. change payment gateway keys,
 
 * <strong> Note : File Location "project/lib/pages/NavigatorPages/selectwallet.dart" </strong>
 
@@ -435,7 +468,11 @@ var options = {
 
 ```
 
-12. change app version
+<a name="section-11"></a>
+## Change app version
+
+
+1. change app version
 
 * <strong> Note : File Location "project/pubsec.yaml" </strong>
 
@@ -444,7 +481,10 @@ version: 1.0.2+3
 
 ```
 
-13. create release keys by running command in terminal
+<a name="section-12"></a>
+## Create release keys
+
+1. create release keys by running command in terminal
 
 <strong>   note: change anyname with any specific name you like, </strong>
 
@@ -453,7 +493,11 @@ version: 1.0.2+3
 
 * after running this command give the data asked in the terminal. after that it will save the jks file and display the location
 
-14. replace the jks key details in file,
+<a name="section-13"></a>
+## Replace the jks key
+
+
+1. replace the jks key details in file,
 
 * <strong> Note : File Location "project/android/key.properties as given below" </strong>
 	
@@ -466,6 +510,10 @@ keyAlias=alias name you given in the command for creating jks file
 
 storeFile=jks file name with the location like ../../../jks
 ```
+
+<a name="section-14"></a>
+## Generate SHA-1
+
 
 15. Generate SHA-1 and SHA-256 keys from the project
 
@@ -485,9 +533,10 @@ Finally copy that debug and release keys and paste those in Firebase where
 
 Click Settings icon (presented right on project overview ) -> project settings -> Your App section -> SHA certificate fingerprints click add button and paste & Submit.
 
+<a name="section-15"></a>
+## Google Map Services Setup
 
-
-16. Google cloud Setup
+16. Google Map Services Setup
 
 * Enable below services in cloud console
 
@@ -502,17 +551,27 @@ Click Settings icon (presented right on project overview ) -> project settings -
 	* Geolocation APIs like distance matrix, geocoding, geolocations, Maps JavaScript, Maps static.
 
 
-17. to download apk file run "flutter build apk --release" in terminal from project location, and you will get apk file in folder - project/build/app/outputs/apk/release/app-release.apk
+<a name="section-16"></a>
+## Generate APK
+
+
+1. to download apk file run "flutter build apk --release" in terminal from project location, and you will get apk file in folder - project/build/app/outputs/apk/release/app-release.apk
 
  
+<a name="section-17"></a>
+## Generate bundle file
+
 
 18. to download app bundle file run "flutter build appbundle --release" in terminal from project location, and you will get app bundle file in folder - project/build/app/outputs/bundle/release/app-release.aab
 
  
+<a name="section-18"></a>
+## Final Steps
+
 
 19. after uploading app in playstore, then you will get a sha1 key and sha256 key from playstore, add those keys in your project as
 
- 
+<br>
 
 Click Settings icon (presented right on project overview ) -> project settings -> Your App section -> SHA certificate fingerprints click add button and paste & Submit.
 
