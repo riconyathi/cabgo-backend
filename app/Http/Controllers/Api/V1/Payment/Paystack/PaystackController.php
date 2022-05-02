@@ -114,7 +114,8 @@ class PaystackController extends ApiController
 
         $conversion = $converted_type.':'.$request->amount.'-'.$converted_amount;
         $transaction_id = $request->payment_id;
-
+            $user = auth()->user();
+            
             if (access()->hasRole('user')) {
             $wallet_model = new UserWallet();
             $wallet_add_history_model = new UserWalletHistory();

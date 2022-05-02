@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4825e26d16f83952426ad457f1b2a8b",
+    "content-hash": "b8f7b6b66eaf4ee52796499f253adf94",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -58,16 +58,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.222.1",
+            "version": "3.222.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "632621d97180e82d3adc1245a7b272774c30dbf5"
+                "reference": "17db4851c065b92e76466d8e6ddef0a7e8367416"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/632621d97180e82d3adc1245a7b272774c30dbf5",
-                "reference": "632621d97180e82d3adc1245a7b272774c30dbf5",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/17db4851c065b92e76466d8e6ddef0a7e8367416",
+                "reference": "17db4851c065b92e76466d8e6ddef0a7e8367416",
                 "shasum": ""
             },
             "require": {
@@ -143,9 +143,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.2"
             },
-            "time": "2022-04-28T18:17:24+00:00"
+            "time": "2022-04-29T18:14:00+00:00"
         },
         {
             "name": "aws/aws-sdk-php-laravel",
@@ -744,53 +744,6 @@
                 }
             ],
             "time": "2022-03-25T21:59:36+00:00"
-        },
-        {
-            "name": "binarytorch/larecipe-dark-theme",
-            "version": "v0.1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/larecipe/larecipe-dark-theme.git",
-                "reference": "9cf48afc89445141df4599512e01446f623f3a38"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/larecipe/larecipe-dark-theme/zipball/9cf48afc89445141df4599512e01446f623f3a38",
-                "reference": "9cf48afc89445141df4599512e01446f623f3a38",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "BinaryTorch\\LaRecipeDarkTheme\\LaRecipeDarkThemeServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "BinaryTorch\\LaRecipeDarkTheme\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Official LaRecipe Dark Theme Mode.",
-            "keywords": [
-                "docs",
-                "documentation",
-                "laravel",
-                "larecipe"
-            ],
-            "support": {
-                "issues": "https://github.com/larecipe/larecipe-dark-theme/issues",
-                "source": "https://github.com/larecipe/larecipe-dark-theme/tree/v0.1.5"
-            },
-            "time": "2020-10-24T08:08:47+00:00"
         },
         {
             "name": "braintree/braintree_php",

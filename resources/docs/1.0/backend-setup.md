@@ -70,32 +70,22 @@ MAIL_PASSWORD=SG.TFEnuSBS65fg.qAmjKNd4LUxxowWdtklHgamytGu_mIBGMQhHVINFZiY
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=suport@tagxi.com
 MAIL_FROM_NAME="tagxi"
-
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 AWS_DEFAULT_REGION=us-east-1
 AWS_BUCKET=
-
 FILESYSTEM_DRIVER=local
-
 SMS_PROVIDER=log
-
 DEFAULT_ALERT_EMAIL='dhilipkumar.kgcas@gmail.com'
-
 NODE_APP_PORT=3000
-
 FIREBASE_CREDENTIALS=/var/www/html/tyt-backend/public/push-configurations/firebase.json
-
 FIREBASE_DATABASE_URL=https://cabeezie.firebaseio.com/
-
 PAYMENT_GATEWAY=braintree
-
 GOOGLE_MAP_KEY=AIzaSyBeVRuuicwooRpk7ErjCEQCwu0OQowVt9I
 GOOGLE_SHEET_KEY = AIzaSyggE-WE-lwXhxWFHJthZ6FleF1WQ3NmGAU
-
 DEFAULT_LAT=11.21215
 DEFAULT_LNG=76.54545
-   ```
+```
 
 * Need to configure database config in .env file mentioned above.
 

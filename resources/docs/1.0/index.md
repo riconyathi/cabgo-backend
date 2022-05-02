@@ -3,10 +3,10 @@
     - [Backend Configuration](/{{route}}/{{version}}/backend-setup)
     - [Native-Android Setup](/{{route}}/{{version}}/android-setup)
     - [Native-Ios Setup](/{{route}}/{{version}}/ios-setup)
-    - [Translation Setup](/{{route}}/{{version}}/translation-setup)
+    - [Native-App-Translation Setup](/{{route}}/{{version}}/translation-setup)
 
 
 - ## User Manual
     - [Admin-App](/{{route}}/{{version}}/admin-user-manual)
-    
+    - [Required-Admin-App-Setup](/{{route}}/{{version}}/required-setup)
 
