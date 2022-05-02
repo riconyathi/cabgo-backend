@@ -18,7 +18,12 @@ class TranslationController extends BaseController
     {
         $client = new Client();
         $get_api_key = env('GOOGLE_SHEET_KEY');
-        $response = $client->get('https://sheets.googleapis.com/v4/spreadsheets/1J7F9JXssbN8mzSOatEF9-MLfC7Odz0SWZItX7fLSwU8/values:batchGet?ranges=Settings!A:Z&key='.$get_api_key.'&ranges=Sheet1!A:Z&ranges=Update-Config!A:Z');
+
+        // $sheet_id = '1J7F9JXssbN8mzSOatEF9-MLfC7Odz0SWZItX7fLSwU8';
+
+        $sheet_id = env('GOOGLE_SHEET_ID');
+        
+        $response = $client->get('https://sheets.googleapis.com/v4/spreadsheets/'.$sheet_id.'/values:batchGet?ranges=Settings!A:Z&key='.$get_api_key.'&ranges=Sheet1!A:Z&ranges=Update-Config!A:Z');
 
 
 
