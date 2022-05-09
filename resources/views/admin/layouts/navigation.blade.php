@@ -1,7 +1,8 @@
 
 @php
+  
 
-if(request()->path()=='translations'){
+if(str_contains((string)request()->path(),'translations')){
   $main_menu = 'settings';
   $sub_menu = 'translations';
 }
