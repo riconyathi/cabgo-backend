@@ -257,6 +257,8 @@ class CreateRequestController extends BaseController
         if ($res->getStatusCode() == 200) {
             $fire_drivers = \GuzzleHttp\json_decode($res->getBody()->getContents());
             if (empty($fire_drivers->data)) {
+
+                return null;
                 // $this->throwCustomException('no drivers available');
             } else {
                 $nearest_driver_ids = [];
