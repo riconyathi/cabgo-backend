@@ -180,6 +180,7 @@ class CreateRequestController extends BaseController
         $selected_drivers = [];
         $i = 0;
         foreach ($nearest_drivers as $driver) {
+            Log::info("in-loop");
             // $selected_drivers[$i]["request_id"] = $request_detail->id;
             $selected_drivers[$i]["user_id"] = $user_detail->id;
             $selected_drivers[$i]["driver_id"] = $driver->id;
@@ -190,6 +191,7 @@ class CreateRequestController extends BaseController
             $i++;
         }
 
+        
         // Send notification to the very first driver
         $first_meta_driver = $selected_drivers[0]['driver_id'];
         $pus_request_detail = $request_result->toJson();
