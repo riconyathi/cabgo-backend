@@ -1203,6 +1203,7 @@ if (!function_exists('app_logo')) {
         return $setting->app_logo;
     }
 }
+
 if (!function_exists('app_name')) {
     function app_name()
     {

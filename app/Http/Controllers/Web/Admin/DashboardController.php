@@ -14,8 +14,13 @@ class DashboardController extends BaseController
 {
 
     public function dashboard()
-    {
-        Session::put('applocale', 'en');
+    {       
+
+        if(!Session::get('applocale')){
+            Session::put('applocale', 'en');
+        }
+
+        // Session::put('applocale', 'en');
         
         $ownerId = null;
         if (auth()->user()->hasRole('owner')) {

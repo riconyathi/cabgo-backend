@@ -244,6 +244,9 @@ $(document).on('click','.chooseLanguage',function(){
 
     var link = "<?php echo url('/change/lang')?>";
     var finalLink = link+'/'+langValue;
+
+    console.log(finalLink);
+
     window.location = finalLink;
 });
 </script>

@@ -58,6 +58,7 @@ class UserTransformer extends Transformer
             'currency_code'=>$user->countryDetail->currency_code,
             'currency_symbol'=>$user->countryDetail->currency_symbol,
             'map_key'=>env('GOOGLE_MAP_KEY'),
+            'mqtt_ip'=>'52.91.17.40',
             'show_rental_ride'=>false,
             // 'created_at' => $user->converted_created_at->toDateTimeString(),
             // 'updated_at' => $user->converted_updated_at->toDateTimeString(),

@@ -319,7 +319,10 @@ class AdminViewController extends BaseController
     public function dashboard()
     {
         // set default locale if none selected @TODO
-        Session::put('applocale', 'en');
+
+        if(!Session::get('applocale')){
+            Session::put('applocale', 'en');
+        }
 
         
         $page = trans('pages_names.dashboard');

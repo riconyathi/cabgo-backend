@@ -61,6 +61,12 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{{url('requests',$result->id)}}">
                             <i class="fa fa-eye"></i>@lang('view_pages.view')</a>
+
+                            <!-- <a class="dropdown-item" target="_blank" href="{{url('requests/view-customer-invoice',$result->id)}}">
+                            <i class="fa fa-eye"></i>View Customer Invoice</a>
+                            <a class="dropdown-item" target="_blank" href="{{url('requests/view-driver-invoice',$result->id)}}">
+                            <i class="fa fa-eye"></i>View Driver Invoice</a>
+                             -->
                     </div>
                 </div>
             </td>

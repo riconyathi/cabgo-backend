@@ -316,7 +316,8 @@ Route::middleware('auth:web')->group(function () {
             Route::get('trip_view/{request}','RequestController@requestDetailedView');
             Route::get('/request/{request}', 'RequestController@fetchSingleRequest');
             Route::get('/fetch/request/{request}', 'RequestController@retrieveSingleRequest');
-       
+            Route::get('view-customer-invoice/{request_detail}','RequestController@viewCustomerInvoice');
+            Route::get('view-driver-invoice/{request_detail}','RequestController@viewDriverInvoice');
 
            
         });
