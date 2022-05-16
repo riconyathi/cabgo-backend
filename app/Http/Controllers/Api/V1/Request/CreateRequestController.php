@@ -277,9 +277,11 @@ class CreateRequestController extends BaseController
 
                 $nearest_drivers = Driver::where('active', 1)->where('approve', 1)->where('available', 1)->where('vehicle_type', $type_id)->whereIn('id', $nearest_driver_ids)->whereNotIn('id', $meta_drivers)->limit(10)->get();
 
-                // if ($nearest_drivers->isEmpty()) {
-                //     $this->throwCustomException('all drivers are busy');
-                // }
+                if ($nearest_drivers->isEmpty()) {
+                    // $this->throwCustomException('all drivers are busy');
+
+                    return null;
+                }
 
                 return $nearest_drivers;
             }
