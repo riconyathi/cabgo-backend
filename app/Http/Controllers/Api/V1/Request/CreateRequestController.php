@@ -173,6 +173,7 @@ class CreateRequestController extends BaseController
         $request_detail->requestPlace()->create($request_place_params);
         $request_result =  fractal($request_detail, new TripRequestTransformer)->parseIncludes('userDetail');
         
+        Log::info($nearest_drivers);
         // Send Request to the nearest Drivers
          if (!$nearest_drivers) {
                 goto no_drivers_available;
@@ -191,7 +192,7 @@ class CreateRequestController extends BaseController
             $i++;
         }
 
-        
+
         // Send notification to the very first driver
         $first_meta_driver = $selected_drivers[0]['driver_id'];
         $pus_request_detail = $request_result->toJson();
