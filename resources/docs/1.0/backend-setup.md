@@ -105,9 +105,9 @@ DEFAULT_LNG=76.54545
 Steps
 
 * Find the node file by below path
-    "project-file/node/server.js"
+    "project-file/node/geofire.js"
 
-* run the server file by using pm2. "pm2 start server.js"
+* run the server file by using pm2. "pm2 start geofire.js"
 
 <a name="section-4"></a>
 ## Map Configuration
