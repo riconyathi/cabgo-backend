@@ -412,11 +412,18 @@ class DriverEndRequestController extends BaseController
 
         $discount_amount = 0;
         if ($coupon_detail) {
-            if ($coupon_detail->minimum_trip_amount && $coupon_detail->minimum_trip_amount < $sub_total) {
+            Log::info("coupon-exists");
+            if ($coupon_detail->minimum_trip_amount < $sub_total) {
+            Log::info("yes-minimum");
+
                 $discount_amount = $sub_total * ($coupon_detail->discount_percent/100);
                 if ($discount_amount > $coupon_detail->maximum_discount_amount) {
                     $discount_amount = $coupon_detail->maximum_discount_amount;
                 }
+
+            Log::info("discount_amount");
+            Log::info($discount_amount);
+
                 $sub_total = $sub_total - $discount_amount;
             }
         }
@@ -530,7 +537,7 @@ class DriverEndRequestController extends BaseController
 
         $discount_amount = 0;
         if ($coupon_detail) {
-            if ($coupon_detail->minimum_trip_amount && $coupon_detail->minimum_trip_amount < $sub_total) {
+            if ($coupon_detail->minimum_trip_amount < $sub_total) {
                 $discount_amount = $sub_total * ($coupon_detail->coupon_detail/100);
                 if ($discount_amount > $coupon_detail->maximum_discount_amount) {
                     $discount_amount = $coupon_detail->maximum_discount_amount;
@@ -595,6 +602,8 @@ class DriverEndRequestController extends BaseController
             return null;
         }
 
+        return $expired;
+        
         // $exceed_usage = PromoUser::where('promo_code_id', $expired->id)->where('user_id', $user_id)->get()->count();
 
         // if ($exceed_usage >= $expired->uses_per_user) {
