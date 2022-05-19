@@ -461,13 +461,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'description' => 'Admin group with restricted access',
             'permissions' => [PermissionSlug::GET_ALL_ROLES, PermissionSlug::GET_ALL_PERMISSIONS,PermissionSlug::ACCESS_DASHBOARD,PermissionSlug::SETTINGS,PermissionSlug::VIEW_COMPANIES,PermissionSlug::DRIVERS_MENU,PermissionSlug::VIEW_DRIVERS,PermissionSlug::VIEW_TYPES,PermissionSlug::VIEW_ZONE,PermissionSlug::MAP_MENU,PermissionSlug::VIEW_SYSTEM_SETINGS,PermissionSlug::USER_MENU,PermissionSlug::VIEW_USERS,PermissionSlug::USER_SOS,PermissionSlug::SERVICE_LOCATION,PermissionSlug::ADMIN,PermissionSlug::DISPATCH_REQUEST,PermissionSlug::LIST_AIRPORTS,PermissionSlug::ADD_EDIT_AIRPORTS],
         ],
-        RoleSlug::AREA_MANAGER => [
-            'name' => 'Area Manager',
-            'description' => 'Admin group with restricted access',
-            'permissions' => [
-                PermissionSlug::ACCESS_DASHBOARD
-            ],
-        ],
+       
          RoleSlug::OWNER=>[
             'name' => 'Owner',
             'description' => 'Owner for company management',

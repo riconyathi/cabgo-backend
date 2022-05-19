@@ -149,6 +149,11 @@ class AirportController extends BaseController
         // dd($request->all());
         $created_params['service_location_id'] = $request->admin_id;
         $set = [];
+
+        if($request->coordinates==null){
+            throw ValidationException::withMessages(['zone_name' => __('Please Complete the shape before submit')]);
+        }
+
         foreach (json_decode($request->coordinates) as $key => $coordinates) {
             $points = [];
             $lineStrings = [];
@@ -200,6 +205,11 @@ class AirportController extends BaseController
         $updated_params = $request->only(['unit']);
         $updated_params['service_location_id'] = $request->admin_id;
         $set = [];
+
+        if($request->coordinates==null){
+            throw ValidationException::withMessages(['zone_name' => __('Please Complete the shape before submit')]);
+        }
+        
         foreach (json_decode($request->coordinates) as $key => $coordinates) {
             $points = [];
             $lineStrings = [];
