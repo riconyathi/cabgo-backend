@@ -91,4 +91,7 @@ return array (
   'scheduled_rides' => 'Scheduled Rides',
   'airport' => 'Airport',
   'withdrawal_requests' => 'Withdrawal Requests',
+  'approved_drivers' => 'Approved Drivers',
+  'pending_approvals' => 'Approval Pending Drivers',
+
 );

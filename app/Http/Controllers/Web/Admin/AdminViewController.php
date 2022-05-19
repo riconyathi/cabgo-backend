@@ -90,14 +90,13 @@ class AdminViewController extends BaseController
 
         $sub_menu = null;
         $item = $driver;
-
         // $request_detail = $driver->requestDetail()->OrderBy('id','asc')->first();
        
         // if ($request_detail) {
             
         $firebase_request_detail = $this->database->getReference('drivers/'.$driver->id)->getValue();
         $zone = Zone::companyKey()->first();
-
+        dd($firebase_request_detail);
         // $default_lat = $firebase_request_detail["l"][0];
         // $default_lng = $firebase_request_detail["l"][1];
 

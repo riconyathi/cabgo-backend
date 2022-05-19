@@ -172,29 +172,34 @@ Route::middleware('auth:web')->group(function () {
             Route::get('delete/{company}', 'CompanyController@delete');
         });
 
-        Route::group(['prefix' => 'drivers'], function () {
-            // prefix('drivers')->group(function () {
-            Route::get('/', 'DriverController@index');
-            Route::get('/fetch', 'DriverController@getAllDrivers');
-            Route::get('/create', 'DriverController@create');
-            Route::post('store', 'DriverController@store');
-            Route::get('/{driver}', 'DriverController@getById');
-            Route::get('request-list/{driver}', 'DriverController@DriverTripRequestIndex');
-            Route::get('request-list/{driver}/fetch', 'DriverController@DriverTripRequest');
-            Route::get('payment-history/{driver}', 'DriverController@DriverPaymentHistory');
-            Route::post('payment-history/{driver}', 'DriverController@StoreDriverPaymentHistory');
-            Route::post('update/{driver}', 'DriverController@update');
-            Route::get('toggle_status/{driver}', 'DriverController@toggleStatus');
-            Route::get('toggle_approve/{driver}/{approval_status}', 'DriverController@toggleApprove');
-            Route::get('toggle_available/{driver}', 'DriverController@toggleAvailable');
-            Route::get('delete/{driver}', 'DriverController@delete');
-            Route::get('document/view/{driver}', 'DriverDocumentController@index');
-            Route::get('upload/document/{driver}/{needed_document}', 'DriverDocumentController@documentUploadView');
-            Route::post('upload/document/{driver}/{needed_document}', 'DriverDocumentController@uploadDocument');
-            Route::post('approve/documents', 'DriverDocumentController@approveDriverDocument')->name('approveDriverDocument');
-            Route::get('get/carmodel', 'DriverController@getCarModel')->name('getCarModel');
-            Route::post('update/decline/reason', 'DriverController@UpdateDriverDeclineReason')->name('UpdateDriverDeclineReason');
-           
+    Route::group(['prefix' => 'drivers'], function () {
+        // prefix('drivers')->group(function () {
+        Route::get('/', 'DriverController@index');
+        Route::get('/fetch/approved', 'DriverController@getApprovedDrivers');
+
+        Route::get('/waiting-for-approval', 'DriverController@approvalPending');
+        // Route::get('/fetch', 'DriverController@getAllDrivers');
+        Route::get('/fetch/approval-pending-drivers', 'DriverController@getApprovalPendingDrivers');
+
+        Route::get('/create', 'DriverController@create');
+        Route::post('store', 'DriverController@store');
+        Route::get('/{driver}', 'DriverController@getById');
+        Route::get('request-list/{driver}', 'DriverController@DriverTripRequestIndex');
+        Route::get('request-list/{driver}/fetch', 'DriverController@DriverTripRequest');
+        Route::get('payment-history/{driver}', 'DriverController@DriverPaymentHistory');
+        Route::post('payment-history/{driver}', 'DriverController@StoreDriverPaymentHistory');
+        Route::post('update/{driver}', 'DriverController@update');
+        Route::get('toggle_status/{driver}', 'DriverController@toggleStatus');
+        Route::get('toggle_approve/{driver}/{approval_status}', 'DriverController@toggleApprove');
+        Route::get('toggle_available/{driver}', 'DriverController@toggleAvailable');
+        Route::get('delete/{driver}', 'DriverController@delete');
+        Route::get('document/view/{driver}', 'DriverDocumentController@index');
+        Route::get('upload/document/{driver}/{needed_document}', 'DriverDocumentController@documentUploadView');
+        Route::post('upload/document/{driver}/{needed_document}', 'DriverDocumentController@uploadDocument');
+        Route::post('approve/documents', 'DriverDocumentController@approveDriverDocument')->name('approveDriverDocument');
+        Route::get('get/carmodel', 'DriverController@getCarModel')->name('getCarModel');
+        Route::post('update/decline/reason', 'DriverController@UpdateDriverDeclineReason')->name('UpdateDriverDeclineReason');
+       
         });
 
         Route::group(['prefix'=>'driver-ratings'], function () {
