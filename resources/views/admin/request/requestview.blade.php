@@ -147,7 +147,7 @@ td {
                                 <td>{{ $item->driverDetail->name }}</td>
                                 <td>{{ $item->driverDetail->email }}</td>
                                 <td>{{ $item->driverDetail->mobile }}</td>
-                                <td>{{ $item->driverDetail->driverDetail->rating }}</td>
+                                <td>{{ $item->driverDetail->rating }}</td>
                             </tr>
                         </tbody>
                     </table>
