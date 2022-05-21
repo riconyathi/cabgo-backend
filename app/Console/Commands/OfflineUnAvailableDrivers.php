@@ -43,14 +43,19 @@ class OfflineUnAvailableDrivers extends Command
     public function handle()
     {
         $current_timestamp = Carbon::now()->timestamp;
-        $conditional_timestamp = Carbon::now()->subMinutes(1);
+        $conditional_timestamp = Carbon::now()->subMinutes(15);
+
+        $one_hr_conditional_time = Carbon::now()->subMinutes(60);
 
         $drivers = $this->database->getReference('drivers')->orderByChild('is_active')->equalTo(1)->getValue();
 
         foreach ($drivers as $key => $driver) {
             $driver_updated_at = Carbon::createFromTimestamp($driver['updated_at'] / 1000);
             
-
+            if($one_hr_conditional_time > $driver_updated_at){
+                goto end;
+            }
+            
             if ($conditional_timestamp > $driver_updated_at) {
                 
                 $this->info("some-drivers-are-there");
