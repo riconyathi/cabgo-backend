@@ -57,11 +57,14 @@ class OfflineUnAvailableDrivers extends Command
                     goto end;
                 }
 
-                $notifable_driver = $mysql_driver->user;
-                $title = trans('push_notifications.reminder_push_title');
-                $body = trans('push_notifications.reminder_push_body');
-                $notifable_driver->notify(new AndroidPushNotification($title, $body));
+                if ($mysql_driver){
+                    $notifable_driver = $mysql_driver->user;
+                    $title = trans('push_notifications.reminder_push_title');
+                    $body = trans('push_notifications.reminder_push_body');
+                    $notifable_driver->notify(new AndroidPushNotification($title, $body));
 
+                }
+                
                 // // Get last online record
                 // if ($mysql_driver && $mysql_driver->driverAvailabilities()) {
                 //     $availability = $mysql_driver->driverAvailabilities()->where('is_online', true)->orderBy('online_at', 'desc')->first();
