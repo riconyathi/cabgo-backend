@@ -39,8 +39,8 @@ class Kernel extends ConsoleKernel
                  ->everyMinute();
         $schedule->command('assign_drivers:for_schedule_rides')
                  ->everyFiveMinutes();
-        $schedule->command('offline:drivers')
-                 ->everyFifteenMinutes();
+        // $schedule->command('offline:drivers')
+        //          ->everyFifteenMinutes();
     }
 
     /**

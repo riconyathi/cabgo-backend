@@ -37,6 +37,11 @@ https://developers.google.com/admin-sdk/directory/v1/languages
 
   * https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=0
 
+  * <strong>Note:Your sheet should update the permission to see the sheet with anyone, please see the below reference image</strong>
+
+  ![image](../../images/user-manual-docs/sharewithanyone.png)
+
+
 * copy the sheet id & place it in to .env file with below param
 
 ```php
