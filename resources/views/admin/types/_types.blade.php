@@ -15,10 +15,10 @@
 <span style="float: right;">
 </span>
 </th>
-<th> @lang('view_pages.tansport_type')
+<!-- <th> @lang('view_pages.tansport_type')
 <span style="float: right;">
 </span>
-</th>
+</th> -->
 <th> @lang('view_pages.icon')
 <span style="float: right;">
 </span>
@@ -55,12 +55,12 @@
 <td> {{$result->name}}</td>
 
 
-<td>  @if($result->is_taxi == 'taxi' )
+<!-- <td>  @if($result->is_taxi == 'taxi' )
                         {{ "Taxi" }}
                     @else
                         {{ "Delivery" }}
                     @endif
-</td>
+</td> -->
 
 <td><img class="img-circle" src="{{$result->icon}}" alt=""></td>
 @if($result->active)
