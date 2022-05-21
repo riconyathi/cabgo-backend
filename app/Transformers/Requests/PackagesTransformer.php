@@ -121,7 +121,7 @@ class PackagesTransformer extends Transformer
 
 
             }else{
-            $this->throwCustomException('promo cannot be used to your trip amount');
+            // $this->throwCustomException('promo cannot be used to your trip amount');
 
             }
 
@@ -154,13 +154,13 @@ class PackagesTransformer extends Transformer
         if (!$expired) {
             $this->throwCustomException('provided promo code expired or invalid');
         }
-        $exceed_usage = PromoUser::where('promo_code_id', $expired->id)->where('user_id', $user->id)->get()->count();
-        if ($exceed_usage >= $expired->uses_per_user) {
-            $this->throwCustomException('you have exceeded your limit for this promo');
-        }
-        if ($expired->total_uses > $expired->total_uses+1) {
-            $this->throwCustomException('provided promo code expired');
-        }
+        // $exceed_usage = PromoUser::where('promo_code_id', $expired->id)->where('user_id', $user->id)->get()->count();
+        // if ($exceed_usage >= $expired->uses_per_user) {
+        //     $this->throwCustomException('you have exceeded your limit for this promo');
+        // }
+        // if ($expired->total_uses > $expired->total_uses+1) {
+        //     $this->throwCustomException('provided promo code expired');
+        // }
         return $expired;
     }
 }
