@@ -29,5 +29,5 @@ return array (
   'complaint_solved_title' => 'Your complaint was Solved 🙁️',
   'complaint_solved_body' => 'Your complaint has solved by our team, Have nice ride',
   'reminder_push_title'=>'Gentle Reminder 😊️',
-  'reminder_push_body'=>'Please open the'.' '.env('APP_NAME').' to get ride requests'
+  'reminder_push_body'=>'Please open the'.' '.env('APP_NAME').' app to get ride requests'
 );
