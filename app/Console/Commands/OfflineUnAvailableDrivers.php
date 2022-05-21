@@ -50,9 +50,9 @@ class OfflineUnAvailableDrivers extends Command
         foreach ($drivers as $key => $driver) {
             $driver_updated_at = Carbon::createFromTimestamp($driver['updated_at']);
 
-            dd($driver['updated_at']);
-            
             if ($conditional_timestamp > $driver['updated_at']) {
+                
+                $this->info("some-drivers-are-there");
 
                 // $updatable_offline_date_time = Carbon::createFromTimestamp($driver['updated_at']);
                 $mysql_driver = Driver::where('id', $driver['id'])->first();
