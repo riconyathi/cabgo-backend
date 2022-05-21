@@ -30,7 +30,7 @@
                             </div>
 
 
-                            @if (!auth()->user()->company_key)
+                            @if (env('APP_FOR')!='demo')
                                 <div class="col-md-7 text-center text-md-right">
                                     <a href="{{ url('types/create') }}" class="btn btn-primary btn-sm">
                                         <i class="mdi mdi-plus-circle mr-2"></i>@lang('view_pages.add_types')</a>
