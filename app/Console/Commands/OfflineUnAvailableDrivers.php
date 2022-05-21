@@ -51,6 +51,7 @@ class OfflineUnAvailableDrivers extends Command
             $driver_updated_at = Carbon::createFromTimestamp($driver['updated_at']);
 
             $this->info($driver['updated_at']);
+            $this->info($conditional_timestamp);
             
             if ($conditional_timestamp > $driver['updated_at']) {
                 
