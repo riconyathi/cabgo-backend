@@ -32,11 +32,27 @@ https://developers.google.com/admin-sdk/directory/v1/languages
 
 
 3. After Added & Updated all the data. you need to setup your server. & you can call our translation api which is created in our server app. so before trying to build an app from ios/android, please complete the server app setup first.
- 
+
+* you can copy the sheet_id from the updated google sheet link like below
+
+  * https://docs.google.com/spreadsheets/d/sheet-id/edit#gid=0
+
+  * <strong>Note:Your sheet should update the permission to see the sheet with anyone, please see the below reference image</strong>
+
+  ![image](../../images/user-manual-docs/sharewithanyone.png)
+
+
+* copy the sheet id & place it in to .env file with below param
+
+```php
+GOOGLE_SHEET_ID='your-sheet-id'
+GOOGLE_SHEET_KEY='your-sheet-key'
+``` 
 4. After setup the server app,
-You can call the translation api which is "you-server-base-url/api/v1/translation/get"
+You can call the translation api which is <strong>"you-server-base-url/api/v1/translation/get"</strong>
+
 You will get the json response from this api. which is updated json for the translation.
-copy the json and paste in project/lib/translations/translation.dart
+copy the json and paste in <strong>project/lib/translations/translation.dart</strong>
 
 ```flutter
 
