@@ -462,5 +462,9 @@ return array (
   'stripe-live-secret Key' => 'Stripe Live Secret Key',
   'enable-razor-pay' => 'Enable Razor Pay',
   'enable-paymob' => 'Enable Paymob',
-  'ride_type'=>'Ride Type'
+  'ride_type'=>'Ride Type',
+  'tansport_type' => 'Transport Type',
+  'select_tansport_type' => 'Select Tansport Type',
+  'taxi' => 'Taxi',
+  'delivery' => 'Delivery'
 );
