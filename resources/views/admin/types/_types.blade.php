@@ -75,8 +75,10 @@
 </button>
 
     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 35px, 0px); top: 0px; left: 0px; will-change: transform;">
-
+        @if (env('APP_FOR')!='demo')
         <a class="dropdown-item" href="{{url('types/edit',$result->id)}}"><i class="fa fa-pencil"></i>@lang('view_pages.edit')</a>
+
+        @endif
 
         @if($result->active)
             <a class="dropdown-item" href="{{url('types/toggle_status',$result->id)}}">
