@@ -90,6 +90,9 @@ class OfflineUnAvailableDrivers extends Command
                 
                 
             }
+
+        $this->info("no-drivers-found");
+
         }
 
         $this->info("success");
