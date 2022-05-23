@@ -466,5 +466,7 @@ return array (
   'tansport_type' => 'Transport Type',
   'select_tansport_type' => 'Select Tansport Type',
   'taxi' => 'Taxi',
-  'delivery' => 'Delivery'
+  'delivery' => 'Delivery',
+  'enable_rental_ride' => 'Enable Rental Ride',
+  'enable_otp_tripstart' => 'Enable Otp Trip Start'
 );
