@@ -43,14 +43,24 @@ class OfflineUnAvailableDrivers extends Command
     public function handle()
     {
         $current_timestamp = Carbon::now()->timestamp;
-        $conditional_timestamp = Carbon::now()->subMinutes(10)->timestamp;
+        $conditional_timestamp = Carbon::now()->subMinutes(15);
+
+        $one_hr_conditional_time = Carbon::now()->subMinutes(60);
 
         $drivers = $this->database->getReference('drivers')->orderByChild('is_active')->equalTo(1)->getValue();
 
         foreach ($drivers as $key => $driver) {
-            $driver_updated_at = Carbon::createFromTimestamp($driver['updated_at']);
-            if ($conditional_timestamp > $driver_updated_at->timestamp) {
-                $updatable_offline_date_time = Carbon::createFromTimestamp($driver_updated_at->timestamp);
+            $driver_updated_at = Carbon::createFromTimestamp($driver['updated_at'] / 1000);
+            
+            if($one_hr_conditional_time > $driver_updated_at){
+                goto end;
+            }
+            
+            if ($conditional_timestamp > $driver_updated_at) {
+                
+                $this->info("some-drivers-are-there");
+
+                // $updatable_offline_date_time = Carbon::createFromTimestamp($driver['updated_at']);
                 $mysql_driver = Driver::where('id', $driver['id'])->first();
                 // Check if the driver is on trip
                 if($mysql_driver && $mysql_driver->requestDetail()->where('is_completed',false)->where('is_cancelled',false)->exists()){
@@ -86,6 +96,9 @@ class OfflineUnAvailableDrivers extends Command
                 
                 
             }
+
+        $this->info("no-drivers-found");
+
         }
 
         $this->info("success");

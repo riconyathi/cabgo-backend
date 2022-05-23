@@ -15,10 +15,10 @@
 <span style="float: right;">
 </span>
 </th>
-<th> @lang('view_pages.tansport_type')
+<!-- <th> @lang('view_pages.tansport_type')
 <span style="float: right;">
 </span>
-</th>
+</th> -->
 <th> @lang('view_pages.icon')
 <span style="float: right;">
 </span>
@@ -55,12 +55,12 @@
 <td> {{$result->name}}</td>
 
 
-<td>  @if($result->is_taxi == 'taxi' )
+<!-- <td>  @if($result->is_taxi == 'taxi' )
                         {{ "Taxi" }}
                     @else
                         {{ "Delivery" }}
                     @endif
-</td>
+</td> -->
 
 <td><img class="img-circle" src="{{$result->icon}}" alt=""></td>
 @if($result->active)
@@ -75,8 +75,10 @@
 </button>
 
     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 35px, 0px); top: 0px; left: 0px; will-change: transform;">
-
+        @if (env('APP_FOR')!='demo')
         <a class="dropdown-item" href="{{url('types/edit',$result->id)}}"><i class="fa fa-pencil"></i>@lang('view_pages.edit')</a>
+
+        @endif
 
         @if($result->active)
             <a class="dropdown-item" href="{{url('types/toggle_status',$result->id)}}">
