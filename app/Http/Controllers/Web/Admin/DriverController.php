@@ -38,6 +38,7 @@ use App\Transformers\Payment\DriverWalletHistoryTransformer;
 use App\Base\Constants\Masters\WalletRemarks;
 use Illuminate\Support\Str;
 use App\Models\Payment\WalletWithdrawalRequest;
+use App\Base\Constants\Setting\Settings;
 
 /**
  * @resource Driver
@@ -637,6 +638,58 @@ class DriverController extends BaseController
         return redirect()->back()->with('success', $message);
     }
 
+        /**
+     * Negative Balance Drivers
+     * 
+     * 
+     * */
+
+    public function NeagtiveBalanceDrivers()
+    {
+        $page = trans('pages_names.negative_balance_drivers');
+        $main_menu = 'drivers';
+        $sub_menu = 'negative_balance_drivers';
+
+        $services = ServiceLocation::whereActive(true)->companyKey()->get();
+        $approved = Driver::where('approve', true)->get();
+        // dd($approved);
+        return view('admin.drivers.negative-balance-drivers', compact('page', 'main_menu', 'sub_menu','services', 'approved'));
+    }
+    public function NegativeBalanceFetch(QueryFilterContract $queryFilter)
+    {
+         $url = request()->fullUrl(); //get full url
+
+         $threshould_value = get_settings(Settings::DRIVER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER);
+         // dd($threshould_value);
+        return cache()->tags('drivers_list')->remember($url, Carbon::parse('10 minutes'), function () use ($queryFilter,$threshould_value) {
+            if (access()->hasRole(RoleSlug::SUPER_ADMIN)) {
+                $query = Driver::orderBy('created_at', 'desc')->whereHas('driverWallet',function($query)use($threshould_value){
+                    $query->where('amount_balance','<=',$threshould_value);
+                });
+
+                if (env('APP_FOR')=='demo') {
+                    $query = Driver::whereHas('user', function ($query) {
+                        $query->whereCompanyKey(auth()->user()->company_key);
+                    })->whereHas('driverWallet',function($query)use($threshould_value){
+                    $query->where('amount_balance','<=',$threshould_value);
+                })->orderBy('created_at', 'desc');
+                }
+                    // dd($query->get());
+
+            } else {
+                $this->validateAdmin();
+                $query = $this->driver->where('service_location_id', auth()->user()->admin->service_location_id)->whereHas('driverWallet',function($query)use($threshould_value){
+                    $query->where('amount_balance','<=',$threshould_value);
+                })->orderBy('created_at', 'desc');
+                // $query = Driver::orderBy('created_at', 'desc');
+                // dd($query);
+            }
+            $results = $queryFilter->builder($query)->customFilter(new DriverFilter)->paginate();
+
+
+            return view('admin.drivers._drivers-negative-balance', compact('results'))->render();
+        });
+    }
 }
 
 

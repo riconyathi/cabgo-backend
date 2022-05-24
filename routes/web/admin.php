@@ -211,6 +211,8 @@ Route::middleware('auth:web')->group(function () {
              Route::get('/view/{driver}','DriverController@withdrawalRequestDetail');
              Route::get('/approve/{wallet_withdrawal_request}','DriverController@approveWithdrawalRequest');
              Route::get('/decline/{wallet_withdrawal_request}','DriverController@declineWithdrawalRequest');
+       Route::get('/negative_balance_drivers','DriverController@NeagtiveBalanceDrivers');
+       Route::get('fetch/negative-balance-drivers', 'DriverController@NegativeBalanceFetch');
         });
 
         Route::group(['prefix' => 'admins',  'middleware' => 'permission:admin'], function () {

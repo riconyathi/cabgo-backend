@@ -93,5 +93,7 @@ return array (
   'withdrawal_requests' => 'Withdrawal Requests',
   'approved_drivers' => 'Approved Drivers',
   'pending_approvals' => 'Approval Pending Drivers',
+  'negative_balance_drivers' => 'Negative Balance Drivers',
+
 
 );

@@ -268,9 +268,12 @@ if(str_contains((string)request()->path(),'translations')){
           <li class="{{ 'withdrawal_requests' == $sub_menu ? 'active' : '' }}">
             <a href="{{url('/withdrawal-requests-lists')}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.withdrawal_requests')</a>
           </li>
-          @endif          
-
-
+          @endif   
+          @if(auth()->user()->can('view-drivers'))
+          <li class="{{ 'negative_balance_drivers' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('withdrawal-requests-lists/negative_balance_drivers')}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.negative_balance_drivers')</a>
+          </li>
+          @endif         
         </ul> 
        
       </li>

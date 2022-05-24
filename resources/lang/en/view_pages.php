@@ -468,5 +468,6 @@ return array (
   'taxi' => 'Taxi',
   'delivery' => 'Delivery',
   'enable_rental_ride' => 'Enable Rental Ride',
-  'enable_otp_tripstart' => 'Enable Otp Trip Start'
+  'enable_otp_tripstart' => 'Enable Otp Trip Start',
+  'wallet_balance' => 'wallet_balance',
 );
