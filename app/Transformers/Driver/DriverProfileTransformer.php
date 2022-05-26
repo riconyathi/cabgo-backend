@@ -78,7 +78,7 @@ class DriverProfileTransformer extends Transformer
             'show_instant_ride'=>false,
             'country_id'=>$user->user->countryDetail->id,
             'currency_symbol' => $user->user->countryDetail->currency_symbol,
-            'mqtt_ip'=>'52.91.17.40'
+            'mqtt_ip'=>'52.22.118.123'
         ];
 
         $current_date = Carbon::now();

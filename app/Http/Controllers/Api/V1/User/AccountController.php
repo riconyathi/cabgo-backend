@@ -29,6 +29,13 @@ class AccountController extends ApiController
             $user = fractal($user, new UserTransformer)->parseIncludes(['onTripRequest.driverDetail','onTripRequest.requestBill','metaRequest.driverDetail','favouriteLocations']);
         }
 
+        if(auth()->user()->hasRole(Role::DISPATCHER)){
+
+            $user = User::where('id',auth()->user()->id)->first();
+
+            
+        }
+
         return $this->respondOk($user);
     }
 }
