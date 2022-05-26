@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Company Page')
+@section('title', 'Company page')
 
 @section('content')
     <style>
@@ -117,7 +117,7 @@
                     </div>
 
                     <div id="js-drivers-partial-target">
-                        <include-fragment src="fetch/approval-pending-drivers">
+                        <include-fragment src="fetch/negative-balance-drivers">
                             <span style="text-align: center;font-weight: bold;"> Loading...</span>
                         </include-fragment>
                     </div>
@@ -147,7 +147,7 @@
                     e.preventDefault();
                     search_keyword = $('#search_keyword').val();
 
-                    fetch('fetch/approval-pending-drivers?search=' + search_keyword)
+                    fetch('fetch/negative-balance-drivers?search=' + search_keyword)
                         .then(response => response.text())
                         .then(html => {
                             document.querySelector('#js-drivers-partial-target').innerHTML = html
@@ -190,6 +190,7 @@
                 e.preventDefault();
 
                 let url = $(this).attr('data-url');
+
                 swal({
                     title: "Are you sure to delete ?",
                     type: "error",
@@ -285,9 +286,8 @@
 
             $(function() {
   $('table.container').on("click", "tr.table-tr", function() {
-        e.preventDefault();
     window.location = $(this).data("url");
-    alert($(this).data("url"));
+    //alert($(this).data("url"));
   });
 });
 
