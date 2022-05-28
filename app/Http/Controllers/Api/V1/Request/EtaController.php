@@ -52,9 +52,7 @@ class EtaController extends ApiController
     {
         $zone_detail = find_zone($request->input('pick_lat'), $request->input('pick_lng'));
 
-        \Log::info($zone_detail);
-
-        if ($zone_detail==null) {
+        if (!$zone_detail) {
             $this->throwCustomException('service not available with this location');
         }
 

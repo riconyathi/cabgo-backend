@@ -123,6 +123,7 @@ class UserTransformer extends Transformer
     {
         $request = Sos::select('id', 'name', 'number', 'user_type', 'created_by')
         ->where('created_by', auth()->user()->id)
+        ->orWhere('user_type', 'admin')
         ->orderBy('created_at', 'Desc')
         ->companyKey()->get();
 

@@ -36,7 +36,6 @@ class Settings
     const GOOGLE_MAP_KEY='google_map_key';
     const MAPBOX_KEY='map_box_key';
     const ENABLE_BRAIN_TREE='enable_brain_tree';
-    const STRIPE_SECRET='stripe_secret';
     const DRIVER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER='driver-wallet-minimum-amount-to-get-order';
     const FIREBASE_DB_URL='firebase-db-url';
     const FIREBASE_API_KEY='firebase-api-key';
@@ -46,6 +45,7 @@ class Settings
     const FIREBASE_MESSAGIN_SENDER_ID='firebase-messaging-sender-id';
     const FIREBASE_APP_ID='firebase-app-id';
     const FIREBASE_MEASUREMENT_ID='firebase-measurement-id';
+    
     const ENABLE_PAYSTACK='enable-paystack';
     const PAYSTACK_ENVIRONMENT='paystack-environment';
     const PAYSTACK_TEST_SECRET_KEY='paystack-test-secret-key';
@@ -59,8 +59,8 @@ class Settings
     const ENABLE_STRIPE='enable-stripe';
     const STRIPE_ENVIRONMENT='stripe-environment';
 
-    const STRIPE_TEST_SECRET_KEY='stripe-test-secret Key';
-    const STRIPE_LIVE_SECRET_KEY='stripe-live-secret Key';
+    const STRIPE_TEST_SECRET_KEY='stripe_test_secret_key';
+    const STRIPE_LIVE_SECRET_KEY='stripe_live_secret_key';
 
     const ENABLE_CASH_FREE='enable-cashfree';
     const CASH_FREE_ENVIRONMENT ='cash_free_environment';
@@ -73,9 +73,18 @@ class Settings
     const CASH_FREE_TEST_CLIENT_SECRET_FOR_PAYOUT = 'cash_free_test_secret_for_payout';
     const CASH_FREE_PRODUCTION_CLIENT_SECRET_FOR_PAYOUT = 'cash_free_production_secret_for_payout';
     const ENABLE_RAZOR_PAY='enable-razor-pay';
+    const RAZOR_PAY_ENVIRONMENT='razor_pay_environment';
     const ENABLE_PAYMOB='enable-paymob';
     const ENABLE_RENTAL_RIDE ='enable_rental_ride';
     const ENABLE_OTP_TRIPSTART ='enable_otp_tripstart';
+    const ENABLE_DELIVERY_START_AND_END_OF_RIDE = 'enable_delivery_start_and_end_of_ride';
+    const STRIPE_TEST_PUBLISHABLE_KEY='stripe_test_publishable_key';
+    const STRIPE_LIVE_PUBLISHABLE_KEY='stripe_live_publishable_key';
+    const RAZOR_PAY_TEST_API_KEY='razor_pay_test_api_key';
+    const RAZOR_PAY_LIVE_API_KEY='razor_pay_live_api_key';
+    const PAYSTACK_TEST_PUBLISHABLE_KEY='paystack_test_publishable_key';
+    const PAYSTACK_PRODUCTION_PUBLISHABLE_KEY='paystack_production_publishable_key';
+    const ENABLE_DIGITAL_SIGNATURE_AT_THE_END_OF_RIDE = 'enable_digital_signatur_at_the_end_of_ride';
 
-
+   
 }
