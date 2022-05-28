@@ -110,7 +110,7 @@ class SettingsSeeder extends Seeder
         ],
         SettingSlug::DRIVER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER => [
             'category'=>SettingCategory::WALLET,
-            'value' => 1000,
+            'value' => -10000,
             'field' => SettingValueType::TEXT,
             'option_value' => null,
             'group_name' => null,
