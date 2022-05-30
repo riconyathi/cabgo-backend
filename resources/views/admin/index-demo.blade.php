@@ -162,7 +162,7 @@
 
 
     <script type="text/javascript"
-        src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&libraries=visualization"></script>
+        src="https://maps.google.com/maps/api/js?key={{get_settings('google_map_key')}}&libraries=visualization"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-database.js"></script>

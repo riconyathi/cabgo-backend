@@ -56,7 +56,7 @@ class TripUserTransformer extends Transformer
             'refferal_code'=>$user->refferal_code,
             'currency_code'=>$user->countryDetail->currency_code,
             'currency_symbol'=>$user->countryDetail->currency_symbol,
-            'map_key'=>env('GOOGLE_MAP_KEY'),
+            //'map_key'=>get_settings('google_map_key'),
             'show_rental_ride'=>false,
             // 'created_at' => $user->converted_created_at->toDateTimeString(),
             // 'updated_at' => $user->converted_updated_at->toDateTimeString(),

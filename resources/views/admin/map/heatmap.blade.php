@@ -76,7 +76,7 @@
 
 
     <script type="text/javascript"
-        src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initialize&libraries=visualization"
+        src="https://maps.google.com/maps/api/js?key={{get_settings('google_map_key')}}&callback=initialize&libraries=visualization"
         async defer></script>
 
     <script type="text/javascript">

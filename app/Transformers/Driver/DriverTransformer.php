@@ -67,7 +67,7 @@ class DriverTransformer extends Transformer
             'no_of_ratings' => $user->no_of_ratings,
             'timezone'=>$user->timezone,
             'refferal_code'=>$user->user->refferal_code,
-            'map_key'=>env('GOOGLE_MAP_KEY'),
+            //'map_key'=>get_settings('google_map_key'),
             'company_key'=>$user->user->company_key,
             'show_instant_ride'=>true,
             'currency_symbol' => $user->user->countryDetail?$user->user->countryDetail->currency_symbol:'₹'

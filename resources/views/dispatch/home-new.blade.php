@@ -268,7 +268,7 @@
 
 
     <script type="text/javascript"
-        src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&libraries=places"></script>
+        src="https://maps.google.com/maps/api/js?key={{get_settings('google_map_key')}}&libraries=places"></script>
 
     <script>
         var lat = parseFloat("{{ auth()->user()->admin->serviceLocationDetail->zones()->pluck('lat')->first() ?? 11.015956}}");
