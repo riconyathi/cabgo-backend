@@ -78,7 +78,7 @@ class DriverProfileTransformer extends Transformer
             'show_instant_ride'=>false,
             'country_id'=>$user->user->countryDetail->id,
             'currency_symbol' => $user->user->countryDetail->currency_symbol,
-            'mqtt_ip'=>'52.22.118.123'
+            'mqtt_ip'=>'34.194.96.250'
         ];
 
         $current_date = Carbon::now();
@@ -111,9 +111,14 @@ class DriverProfileTransformer extends Transformer
         $wallet_balance= $driver_wallet?$driver_wallet->amount_balance:0;
 
          $minimum_balance = get_settings(Settings::DRIVER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER);
-            if ($minimum_balance > $wallet_balance) {
+
+            if($minimum_balance !=0){
+                if ($minimum_balance > $wallet_balance) {
                 $low_balance = true;
             }
+                
+            }
+            
 
             $params['low_balance'] = $low_balance;
 
