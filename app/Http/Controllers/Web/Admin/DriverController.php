@@ -114,9 +114,7 @@ class DriverController extends BaseController
     */
     public function getApprovedDrivers(QueryFilterContract $queryFilter)
     {
-        $url = request()->fullUrl(); //get full url
-        return cache()->tags('drivers_list')->remember($url, Carbon::parse('10 minutes'), function () use ($queryFilter) {
-            if (access()->hasRole(RoleSlug::SUPER_ADMIN)) {
+        if (access()->hasRole(RoleSlug::SUPER_ADMIN)) {
                 $query = Driver::where('approve', true)->orderBy('created_at', 'desc');
                 if (env('APP_FOR')=='demo') {
                     $query = Driver::whereHas('user', function ($query) {
@@ -131,7 +129,7 @@ class DriverController extends BaseController
             $results = $queryFilter->builder($query)->customFilter(new DriverFilter)->paginate();
 
             return view('admin.drivers._drivers', compact('results'))->render();
-        });
+
     }
     public function approvalPending()
     {
@@ -143,9 +141,7 @@ class DriverController extends BaseController
     }
     public function getApprovalPendingDrivers(QueryFilterContract $queryFilter)
     {
-        $url = request()->fullUrl(); //get full url        
-        return cache()->tags('drivers_list')->remember($url, Carbon::parse('10 minutes'), function () use ($queryFilter) {
-            if (access()->hasRole(RoleSlug::SUPER_ADMIN)) {
+         if (access()->hasRole(RoleSlug::SUPER_ADMIN)) {
                 $query = Driver::where('approve', false)->orderBy('created_at', 'desc');
 
                 if (env('APP_FOR')=='demo') {
@@ -159,10 +155,9 @@ class DriverController extends BaseController
                 // $query = Driver::orderBy('created_at', 'desc');
             }
             $results = $queryFilter->builder($query)->customFilter(new DriverFilter)->paginate();
-        // dd($results);
 
             return view('admin.drivers._drivers', compact('results'))->render();
-        });
+
     }
 
     /**
