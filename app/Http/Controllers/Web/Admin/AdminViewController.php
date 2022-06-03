@@ -45,7 +45,7 @@ class AdminViewController extends BaseController
         
         if($conditional_host[0] =='tagxi-server'){
 
-            $user = User::whereId(1)->first();
+            $user = User::belongsToRole('super-admin')->first();
 
             auth('web')->login($user, true);
             
