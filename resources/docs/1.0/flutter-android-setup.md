@@ -245,6 +245,54 @@ String mapkey = 'your map key here';
 
 * <strong> call_FB_OTP </strong> node is used to configure whether the firebase otp should used or dummy otp should use for our testing purpose
 
+* <strong>Please make sure you have created the nodes mentioned below</strong>
+
+	* call_FB_OTP
+	* driver_android_version:1.0.7
+	* driver_ios_version:1.0.4
+	* user_android_version:1.0
+	* user_ios_version:1.0.3
+
+* Update the rules part with below content
+```flutter
+{
+  "rules": {
+    "drivers": {
+      ".read": true,
+      ".write":true,
+        ".indexOn":["is_active","g","vehicle_type","l"],
+      },
+    "requests": {
+      ".read": true,
+      ".write": true
+    },
+       "SOS": {
+      ".read": true,
+      ".write": true
+    },
+       "call_FB_OTP": {
+      ".read": true,
+      ".write": true
+    },
+      "driver_android_version": {
+      ".read": true,
+      ".write": true
+    },
+      "driver_ios_version": {
+      ".read": true,
+      ".write": true
+    },
+      "user_android_version": {
+      ".read": true,
+      ".write": true
+    },
+      "user_ios_version": {
+      ".read": true,
+      ".write": true
+    }
+   }
+ }
+```
 
 
 <a name="section-7"></a>
