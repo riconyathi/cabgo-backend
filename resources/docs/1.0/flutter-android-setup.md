@@ -253,7 +253,8 @@ String mapkey = 'your map key here';
 	* user_android_version:1.0
 	* user_ios_version:1.0.3
 
-* Update the rules part with below content
+* <strong> Update the rules part with below content</strong>
+
 ```flutter
 {
   "rules": {
