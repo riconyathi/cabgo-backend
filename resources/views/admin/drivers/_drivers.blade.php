@@ -1,5 +1,5 @@
 <div class="box-body no-padding">
-    <div class="table-responsive">
+    <div class="">
       <table class="table table-hover">
 <thead>
 <tr>
@@ -121,7 +121,7 @@
 <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('view_pages.action')
 </button>
 @if($result->approve == 1)
-    <div class="dropdown-menu">
+    <div class="dropdown-menu overflow-auto">
         <a class="dropdown-item" href="{{url('drivers',$result->id)}}">
             <i class="fa fa-pencil"></i>@lang('view_pages.edit')
         </a>

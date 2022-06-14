@@ -1,6 +1,6 @@
 
 <div class="box-body no-padding">
-    <div class="table-responsive">
+    <div class="">
       <table class="table table-hover">
     <thead>
     <tr>
