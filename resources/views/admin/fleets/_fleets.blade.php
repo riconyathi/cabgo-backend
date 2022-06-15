@@ -3,8 +3,6 @@
         <div class="card">
             <div class="card-body">
 
-               
-
                 <div class="col-sm-12 p-0">
                     <table class="table table-hover" style="border-collapse: collapse; border-spacing: 0px; width: 100%;" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                         <thead>
