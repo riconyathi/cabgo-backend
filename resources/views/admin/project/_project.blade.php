@@ -1,5 +1,5 @@
 <div class="box-body no-padding">
-    <div class="">
+    <div class="table-responsive">
       <table class="table table-hover">
     <thead>
     <tr>
@@ -50,7 +50,6 @@
     @endif
     <td>
 
-    <div class="dropdown">
     <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('view_pages.action')
     </button>
         <div class="dropdown-menu">
