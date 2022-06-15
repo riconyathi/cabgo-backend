@@ -2,13 +2,13 @@
 
 return array (
   'driver_arrived_title' => 'Driver Arrived 😊️',
-  'driver_arrived_body' => 'Driver arrived to pickup you',
+  'driver_arrived_body' => 'The Driver arrived to pick you up',
   'driver_approved' => 'Account Approved 😃️',
   'driver_approved_body' => 'Your profile verified and approved',
   'driver_declined_title' => 'Account Declined 🙁️',
   'driver_declined_body' => 'Your Account declined due to some reason. please contact our admin',
   'trip_accepted_title' => 'Trip Request Accepted',
-  'trip_accepted_body' => 'The Driver is coming to pickup you',
+  'trip_accepted_body' => 'The Driver is coming to pick you',
   'no_driver_found_title' => 'No Driver Found Around You 🙁️',
   'no_driver_found_body' => 'Sorry plese try again after some times,there is no driver available for your ride now',
   'new_request_title' => 'New Trip Requested 😊️',
