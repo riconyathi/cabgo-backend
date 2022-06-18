@@ -462,4 +462,15 @@ return array (
   'stripe_live_secret_key' => 'Stripe Live Secret Key',
   'enable-razor-pay' => 'Enable Razor Pay',
   'enable-paymob' => 'Enable Paymob',
+  'Currency' => 'Currency',
+  'stripe_settings' => 'Stripe Settings',
+  'stripe_test_publishable_key' => 'Stripe Test Publish Key',
+  'stripe_live_publishable_key' => 'Stripe Live Publish Key',
+  'paystack_test_publishable_key' => 'Paystack Test Publish Key',
+  'paystack_production_publishable_key ' => 'Paystack Production Publish Key',
+  'enable-cashfree' => 'Enable Cashfree',
+  'razor_pay_environment' => 'Razor Pay Environment',
+  'razor_pay_test_api_key' => 'Razor Pay Test Api Key',
+  'razor_pay_live_api_key' => 'Razor Pay Live Api Key',
+
 );

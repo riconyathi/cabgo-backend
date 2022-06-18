@@ -27,7 +27,7 @@ class SettingsSeeder extends Seeder
             'category'=>SettingCategory::TRIP_SETTINGS,
             'value' => 30,
             'field' => SettingValueType::SELECT,
-            'option_value' => '{"percentage":1,"fixed":2}',
+            'option_value' => '{"percentage":1}',
             'group_name' => null,
         ],
             SettingSlug::ADMIN_COMMISSION => [
@@ -58,20 +58,20 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => null,
         ],
-         SettingSlug::DRIVER_SEARCH_RADIUS => [
-            'category'=>SettingCategory::TRIP_SETTINGS,
-            'value' => 30,
-            'field' => SettingValueType::TEXT,
-            'option_value' => null,
-            'group_name' => null,
-        ],
-         SettingSlug::MINIMUM_TIME_FOR_SEARCH_DRIVERS_FOR_SCHEDULE_RIDE => [
-            'category'=>SettingCategory::TRIP_SETTINGS,
-            'value' => 30,
-            'field' => SettingValueType::TEXT,
-            'option_value' => null,
-            'group_name' => null,
-        ],
+        //  SettingSlug::DRIVER_SEARCH_RADIUS => [
+        //     'category'=>SettingCategory::TRIP_SETTINGS,
+        //     'value' => 30,
+        //     'field' => SettingValueType::TEXT,
+        //     'option_value' => null,
+        //     'group_name' => null,
+        // ],
+        //  SettingSlug::MINIMUM_TIME_FOR_SEARCH_DRIVERS_FOR_SCHEDULE_RIDE => [
+        //     'category'=>SettingCategory::TRIP_SETTINGS,
+        //     'value' => 30,
+        //     'field' => SettingValueType::TEXT,
+        //     'option_value' => null,
+        //     'group_name' => null,
+        // ],
         // General category settings
         SettingSlug::LOGO => [
             'category'=>SettingCategory::GENERAL,
@@ -94,20 +94,20 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => null,
         ],
-        SettingSlug::HEAD_OFFICE_NUMBER => [
-            'category'=>SettingCategory::GENERAL,
-            'value' => '+8299600007',
-            'field' => SettingValueType::TEXT,
-            'option_value' => null,
-            'group_name' => null,
-        ],
-        SettingSlug::HELP_EMAIL_ADDRESS => [
-            'category'=>SettingCategory::GENERAL,
-            'value' => 'sales@tagyourtaxi.com',
-            'field' => SettingValueType::TEXT,
-            'option_value' => null,
-            'group_name' => null,
-        ],
+        // SettingSlug::HEAD_OFFICE_NUMBER => [
+        //     'category'=>SettingCategory::GENERAL,
+        //     'value' => '+8299600007',
+        //     'field' => SettingValueType::TEXT,
+        //     'option_value' => null,
+        //     'group_name' => null,
+        // ],
+        // SettingSlug::HELP_EMAIL_ADDRESS => [
+        //     'category'=>SettingCategory::GENERAL,
+        //     'value' => 'sales@tagyourtaxi.com',
+        //     'field' => SettingValueType::TEXT,
+        //     'option_value' => null,
+        //     'group_name' => null,
+        // ],
         SettingSlug::DRIVER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER => [
             'category'=>SettingCategory::WALLET,
             'value' => -10000,
@@ -116,13 +116,13 @@ class SettingsSeeder extends Seeder
             'group_name' => null,
         ],
         // Installation settings
-        SettingSlug::GOOGLE_BROWSER_KEY => [
-            'category'=>SettingCategory::INSTALLATION,
-            'value' => '**********************',
-            'field' => SettingValueType::TEXT,
-            'option_value' => null,
-            'group_name' => null,
-        ],
+        // SettingSlug::GOOGLE_BROWSER_KEY => [
+        //     'category'=>SettingCategory::INSTALLATION,
+        //     'value' => '**********************',
+        //     'field' => SettingValueType::TEXT,
+        //     'option_value' => null,
+        //     'group_name' => null,
+        // ],
         // SettingSlug::TWILLO_ACCOUNT_SID => [
         //     'category'=>SettingCategory::INSTALLATION,
         //     'value' => 'AC75a5048afaf14beaafec1a8c9e92e766',
@@ -353,13 +353,13 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => null,
         ],
-         SettingSlug::MINIMUM_TRIPS_SHOULD_COMPLETE_TO_REFER_DRIVERS => [
-            'category'=>SettingCategory::REFERRAL,
-            'value' => 30,
-            'field' => SettingValueType::TEXT,
-            'option_value' => null,
-            'group_name' => null,
-        ],
+        //  SettingSlug::MINIMUM_TRIPS_SHOULD_COMPLETE_TO_REFER_DRIVERS => [
+        //     'category'=>SettingCategory::REFERRAL,
+        //     'value' => 30,
+        //     'field' => SettingValueType::TEXT,
+        //     'option_value' => null,
+        //     'group_name' => null,
+        // ],
 
         SettingSlug::GOOGLE_MAP_KEY => [
             'category'=>SettingCategory::MAP_SETTINGS,
