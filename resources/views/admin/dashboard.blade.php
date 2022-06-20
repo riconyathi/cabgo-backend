@@ -539,7 +539,7 @@
                 </div>
             </div>
 
-    </section>
+</section>
 
     <script src="{{ asset('assets/vendor_components/jquery.peity/jquery.peity.js') }}"></script>
 
@@ -558,6 +558,7 @@
     </script>
 
     <!-- Morris.js charts -->
+
     <script src="{{ asset('assets/vendor_components/raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('assets/vendor_components/morris.js/morris.min.js') }}"></script>
 
@@ -571,11 +572,11 @@
 
             var barChartData = barData[0]
             var overallEarning = barData[1]
-
+// console.log(barChartData);
             var bar = new Morris.Bar({
                 element: 'bar-chart',
                 resize: true,
-                data: [barChartData],
+                data: ['barChartData'],
                 barColors: ['#1e88e5', '#26c6da', '#fc4b6c'],
                 barSizeRatio: 0.5,
                 barGap: 5,
@@ -585,6 +586,7 @@
                 hideHover: 'auto',
                 color: '#666666'
             });
+            console.log(bar);
 
             if ($('#chart_1').length > 0) {
                 var ctx1 = document.getElementById("chart_1").getContext("2d");

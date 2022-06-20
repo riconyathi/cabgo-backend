@@ -69,8 +69,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="date_option">@lang('view_pages.date_option') <span
-                                            class="text-danger">*</span></label>
+                                    <label for="date_option">@lang('view_pages.date_option') </label>
                                     <select name="date_option" id="date_option" class="form-control">
                                         <option value="date">@lang('view_pages.date')</option>
                                         <option value="today">@lang('view_pages.today')</option>
@@ -84,7 +83,8 @@
 
                             <div class="col-md-6 dateDiv">
                                 <div class="form-group">
-                                    <label for="from">@lang('view_pages.from')</label>
+                                    <label for="from">@lang('view_pages.from')<span
+                                            class="text-danger">*</span></label>
                                     <input class="form-control datepicker" type="text" id="from" name="from"
                                         value="{{ old('from') }}" required
                                         placeholder="{{ now()->startOfMonth()->format('Y-m-d') }}" autocomplete="off">
@@ -94,7 +94,8 @@
 
                             <div class="col-md-6 dateDiv">
                                 <div class="form-group">
-                                    <label for="to">@lang('view_pages.to') </label>
+                                    <label for="to">@lang('view_pages.to')<span
+                                            class="text-danger">*</span> </label>
                                     <input class="form-control datepicker" type="text" id="to" name="to"
                                         value="{{ old('to') }}" required placeholder="{{ now()->format('Y-m-d') }}"
                                         autocomplete="off">
