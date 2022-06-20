@@ -21,11 +21,12 @@
                             @lang('view_pages.search')
                         </button>
                     </div> --}}
-                        
+                    @if (env('APP_FOR')!='demo')
                     <div class="col-12 text-right">
                         <a href="{{url('notifications/push/view')}}" class="btn btn-primary btn-sm">
                             <i class="mdi mdi-plus-circle mr-2"></i>@lang('view_pages.send_push')</a>
                     </div>
+                    @endif
                 </div>
             </div>
 
