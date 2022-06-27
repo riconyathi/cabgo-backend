@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th> @lang('view_pages.s_no')</th>
+            <th> @lang('view_pages.date')</th>
             <th> @lang('view_pages.request_id')</th>
             <th> Trip Start Time</th>
             <th> Trip End Time</th>
@@ -27,6 +28,7 @@
         @forelse($results as $key => $result)
             <tr>
                 <td>{{ $i++ }} </td>
+                <td>{{ $result->created_at->format("m/d/Y") }} </td>
                 <td>{{$result->request_number}}</td>
                 <td>{{ $result->converted_trip_start_time ?? '-' }}</td>
                 <td>{{ $result->converted_completed_at ?? '-' }}</td>
