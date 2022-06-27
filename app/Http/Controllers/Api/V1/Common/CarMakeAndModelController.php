@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1\Common;
 use App\Models\Master\CarMake;
 use App\Models\Master\CarModel;
 use App\Http\Controllers\Api\V1\BaseController;
+use App\Models\Admin\ZoneSurgePrice;
+use Illuminate\Support\Carbon;
 
 /**
  * @group Vehicle Management
@@ -28,6 +30,16 @@ class CarMakeAndModelController extends BaseController
     */
     public function getCarMakes()
     {
+
+
+        $timezone = env('SYSTEM_DEFAULT_TIMEZONE');
+
+        $current_time = Carbon::now()->setTimezone($timezone);
+
+        $current_time = $current_time->toTimeString();
+
+        $zone_surge_price = ZoneSurgePrice::whereTime('start_time','<=',$current_time)->whereTime('end_time','>=',$current_time)->first();
+
 
         return $this->respondSuccess($this->car_make->get());
     }
