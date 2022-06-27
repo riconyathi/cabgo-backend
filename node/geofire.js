@@ -41,7 +41,7 @@ function queryGeoLocation(req, res) {
         const lat = parseFloat(req.params.lat);
         const long = parseFloat(req.params.lng);
         const vehicle_type = req.params.vehicle_type;
-        const radius = req.params.driver_search_radius;
+        const radius = parseInt(req.params.driver_search_radius);
         var fire_drivers = [];
 
         let geoQuery = geoFire.query({ center: [lat, long], radius: radius });
