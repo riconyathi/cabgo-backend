@@ -237,7 +237,7 @@ class EtaTransformer extends Transformer
 
         // Validate if the current time in surge timings
 
-        $timezone = $request_detail->serviceLocationDetail->timezone;
+        $timezone = $zone_type->zone->serviceLocation->timezone;
 
         $current_time = Carbon::now()->setTimezone($timezone);
 
