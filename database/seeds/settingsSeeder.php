@@ -27,7 +27,7 @@ class SettingsSeeder extends Seeder
             'category'=>SettingCategory::TRIP_SETTINGS,
             'value' => 30,
             'field' => SettingValueType::SELECT,
-            'option_value' => '{"percentage":1}',
+            'option_value' => '{"percentage":1,"fixed":2}',
             'group_name' => null,
         ],
             SettingSlug::ADMIN_COMMISSION => [

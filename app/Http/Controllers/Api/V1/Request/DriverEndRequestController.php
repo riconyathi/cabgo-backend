@@ -425,9 +425,19 @@ class DriverEndRequestController extends BaseController
         $tax_percent = get_settings('service_tax');
         $tax_amount = ($sub_total * ($tax_percent / 100));
         // Get Admin Commision
+        $admin_commision_type = get_settings('admin_commission_type');
+
         $service_fee = get_settings('admin_commission');
         // Admin commision
+        if($admin_commision_type==1){
+
         $admin_commision = ($sub_total * ($service_fee / 100));
+
+        }else{
+            
+            $admin_commision = $service_fee;
+
+        }
         // Admin commision with tax amount
         $admin_commision_with_tax = $tax_amount + $admin_commision;
         $driver_commision = $sub_total+$discount_amount;  
@@ -548,7 +558,16 @@ class DriverEndRequestController extends BaseController
         // Get Admin Commision
         $service_fee = get_settings('admin_commission');
         // Admin commision
+        // Admin commision
+        if($admin_commision_type==1){
+
         $admin_commision = ($sub_total * ($service_fee / 100));
+
+        }else{
+            
+            $admin_commision = $service_fee;
+
+        }
         // Admin commision with tax amount
         $admin_commision_with_tax = $tax_amount + $admin_commision;
         $driver_commision = $sub_total+$discount_amount;  
