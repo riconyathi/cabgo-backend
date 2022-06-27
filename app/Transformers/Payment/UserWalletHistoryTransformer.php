@@ -5,6 +5,7 @@ namespace App\Transformers\Payment;
 use App\Transformers\Transformer;
 use App\Models\Payment\UserWalletHistory;
 use App\Models\Payment\UserWalletAddedHistory;
+use App\Base\Constants\Setting\Settings;
 
 class UserWalletHistoryTransformer extends Transformer
 {
@@ -36,8 +37,8 @@ class UserWalletHistoryTransformer extends Transformer
             'is_credit'=>$wallet_history->is_credit,
             'created_at' => $wallet_history->converted_created_at,
             'updated_at' => $wallet_history->converted_updated_at,
-            'currency_code'=>auth()->user()->countryDetail->currency_code,
-            'currency_symbol'=>auth()->user()->countryDetail->currency_code,
+            'currency_code'=>get_settings(Settings::CURRENCY),
+            'currency_symbol'=>get_settings(Settings::CURRENCY_SYMBOL),
         ];
 
         return $params;

@@ -199,8 +199,8 @@ class PaymentController extends BaseController
             $user_wallet = auth()->user()->userWallet;
 
             $wallet_balance= $user_wallet->amount_balance;
-            $currency_code = auth()->user()->countryDetail->currency_code;
-            $currency_symbol = auth()->user()->countryDetail->currency_symbol;
+            $currency_code = get_settings(Settings::CURRENCY);
+            $currency_symbol = get_settings(Settings::CURRENCY_SYMBOL);
             $default_card = CardInfo::where('user_id', auth()->user()->id)->where('is_default', true)->first();
             $default_card_id = null;
             if ($default_card) {
@@ -214,8 +214,8 @@ class PaymentController extends BaseController
             $driver_wallet = auth()->user()->driver->driverWallet;
 
             $wallet_balance= $driver_wallet->amount_balance;
-            $currency_code = auth()->user()->countryDetail->currency_code;
-            $currency_symbol = auth()->user()->countryDetail->currency_symbol;
+            $currency_code = get_settings(Settings::CURRENCY);
+            $currency_symbol = get_settings(Settings::CURRENCY_SYMBOL);
 
             $default_card = CardInfo::where('user_id', auth()->user()->id)->where('is_default', true)->first();
             $default_card_id = null;
@@ -392,7 +392,7 @@ class PaymentController extends BaseController
 
             $user_info = auth()->user();
 
-            $currency_code = auth()->user()->countryDetail?auth()->user()->countryDetail->currency_symbol:env('SYSTEM_DEFAULT_CURRENCY');
+            $currency_code = get_settings(Settings::CURRENCY);
 
             $created_params['requested_currency'] = $currency_code;
             $created_params['user_id'] = auth()->user()->id;

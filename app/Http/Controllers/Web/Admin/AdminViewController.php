@@ -105,11 +105,7 @@ class AdminViewController extends BaseController
 
         $today = date('Y-m-d');
 
-        if (auth()->user()->countryDetail) {
-            $currency = auth()->user()->countryDetail->currency_symbol;
-        } else {
-            $currency = env('SYSTEM_DEFAULT_CURRENCY');
-        }
+        $currency = get_settings(Settings::CURRENCY_SYMBOL);
 
         //card
         $totalTrips = Request::where('driver_id',$driver->id)->companyKey()->whereIsCompleted(true)->count();
@@ -465,12 +461,7 @@ class AdminViewController extends BaseController
          $overall_earning_wallet_percent =0;
         }
 
-        // $currency = auth()->user()->countryDetail->currency_code ?: env('SYSTEM_DEFAULT_CURRENCY');
-        if (auth()->user()->countryDetail) {
-            $currency = auth()->user()->countryDetail->currency_symbol;
-        } else {
-            $currency = env('SYSTEM_DEFAULT_CURRENCY');
-        }
+        $currency = get_settings(Settings::CURRENCY_SYMBOL);
         
 
      

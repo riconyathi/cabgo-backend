@@ -128,13 +128,7 @@ class DashboardController extends BaseController
         }
 
         // $currency = auth()->user()->countryDetail->currency_code ?: env('SYSTEM_DEFAULT_CURRENCY');
-        if (auth()->user()->countryDetail) {
-            $currency = auth()->user()->countryDetail->currency_symbol;
-        } else {
-            // $currency = env('SYSTEM_DEFAULT_CURRENCY');
-            $currency = get_settings(Settings::CURRENCY);
-
-        }
+        $currency = get_settings(Settings::CURRENCY);
 
         return view('admin.dashboard', compact('page', 'main_menu','currency', 'sub_menu','total_drivers','total_users','trips','todayEarnings','overallEarnings','data'));
     }

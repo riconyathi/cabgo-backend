@@ -431,6 +431,13 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => null,
         ],
+        SettingSlug::CURRENCY_SYMBOL => [
+            'category'=>SettingCategory::GENERAL,
+            'value' => '₹',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
 
     ];
 
