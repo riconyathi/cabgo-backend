@@ -58,13 +58,13 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => null,
         ],
-        //  SettingSlug::DRIVER_SEARCH_RADIUS => [
-        //     'category'=>SettingCategory::TRIP_SETTINGS,
-        //     'value' => 30,
-        //     'field' => SettingValueType::TEXT,
-        //     'option_value' => null,
-        //     'group_name' => null,
-        // ],
+         SettingSlug::DRIVER_SEARCH_RADIUS => [
+            'category'=>SettingCategory::TRIP_SETTINGS,
+            'value' => 3,
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
         //  SettingSlug::MINIMUM_TIME_FOR_SEARCH_DRIVERS_FOR_SCHEDULE_RIDE => [
         //     'category'=>SettingCategory::TRIP_SETTINGS,
         //     'value' => 30,

@@ -223,7 +223,10 @@ class DispatcherCreateRequestController extends BaseController
 
         // NEW flow
         $client = new \GuzzleHttp\Client();
-        $url = env('NODE_APP_URL').':'.env('NODE_APP_PORT').'/'.$pick_lat.'/'.$pick_lng.'/'.$type_id;
+        
+        $driver_search_radius = get_settings('driver_search_radius')?:30;
+
+        $url = env('NODE_APP_URL').':'.env('NODE_APP_PORT').'/'.$pick_lat.'/'.$pick_lng.'/'.$type_id.'/'.$driver_search_radius;
 
         $res = $client->request('GET', "$url");
         if ($res->getStatusCode() == 200) {
