@@ -32,13 +32,13 @@ class CarMakeAndModelController extends BaseController
     {
 
 
-        $timezone = env('SYSTEM_DEFAULT_TIMEZONE');
+        // $timezone = env('SYSTEM_DEFAULT_TIMEZONE');
 
-        $current_time = Carbon::now()->setTimezone($timezone);
+        // $current_time = Carbon::now()->setTimezone($timezone);
 
-        $current_time = $current_time->toTimeString();
+        // $current_time = $current_time->toTimeString();
 
-        $zone_surge_price = ZoneSurgePrice::whereTime('start_time','<=',$current_time)->whereTime('end_time','>=',$current_time)->first();
+        // $zone_surge_price = ZoneSurgePrice::whereTime('start_time','<=',$current_time)->whereTime('end_time','>=',$current_time)->first();
 
 
         return $this->respondSuccess($this->car_make->get());
