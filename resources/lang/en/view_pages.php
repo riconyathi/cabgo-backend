@@ -50,7 +50,7 @@ return array (
   'notification' => 'Notification',
   'trip_settings' => 'Trip Settings',
   'sms' => 'Sms',
-  'general' => 'General',
+  'general' => 'App Settings',
   'installation' => 'Instalation',
   'service_tax' => 'Service Tax',
   'admin_commission_type' => 'Admin Commision Type',

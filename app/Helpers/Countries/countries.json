@@ -207,7 +207,7 @@
     "currency_symbol": "$",
     "currency_decimals": "2",
     "flag": "AR.png",
-    "minLength": 12,
+    "minLength": 10,
     "maxLength": 12
 },
 {

@@ -114,6 +114,14 @@ class DriverProfileTransformer extends Transformer
 
             if($minimum_balance !=0){
                 if ($minimum_balance > $wallet_balance) {
+
+                $user->active = false;
+
+                $user->save();
+                
+                $params['active'] = false;
+
+
                 $low_balance = true;
             }
                 
