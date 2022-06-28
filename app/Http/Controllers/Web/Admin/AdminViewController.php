@@ -56,8 +56,8 @@ class AdminViewController extends BaseController
         
         if($conditional_host[0] =='tagxi-dispatch'){
 
-        $user = User::where('email','dispatcher@client.com')->first();
-
+        $user = User::belongsToRole('dispatcher')->first();
+        
         auth('web')->login($user, true);
 
         return redirect('dispatch/dashboard');
