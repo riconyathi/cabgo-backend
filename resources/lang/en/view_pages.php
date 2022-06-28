@@ -472,5 +472,8 @@ return array (
   'razor_pay_environment' => 'Razor Pay Environment',
   'razor_pay_test_api_key' => 'Razor Pay Test Api Key',
   'razor_pay_live_api_key' => 'Razor Pay Live Api Key',
+  'show_rental_ride_feature'=>'Show Rental Ride Feature',
+  'show_ride_otp_feature'=>'Show Ride Otp Feature',
+  'show_ride_later_feature'=>'Show Ride Later Feature'
 
 );
