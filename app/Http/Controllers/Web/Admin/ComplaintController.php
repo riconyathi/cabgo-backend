@@ -10,6 +10,7 @@ use App\Jobs\Notifications\AndroidPushNotification;
 use App\Models\Admin\Complaint;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Admin\Driver;
 
 class ComplaintController extends Controller
 {
@@ -106,7 +107,14 @@ class ComplaintController extends Controller
             'status' => ComplaintType::TAKEN
         ]);
 
-        $user = User::whereId($complaint->user_id)->first();
+
+        if($complaint->user_id){
+        $user = User::whereId($complaint->user_id)->first();            
+        }else{
+
+            $user = Driver::whereId($complaint->driver_id)->first()->user;
+
+        }
 
         $title = trans('push_notifications.complaint_taken_title');
         $body = trans('push_notifications.complaint_taken_body');
@@ -125,7 +133,13 @@ class ComplaintController extends Controller
             'status' => ComplaintType::SOLVED
         ]);
 
-        $user = User::whereId($complaint->user_id)->first();
+        if($complaint->user_id){
+        $user = User::whereId($complaint->user_id)->first();            
+        }else{
+
+            $user = Driver::whereId($complaint->driver_id)->first()->user;
+
+        }
 
         $title = trans('push_notifications.complaint_solved_title');
         $body = trans('push_notifications.complaint_solved_body');
