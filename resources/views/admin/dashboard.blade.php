@@ -170,7 +170,7 @@
                         <div class="display-4 fs-4 mb-2 font-weight-normal font-sans-serif text-warning"
                             data-countup="{&quot;endValue&quot;:58.386,&quot;decimalPlaces&quot;:2,&quot;suffix&quot;:&quot;k&quot;}">
                             {{ $total_drivers[0]['decline'] }}</div><a class="font-weight-semi-bold fs--1 text-nowrap"
-                            href="{{url('/drivers/waiting-for-approval')}}">See all<span class="fa fa-angle-right ml-1" data-fa-transform="down-1"></span></a>
+                            href="{{url('drivers')}}">See all<span class="fa fa-angle-right ml-1" data-fa-transform="down-1"></span></a>
                     </div>
                 </div>
             </div>
@@ -539,7 +539,7 @@
                 </div>
             </div>
 
-</section>
+    </section>
 
     <script src="{{ asset('assets/vendor_components/jquery.peity/jquery.peity.js') }}"></script>
 
@@ -558,7 +558,6 @@
     </script>
 
     <!-- Morris.js charts -->
-
     <script src="{{ asset('assets/vendor_components/raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('assets/vendor_components/morris.js/morris.min.js') }}"></script>
 
@@ -568,25 +567,28 @@
 
             var barData = JSON.parse('<?php echo json_encode($data); ?>');
             var tripData = JSON.parse('<?php echo json_encode($trips); ?>');
-            barData = Object.values(barData);
 
-            var barChartData = barData[0]
-            var overallEarning = barData[1]
-// console.log(barChartData);
+            var barChartData = barData?.cancel;
+            var overallEarning = barData?.earnings;
+            let cancelValues = [];
+            for(var value in barChartData){
+                // console.log(barChartData[value]);
+            }
+
             var bar = new Morris.Bar({
                 element: 'bar-chart',
                 resize: true,
-                data: ['barChartData'],
+                data: barChartData,
                 barColors: ['#1e88e5', '#26c6da', '#fc4b6c'],
                 barSizeRatio: 0.5,
                 barGap: 5,
                 xkey: 'y',
-                ykeys: ['a', 'u','d'],
+                ykeys: ['a', 'd','u'],
                 labels: ['Cancelled due to no Drivers', 'Cancelled by User', 'Cancelled by Driver'],
                 hideHover: 'auto',
                 color: '#666666'
             });
-            console.log(bar);
+            console.log(barChartData,bar);
 
             if ($('#chart_1').length > 0) {
                 var ctx1 = document.getElementById("chart_1").getContext("2d");
