@@ -9,7 +9,7 @@ use App\Models\Request\RequestBill;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\Web\Admin\Settings;
+use App\Base\Constants\Setting\Settings;
 
 class DashboardController extends BaseController
 {
