@@ -9,19 +9,20 @@ use App\Models\Request\RequestBill;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Web\Admin\Settings;
 
 class DashboardController extends BaseController
 {
 
     public function dashboard()
-    {       
+    {
 
         if(!Session::get('applocale')){
             Session::put('applocale', 'en');
         }
 
         // Session::put('applocale', 'en');
-        
+
         $ownerId = null;
         if (auth()->user()->hasRole('owner')) {
             $ownerId = auth()->user()->owner->id;
@@ -32,7 +33,7 @@ class DashboardController extends BaseController
         $sub_menu = null;
 
         $today = date('Y-m-d');
-    
+
         $total_drivers = Driver::selectRaw('
                                         IFNULL(SUM(CASE WHEN approve=1 THEN 1 ELSE 0 END),0) AS approved,
                                         IFNULL((SUM(CASE WHEN approve=1 THEN 1 ELSE 0 END) / count(*)),0) * 100 AS approve_percentage,
@@ -47,7 +48,7 @@ class DashboardController extends BaseController
         if($ownerId != null){
             $total_drivers = $total_drivers->whereOwnerId($ownerId);
         }
-        
+
         $total_drivers = $total_drivers->get();
 
         $total_users = User::belongsToRole('user')->companyKey()->count();
@@ -72,7 +73,7 @@ class DashboardController extends BaseController
         $adminCommissionQuery = "IFNULL(SUM(request_bills.admin_commision_with_tax),0)";
         $driverCommissionQuery = "IFNULL(SUM(request_bills.driver_commision),0)";
         $totalEarningsQuery = "$cardEarningsQuery + $cashEarningsQuery + $walletEarningsQuery";
-        
+
         // Today earnings
         $todayEarnings = Request::leftJoin('request_bills','requests.id','request_bills.request_id')
                                         ->selectRaw("
@@ -128,7 +129,7 @@ class DashboardController extends BaseController
             $data['earnings']['values'][] = RequestBill::whereHas('requestDetail', function ($query) use ($from,$to) {
                                                         $query->companyKey()->whereBetween('trip_start_time', [$from,$to])->whereIsCompleted(true);
                                                     })->sum('total_amount');
-            
+
               $startDate->addMonth();
             }
 
@@ -137,6 +138,8 @@ class DashboardController extends BaseController
         } else {
             $currency = env('SYSTEM_DEFAULT_CURRENCY');
         }
+        // $currency = auth()->user()->countryDetail->currency_code ?: env('SYSTEM_DEFAULT_CURRENCY');
+        $currency = get_settings(Settings::CURRENCY);
 
         return view('admin.dashboard', compact('page', 'main_menu','currency', 'sub_menu','total_drivers','total_users','trips','todayEarnings','overallEarnings','data'));
     }

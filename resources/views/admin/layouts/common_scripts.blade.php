@@ -290,7 +290,7 @@ $(document).on('click','.chooseLanguage',function(){
         firebase.analytics();
 
         var sosRef = firebase.database().ref('SOS');
-
+        
         sosRef.on('value', async function(snapshot) {
             var sosData = snapshot.val();
 

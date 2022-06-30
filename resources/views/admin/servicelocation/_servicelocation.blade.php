@@ -16,11 +16,11 @@
     <span style="float: right;">
     </span>
     </th>
-    <th> @lang('view_pages.currency_symbol')
+    <th> @lang('view_pages.timezone')
     <span style="float: right;">
     </span>
     </th>
-    <th>@lang('view_pages.currency_code')</th>
+    <!-- <th>@lang('view_pages.currency_code')</th> -->
     <th> @lang('view_pages.status')
     <span style="float: right;">
     </span>
@@ -41,8 +41,7 @@
     <tr>
     <td>{{ $i++ }} </td>
     <td>{{$result->name}}</td>
-    <td>{{$result->currency_symbol}}</td>
-    <td>{{$result->currency_code}}</td>
+    <td>{{$result->timezone}}</td>
     @if($result->active)
     <td><span class="label label-success">Active</span></td>
     @else

@@ -85,7 +85,12 @@ class Settings
     const PAYSTACK_TEST_PUBLISHABLE_KEY='paystack_test_publishable_key';
     const PAYSTACK_PRODUCTION_PUBLISHABLE_KEY='paystack_production_publishable_key';
     const ENABLE_DIGITAL_SIGNATURE_AT_THE_END_OF_RIDE = 'enable_digital_signatur_at_the_end_of_ride';
-    const CURRENCY = 'Currency';
+    const CURRENCY = 'currency_code';
+    const CURRENCY_SYMBOL='currency_symbol';
+
+    const SHOW_RENTAL_RIDE_FEATURE='show_rental_ride_feature';
+    const SHOW_RIDE_OTP_FEATURE='show_ride_otp_feature';
+    const SHOW_RIDE_LATER_FEATURE='show_ride_later_feature';
 
    
 }

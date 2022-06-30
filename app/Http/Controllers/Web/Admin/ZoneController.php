@@ -101,6 +101,12 @@ class ZoneController extends BaseController
     */
     public function zoneEdit($id)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone')->with('warning', $message);
+        }
+
         $zone = $this->zone->where('id', $id)->first();
         $page = trans('pages_names.add_zone');
         $main_menu = 'map';

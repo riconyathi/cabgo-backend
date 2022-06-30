@@ -85,7 +85,7 @@ class StripeController extends ApiController
         $customer = \Stripe\Customer::create($create_customer_data);
 
 
-            $user_currency_code = auth()->user()->countryDetail->currency_code?:env('SYSTEM_DEFAULT_CURRENCY');
+            $user_currency_code = get_settings(Settings::CURRENCY);
 
             $setup_intent = \Stripe\PaymentIntent::create([
                 'amount' => $request->amount *100,
