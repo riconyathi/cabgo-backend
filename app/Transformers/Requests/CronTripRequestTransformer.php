@@ -82,8 +82,6 @@ class CronTripRequestTransformer extends Transformer
 
         ];
 
-        $timezone = $request->userDetail->timezone?:env('SYSTEM_DEFAULT_TIMEZONE');
-
 
         if($request->payment_opt ==PaymentType::CARD){
             

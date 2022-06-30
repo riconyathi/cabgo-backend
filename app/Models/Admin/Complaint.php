@@ -13,7 +13,7 @@ class Complaint extends Model
     use HasActive,UuidModel,SearchableTrait;
 
     protected $fillable = [
-        'user_type','user_id','request_id','complaint_type','complaint_title_id','description','status'
+        'user_type','user_id','request_id','complaint_type','complaint_title_id','description','status','driver_id'
     ];
 
     /**

@@ -60,7 +60,6 @@ class UserTransformer extends Transformer
             //'map_key'=>get_settings('google_map_key'),
             'mqtt_ip'=>'54.172.163.200',
             'show_rental_ride'=>true,
-            'show_ride_otp_feature'=>true,
             'show_ride_later_feature'=>true,
             // 'created_at' => $user->converted_created_at->toDateTimeString(),
             // 'updated_at' => $user->converted_updated_at->toDateTimeString(),
@@ -69,9 +68,7 @@ class UserTransformer extends Transformer
         if(get_settings('show_rental_ride_feature')=='0'){
             $params['show_rental_ride'] = false;  
         }
-        if(get_settings('show_ride_otp_feature')=='0'){
-            $params['show_ride_otp_feature'] = false;  
-        }
+        
         if(get_settings('show_ride_later_feature')=='0'){
             $params['show_ride_later_feature'] = false;  
         }
