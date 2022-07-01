@@ -30,7 +30,7 @@
                             <div class="col-md-4 col-12">
                                 <div>
                                     <h3>
-                                        <span class="text-gray">{{ $item->name }}</span>
+                                        <span class="text-gray">{{ $item->name }} </span>
                                     </h3>
                                     <p>
                                         <span class="text-gray">
@@ -113,6 +113,7 @@
                                             <div class="timeline-point">
                                                 <i class="fa fa-star text-yellow"></i>
                                             </div>
+                                            
                                             <div class="timeline-event p-10">
                                                 <div class="post">
                                                     <div class="user-block">
@@ -123,6 +124,7 @@
 
                                                         <span class="username">
                                                             <a href="#">{{ $trip->userDetail->name }}</a>
+                                                            {{ $trip->requestDetail->request_number }}
                                                         </span>
                                                         <span
                                                             class="description">{{ $trip->created_at->diffForHumans() ?? '' }}</span>
@@ -174,86 +176,6 @@
 
 
 
-                                    {{-- <div class="timeline-item">
-                                        <div class="timeline-point">
-                                            <i class="fa fa-star text-yellow"></i>
-                                        </div>
-                                        <div class="timeline-event">
-                                            <div class="timeline-heading">
-                                                <h4 class="timeline-title">Rider Name</h4>
-                                            </div>
-                                            <div class="timeline-body">
-                                                <p>Advenientibus aliorum eam ad per te sed. Facere debetur aut veneris
-                                                    accedens.</p>
-                                                <br>
-                                                <span>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                </span>
-                                            </div>
-                                            <div class="timeline-footer">
-                                                <p class="text-right">Feb-22-2021</p>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                    {{-- <div class="timeline-item">
-                                        <div class="timeline-point">
-                                            <i class="fa fa-star text-yellow"></i>
-                                        </div>
-                                        <div class="timeline-event">
-                                            <div class="timeline-heading">
-                                                <h4 class="timeline-title">Rider Name</h4>
-                                            </div>
-                                            <div class="timeline-body">
-                                                <p>Advenientibus aliorum eam ad per te sed. Facere debetur aut veneris
-                                                    accedens.</p>
-                                                <br>
-                                                <span>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                </span>
-                                            </div>
-                                            <div class="timeline-footer">
-                                                <p class="text-right">Feb-22-2021</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <span class="timeline-label">
-                                        <span class="badge badge-info badge-lg">label</span>
-                                    </span>
-
-                                    <div class="timeline-item">
-                                        <div class="timeline-point">
-                                            <i class="fa fa-star text-yellow"></i>
-                                        </div>
-                                        <div class="timeline-event">
-                                            <div class="timeline-heading">
-                                                <h4 class="timeline-title">Rider Name</h4>
-                                            </div>
-                                            <div class="timeline-body">
-                                                <p>Advenientibus aliorum eam ad per te sed. Facere debetur aut veneris
-                                                    accedens.</p>
-                                                <br>
-                                                <span>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                    <i class="fa fa-star" style="color: yellow"></i>
-                                                </span>
-                                            </div>
-                                            <div class="timeline-footer">
-                                                <p class="text-right">Feb-22-2021</p>
-                                            </div>
-                                        </div>
-                                    </div> --}}
 
                                     <span class="timeline-label">
                                         <button class="btn btn-danger"><i class="fa fa-clock-o"></i></button>

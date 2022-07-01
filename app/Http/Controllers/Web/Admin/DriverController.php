@@ -527,9 +527,9 @@ class DriverController extends BaseController
         $page = trans('pages_names.drivers');
         $main_menu = 'drivers';
         $sub_menu = 'driver_ratings';
-        $trips = RequestRating::where('driver_id',$driver->id)->whereNotNull('user_id')->paginate(10);
-        // dd($trips);
+        $trips = RequestRating::where('driver_id',$driver->id)->whereNotNull('user_id')->whereUserRating(true)->paginate(10);
         $item = $driver;
+        // dd($trips);
          return view('admin.drivers.driver-rating-view', compact('page', 'main_menu', 'sub_menu','item','trips'));
     }
 
