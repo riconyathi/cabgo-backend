@@ -471,7 +471,7 @@ class DriverController extends BaseController
     public function StoreDriverPaymentHistory(AddDriverMoneyToWalletRequest $request,Driver $driver)
     {
         
-        $user_currency_code = env('SYSTEM_DEFAULT_CURRENCY');
+        $currency = get_settings(Settings::CURRENCY);
          
         // $converted_amount_array =  convert_currency_to_usd($user_currency_code, $request->input('amount'));
 

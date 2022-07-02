@@ -108,6 +108,7 @@ td {
                                 <th>@lang('view_pages.name')</th>
                                 <th>@lang('view_pages.email')</th>
                                 <th>@lang('view_pages.mobile')</th>
+                                <th>@lang('view_pages.rating')</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,10 +117,12 @@ td {
                                 <td>{{ $item->userDetail->name }}</td>
                                 <td>{{ $item->userDetail->email }}</td>
                                 <td>{{ $item->userDetail->mobile }}</td>
+                                <td>{{ $item->requestRating()->where('user_rating',1)->pluck('rating')->first() }}</td>
                                 @else
                                  <td>{{ $item->adHocuserDetail->name }}</td>
                                 <td>{{ $item->adHocuserDetail->email }}</td>
                                 <td>{{ $item->adHocuserDetail->mobile }}</td>
+                                <td>{{ $item->requestRating()->where('user_rating',1)->pluck('rating')->first() }}</td>
                                 @endif
                             </tr>
                         </tbody>
@@ -147,7 +150,7 @@ td {
                                 <td>{{ $item->driverDetail->name }}</td>
                                 <td>{{ $item->driverDetail->email }}</td>
                                 <td>{{ $item->driverDetail->mobile }}</td>
-                                <td>{{ $item->driverDetail->rating }}</td>
+                                <td>{{ $item->requestRating()->where('driver_rating',1)->pluck('rating')->first() }}</td>
                             </tr>
                         </tbody>
                     </table>

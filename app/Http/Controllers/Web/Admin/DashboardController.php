@@ -136,7 +136,7 @@ class DashboardController extends BaseController
         if (auth()->user()->countryDetail) {
             $currency = auth()->user()->countryDetail->currency_symbol;
         } else {
-            $currency = env('SYSTEM_DEFAULT_CURRENCY');
+            $currency = get_settings(Settings::CURRENCY);
         }
         // $currency = auth()->user()->countryDetail->currency_code ?: env('SYSTEM_DEFAULT_CURRENCY');
         $currency = get_settings(Settings::CURRENCY);
