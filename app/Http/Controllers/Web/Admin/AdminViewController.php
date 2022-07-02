@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Web\BaseController;
 use App\Models\Payment\DriverWallet;
 use Kreait\Firebase\Database;
+use App\Base\Constants\Setting\Settings;
+
 
 class AdminViewController extends BaseController
 {
@@ -106,6 +108,7 @@ class AdminViewController extends BaseController
         $today = date('Y-m-d');
 
         $currency = get_settings(Settings::CURRENCY_SYMBOL);
+        // dd($currency);
 
         //card
         $totalTrips = Request::where('driver_id',$driver->id)->companyKey()->whereIsCompleted(true)->count();
