@@ -474,6 +474,9 @@ return array (
   'razor_pay_live_api_key' => 'Razor Pay Live Api Key',
   'show_rental_ride_feature'=>'Show Rental Ride Feature',
   'show_ride_otp_feature'=>'Show Ride Otp Feature',
-  'show_ride_later_feature'=>'Show Ride Later Feature'
+  'show_ride_later_feature'=>'Show Ride Later Feature',
+  'free_waiting_time_in_mins_before_trip_start'=>'Free Waiting Time In Minutes Before Start A Ride',
+  'free_waiting_time_in_mins_after_trip_start'=>'Free Waiting Time In Minutes After Start A Ride',
+    
 
 );
