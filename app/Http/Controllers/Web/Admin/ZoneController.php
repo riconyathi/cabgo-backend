@@ -84,6 +84,12 @@ class ZoneController extends BaseController
     */
     public function create()
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone')->with('warning', $message);
+        }
+        
         $page = trans('pages_names.add_zone');
 
         $main_menu = 'map';
