@@ -37,6 +37,7 @@
         "prewk/xml-string-streamer": "^1.0",
         "proengsoft/laravel-jsvalidation": "^2.5",
         "ramsey/uuid": "^3.9",
+        "saikiran/geohash": "^1.0",
         "salmanzafar/laravel-mqtt": "^2.0",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-fractal": "^5.6",
