@@ -252,9 +252,7 @@ class CreateRequestController extends BaseController
         $pick_lat = $request->pick_lat;
         $pick_lng = $request->pick_lng;
 
-        // NEW flow
-        $client = new \GuzzleHttp\Client();
-        
+        // NEW flow        
         $driver_search_radius = get_settings('driver_search_radius')?:30;
 
         $radius = kilometer_to_miles($driver_search_radius);
@@ -293,7 +291,6 @@ class CreateRequestController extends BaseController
 
                 $distance = distance_between_two_coordinates($pick_lat,$pick_lng,$fire_driver['l'][0],$fire_driver['l'][1],'K');
 
-                // $firebase_drivers[$i]['id']= $fire_driver['id'];
                 $firebase_drivers[$fire_driver['id']]['distance']= $distance;
 
             }      
