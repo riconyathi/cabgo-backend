@@ -16,6 +16,8 @@ use App\Jobs\Notifications\AndroidPushNotification;
 use App\Transformers\Requests\TripRequestTransformer;
 use App\Transformers\Requests\CronTripRequestTransformer;
 use App\Models\Request\DriverRejectedRequest;
+use Sk\Geohash\Geohash;
+use Kreait\Firebase\Database;
 
 class AssignDriversForRegularRides extends Command
 {
@@ -38,8 +40,9 @@ class AssignDriversForRegularRides extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Database $database)
     {
+        $this->database = $database;
         parent::__construct();
     }
 
