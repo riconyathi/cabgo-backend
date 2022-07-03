@@ -291,7 +291,7 @@ class CreateRequestController extends BaseController
 
             if($fire_driver['vehicle_type']==$vehicle_type && $fire_driver['is_active']==1 && $fire_driver['is_available']==1 && $conditional_timestamp < $driver_updated_at){
 
-                $distance = distance_between_two_coordinates($requested_lat,$requested_long,$fire_driver['l'][0],$fire_driver['l'][1],'K');
+                $distance = distance_between_two_coordinates($pick_lat,$pick_lng,$fire_driver['l'][0],$fire_driver['l'][1],'K');
 
                 // $firebase_drivers[$i]['id']= $fire_driver['id'];
                 $firebase_drivers[$fire_driver['id']]['distance']= $distance;
