@@ -79,7 +79,7 @@ return [
                 'path' => 'uploads/system-admin/logo/',
                 'image' => [
                     'min_resolution' => 1000,
-                    'store_resolution' => 1000,
+                    'store_resolution' => 150,
                     'max_file_size_kb' => 500,
                 ],
             ],

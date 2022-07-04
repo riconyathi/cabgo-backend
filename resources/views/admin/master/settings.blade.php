@@ -46,6 +46,7 @@
                     </ul>
 
                     <form action="{{url('system/settings')}}" method="post" enctype="multipart/form-data" >
+                        @csrf
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <div class="tab-content p-10">
