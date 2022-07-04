@@ -13,14 +13,14 @@
             <div class="row">
                 <div class="col-md-4 col-12">
                     <div class="profile-user-info">
-                      <p>Email :<span class="text-gray pl-10">{{ $user->email }}</span> </p>
-                      <p>Phone :<span class="text-gray pl-10">{{ $user->mobile }}</span></p>
-                      <p>Address :<span class="text-gray pl-10">{{ $user->admin ? $user->admin->address : '' }}</span></p>
+                      <p>@lang('view_pages.email') :<span class="text-gray pl-10">{{ $user->email }}</span> </p>
+                      <p>@lang('view_pages.mobile') :<span class="text-gray pl-10">{{ $user->mobile }}</span></p>
+                      <p>@lang('view_pages.address') :<span class="text-gray pl-10">{{ $user->admin ? $user->admin->address : '' }}</span></p>
                   </div>
                </div>
                 <div class="col-md-3 col-12">
                     {{-- <div class="profile-user-info">						
-                      <p class="margin-bottom">Social Profile</p>
+                      <p class="margin-bottom">@lang('view_pages.social_profile')</p>
                       <div class="user-social-acount">
                           <button class="btn btn-circle btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></button>
                           <button class="btn btn-circle btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></button>

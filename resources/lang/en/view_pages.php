@@ -1,6 +1,5 @@
 <?php
-
-return array (
+ return array (
   'status' => 'Status',
   'action' => 'Action',
   'search' => 'Search',
@@ -476,7 +475,11 @@ return array (
   'show_ride_otp_feature'=>'Show Ride Otp Feature',
   'show_ride_later_feature'=>'Show Ride Later Feature',
   'free_waiting_time_in_mins_before_trip_start'=>'Free Waiting Time In Minutes Before Start A Ride',
-  'free_waiting_time_in_mins_after_trip_start'=>'Free Waiting Time In Minutes After Start A Ride',
-    
-
+   'free_waiting_time_in_mins_after_trip_start'=>'Free Waiting Time In Minutes After Start A Ride',
+   'social_profile' => 'Social Profile',
+   'drivers_registered' => 'Drivers registered',
+   'default_country_code_for_mobile_app' => 'Default Country Code For Mobile App (eg: Country name: India,  as  IN )',
+   'default_Language_code_for_mobile_app' =>'Default Language Code For Mobile App (eg: Language: English (UK),  as  en-GB )',
+   'user_can_make_a_ride_after_x_miniutes' => 'User Can Make A Ride After "X" miniutes',
+   'trip_accept_reject_duration_for_driver' => 'Trip Accept/Reject Duration For scheduled Driver'
 );

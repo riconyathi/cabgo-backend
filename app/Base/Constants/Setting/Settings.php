@@ -91,6 +91,14 @@ class Settings
     const SHOW_RENTAL_RIDE_FEATURE='show_rental_ride_feature';
     const SHOW_RIDE_OTP_FEATURE='show_ride_otp_feature';
     const SHOW_RIDE_LATER_FEATURE='show_ride_later_feature';
+    const DEFAULT_COUNTRY_CODE_FOR_MOBILE_APP='default_country_code_for_mobile_app';
+    const DEFAULT__LANGUAGE_CODE_FOR_MOBILE_APP='default_Language_code_for_mobile_app';
+    const USER_CAN_MAKE_A_RIDE_AFTER_X_MINIUTES='user_can_make_a_ride_after_x_miniutes';
+    const TRIP_ACCEPT_REJECT_DURATION_FOR_DRIVER='trip_accept_reject_duration_for_driver';
+
+
+
+
 
    
 }

@@ -65,14 +65,28 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => null,
         ],
-        //  SettingSlug::MINIMUM_TIME_FOR_SEARCH_DRIVERS_FOR_SCHEDULE_RIDE => [
-        //     'category'=>SettingCategory::TRIP_SETTINGS,
-        //     'value' => 30,
-        //     'field' => SettingValueType::TEXT,
-        //     'option_value' => null,
-        //     'group_name' => null,
-        // ],
-        // General category settings
+         SettingSlug::USER_CAN_MAKE_A_RIDE_AFTER_X_MINIUTES => [
+            'category'=>SettingCategory::TRIP_SETTINGS,
+            'value' => 1,
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
+         SettingSlug::MINIMUM_TIME_FOR_SEARCH_DRIVERS_FOR_SCHEDULE_RIDE => [
+            'category'=>SettingCategory::TRIP_SETTINGS,
+            'value' => 30,
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
+        SettingSlug::TRIP_ACCEPT_REJECT_DURATION_FOR_DRIVER => [
+            'category'=>SettingCategory::TRIP_SETTINGS,
+            'value' => 30,
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
+    //General category settings
         SettingSlug::LOGO => [
             'category'=>SettingCategory::GENERAL,
             'value' => null,
@@ -90,6 +104,34 @@ class SettingsSeeder extends Seeder
         SettingSlug::APP_NAME => [
             'category'=>SettingCategory::GENERAL,
             'value' => 'Tagxi',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
+        SettingSlug::CURRENCY => [
+            'category'=>SettingCategory::GENERAL,
+            'value' => 'INR',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
+        SettingSlug::CURRENCY_SYMBOL => [
+            'category'=>SettingCategory::GENERAL,
+            'value' => '₹',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
+        SettingSlug::DEFAULT_COUNTRY_CODE_FOR_MOBILE_APP => [
+            'category'=>SettingCategory::GENERAL,
+            'value' => 'IN',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
+        SettingSlug::DEFAULT__LANGUAGE_CODE_FOR_MOBILE_APP => [
+            'category'=>SettingCategory::GENERAL,
+            'value' =>  'en-GB',
             'field' => SettingValueType::TEXT,
             'option_value' => null,
             'group_name' => null,

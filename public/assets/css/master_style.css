@@ -138,7 +138,7 @@ time {
 }
 
 img {
-    max-width: 50px;
+    max-width: 100%;
 }
 
 .img-fluid {
