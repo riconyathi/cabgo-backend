@@ -506,8 +506,6 @@ class DriverController extends BaseController
         return redirect()->back()->with('success', $message);
 
 
-
-
     }
 
     public function driverRatings()

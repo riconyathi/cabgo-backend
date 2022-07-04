@@ -50,6 +50,11 @@ class ServiceLocationController extends BaseController
 
     public function create()
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('service_location')->with('warning', $message);
+        }
         $timezones = TimeZone::active()->get();
         $countries = Country::active()->get();
         $page = trans('pages_names.add_service_location');
@@ -73,6 +78,12 @@ class ServiceLocationController extends BaseController
 
     public function getById(ServiceLocation $serviceLocation)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('service_location')->with('warning', $message);
+        }
+
         $item = $serviceLocation;
         $timezones = TimeZone::active()->get();
         $countries = Country::active()->get();
@@ -84,6 +95,12 @@ class ServiceLocationController extends BaseController
 
     public function update(UpdateServiceLocationRequest $request, ServiceLocation $serviceLocation)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('service_location')->with('warning', $message);
+        }
+        
         $updated_params = $request->all();
         $serviceLocation->update($updated_params);
         $message = trans('succes_messages.service_location_updated_succesfully');
