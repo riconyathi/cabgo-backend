@@ -25,7 +25,7 @@ use Kreait\Firebase\Database;
 class UserCancelRequestController extends BaseController
 {
 
-    public function __construct(Request $request,Database $database)
+    public function __construct(Database $database)
     {
         $this->database = $database;
     }
@@ -139,7 +139,7 @@ class UserCancelRequestController extends BaseController
 
              // Delete Meta Driver From Firebase
             $this->database->getReference('request-meta/'.$driver->id)->remove();
-            
+
             $driver->available = true;
             $driver->save();
             $driver->fresh();
