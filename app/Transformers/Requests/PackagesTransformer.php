@@ -85,7 +85,7 @@ class PackagesTransformer extends Transformer
                 'name'=>$type->vehicle_type_name,
                 'icon'=>$type->icon,
                 'capacity'=>$type->vehicleType->capacity,
-                'currency'=> $type->zone->serviceLocation->currency_symbol,
+                'currency'=> get_settings('currency_symbol'),
                 'unit' => $type->zone->unit,
                 'unit_in_words' => $type->zone->unit ? 'Km' : 'Miles',
                 'distance_price_per_km'=>$prices->distance_price_per_km,

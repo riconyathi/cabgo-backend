@@ -23,11 +23,3 @@ Route::namespace('Web')->group(function () {
     // Website home route
     Route::get('/', 'HomeController@index')->name('home');
 });
-
-Route::view('/adhoc1', 'adhoc/adhoc1')->name('adhoc1');
-// Route::view('/adhoc2', 'adhoc/adhoc2')->name('adhoc2');
-Route::view('/adhoc3', 'adhoc/adhoc3')->name('adhoc3');
-
-
-Route::get('/adhoc', 'AdhocController@index');
-Route::get('/adhoc2', 'AdhocController@create');

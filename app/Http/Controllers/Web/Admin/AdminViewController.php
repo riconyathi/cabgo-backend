@@ -107,7 +107,7 @@ class AdminViewController extends BaseController
 
         $today = date('Y-m-d');
 
-        $currency = get_settings(Settings::CURRENCY_SYMBOL);
+        $currency = get_settings('currency_symbol');
         // dd($currency);
 
         //card
@@ -464,7 +464,7 @@ class AdminViewController extends BaseController
          $overall_earning_wallet_percent =0;
         }
 
-        $currency = get_settings(Settings::CURRENCY_SYMBOL);
+        $currency = get_settings('currency_symbol');
         
 
      

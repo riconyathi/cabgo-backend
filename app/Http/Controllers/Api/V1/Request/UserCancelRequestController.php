@@ -15,6 +15,7 @@ use App\Base\Constants\Masters\WalletRemarks;
 use App\Base\Constants\Masters\zoneRideType;
 use App\Base\Constants\Masters\PaymentType;
 use App\Models\Admin\CancellationReason;
+use Kreait\Firebase\Database;
 
 /**
  * @group User-trips-apis
@@ -23,6 +24,11 @@ use App\Models\Admin\CancellationReason;
  */
 class UserCancelRequestController extends BaseController
 {
+
+    public function __construct(Request $request,Database $database)
+    {
+        $this->database = $database;
+    }
 
     /**
     * User Cancel Request
@@ -130,6 +136,10 @@ class UserCancelRequestController extends BaseController
         }
         
         if ($driver) {
+
+             // Delete Meta Driver From Firebase
+            $this->database->getReference('request-meta/'.$driver->id)->remove();
+            
             $driver->available = true;
             $driver->save();
             $driver->fresh();
@@ -155,10 +165,12 @@ class UserCancelRequestController extends BaseController
             // Send data via Mqtt
             dispatch(new NotifyViaMqtt('request_handler_'.$driver->id, json_encode($socket_data), $driver->id));
 
+           
             $notifiable_driver->notify(new AndroidPushNotification($title, $body));
         }
         // Delete meta records
         // RequestMeta::where('request_id', $request_detail->id)->delete();
+        
         $request_detail->requestMeta()->delete();
 
         return $this->respondSuccess();

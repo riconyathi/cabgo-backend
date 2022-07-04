@@ -171,6 +171,10 @@ class AssignDriversForScheduledRides extends Command
 
                         // Send notification to the very first driver
                         $first_meta_driver = $selected_drivers[0]['driver_id'];
+                        
+                        // Add first Driver into Firebase Request Meta
+                        $this->database->getReference('request-meta/'.$first_meta_driver)->set(['driver_id'=>$first_meta_driver,'request_id'=>$request->id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+
                         $request_result =  fractal($request, new CronTripRequestTransformer)->parseIncludes('userDetail');
                         $pus_request_detail = $request_result->toJson();
                         $push_data = ['notification_enum'=>PushEnums::REQUEST_CREATED,'result'=>(string)$pus_request_detail];

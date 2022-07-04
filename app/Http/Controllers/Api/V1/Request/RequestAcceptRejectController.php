@@ -15,6 +15,7 @@ use App\Http\Requests\Request\AcceptRejectRequest;
 use App\Jobs\Notifications\AndroidPushNotification;
 use App\Transformers\Requests\TripRequestTransformer;
 use App\Models\Request\DriverRejectedRequest;
+use Kreait\Firebase\Database;
 
 /**
  * @group Driver-trips-apis
@@ -25,9 +26,10 @@ class RequestAcceptRejectController extends BaseController
 {
     protected $request;
 
-    public function __construct(RequestModel $request)
+    public function __construct(RequestModel $request,Database $database)
     {
         $this->request = $request;
+        $this->database = $database;
     }
 
     /**
@@ -55,6 +57,9 @@ class RequestAcceptRejectController extends BaseController
         // Validate the request i,e the request is already accepted by some one and it is a valid request for accept or reject state.
         $this->validateRequestDetail($request_detail);
         $driver = auth()->user()->driver;
+
+        // Delete Meta Driver From Firebase
+        $this->database->getReference('request-meta/'.$driver->id)->remove();
 
         if ($request->input('is_accept')) {
             // Update Driver to the trip request detail
@@ -100,6 +105,7 @@ class RequestAcceptRejectController extends BaseController
             $push_request_detail = $request_result->toJson();
             // Delete Driver record from meta table
             RequestMeta::where('request_id', $request->input('request_id'))->where('driver_id', $driver->id)->delete();
+            
             // Send request to next driver
             $request_meta = RequestMeta::where('request_id', $request->input('request_id'))->first();
             if ($request_meta) {
@@ -109,6 +115,10 @@ class RequestAcceptRejectController extends BaseController
                 $body = trans('push_notifications.new_request_body');
                 $push_data = ['notification_enum'=>PushEnums::REQUEST_CREATED,'result'=>(string)$push_request_detail];
                 $driver = Driver::find($request_meta->driver_id);
+
+                // Add Next Driver into Firebase Request Meta
+                $this->database->getReference('request-meta/'.$request_meta->driver_id)->set(['driver_id'=>$request_meta->driver_id,'request_id'=>$request_detail->id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+
                 $notifiable_driver = $driver->user;
                 $notifiable_driver->notify(new AndroidPushNotification($title, $body));
 

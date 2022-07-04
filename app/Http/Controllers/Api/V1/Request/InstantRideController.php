@@ -60,7 +60,7 @@ class InstantRideController extends BaseController
 
         $service_location = $zone_detail->serviceLocation;
 
-        $currency_code = get_settings(Settings::CURRENCY);
+        $currency_code = get_settings('currency_code');
 
         $type_id = auth()->user()->driver->vehicle_type;
 

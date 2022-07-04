@@ -71,7 +71,7 @@ class BraintreeController extends ApiController
     public function addMoneyToWallet(AddMoneyToWalletRequest $request)
     {
         
-        $user_currency_code = get_settings(Settings::CURRENCY);
+        $user_currency_code = get_settings('currency_code');
         
         // Convert the amount to USD to any currency
         $converted_amount_array =  convert_currency_to_usd($user_currency_code, $request->input('amount'));

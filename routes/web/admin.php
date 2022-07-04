@@ -90,9 +90,6 @@ Route::middleware('auth:web')->group(function () {
         Route::get('toggle_available/{driver}', 'DriverController@toggleAvailable');
         Route::get('delete/{driver}', 'DriverController@delete');
         Route::get('document/view/{driver}', 'DriverDocumentController@index')->name('companyDriverDocumentView');
-        // Route::get('upload/document/{driver}/{needed_document}', 'DriverDocumentController@documentUploadView');
-        // Route::post('upload/document/{driver}/{needed_document}', 'DriverDocumentController@uploadDocument')->name('companyUpdateDriverDocument');
-        // Route::post('approve/documents', 'DriverDocumentController@approveDriverDocument')->name('companyApproveDriverDocument');
         Route::get('get/carmodel', 'DriverController@getCarModel')->name('getCarModel');
         Route::get('profile/{driver}', 'DriverController@profile');
         Route::get('hire/view', 'DriverController@hireDriverView')->name('hireDriverView');
@@ -112,10 +109,6 @@ Route::middleware('guest')->namespace('Dispatcher')->group(function () {
     Route::get('dispatch-login', 'DispatcherController@loginView');
 });
 
-// Route::middleware('guest')->namespace('Owner')->group(function () {
-    
-//     Route::get('company-login', 'DispatcherController@loginView');
-// });
 
 Route::namespace('Admin')->group(function () {
     Route::get('track/request/{request}', 'AdminViewController@trackTripDetails');
@@ -431,46 +424,9 @@ Route::middleware('auth:web')->group(function () {
             Route::get('/get/zone', 'MapController@getZoneByServiceLocation')->name('getZoneByServiceLocation');
         });
 
-        Route::group(['prefix' => 'project'], function () {
-            Route::get('/', 'ProjectController@index');
-            Route::get('/fetch', 'ProjectController@getAllProject');
-            Route::get('/create', 'ProjectController@create');
-            Route::post('store', 'ProjectController@store');
-            Route::get('edit/{project}', 'ProjectController@getById');
-            Route::post('update/{project}', 'ProjectController@update');
-            Route::get('toggle_status/{project}', 'ProjectController@toggleStatus');
-            Route::get('fetch/flavours', 'ProjectController@fetchFlavoursByProject')->name('fetchFlavour');
-            Route::get('delete/{project}', 'ProjectController@delete');
-
-            Route::get('added/clients/{project}', 'ProjectController@addedClient');
-            Route::get('add/client/{project}', 'ProjectController@addClient');
-            Route::post('store/client/{project}', 'ProjectController@storeClient');
-            Route::get('client/edit/{user}', 'ProjectController@editClient');
-            Route::post('update/client/{user}', 'ProjectController@updateClient');
-            Route::get('client/toggle_status/{project}', 'ProjectController@toggleClientStatus');
-            Route::get('client/delete/{user}', 'ProjectController@deleteClient');
-
-            Route::get('added/flavour/{project}', 'ProjectController@addedFlavour');
-            Route::get('add/flavour/{project}', 'ProjectController@addFlavour');
-            Route::post('store/flavour/{project}', 'ProjectController@storeFlavour');
-            Route::get('flavour/edit/{projectflavour}', 'ProjectController@editFlavour');
-            Route::post('update/flavour/{projectflavour}', 'ProjectController@updateFlavour');
-            Route::get('flavour/toggle_status/{projectflavour}', 'ProjectController@toggleFlavourStatus');
-            Route::get('flavour/delete/{projectflavour}', 'ProjectController@deleteFlavour');
-        });
     });
 
     Route::namespace('Master')->group(function () {
-        Route::group(['prefix' => 'developer'], function () {
-            Route::get('/', 'DeveloperController@index');
-            Route::get('/fetch', 'DeveloperController@getAllDeveloper');
-            Route::get('/create', 'DeveloperController@create');
-            Route::post('store', 'DeveloperController@store');
-            Route::get('edit/{developer}', 'DeveloperController@getById');
-            Route::post('update/{developer}', 'DeveloperController@update');
-            Route::get('toggle_status/{user}', 'DeveloperController@toggleStatus');
-            Route::get('delete/{developer}', 'DeveloperController@delete');
-        });
 
         Route::prefix('roles')->group(function () {
             Route::get('/', 'RoleController@index');
@@ -484,17 +440,6 @@ Route::middleware('auth:web')->group(function () {
         Route::prefix('system/settings')->group(function () {
             Route::get('/', 'SettingController@index');
             Route::post('/', 'SettingController@store');
-        });
-
-        Route::prefix('builds')->group(function () {
-            Route::get('/projects', 'BuildController@index');
-            Route::get('/fetch/projects', 'BuildController@fetchProject');
-            Route::get('environments/{project_id}/{flavour_id}', 'BuildController@buildEnvironments');
-            Route::get('flavours/{project_id}/', 'BuildController@buildFlavours');
-            Route::get('/{project_id}/{flavour_id}/{environment}', 'BuildController@listBuildsByEnvironment');
-            Route::get('create', 'BuildController@create');
-            Route::post('store', 'BuildController@store');
-            Route::any('app/delete/{mobile_build}', 'BuildController@deleteBuild');
         });
 
         // Car Make CRUD

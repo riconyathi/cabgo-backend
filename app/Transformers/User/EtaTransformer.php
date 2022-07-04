@@ -179,8 +179,8 @@ class EtaTransformer extends Transformer
         $response['approximate_value'] = 1;
         $response['min_amount'] = $ride->total_price;
         $response['max_amount'] = ($ride->total_price * 1.05);
-        $response['currency'] = $zone_type->zone->serviceLocation->currency_symbol;
-        $response['currency_name'] = $zone_type->zone->serviceLocation->currency_name;
+        $response['currency'] = get_settings('currency_symbol');
+        $response['currency_name'] = get_settings('currency_code');
         $response['type_name'] = $zone_type->vehicleType->name;
         $response['unit'] = $zone_type->unit;
         $response['unit_in_words_without_lang'] = $unit_in_words;

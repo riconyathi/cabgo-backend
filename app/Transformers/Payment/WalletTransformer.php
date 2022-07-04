@@ -24,7 +24,7 @@ class WalletTransformer extends Transformer
      */
     public function transform(UserWallet $wallet_history)
     {
-        $user_currency_code = get_settings(Settings::CURRENCY);
+        $user_currency_code = get_settings('currency_code');
         $params = [
             'id' => $wallet_history->id,
             'user_id' => $wallet_history->user_id,
@@ -32,7 +32,7 @@ class WalletTransformer extends Transformer
             'amount_balance' => $wallet_history->amount_balance,
             'amount_spent' => $wallet_history->amount_spent,
             'currency_code'=>$user_currency_code,
-            'currency_symbol'=>get_settings(Settings::CURRENCY_SYMBOL),
+            'currency_symbol'=>get_settings('currency_symbol'),
             'created_at' => $wallet_history->converted_created_at,
             'updated_at' => $wallet_history->converted_updated_at,
         ];

@@ -43,7 +43,7 @@ class DriverPayment implements DriverPaymentContract {
     */
     public function addDriverMoneyToWallet(Request $request,Driver $driver)
     {
-        $user_currency_code = get_settings(Settings::CURRENCY);
+        $user_currency_code = get_settings('currency_code');
 
         // dd($user_currency_code);
 

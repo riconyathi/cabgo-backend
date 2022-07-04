@@ -337,10 +337,10 @@ class Request extends Model
 
     public function getCurrencyAttribute()
     {
-        if ($this->zoneType->zone->serviceLocation->exists()) {
-            return $this->zoneType->zone->serviceLocation->currency_symbol;
-        }
-        return null;
+        // if ($this->zoneType->zone->serviceLocation->exists()) {
+        //     return $this->zoneType->zone->serviceLocation->currency_symbol;
+        // }
+        return get_settings('currency_symbol');
     }
 
     protected $searchable = [

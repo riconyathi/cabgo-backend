@@ -29,7 +29,7 @@ class CancellationRideController extends Controller
         $query = RequestCancellationFee::query();
         $results = $queryFilter->builder($query)->customFilter(new RequestCancellationFilter)->defaultSort('-created_at')->paginate();
 
-        $currency = get_settings(Settings::CURRENCY);
+        $currency = get_settings('currency_code');
 
         return view('admin.cancellation-rides._rides', compact('results','currency'));
     }

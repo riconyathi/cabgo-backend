@@ -199,8 +199,8 @@ class PaymentController extends BaseController
             $user_wallet = auth()->user()->userWallet;
 
             $wallet_balance= $user_wallet->amount_balance;
-            $currency_code = get_settings(Settings::CURRENCY);
-            $currency_symbol = get_settings(Settings::CURRENCY_SYMBOL);
+            $currency_code = get_settings('currency_code');
+            $currency_symbol = get_settings('currency_symbol');
             $default_card = CardInfo::where('user_id', auth()->user()->id)->where('is_default', true)->first();
             $default_card_id = null;
             if ($default_card) {
@@ -214,8 +214,8 @@ class PaymentController extends BaseController
             $driver_wallet = auth()->user()->driver->driverWallet;
 
             $wallet_balance= $driver_wallet->amount_balance;
-            $currency_code = get_settings(Settings::CURRENCY);
-            $currency_symbol = get_settings(Settings::CURRENCY_SYMBOL);
+            $currency_code = get_settings('currency_code');
+            $currency_symbol = get_settings('currency_symbol');
 
             $default_card = CardInfo::where('user_id', auth()->user()->id)->where('is_default', true)->first();
             $default_card_id = null;
@@ -392,7 +392,7 @@ class PaymentController extends BaseController
 
             $user_info = auth()->user();
 
-            $currency_code = get_settings(Settings::CURRENCY);
+            $currency_code = get_settings('currency_code');
 
             $created_params['requested_currency'] = $currency_code;
             $created_params['user_id'] = auth()->user()->id;
@@ -420,7 +420,7 @@ class PaymentController extends BaseController
             
             $user_info = auth()->user()->driver;
 
-            $currency_code = auth()->user()->driver->serviceLocation->currency_symbol;
+            $currency_code = get_settings('currency_symbol');
 
             $created_params['requested_currency'] = $currency_code;
             $created_params['driver_id'] = auth()->user()->driver->id;

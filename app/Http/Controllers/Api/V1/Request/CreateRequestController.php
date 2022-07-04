@@ -21,6 +21,7 @@ use App\Jobs\Notifications\FcmPushNotification;
 use App\Base\Constants\Setting\Settings;
 use Sk\Geohash\Geohash;
 use Kreait\Firebase\Database;
+
 /**
  * @group User-trips-apis
  *
@@ -95,7 +96,7 @@ class CreateRequestController extends BaseController
 
         // Get currency code of Request
         $service_location = $zone_type_detail->zone->serviceLocation;
-        $currency_code = get_settings(Settings::CURRENCY);
+        $currency_code = get_settings('currency_code');
         //Find the zone using the pickup coordinates & get the nearest drivers
 
         $nearest_drivers =  $this->getFirebaseDrivers($request, $type_id);
@@ -198,6 +199,10 @@ class CreateRequestController extends BaseController
 
         // Send notification to the very first driver
         $first_meta_driver = $selected_drivers[0]['driver_id'];
+
+        // Add first Driver into Firebase Request Meta
+        $this->database->getReference('request-meta/'.$first_meta_driver)->set(['driver_id'=>$first_meta_driver,'request_id'=>$request_detail->id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+
         $pus_request_detail = $request_result->toJson();
         $push_data = ['notification_enum'=>PushEnums::REQUEST_CREATED,'result'=>$pus_request_detail];
         $title = trans('push_notifications.new_request_title');
@@ -348,7 +353,7 @@ class CreateRequestController extends BaseController
 
         // Get currency code of Request
         $service_location = $zone_type_detail->zone->serviceLocation;
-        $currency_code = get_settings(Settings::CURRENCY);
+        $currency_code = get_settings('currency_code');
 
         // fetch unit from zone
         $unit = $zone_type_detail->zone->unit;
