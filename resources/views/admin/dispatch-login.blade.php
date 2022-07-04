@@ -67,7 +67,8 @@
                         <div class="print-error-msg" style="position: absolute;right: 0;left: 0;">
                             <ul class="error-style"></ul>
                         </div>
-                        <img src="assets/images/favicon.png" alt="">
+            
+                         <img style="width: 50px" src="{{ fav_icon() ?? asset('images/favicon.png') }}" alt="" style="width:50px">
                         <h3 class="text-center">Dispatch Panel</h3>
                         <p class="login-box-msg"></p>
                         <!-- action="{{ url('api/spa/login') }}" method="post" -->

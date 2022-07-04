@@ -186,7 +186,6 @@ class ImageUploader implements ImageUploaderContract
     public function saveSystemAdminLogo()
     {
         $this->validateFile();
-
         $config = $this->config('system-admin.upload.logo');
 
         $this->setDefaultResize(data_get($config, 'image.store_resolution'));
