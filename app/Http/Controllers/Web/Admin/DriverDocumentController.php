@@ -125,7 +125,8 @@ class DriverDocumentController extends BaseController
     {
         $status = $status == true ? 1 : 0;
 
-        $this->database->getReference('drivers/'.$driver->id)->update(['approve'=>$status,'updated_at'=> Database::SERVER_TIMESTAMP]);
+        $this->database->getReference('drivers/'.$driver->id)->update(['approve'=>(int)$status,'updated_at'=> Database::SERVER_TIMESTAMP]);
+
 
         $driver->update([
             'approve' => $status
