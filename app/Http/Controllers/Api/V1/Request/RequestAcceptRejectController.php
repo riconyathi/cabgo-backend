@@ -65,7 +65,7 @@ class RequestAcceptRejectController extends BaseController
 
         if ($request->input('is_accept')) {
 
-            $this->database->getReference('request-meta/'.$request_detail->id)->remove());
+            $this->database->getReference('request-meta/'.$request_detail->id)->remove();
 
             // Update Driver to the trip request detail
             $updated_params = ['driver_id'=>auth()->user()->driver->id,
