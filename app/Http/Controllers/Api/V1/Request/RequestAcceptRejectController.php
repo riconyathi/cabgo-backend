@@ -59,7 +59,7 @@ class RequestAcceptRejectController extends BaseController
         $driver = auth()->user()->driver;
 
         // Delete Meta Driver From Firebase
-        $this->database->getReference('request-meta/'.$request_detail->id)->set(['driver_id'=>'','request_id'=>$request_detail->id,'user_id'=>$request_detail->user_id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+        // $this->database->getReference('request-meta/'.$request_detail->id)->set(['driver_id'=>'','request_id'=>$request_detail->id,'user_id'=>$request_detail->user_id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
         // $this->database->getReference('request-meta/'.$request_detail->id.'/'.$driver->id)->remove();
 
