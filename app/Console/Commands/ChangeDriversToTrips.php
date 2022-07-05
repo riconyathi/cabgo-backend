@@ -66,7 +66,8 @@ class ChangeDriversToTrips extends Command
                 $driver->available = true;
                 $driver->save();
                 // Delete Meta Driver From Firebase
-                $this->database->getReference('request-meta/'.$request_meta_detable->request_id.'/'.$request_meta_detable->driver_id)->remove();
+                 $this->database->getReference('request-meta/'.$request_meta_detable->request_id)->set(['driver_id'=>'','request_id'=>$request_meta_detable->request_id,'user_id'=>$request_meta_detable->user_id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+
                 // Delete Driver data from Mysql Request Meta
                 $request_meta_detable->delete();
             }

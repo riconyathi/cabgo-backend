@@ -41,7 +41,7 @@ class SendRequestToNextDriversJob implements ShouldQueue
             $request_meta_detail = RequestMeta::find($request_meta_id);
 
             // Add Meta Driver into Firebase Request Meta
-            $this->database->getReference('request-meta/'.$request_meta_detail->request_id.'/'.$request_meta_detail->driver_id)->set(['driver_id'=>$request_meta_detail->driver_id,'request_id'=>$request_meta_detail->request_id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+            $this->database->getReference('request-meta/'.$request_meta_detail->request_id.'/'.$request_meta_detail->driver_id)->set(['driver_id'=>$request_meta_detail->driver_id,'request_id'=>$request_meta_detail->request_id,'user_id'=>$request_meta_detail->user_id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
             $request_result =  fractal($request_meta_detail->request, new CronTripRequestTransformer)->parseIncludes('userDetail');
 

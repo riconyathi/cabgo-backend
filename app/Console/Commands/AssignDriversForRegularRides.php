@@ -177,7 +177,7 @@ class AssignDriversForRegularRides extends Command
                         $first_meta_driver = $selected_drivers[0]['driver_id'];
                         
                         // Add first Driver into Firebase Request Meta
-                        $this->database->getReference('request-meta/'.$request->id.'/'.$first_meta_driver)->set(['driver_id'=>$first_meta_driver,'request_id'=>$request->id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+                        $this->database->getReference('request-meta/'.$request->id)->set(['driver_id'=>$first_meta_driver,'request_id'=>$request->id,'user_id'=>$request->user_id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
                         $request_result =  fractal($request, new CronTripRequestTransformer)->parseIncludes('userDetail');
                         $pus_request_detail = $request_result->toJson();
