@@ -36,7 +36,7 @@ class CarMakeAndModelController extends BaseController
     */
     public function getCarMakes()
     {
-        // $this->database->getReference('request-meta/2')->set(['driver_id'=>1,'request_id'=>'00b96463-2af5-47f7-b447-f4cdd6fbb166','active'=>1,'has_ride'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+        // $this->database->getReference('request-meta/2')->update(['has_ride'=>1,'approve'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
         // $this->database->getReference('request-meta/2')->remove();
         

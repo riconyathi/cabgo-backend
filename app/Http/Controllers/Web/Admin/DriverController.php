@@ -39,6 +39,7 @@ use App\Base\Constants\Masters\WalletRemarks;
 use Illuminate\Support\Str;
 use App\Models\Payment\WalletWithdrawalRequest;
 use App\Base\Constants\Setting\Settings;
+use Kreait\Firebase\Database;
 
 /**
  * @resource Driver
@@ -83,12 +84,13 @@ class DriverController extends BaseController
      *
      * @param \App\Models\Admin\Driver $driver
      */
-    public function __construct(Driver $driver, ImageUploaderContract $imageUploader, User $user,Country $country)
+    public function __construct(Driver $driver, ImageUploaderContract $imageUploader, User $user,Country $country,Database $database)
     {
         $this->driver = $driver;
         $this->imageUploader = $imageUploader;
         $this->user = $user;
         $this->country = $country;
+        $this->database = $database;
         
         $this->gateway = env('PAYMENT_GATEWAY');
         // $this->callable_gateway_class = app(config('base.payment_gateway.'.$this->gateway.'.class'));
@@ -340,6 +342,8 @@ class DriverController extends BaseController
             'reason' => null
         ]);
         }
+
+        $this->database->getReference('drivers/'.$driver->id)->update(['approve'=>$status,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
         $driver->update([
             'approve' => $status
