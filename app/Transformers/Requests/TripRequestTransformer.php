@@ -84,7 +84,16 @@ class TripRequestTransformer extends Transformer
             'if_dispatch'=>false
         ];
 
-         $params['maximum_time_for_find_drivers_for_regular_ride'] = (get_settings(Settings::MAXIMUM_TIME_FOR_FIND_DRIVERS_FOR_REGULAR_RIDE) *60);
+        $maximum_time_for_find_drivers_for_regular_ride = get_settings(Settings::MAXIMUM_TIME_FOR_FIND_DRIVERS_FOR_REGULAR_RIDE);
+
+        $current_time = $current_time = Carbon::now();
+
+        $trip_requested_time = Carbon::parse($request->created_at);
+
+        $difference_request_duration = $trip_requested_time->diffInMinutes($current_time);
+
+         $params['maximum_time_for_find_drivers_for_regular_ride'] = ($maximum_time_for_find_drivers_for_regular_ride - $difference_request_duration);
+
 
         if (!$request->is_later) {
             $ride_type = 1;
