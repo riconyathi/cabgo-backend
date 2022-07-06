@@ -410,6 +410,13 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => null,
         ], 
+        SettingSlug::GOOGLE_MAP_KEY_FOR_DISTANCE_MATRIX => [
+            'category'=>SettingCategory::MAP_SETTINGS,
+            'value' => 'AIzaSyBeVRs1icwooRpk7ErjCEQCwu0OQowVt9I',
+            'field' => SettingValueType::PASSWORD,
+            'option_value' => null,
+            'group_name' => null,
+        ], 
          SettingSlug::FIREBASE_DB_URL => [
             'category'=>SettingCategory::FIREBASE_SETTINGS,
             'value' => 'https://your-db.firebaseio.com',
