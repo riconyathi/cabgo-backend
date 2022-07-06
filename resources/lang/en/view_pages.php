@@ -284,7 +284,7 @@
   'decline' => 'Decline',
   'comment' => 'Comment',
   'approval_action' => 'Action',
-  'minimum_time_for_search_drivers_for_schedule_ride' => 'Mininum time for search drivers for schedule rides in miniutes',
+  'minimum_time_for_search_drivers_for_schedule_ride' => 'Mininum time for find drivers for schedule rides in miniutes',
   'currency_code' => 'Currency Code',
   'favicon' => 'Favicon',
   'Referral' => 'Referral',
@@ -481,8 +481,8 @@
    'drivers_registered' => 'Drivers registered',
    'default_country_code_for_mobile_app' => 'Default Country Code For Mobile App (eg: Country name: India,  as  IN )',
    'default_Language_code_for_mobile_app' =>'Default Language Code For Mobile App (eg: Language: English (UK),  as  en-GB ) More Info:https://developers.google.com/admin-sdk/directory/v1/languages ',
-   'user_can_make_a_ride_after_x_miniutes' => 'User Can Make A Ride After "X" miniutes',
-   'trip_accept_reject_duration_for_driver' => 'Trip Accept/Reject Duration For scheduled Driver',
+   'user_can_make_a_ride_after_x_miniutes' => 'User Can Make Schedule A Ride After "X" miniutes',
+   'trip_accept_reject_duration_for_driver' => 'Trip Accept/Reject Duration For Driver',
    'paystack_production_publishable_key' => 'Paystack Production Publishable Key',
    'see_all' => 'See All',
    'drivers_approved' => 'Drivers Approved',
@@ -501,6 +501,7 @@
     'cancelled_due_to_no_drivers' => 'Cancelled Due To No Drivers',
     'cancelled_by_user' => 'Cancelled By User',
     'cancelled_by_driver' => 'Cancelled By Driver',
+    'maximum_time_for_find_drivers_for_regular_ride' => 'Maximum Time For Find Drivers For Regular Ride',
 
 
 );

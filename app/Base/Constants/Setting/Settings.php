@@ -96,5 +96,7 @@ class Settings
     const USER_CAN_MAKE_A_RIDE_AFTER_X_MINIUTES='user_can_make_a_ride_after_x_miniutes';
     const TRIP_ACCEPT_REJECT_DURATION_FOR_DRIVER='trip_accept_reject_duration_for_driver';
     const GOOGLE_MAP_KEY_FOR_DISTANCE_MATRIX='google_map_key_for_distance_matrix';
+    const MAXIMUM_TIME_FOR_FIND_DRIVERS_FOR_REGULAR_RIDE='maximum_time_for_find_drivers_for_regular_ride';
+
 
 }
