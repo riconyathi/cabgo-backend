@@ -379,7 +379,7 @@ if (!function_exists('get_distance_matrix')) {
           'units' => "imperial",
           'origins' => "$pick_lat,$pick_lng",
           'destinations' => "$drop_lat,$drop_lng",
-          'key' => get_settings('google_map_key')
+          'key' => get_settings('google_map_key_for_distance_matrix')
         ];
         //AIzaSyDsgTHjo-lusijguNf8XO8aLNyYHe9mRE4
 
