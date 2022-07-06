@@ -429,6 +429,12 @@ class PaymentController extends BaseController
 
             $wallet_balance= $driver_wallet->amount_balance;
 
+            if($wallet_balance <=0){
+
+                $this->throwCustomException('Your wallet balance is too low');
+
+            }
+
              if($wallet_balance < $request->requested_amount){
 
                 $this->throwCustomException('Yout wallet balance is too low than your requested amount');

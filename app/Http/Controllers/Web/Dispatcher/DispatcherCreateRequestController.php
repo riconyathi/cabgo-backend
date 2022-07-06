@@ -150,7 +150,7 @@ class DispatcherCreateRequestController extends BaseController
         // Send notification to the very first driver
         $first_meta_driver = $selected_drivers[0]['driver_id'];
         // Add first Driver into Firebase Request Meta
-        $this->database->getReference('request-meta/'.$request_detail->id.'/'.$first_meta_driver)->set(['driver_id'=>$first_meta_driver,'request_id'=>$request_detail->id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+        $this->database->getReference('request-meta/'.$request_detail->id.'/'.$first_meta_driver)->set(['driver_id'=>$first_meta_driver,'request_id'=>$request_detail->id,'user_id'=>$request_detail->user_id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
         
         $request_result =  fractal($request_detail, new TripRequestTransformer)->parseIncludes('userDetail');
 
