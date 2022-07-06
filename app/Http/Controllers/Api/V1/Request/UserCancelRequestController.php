@@ -134,11 +134,12 @@ class UserCancelRequestController extends BaseController
                 $driver=null;
             }
         }
+
+        // Delete Meta Driver From Firebase
+            $this->database->getReference('request-meta/'.$request_detail->id)->remove();
+
         
         if ($driver) {
-
-             // Delete Meta Driver From Firebase
-            $this->database->getReference('request-meta/'.$request_detail->id)->remove();
 
             // $this->database->getReference('request-meta/'.$request_detail.'/'.$driver->id)->remove();
 
