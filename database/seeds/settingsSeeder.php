@@ -406,7 +406,7 @@ class SettingsSeeder extends Seeder
         SettingSlug::GOOGLE_MAP_KEY => [
             'category'=>SettingCategory::MAP_SETTINGS,
             'value' => 'AIzaSyBeVRs1icwooRpk7ErjCEQCwu0OQowVt9I',
-            'field' => SettingValueType::TEXT,
+            'field' => SettingValueType::PASSWORD,
             'option_value' => null,
             'group_name' => null,
         ], 
@@ -420,7 +420,7 @@ class SettingsSeeder extends Seeder
          SettingSlug::FIREBASE_API_KEY => [
             'category'=>SettingCategory::FIREBASE_SETTINGS,
             'value' => 'your-api-key',
-            'field' => SettingValueType::TEXT,
+            'field' => SettingValueType::PASSWORD,
             'option_value' => null,
             'group_name' => null,
         ], 

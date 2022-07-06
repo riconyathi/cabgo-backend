@@ -479,7 +479,8 @@
    'social_profile' => 'Social Profile',
    'drivers_registered' => 'Drivers registered',
    'default_country_code_for_mobile_app' => 'Default Country Code For Mobile App (eg: Country name: India,  as  IN )',
-   'default_Language_code_for_mobile_app' =>'Default Language Code For Mobile App (eg: Language: English (UK),  as  en-GB )',
+   'default_Language_code_for_mobile_app' =>'Default Language Code For Mobile App (eg: Language: English (UK),  as  en-GB ) More Info:https://developers.google.com/admin-sdk/directory/v1/languages ',
    'user_can_make_a_ride_after_x_miniutes' => 'User Can Make A Ride After "X" miniutes',
-   'trip_accept_reject_duration_for_driver' => 'Trip Accept/Reject Duration For scheduled Driver'
+   'trip_accept_reject_duration_for_driver' => 'Trip Accept/Reject Duration For scheduled Driver',
+   'paystack_production_publishable_key' => 'Paystack Production Publishable Key',
 );
