@@ -146,7 +146,7 @@ class UserTransformer extends Transformer
 
 
         $request = $user->requestDetail()->where('is_completed', false)->where('is_cancelled', false)->where('user_rated', false)->where('is_later',true)->where('driver_id', null)->where('is_later', 0)->where('trip_start_time', '<=', $add_45_min)
-                    ->where('trip_start_time', '>', $current_date)first();
+                    ->where('trip_start_time', '>', $current_date)->first();
 
         return $request
         ? $this->item($request, new TripRequestTransformer)
