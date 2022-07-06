@@ -10,6 +10,7 @@ use App\Models\Request\Request as RequestModel;
 use App\Transformers\User\AdHocUserTransformer;
 use App\Transformers\Requests\RequestBillTransformer;
 use App\Base\Constants\Masters\PaymentType;
+use App\Base\Constants\Setting\Settings;
 
 class CronTripRequestTransformer extends Transformer
 {

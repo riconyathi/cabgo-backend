@@ -10,6 +10,7 @@ use App\Transformers\User\AdHocUserTransformer;
 use App\Transformers\Requests\RequestBillTransformer;
 use Carbon\Carbon;
 use App\Base\Constants\Masters\PaymentType;
+use App\Base\Constants\Setting\Settings;
 
 
 class TripRequestTransformer extends Transformer

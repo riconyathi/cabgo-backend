@@ -18,6 +18,7 @@ use App\Transformers\Requests\CronTripRequestTransformer;
 use App\Models\Request\DriverRejectedRequest;
 use Sk\Geohash\Geohash;
 use Kreait\Firebase\Database;
+use App\Base\Constants\Setting\Settings;
 
 class AssignDriversForScheduledRides extends Command
 {
