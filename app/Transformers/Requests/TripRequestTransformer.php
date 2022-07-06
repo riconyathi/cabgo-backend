@@ -83,6 +83,8 @@ class TripRequestTransformer extends Transformer
             'if_dispatch'=>false
         ];
 
+         $params['maximum_time_for_find_drivers_for_regular_ride'] = (get_settings(Settings::MAXIMUM_TIME_FOR_FIND_DRIVERS_FOR_REGULAR_RIDE) *60);
+
         if (!$request->is_later) {
             $ride_type = 1;
         } else {

@@ -83,6 +83,8 @@ class CronTripRequestTransformer extends Transformer
         ];
 
 
+        $params['maximum_time_for_find_drivers_for_regular_ride'] = (get_settings(Settings::MAXIMUM_TIME_FOR_FIND_DRIVERS_FOR_REGULAR_RIDE) *60);
+        
         if($request->payment_opt ==PaymentType::CARD){
             
             $params['payment_type_string'] = 'card';
