@@ -288,7 +288,11 @@ class DriverController extends BaseController
 
         $driver->update(['name'=>$request->input('name'),
             'email'=>$request->input('email'),
-            'mobile'=>$request->input('mobile')
+            'mobile'=>$request->input('mobile'),
+            'car_make'=>$request->input('car_make'),
+            'car_model'=>$request->input('car_model'),
+            'car_color'=>$request->input('car_color'),
+            'car_number'=>$request->input('car_number'),
         ]);
 
         $driver->user->update(['name'=>$request->input('name'),

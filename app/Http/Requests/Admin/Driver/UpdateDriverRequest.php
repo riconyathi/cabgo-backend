@@ -17,12 +17,12 @@ class UpdateDriverRequest extends BaseRequest
             'name' => 'required|max:50',
             'mobile'=>'required|mobile_number|min:8',
             'email'=>'required|email',
-            'address'=>'required|min:10',
+            // 'address'=>'required|min:10',
             // 'state'=>'max:100',
             // 'city'=>'required',
             // 'country'=>'required|exists:countries,id',
             'gender'=>'required|in:male,female,others',
-            'is_company_driver' => 'sometimes|required|in:0,1',
+            // 'is_company_driver' => 'sometimes|required|in:0,1',
             'company'=>'sometimes',
             'type' => 'sometimes|required'
 
