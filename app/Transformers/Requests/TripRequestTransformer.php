@@ -94,7 +94,12 @@ class TripRequestTransformer extends Transformer
 
         $difference_request_duration = $difference_request_duration * 60;
 
-         $params['maximum_time_for_find_drivers_for_regular_ride'] = ($maximum_time_for_find_drivers_for_regular_ride - $difference_request_duration);
+        $final_interval = ($maximum_time_for_find_drivers_for_regular_ride - $difference_request_duration);
+
+        if($final_interval<0){
+            $final_interval =1;
+        }
+        $params['maximum_time_for_find_drivers_for_regular_ride'] = $final_interval;
 
 
         if (!$request->is_later) {
