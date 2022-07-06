@@ -56,7 +56,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+<!--                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="address">@lang('view_pages.address') <span class="text-danger">*</span></label>
                                             <input class="form-control" type="text" id="address" name="address"
@@ -65,7 +65,7 @@
                                             <span class="text-danger">{{ $errors->first('address') }}</span>
 
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="row">
@@ -90,7 +90,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                              <!--       <div class="col-6">
                                         <div class="form-group">
                                             <label for="">@lang('view_pages.is_company_driver') <span class="text-danger">*</span></label>
                                             <select name="is_company_driver" id="is_company_driver" class="form-control">
@@ -122,7 +122,7 @@
                                             </select>
                                             <span class="text-danger">{{ $errors->first('company') }}</span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="row">

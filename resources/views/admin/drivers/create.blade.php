@@ -50,14 +50,14 @@
 
         </div>
     </div>
-               <div class="col-sm-6">
+<!--  <div class="col-sm-6">
             <div class="form-group">
             <label for="address">@lang('view_pages.address')</label>
             <input class="form-control" type="text" id="address" name="address" value="{{old('address')}}" required="" placeholder="@lang('view_pages.enter_address')">
             <span class="text-danger">{{ $errors->first('address') }}</span>
 
         </div>
-    </div>
+    </div> -->
 </div>
 
 <div class="row">
@@ -77,7 +77,7 @@
 </div>
 </div>
 <div class="col-6">
-    <div class="form-group">
+   <!--  <div class="form-group">
         <label for="">@lang('view_pages.is_company_driver') <span class="text-danger">*</span></label>
         <select name="is_company_driver" id="is_company_driver" class="form-control">
             <option value="" selected disabled>@lang('view_pages.select')</option>
@@ -85,10 +85,10 @@
             <option value="0" {{ old('is_company_driver') == '0' ? 'selected' : '' }}>@lang('view_pages.no')</option>
         </select>
         <span class="text-danger">{{ $errors->first('is_company_driver') }}</span>
-    </div>
+    </div> -->
 </div>
 
-<div class="col-6" style="display:none" id="companyShow">
+<!-- <div class="col-6" style="display:none" id="companyShow">
 <div class="form-group">
 <label for="company">@lang('view_pages.select_company')
     <span class="text-danger">*</span>
@@ -102,7 +102,7 @@
 </select>
 <span class="text-danger">{{ $errors->first('company') }}</span>
 </div>
-</div>
+</div> -->
 </div>
 
 <div class="row">
