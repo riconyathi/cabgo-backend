@@ -67,7 +67,7 @@ class SettingsSeeder extends Seeder
         ],
          SettingSlug::USER_CAN_MAKE_A_RIDE_AFTER_X_MINIUTES => [
             'category'=>SettingCategory::TRIP_SETTINGS,
-            'value' => 1,
+            'value' => 30,
             'field' => SettingValueType::TEXT,
             'option_value' => null,
             'group_name' => null,
@@ -129,13 +129,13 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => null,
         ],
-        SettingSlug::DEFAULT__LANGUAGE_CODE_FOR_MOBILE_APP => [
-            'category'=>SettingCategory::GENERAL,
-            'value' =>  'en-GB',
-            'field' => SettingValueType::TEXT,
-            'option_value' => null,
-            'group_name' => null,
-        ],
+        // SettingSlug::DEFAULT__LANGUAGE_CODE_FOR_MOBILE_APP => [
+        //     'category'=>SettingCategory::GENERAL,
+        //     'value' =>  'en-GB',
+        //     'field' => SettingValueType::TEXT,
+        //     'option_value' => null,
+        //     'group_name' => null,
+        // ],
         // SettingSlug::HEAD_OFFICE_NUMBER => [
         //     'category'=>SettingCategory::GENERAL,
         //     'value' => '+8299600007',

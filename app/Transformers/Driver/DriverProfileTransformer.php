@@ -112,7 +112,7 @@ class DriverProfileTransformer extends Transformer
 
          $minimum_balance = get_settings(Settings::DRIVER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER);
 
-            if($minimum_balance !=0){
+            if($minimum_balance >=0){
                 if ($minimum_balance > $wallet_balance) {
 
                 $user->active = false;
@@ -126,8 +126,9 @@ class DriverProfileTransformer extends Transformer
             }
                 
             }
-            
 
+            $params['trip_accept_reject_duration_for_driver'] = get_settings(Settings::TRIP_ACCEPT_REJECT_DURATION_FOR_DRIVER);
+            
             $params['low_balance'] = $low_balance;
 
         return $params;

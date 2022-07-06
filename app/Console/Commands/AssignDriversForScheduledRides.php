@@ -54,7 +54,12 @@ class AssignDriversForScheduledRides extends Command
     public function handle()
     {
         $current_date = Carbon::now()->format('Y-m-d H:i:s');
-        $add_45_min = Carbon::now()->addMinutes(45)->format('Y-m-d H:i:s');
+
+        $findable_duration = get_settings('minimum_time_for_search_drivers_for_schedule_ride');
+        if(!$findable_duration){
+            $findable_duration = 45;
+        }
+        $add_45_min = Carbon::now()->addMinutes($findable_duration)->format('Y-m-d H:i:s');
         // DB::enableQueryLog();
         $requests = Request::where('is_later', 1)
                     ->where('trip_start_time', '<=', $add_45_min)
