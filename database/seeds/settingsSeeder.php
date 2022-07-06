@@ -81,7 +81,7 @@ class SettingsSeeder extends Seeder
         ],
         SettingSlug::MAXIMUM_TIME_FOR_FIND_DRIVERS_FOR_REGULAR_RIDE => [
             'category'=>SettingCategory::TRIP_SETTINGS,
-            'value' => 30,
+            'value' => 5,
             'field' => SettingValueType::TEXT,
             'option_value' => null,
             'group_name' => null,
