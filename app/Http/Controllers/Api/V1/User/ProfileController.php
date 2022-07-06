@@ -319,4 +319,17 @@ class ProfileController extends ApiController
 
 
     }
+    /**
+     * user Account Delete
+     * 
+     * 
+     * */
+    public function userDelete()
+    {
+        $user = auth()->user()->delete();
+
+        return response()->json(['success'=>true,'message'=>'User Account deleted successfully']);
+
+    }
+
 }
