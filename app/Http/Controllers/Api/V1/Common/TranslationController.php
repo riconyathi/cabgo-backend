@@ -26,7 +26,6 @@ class TranslationController extends BaseController
         $response = $client->get('https://sheets.googleapis.com/v4/spreadsheets/'.$sheet_id.'/values:batchGet?ranges=Settings!A:Z&key='.$get_api_key.'&ranges=Sheet1!A:Z&ranges=Update-Config!A:Z');
 
 
-
         $data = json_decode($response->getBody()->getContents(), true);
 
         $settings = [];

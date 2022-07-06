@@ -10,6 +10,7 @@ use App\Transformers\User\AdHocUserTransformer;
 use App\Transformers\Requests\RequestBillTransformer;
 use Carbon\Carbon;
 use App\Base\Constants\Masters\PaymentType;
+use App\Base\Constants\Setting\Settings;
 
 
 class TripRequestTransformer extends Transformer
@@ -82,6 +83,24 @@ class TripRequestTransformer extends Transformer
             'ride_driver_rating'=>0,
             'if_dispatch'=>false
         ];
+
+        $maximum_time_for_find_drivers_for_regular_ride = (get_settings(Settings::MAXIMUM_TIME_FOR_FIND_DRIVERS_FOR_REGULAR_RIDE) * 60);
+
+        $current_time = $current_time = Carbon::now();
+
+        $trip_requested_time = Carbon::parse($request->created_at);
+
+        $difference_request_duration = $trip_requested_time->diffInMinutes($current_time);
+
+        $difference_request_duration = $difference_request_duration * 60;
+
+        $final_interval = ($maximum_time_for_find_drivers_for_regular_ride - $difference_request_duration);
+
+        if($final_interval<0){
+            $final_interval =1;
+        }
+        $params['maximum_time_for_find_drivers_for_regular_ride'] = $final_interval;
+
 
         if (!$request->is_later) {
             $ride_type = 1;

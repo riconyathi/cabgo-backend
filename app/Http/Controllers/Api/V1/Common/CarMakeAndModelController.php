@@ -36,6 +36,13 @@ class CarMakeAndModelController extends BaseController
     */
     public function getCarMakes()
     {
+
+        $current_time = $current_time = Carbon::now();
+
+        $trip_requested_time = Carbon::now()->subMinutes(3);
+
+        dd($trip_requested_time->diffInMinutes($current_time));
+
         // $this->database->getReference('request-meta/2')->update(['has_ride'=>1,'approve'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
         // $this->database->getReference('request-meta/2')->remove();

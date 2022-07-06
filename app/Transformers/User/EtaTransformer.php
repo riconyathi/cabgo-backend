@@ -222,9 +222,6 @@ class EtaTransformer extends Transformer
         // $pickup_time_in_seconds = get_duration_value_from_distance_matrix($driver_to_pickup_response);
         $pickup_time_in_seconds = 0;
         $wait_time_in_seconds = 180; // can be change
-        /**
-        * @TODO surge price calculations
-        */
 
         $distance_in_unit = ($distance_in_unit - $type_prices->base_distance);
         
@@ -257,28 +254,6 @@ class EtaTransformer extends Transformer
 
         $distance_price = ($distance_in_unit * $price_per_distance);
 
-        /**
-         * OLD FLOW FOR SURGE
-         * 
-         * */
-        // $surgePrice = ZoneSurgePrice::whereZoneId($zone_type->zone_id)->get();
-        // $peakValue = 0;
-        // foreach ($surgePrice as $surge) {
-        //     $startDate = now()->parse($surge->start_time);
-        //     $endDate = now()->parse($surge->end_time);
-
-        //     // if(now()->between($startDate,$endDate)){
-        //     if (now()->gte($startDate)  && now()->lte($endDate)) {
-        //         $peakValue = $distance_price * ($surge->value / 100);
-        //     }
-        // }
-
-        // $distance_price = $distance_price + $peakValue;
-
-
-
-
-        // $check_if_peak_time = $this->checkIfPeakTime($zone_type, request()->ride_type);
         $time_price = ($dropoff_time_in_seconds / 60) * $type_prices->price_per_time;
         $base_price = $type_prices->base_price;
         // additon of base and distance price
@@ -344,12 +319,7 @@ class EtaTransformer extends Transformer
             ];
     }
 
-    /**
-    * Check if peak time
-    */
-    private function checkIfPeakTime($zone_type, $ride_type)
-    {
-    }
+
     //vehicle type id should be zone_type id
     private function findNearestDriver($pick_lat, $pick_lng, $vehicle_type)
     {

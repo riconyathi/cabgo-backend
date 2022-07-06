@@ -10,6 +10,7 @@ use App\Models\Request\Request as RequestModel;
 use App\Transformers\User\AdHocUserTransformer;
 use App\Transformers\Requests\RequestBillTransformer;
 use App\Base\Constants\Masters\PaymentType;
+use App\Base\Constants\Setting\Settings;
 
 class CronTripRequestTransformer extends Transformer
 {
@@ -83,6 +84,8 @@ class CronTripRequestTransformer extends Transformer
         ];
 
 
+        $params['maximum_time_for_find_drivers_for_regular_ride'] = (get_settings(Settings::MAXIMUM_TIME_FOR_FIND_DRIVERS_FOR_REGULAR_RIDE) *60);
+        
         if($request->payment_opt ==PaymentType::CARD){
             
             $params['payment_type_string'] = 'card';
