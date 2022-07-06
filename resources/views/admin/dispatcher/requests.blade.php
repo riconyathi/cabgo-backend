@@ -193,7 +193,7 @@
     <script src="{{asset('assets/vendor_components/jquery/dist/jquery.js')}}"></script>
 
     <script type="text/javascript"
-            src="http://maps.googleapis.com/maps/api/js?key={{get_settings('google_map_key')}}&libraries=places">
+            src="https://maps.googleapis.com/maps/api/js?key={{get_settings('google_map_key')}}&libraries=places">
     </script>
     <script>
 
