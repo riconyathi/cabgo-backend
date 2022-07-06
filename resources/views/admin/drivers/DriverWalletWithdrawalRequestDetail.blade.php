@@ -8,7 +8,7 @@
 <!-- Start Page content -->
  <div class="row">
             @foreach ($card as $items)
-                <div class="col-xl-4 col-md-6 col-12">
+                <div class="col-xl-4 col-md-4 col-6" style="margin: 25px">
                     <div class="box box-body">
                         <h5 class="text-capitalize">{{ $items['display_name'] }}</h5>
                         <div class="flexbox wid-icons mt-2">
@@ -18,18 +18,26 @@
                     </div>
                 </div>
             @endforeach
-        </div>
+            <div class="col-xl-6 col-md-4 col-6" style="margin: 25px">
+                <div class="box box-body flex">
+                    <h5 class="text-capitalize">Bank Information</h5>
+                    <div>
+                        <span><b>Bank Name : </b>{{$bankInfo->bank_name}}</span><br>
+                        <span><b>Bank Code : </b>{{$bankInfo->bank_code}}</span><br>
+                        <span><b>Account Holder Name : </b>{{$bankInfo->account_name}}</span><br>
+                        <span><b>Account Number : </b>{{$bankInfo->account_no}}</span><br>
+                    </div>
+                </div>
+          </div>
+ </div>
 
 
-<div class="content">
-<div class="container-fluid">
+<div class="content" style="margin: 25px">
 
- <div class="content">
-
-        <div class="row">
-<h5>Withdrawal Requests History</h5>
-            <div class="col-12">
-        <div class="box">            
+ <div class="row">
+   <h5 style="margin: 25px">Withdrawal Requests History</h5>
+     <div class="col-12">
+        <div class="box">
             <table class="table table-hover">
     <thead>
          <tr>
@@ -40,7 +48,7 @@
             <th> @lang('view_pages.amount')</th>
             <th> @lang('view_pages.status')</th>
             <th> @lang('view_pages.action')</th>
-           
+
         </tr>
     </thead>
       <tbody>
@@ -99,9 +107,9 @@
         </div>
         </div>
 
-        
 
-       
+
+
 
 </div>
 
