@@ -13,6 +13,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use App\Jobs\Notifications\AndroidPushNotification;
 use App\Transformers\Requests\TripRequestTransformer;
 use App\Transformers\Requests\CronTripRequestTransformer;
+use Kreait\Firebase\Database;
 
 class SendRequestToNextDriversJob implements ShouldQueue
 {
@@ -25,9 +26,10 @@ class SendRequestToNextDriversJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($request_meta_ids)
+    public function __construct($request_meta_ids,Database $database)
     {
         $this->request_meta_ids = $request_meta_ids;
+        $this->database = $database;
     }
 
     /**
