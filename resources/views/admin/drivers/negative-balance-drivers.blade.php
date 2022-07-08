@@ -65,10 +65,10 @@
                                             <div class="demo-radio-button">
                                                 <input name="active" type="radio" id="active" data-val="1"
                                                     class="with-gap radio-col-green">
-                                                <label for="active">Active</label>
+                                                <label for="active">@lang('view_pages.active')</label>
                                                 <input name="active" type="radio" id="inactive" data-val="0"
                                                     class="with-gap radio-col-grey">
-                                                <label for="inactive">Inactive</label>
+                                                <label for="inactive">@lang('view_pages.inactive')</label>
                                             </div>
                                             <h4>Approval Status</h4>
                                             <div class="demo-radio-button">
@@ -118,7 +118,7 @@
 
                     <div id="js-drivers-partial-target">
                         <include-fragment src="fetch/negative-balance-drivers">
-                            <span style="text-align: center;font-weight: bold;"> Loading...</span>
+                            <span style="text-align: center;font-weight: bold;">@lang('view_pages.loading')</span>
                         </include-fragment>
                     </div>
                 </div>

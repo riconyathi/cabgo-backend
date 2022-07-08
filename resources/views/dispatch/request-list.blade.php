@@ -163,7 +163,7 @@
                                             Progress
                                             <div class="spinner-border text-dark" style="width: 1rem;height: 1rem;"
                                                 role="status">
-                                                <span class="sr-only">Loading...</span>
+                                                <span class="sr-only">@lang('view_pages.loading')</span>
                                             </div>
                                         </span>
                                     @endif

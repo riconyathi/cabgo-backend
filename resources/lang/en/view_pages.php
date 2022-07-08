@@ -277,7 +277,6 @@
   'select_payment_opt' => 'Select Payment Option',
   'select_trip_status' => 'Select Trip Status',
   'trip_distance' => 'Trip Distance',
-  'driver_commission' => 'Driver Commission',
   'is_paid_status' => 'Paid Status',
   'select_zone' => 'Select zone',
   'approve' => 'Approve',
@@ -481,7 +480,7 @@
    'drivers_registered' => 'Drivers registered',
    'default_country_code_for_mobile_app' => 'Default Country Code For Mobile App (eg: Country name: India,  as  IN )',
    'default_Language_code_for_mobile_app' =>'Default Language Code For Mobile App (eg: Language: English (UK),  as  en-GB ) More Info:https://developers.google.com/admin-sdk/directory/v1/languages ',
-   'user_can_make_a_ride_after_x_miniutes' => 'User Can Make Schedule A Ride After "X" miniutes',
+   'user_can_make_a_ride_after_x_miniutes' => 'User Can Schedule A Ride After "X" miniutes',
    'trip_accept_reject_duration_for_driver' => 'Trip Accept/Reject Duration For Driver in Seconds',
    'paystack_production_publishable_key' => 'Paystack Production Publishable Key',
    'see_all' => 'See All',
@@ -539,6 +538,19 @@
      'reset' => 'Reset',
      'ride_now' => 'Ride Now',
      'ride_later' => 'Ride Later',
+     'loading' => 'Loading...',
+     'drivers_privileged_fleet' => 'Drivers Privileged Fleet',
+     'manage_driver' => 'Manage Driver',
+     'filter_drivers' => 'Filter drivers',
+     'active_status' => 'Active Status',
+     'driver_profile' => 'Driver Profile',
+     'trip_complaint' => 'Trip Complaint',
+     'general_complaint' => 'General Complaint',
+     
+
+
+
+     
 
 
 );

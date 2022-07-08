@@ -58,8 +58,8 @@
                 <div class="col-md-4 m-auto text-center">
                   <img src="{{ asset('dispatcher/profile-img.png') }}" alt="" class="w-25" id="img-src">
                   <input type="file" id="profile_picture" onchange="readURL(this)" name="profile_picture" style="display:none">
-                  <button class="btn btn-primary btn-sm" type="button" onclick="$('#profile_picture').click()" id="upload">Browse</button>
-                  <button class="btn btn-danger btn-sm" type="button" id="remove_img" style="display: none;">Remove</button><br>
+                  <button class="btn btn-primary btn-sm" type="button" onclick="$('#profile_picture').click()" id="upload">@lang('view_pages.browse')</button>
+                  <button class="btn btn-danger btn-sm" type="button" id="remove_img" style="display: none;">@lang('view_pages.remove')</button><br>
                 </div>
               </div>
             </div>
