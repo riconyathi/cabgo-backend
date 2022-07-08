@@ -156,7 +156,7 @@ class DriverDocumentController extends BaseController
         $socket_data->data  = $socket_params;
 
         
-        dispatch(new NotifyViaMqtt('approval_status_'.$driver_details->id, json_encode($socket_data), $driver_details->id));
+        // dispatch(new NotifyViaMqtt('approval_status_'.$driver_details->id, json_encode($socket_data), $driver_details->id));
 
         $user->notify(new AndroidPushNotification($title, $body, $push_data));
     }

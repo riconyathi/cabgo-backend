@@ -43,6 +43,8 @@ class ClearDemoDatabase extends Command
      */
     public function handle()
     {
+        if(env('APP_FOR')=='demo'){
+
         $non_deleted_ids = [];
 
         $non_deleted_ids[] = $user = User::belongsToRole('super-admin')->pluck('id')->first();
@@ -56,7 +58,9 @@ class ClearDemoDatabase extends Command
         $this->database->getReference('requests')->remove();
 
         $this->info("success");
-
+    
+        }
+        
 
     }
 }

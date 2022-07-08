@@ -228,7 +228,7 @@ class CreateRequestController extends BaseController
 
         // dispatch(new NotifyViaSocket('transfer_msg', $socket_message));
 
-        dispatch(new NotifyViaMqtt('create_request_'.$driver->id, json_encode($socket_data), $driver->id));
+        // dispatch(new NotifyViaMqtt('create_request_'.$driver->id, json_encode($socket_data), $driver->id));
 
         foreach ($selected_drivers as $key => $selected_driver) {
             $request_detail->requestMeta()->create($selected_driver);
@@ -387,7 +387,7 @@ class CreateRequestController extends BaseController
             'trip_start_time'=>$trip_start_time,
             'zone_type_id'=>$request->vehicle_type,
             'payment_opt'=>$request->payment_opt,
-            'unit'=>$unit,
+            'unit'=>(string)$unit,
             'requested_currency_code'=>$currency_code,
             'service_location_id'=>$service_location->id,
             'ride_otp'=>rand(1111, 9999)];

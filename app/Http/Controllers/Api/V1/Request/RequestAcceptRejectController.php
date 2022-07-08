@@ -97,7 +97,7 @@ class RequestAcceptRejectController extends BaseController
             // Form a socket sturcture using users'id and message with event name
             // $socket_message = structure_for_socket($user->id, 'user', $socket_data, 'trip_status');
             // dispatch(new NotifyViaSocket('transfer_msg', $socket_message));
-            dispatch(new NotifyViaMqtt('trip_status_'.$user->id, json_encode($socket_data), $user->id));
+            // dispatch(new NotifyViaMqtt('trip_status_'.$user->id, json_encode($socket_data), $user->id));
             accet_dispatch_notify:
         // @TODO send sms,email & push notification with request detail
         } else {
@@ -135,7 +135,7 @@ class RequestAcceptRejectController extends BaseController
                 // Form a socket sturcture using users'id and message with event name
                 // $socket_message = structure_for_socket($driver->id, 'driver', $socket_data, 'create_request');
                 // dispatch(new NotifyViaSocket('transfer_msg', $socket_message));
-                dispatch(new NotifyViaMqtt('create_request_'.$driver->id, json_encode($socket_data), $driver->id));
+                // dispatch(new NotifyViaMqtt('create_request_'.$driver->id, json_encode($socket_data), $driver->id));
             } else {
                 goto no_drivers_available;
 
@@ -160,7 +160,7 @@ class RequestAcceptRejectController extends BaseController
                 // Form a socket sturcture using users'id and message with event name
                 // $socket_message = structure_for_socket($user->id, 'user', $socket_data, 'trip_status');
                 // dispatch(new NotifyViaSocket('transfer_msg', $socket_message));
-                dispatch(new NotifyViaMqtt('trip_status_'.$user->id, json_encode($socket_data), $user->id));
+                // dispatch(new NotifyViaMqtt('trip_status_'.$user->id, json_encode($socket_data), $user->id));
                 dispatch_notify:
                 no_drivers_available:
             }

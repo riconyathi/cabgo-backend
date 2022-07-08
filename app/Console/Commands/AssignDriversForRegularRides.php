@@ -196,7 +196,7 @@ class AssignDriversForRegularRides extends Command
                         $notifable_driver->notify(new AndroidPushNotification($title, $body));
 
                     
-                        dispatch(new NotifyViaMqtt('create_request_'.$driver->id, json_encode($socket_data), $driver->id));
+                        // dispatch(new NotifyViaMqtt('create_request_'.$driver->id, json_encode($socket_data), $driver->id));
 
                         foreach ($selected_drivers as $key => $selected_driver) {
                             $request->requestMeta()->create($selected_driver);
