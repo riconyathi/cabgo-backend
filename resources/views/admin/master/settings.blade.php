@@ -108,8 +108,8 @@
                                                             <div class="col-6">
                                                                 <img id="blah" src="{{  $setting_name['name'] == 'logo' ? app_logo() : fav_icon() }}" alt="" style="max-width: 250px; max-height: 250px"><br>
                                                                 <input type="file" id="{{ $setting_name['name'] }}" onchange="readURL(this)" name="{{ $setting_name['name'] }}" style="display:none"><br>
-                                                                <button class="btn btn-primary btn-sm" type="button" onclick="$({{ $setting_name['name'] }}).click()" id="upload">Browse</button>
-                                                                <button class="btn btn-danger btn-sm" type="button" id="remove_img" style="display: none;">Remove</button><br>
+                                                                <button class="btn btn-primary btn-sm" type="button" onclick="$({{ $setting_name['name'] }}).click()" id="upload">@lang('view_pages.browse')</button>
+                                                                <button class="btn btn-danger btn-sm" type="button" id="remove_img" style="display: none;">@lang('view_pages.remove')</button><br>
                                                                 <span class="text-danger">{{ $errors->first($setting_name['name']) }}</span>
                                                             </div>
                                                         </div>

@@ -234,7 +234,7 @@
                             <div id="map"></div>
 
                             <div id="legend">
-                                <h5>Legend</h5>
+                                <h5>@lang('view_pages.legend')</h5>
                             </div>
 
                             {{-- List requests --}}
@@ -244,7 +244,7 @@
                                 </div>
                                 <div id="request-lists-target">
                                     <include-fragment src="{{ url('fetch/request_lists') }}">
-                                        <span style="text-align: center;font-weight: bold;"> Loading...</span>
+                                        <span style="text-align: center;font-weight: bold;"> @lang('view_pages.loading')</span>
                                     </include-fragment>
                                 </div>
                             </div>
@@ -268,7 +268,7 @@
 
 
     <script type="text/javascript"
-        src="https://maps.google.com/maps/api/js?key={{get_settings('google_map_key')}}&libraries=places"></script>
+        src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&libraries=places"></script>
 
     <script>
         var lat = parseFloat("{{ auth()->user()->admin->serviceLocationDetail->zones()->pluck('lat')->first() ?? 11.015956}}");
