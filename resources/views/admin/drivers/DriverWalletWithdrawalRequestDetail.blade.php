@@ -20,12 +20,12 @@
             @endforeach
             <div class="col-xl-6 col-md-4 col-6" style="margin: 25px">
                 <div class="box box-body flex">
-                    <h5 class="text-capitalize">Bank Information</h5>
+                    <h5 class="text-capitalize">@lang('view_pages.bank_information') </h5>
                     <div>
-                        <span><b>Bank Name : </b>{{$bankInfo->bank_name}}</span><br>
-                        <span><b>Bank Code : </b>{{$bankInfo->bank_code}}</span><br>
-                        <span><b>Account Holder Name : </b>{{$bankInfo->account_name}}</span><br>
-                        <span><b>Account Number : </b>{{$bankInfo->account_no}}</span><br>
+                 <span><b>@lang('view_pages.bank_name') : </b>{{$bankInfo->bank_name}}</span><br>
+                        <span><b>@lang('view_pages.bank_code')  : </b>{{$bankInfo->bank_code}}</span><br>
+                        <span><b>@lang('view_pages.account_holder_name') : </b>{{$bankInfo->account_name}}</span><br>
+                        <span><b>@lang('view_pages.account_number') : </b>{{$bankInfo->account_no}}</span><br>
                     </div>
                 </div>
           </div>
@@ -35,7 +35,7 @@
 <div class="content" style="margin: 25px">
 
  <div class="row">
-   <h5 style="margin: 25px">Withdrawal Requests History</h5>
+   <h5 style="margin: 25px">@lang('view_pages.withdrawal_requests_history')</h5>
      <div class="col-12">
         <div class="box">
             <table class="table table-hover">
@@ -62,11 +62,11 @@
             <td>{{$result->driverDetail->mobile }}</td>
             <td> {{$result->requested_currency}} {{$result->requested_amount}}</td>
             @if ($result->status == 0)
-                <td><button class="btn btn-warning btn-sm">Requested</button></td>
+                <td><button class="btn btn-warning btn-sm">@lang('view_pages.requested')</button></td>
             @elseif($result->status==1)
-                 <td><button class="btn btn-success btn-sm">Approved</button></td>
+                 <td><button class="btn btn-success btn-sm">@lang('view_pages.approved')</button></td>
             @else
-                 <td><button class="btn btn-danger btn-sm">Declined</button></td>
+                 <td><button class="btn btn-danger btn-sm">@lang('view_pages.declined')</button></td>
             @endif
             <td>
                 <div class="dropdown">

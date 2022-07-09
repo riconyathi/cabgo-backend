@@ -2,8 +2,8 @@
 
 @section('content')
 
-	<!-- Morris charts -->
-	<link rel="stylesheet" href{!! asset('assets/vendor_components/morris.js/morris.css') !!}">
+    <!-- Morris charts -->
+    <link rel="stylesheet" href{!! asset('assets/vendor_components/morris.js/morris.css') !!}">
     <style>
         .text-red {
             color: red;
@@ -109,7 +109,7 @@
 
                 <div class="box">
                     <div class="box-header with-border">
-                        <h4 class="box-title">Map View</h4>
+                        <h4 class="box-title">@lang('view_pages.map_view')</h4>
                 <div id="map"></div>
                 <div id="legend"><h3>@lang('view_pages.legend')</h3></div>
                 </div>
@@ -121,7 +121,7 @@
             <div class="col-12 col-lg-6">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h4 class="box-title">Trip Overview</h4>
+                        <h4 class="box-title">@lang('view_pages.trip_verview')</h4>
                         <ul class="box-controls pull-right">
                             <li><a class="box-btn-slide" href="#"></a></li>
                             <li><a class="box-btn-fullscreen" href="#"></a></li>
@@ -138,7 +138,7 @@
             <div class="col-12 col-lg-6">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h4 class="box-title">Earnings Overview</h4>
+                        <h4 class="box-title">@lang('view_pages.earnings_overview')</h4>
                         <ul class="box-controls pull-right">
                             <li><a class="box-btn-slide" href="#"></a></li>
                             <li><a class="box-btn-fullscreen" href="#"></a></li>
@@ -264,9 +264,9 @@
 
 @section('extra-scripts')
 
-	<!-- Morris.js charts -->
-	<script src="{{asset('assets/vendor_components/raphael/raphael.min.js') }}"></script>
-	<script src="{{asset('assets/vendor_components/morris.js/morris.min.js') }}"></script>
+    <!-- Morris.js charts -->
+    <script src="{{asset('assets/vendor_components/raphael/raphael.min.js') }}"></script>
+    <script src="{{asset('assets/vendor_components/morris.js/morris.min.js') }}"></script>
 
 <script>
 $(function () {
@@ -288,13 +288,13 @@ $(function () {
             return monthNames[index];
         },
         xLabels: "month",
-		ykeys: ['a'],
-		labels: ['Monthly Earnings'],
-		fillOpacity: 1,
-		lineWidth:1,
-		lineColors: ['#7460ee', '#ffb22b'],
-		hideHover: 'auto',
-		color: '#666666'
+        ykeys: ['a'],
+        labels: ['Monthly Earnings'],
+        fillOpacity: 1,
+        lineWidth:1,
+        lineColors: ['#7460ee', '#ffb22b'],
+        hideHover: 'auto',
+        color: '#666666'
     });
 
     var barData = JSON.parse('<?php echo json_encode($data) ?>');
@@ -303,14 +303,14 @@ $(function () {
       element: 'bar-chart',
       resize: true,
       data: barData,
-		barColors: ['#26c6da','#fc4b6c'],
-		barSizeRatio: 0.5,
-		barGap:5,
-		xkey: 'y',
-		ykeys: ['a', 'b'],
-		labels: ['Completed', 'Cancelled'],
-		hideHover: 'auto',
-		color: '#666666'
+        barColors: ['#26c6da','#fc4b6c'],
+        barSizeRatio: 0.5,
+        barGap:5,
+        xkey: 'y',
+        ykeys: ['a', 'b'],
+        labels: ['Completed', 'Cancelled'],
+        hideHover: 'auto',
+        color: '#666666'
     });
 });
 

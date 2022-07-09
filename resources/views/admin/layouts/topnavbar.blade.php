@@ -27,14 +27,14 @@
          <!-- Sidebar toggle button-->
 
          <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-             <span class="sr-only">Toggle navigation</span>
+             <span class="sr-only">@lang('view_pages.toggle_navigation')</span>
          </a>
 
          <div class="navbar-custom-menu">
              <ul class="nav navbar-nav">
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="sosicon">SOS Request</span>
+                        <span class="sosicon"> @lang('view_pages.sos_request')</span>
                         {{-- <span class="badge badge-pill badge-danger">0</span> --}}
                         {{-- <i class="mdi mdi-bell-ring sosicon"></i> --}}
                     </a>
@@ -94,12 +94,12 @@
                              <div class="row no-gutters">
                                  <div class="col-12 text-left">
                                      <a href="{{ url('admins/profile', auth()->user()->id) }}"><i
-                                             class="ion ion-person"></i> My Profile</a>
+                                             class="ion ion-person"></i> @lang('pages_names.my_profile')</a>
                                  </div>
                                  <div role="separator" class="divider col-12"></div>
                                  <div class="col-12 text-left">
                                      <a href="{{ url('api/spa/logout') }}" class="logout"><i
-                                             class="fa fa-power-off"></i> Logout</a>
+                                             class="fa fa-power-off"></i> @lang('pages_names.logout')</a>
                                  </div>
                              </div>
                              <!-- /.row -->
