@@ -33,7 +33,7 @@
          <div class="navbar-custom-menu">
              <ul class="nav navbar-nav">
                 <li class="dropdown notifications-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="sosicon"> @lang('view_pages.sos_request')</span>
                         {{-- <span class="badge badge-pill badge-danger">0</span> --}}
                         {{-- <i class="mdi mdi-bell-ring sosicon"></i> --}}

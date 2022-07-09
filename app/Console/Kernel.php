@@ -41,8 +41,8 @@ class Kernel extends ConsoleKernel
                  ->everyMinute();
         $schedule->command('assign_drivers:for_schedule_rides')
                  ->everyFiveMinutes();
-        $schedule->command('clear:database')
-                 ->daily();
+        // $schedule->command('clear:database')
+        //          ->daily();
     }
 
     /**

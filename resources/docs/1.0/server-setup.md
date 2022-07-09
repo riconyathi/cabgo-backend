@@ -12,7 +12,7 @@
 - [Install phpmyadmin](#section-8)
 - [Install composer](#section-9)
 - [Install Jenkins](#section-10)
-- [Install Nodejs & Pm2](#section-11)
+<!-- - [Install Nodejs & Pm2](#section-11) -->
 - [Setup Laravel Supervisor](#section-12)
 - [Install EMQX server](#section-13)
 
@@ -38,7 +38,7 @@ We are strongly any VPS Server with ubuntu OS. Because it is quite easy to setup
 6. Install phpmyadmin
 7. Install composer
 8. Install Jenkins
-9. Install Nodejs & Pm2
+<!-- 9. Install Nodejs & Pm2 -->
 10. Setup Laravel Supervisor
 11. Install EMQX server
 
@@ -143,7 +143,7 @@ Follow the instructions from the reference link below. and skip the firewal setu
 
 Reference Link: https://www.digitalocean.com/community/tutorials/how-to-install-jenkins-on-ubuntu-16-04
 
-<a name="section-11"></a>
+<!-- <a name="section-11"></a>
 ## 9.Install Nodejs & Pm2
 
 Follow the instructions from the reference link below. install nodejs & npm as well.
@@ -175,4 +175,4 @@ Follow the instructions below & from the reference link.
 
 Reference Link: https://www.emqx.com/en/downloads?product=broker
 
-
+ -->

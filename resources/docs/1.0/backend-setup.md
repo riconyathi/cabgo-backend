@@ -4,7 +4,7 @@
 
 - [Introduction](#section-1)
 - [Setup Instructions](#section-2)
-- [Node.js File Setup](#section-3)
+- [<!-- Node -->.js File Setup](#section-3)
 - [Map Setup](#section-4)
 - [Firebase Config](#section-5)
 - [Queue Setup](#section-6)
@@ -23,9 +23,6 @@ You are almost finished and ready to setup your back end part. once you setup je
 * Setup DB config in .env file
     ```php
     APP_URL=http://tagxi.com/future/public
-    NODE_APP_URL=http://tagxi.com
-    NODE_APP_PORT=3000
-    SOCKET_PORT=3001
     ```
    ```php
    DB_PORT=3306
@@ -97,7 +94,7 @@ DEFAULT_LNG=76.54545
     * php artisan passport:install
     * php artisan storage:link
 
-<a name="section-3"></a>
+<!-- <a name="section-3"></a>
 ## Node.js File Setup
 
 * By run the node.js server file we will be fetch the nearest drivers using geofire in firebase realtime database. so we need to run the node file, please follow the below instructions.
@@ -108,7 +105,7 @@ Steps
     "project-file/node/geofire.js"
 
 * run the server file by using pm2. "pm2 start geofire.js"
-
+ -->
 <a name="section-4"></a>
 ## Map Configuration
 
@@ -138,7 +135,7 @@ GOOGLE_MAP_KEY=AIzaSyBeTRs1icwooRpk7ErjCEQCwu0OQowVt9I
 
 * Generate firebase.json content and replace it in the below paths. Please find the image for how to generate firebase.json file.
 
-    * node/firebase.json
+    <!-- * node/firebase.json -->
     * public/push-configurations/firebase.json
 
 ![image](../../images/user-manual-docs/project-settings–firebase-console.png)

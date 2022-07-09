@@ -5,7 +5,6 @@
 - [Introduction](#section-1)
 - [Setup Instructions](#section-2)
 - [Change Base Url](#section-3)
-- [Change the MQTT_URL](#section-4)
 - [Change Website URL](#section-5)
 - [Google Map & Cloud Configure](#section-6)
 - [Change Package Name](#section-7)
@@ -60,20 +59,6 @@ In this article, we are going to set up the TYT App’s initial setup for real-t
 ```
 <a name="section-4"></a>
 
-## Change the MQTT URL
-
-2. Change the MQTT_URL value of the Variable which is presented in the SocketHelper File which is presented in the Utils Package.
-
-* It is used to make a Socket Connection between APP and the Server. So Update this value very carefully with your server’s right IP Address.
-
-    * like this 
-
-        * <strong> Note : File Location : project/lib/functions/functions.dart </strong>
-
-```flutter
-String mqttUrl = 'your mqtt url here';
-int mqttPort = 1883; // port number
-```
 <a name="section-5"></a>
 ## Change Website URL
 
@@ -371,6 +356,7 @@ applicationId "package name here"
 
 	* project/android/app/src/main/res/mipmap-xxxhdpi - ic_launcher.png (192x192)
 
+  * project/android/app/src/main/res/drawable/ - logo.png
 
 <a name="section-9"></a>
 ## Change Display Name
@@ -378,7 +364,6 @@ applicationId "package name here"
 1. change app display name in file,
 
 * <strong> Note : File Location "project/android/app/src/main/AndroidManifest.xml" </strong>
-
 ```flutter
 android:label="project name"
 
@@ -389,6 +374,17 @@ android:label="project name"
  title: 'project name',
 
  ```
+ 
+2. Change App Display name in Driver app for Background location notification
+  <strong>Note: File Location "project/lib/functions/functions.dart" </strong>
+
+```flutter
+  foregroundNotificationConfig:
+            const geolocs.ForegroundNotificationConfig(
+          notificationText:
+              "Tagxi Driver will continue to receive your location in background",
+          notificationTitle: "Location background service running",
+```
 
 <a name="section-10"></a>
 ## change payment gateway keys
