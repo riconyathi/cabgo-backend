@@ -324,7 +324,7 @@ class ProfileController extends ApiController
      * 
      * 
      * */
-    public function userDelete()
+    public function userDeleteAccount()
     {
         $user = auth()->user()->delete();
 
