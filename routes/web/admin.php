@@ -282,6 +282,12 @@ Route::middleware('auth:web')->group(function () {
             Route::get('toggle_status/{user}', 'UserController@toggleStatus');
             Route::get('delete/{user}', 'UserController@delete');
             Route::get('/request-list/{user}', 'UserController@UserTripRequest');
+            Route::get('payment-history/{user}', 'UserController@userPaymentHistory');
+            Route::post('payment-history/{user}', 'UserController@StoreUserPaymentHistory');      
+
+
+
+
         });
 
         Route::group(['prefix' => 'sos',  'middleware' => 'permission:view-sos'], function () {
