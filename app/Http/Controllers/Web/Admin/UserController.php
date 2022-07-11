@@ -244,6 +244,14 @@ class UserController extends BaseController
 
         $amount = UserWallet::where('user_id',$user->id)->first();
 
+    if ($amount == null) {
+         $card = [];
+         $card['total_amount'] = ['name' => 'total_amount', 'display_name' => 'Total Amount ', 'count' => "0", 'icon' => 'fa fa-flag-checkered text-green'];
+        $card['amount_spent'] = ['name' => 'amount_spent', 'display_name' => 'Spend Amount ', 'count' => "0", 'icon' => 'fa fa-ban text-red'];
+        $card['balance_amount'] = ['name' => 'balance_amount', 'display_name' => 'Balance Amount', 'count' => "0", 'icon' => 'fa fa-ban text-red'];
+
+         $history = UserWalletHistory::where('user_id',$user->id)->orderBy('created_at','desc')->paginate(10);
+        }else{
 
          $card = [];
         $card['total_amount'] = ['name' => 'total_amount', 'display_name' => 'Total Amount ', 'count' => $amount->amount_added, 'icon' => 'fa fa-flag-checkered text-green'];
@@ -253,7 +261,7 @@ class UserController extends BaseController
          $history = UserWalletHistory::where('user_id',$user->id)->orderBy('created_at','desc')->paginate(10);
 
         // dd($history);
-
+        }
         return view('admin.users.user-payment-wallet', compact('card','main_menu','sub_menu','item','history'));
     }
      public function StoreUserPaymentHistory(AddUserMoneyToWalletRequest $request,User $user)
