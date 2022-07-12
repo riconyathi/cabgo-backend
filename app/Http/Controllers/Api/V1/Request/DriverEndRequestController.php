@@ -615,6 +615,9 @@ class DriverEndRequestController extends BaseController
         $service_fee = get_settings('admin_commission');
         // Admin commision
         // Admin commision
+        // Get Admin Commision
+        $admin_commision_type = get_settings('admin_commission_type');
+
         if($admin_commision_type==1){
 
         $admin_commision = ($sub_total * ($service_fee / 100));
