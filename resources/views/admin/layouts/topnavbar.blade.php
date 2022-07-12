@@ -51,6 +51,8 @@
                              $translations = \DB::table('ltm_translations')->groupBy('locale')->get();
                         @endphp
 
+
+
                          @foreach ($translations as $k => $translation)
                              <a class="{{ $translation->locale == session()->get('applocale') ? 'hover-blue' : '' }} dropdown-item chooseLanguage"
                                  href="#" data-value="{{ $translation->locale  }}">
@@ -60,7 +62,7 @@
                              </a>
                          @endforeach
 
-                        <!--  @foreach (config('app.app_lang') as $k => $v)
+                   <!--       @foreach (config('app.app_lang') as $k => $v)
                              <a class="{{ $k == session()->get('applocale') ? 'hover-blue' : '' }} dropdown-item chooseLanguage"
                                  href="#" data-value="{{ $k }}">
                                  <li class="header">

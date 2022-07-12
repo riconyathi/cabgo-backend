@@ -371,7 +371,7 @@ if (!function_exists('find_airport')) {
 }
 
 if (!function_exists('get_distance_matrix')) {
-    function get_distance_matrix($pick_lat, $pick_lng, $drop_lat, $drop_lng, $traffic = fals)
+    function get_distance_matrix($pick_lat, $pick_lng, $drop_lat, $drop_lng, $traffic = false)
     {
         $client = new \GuzzleHttp\Client();
         $url = 'https://maps.googleapis.com/maps/api/distancematrix/json';

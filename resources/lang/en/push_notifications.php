@@ -28,8 +28,8 @@ return array (
   'complaint_taken_body' => 'Your Complaint has Taken by our team, Will resolve this shortly',
   'complaint_solved_title' => 'Your complaint was Solved 🙁️',
   'complaint_solved_body' => 'Your complaint has solved by our team, Have nice ride',
-  'reminder_push_title'=>'Gentle Reminder 😊️',
-  'reminder_push_body'=>'Please open the'.' '.env('APP_NAME').' app to get ride requests',
-  'amount_credited_to_your_wallet_title'=>'Amount Added Succesfully',
-  'amount_credited_to_your_wallet_body'=>'Amount Credited to Your Wallet Succesfully'
+  'reminder_push_title' => 'Gentle Reminder 😊️',
+  'reminder_push_body' => 'Please open the Laravel app to get ride requests',
+  'amount_credited_to_your_wallet_title' => 'Amount Added Succesfully',
+  'amount_credited_to_your_wallet_body' => 'Amount Credited to Your Wallet Succesfully',
 );

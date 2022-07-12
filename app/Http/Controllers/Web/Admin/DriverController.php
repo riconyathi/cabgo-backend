@@ -462,7 +462,17 @@ class DriverController extends BaseController
         // dd($item);
 
         $amount = DriverWallet::where('user_id',$driver->id)->first();
+        
+        if ($amount == null) {
 
+         $card = [];
+         $card['total_amount'] = ['name' => 'total_amount', 'display_name' => 'Total Amount ', 'count' => "0", 'icon' => 'fa fa-flag-checkered text-green'];
+        $card['amount_spent'] = ['name' => 'amount_spent', 'display_name' => 'Spend Amount ', 'count' => "0", 'icon' => 'fa fa-ban text-red'];
+        $card['balance_amount'] = ['name' => 'balance_amount', 'display_name' => 'Balance Amount', 'count' => "0", 'icon' => 'fa fa-ban text-red'];
+
+         $history = UserWalletHistory::where('user_id',$user->id)->orderBy('created_at','desc')->paginate(10);
+        }
+        else{
          $card = [];
         $card['total_amount'] = ['name' => 'total_amount', 'display_name' => 'Total Amount ', 'count' => $amount->amount_added, 'icon' => 'fa fa-flag-checkered text-green'];
         $card['amount_spent'] = ['name' => 'amount_spent', 'display_name' => 'Spend Amount ', 'count' => $amount->amount_spent, 'icon' => 'fa fa-ban text-red'];
@@ -471,8 +481,7 @@ class DriverController extends BaseController
 
          $history = DriverWalletHistory::where('user_id',$driver->id)->orderBy('created_at','desc')->paginate(10);
 
-
-
+          }
 
         return view('admin.drivers.driver-payment-wallet', compact('card','main_menu','sub_menu','item','history'));
     }
