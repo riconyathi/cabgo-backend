@@ -710,5 +710,4 @@ return array (
   'enter_currency_code' => 'Enter Currency Value',
   'ride_type' => 'Ride Type',
   'icons' => 'Icons',
-  'user_payment_history' => 'User Payment History',
 );
