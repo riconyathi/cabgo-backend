@@ -667,8 +667,7 @@ class DriverEndRequestController extends BaseController
        // Validate if the promo is expired
         $current_date = Carbon::today()->toDateTimeString();
 
-        $expired = Promo::where('id', $promo_code_id)->where('from', '<=', $current_date)->orWhere('to', '>=', $current_date)->first();
-
+        $expired = Promo::where('id', $promo_code_id)->where('to', '>', $current_date)->first();
         
         return $expired;
         

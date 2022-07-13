@@ -430,7 +430,7 @@ class EtaTransformer extends Transformer
         // Validate if the promo is expired
         $current_date = Carbon::today()->toDateTimeString();
 
-        $expired = Promo::where('code', $promo_code)->where('from', '<=', $current_date)->orWhere('to', '>=', $current_date)->where('service_location_id', $service_location)->first();
+        $expired = Promo::where('code', $promo_code)->where('to', '>', $current_date)->where('service_location_id', $service_location)->first();
 
         if (!$expired) {
             $this->throwCustomException('provided promo code expired or invalid');
