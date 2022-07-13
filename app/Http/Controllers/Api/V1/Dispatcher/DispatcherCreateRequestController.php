@@ -7,6 +7,7 @@ use App\Jobs\NotifyViaMqtt;
 use App\Models\Admin\Driver;
 use App\Jobs\NotifyViaSocket;
 use App\Models\Admin\ZoneType;
+use Illuminate\Http\Request as ValidatorRequest;
 use App\Models\Request\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Request\RequestMeta;
@@ -16,6 +17,8 @@ use App\Http\Controllers\Api\V1\BaseController;
 use App\Http\Requests\Request\CreateTripRequest;
 use App\Jobs\Notifications\AndroidPushNotification;
 use App\Transformers\Requests\TripRequestTransformer;
+use App\Models\User;
+use App\Transformers\Requests\UserRequestForDispatcherAppTransformer;
 
 /**
  * @group Dispatcher-trips-apis
@@ -250,5 +253,37 @@ class DispatcherCreateRequestController extends BaseController
         } else {
             $this->throwCustomException('there is an error-getting-drivers');
         }
+    }
+
+
+    /**
+     * Find User Data
+     * 
+     * 
+     * */
+    public function findUserData(ValidatorRequest $request){
+
+        $request->validate([
+        'mobile' => 'required',
+        ]);
+
+        $user = User::belongsToRole('user')->where('mobile',$request->mobile)->first();
+
+        $message = 'user_doesnt_exists';
+
+        $request_result = null;
+
+        if($user){
+            
+            $query = $this->request->where('user_id', $user->id)->orderBy('created_at', 'desc')->where('is_completed',true)->get();
+
+            $request_result =  fractal($query, new UserRequestForDispatcherAppTransformer);
+
+            $message = 'user_exists';
+        }
+
+        return $this->respondSuccess($request_result, $message);
+
+
     }
 }

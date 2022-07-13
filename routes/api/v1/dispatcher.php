@@ -21,6 +21,7 @@ Route::prefix('dispatcher')->namespace('Dispatcher')->middleware('auth')->group(
     Route::middleware(role_middleware(Role::adminRoles()))->group(function () {
         Route::prefix('request')->group(function () {
             Route::post('create', 'DispatcherCreateRequestController@createRequest');
+            Route::post('find-user-data','DispatcherCreateRequestController@findUserData');
         });
     });
 });
