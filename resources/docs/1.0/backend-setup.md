@@ -13,7 +13,7 @@
 
 <a name="section-1"></a>
 ## Introduction
-You are almost finished and ready to setup your back end part. once you setup jenkins and taken a build.
+You are almost finished and ready to setup your back end part. once you setup jenkins and taken a build or just uploaded the laravel project in your project path. Please follow the below steps for running the server app.
 
 <a name="section-2"></a>
 ## Setup Instructions
@@ -165,7 +165,7 @@ stopwaitsecs=3600
 * to open cronjob file please use the following command "crontab -e"
 
 ```php
-* * * * * php /var/www/html/taxi artisan schedule:run >> /dev/null 2>&1
+* * * * * cd /var/www/html/taxi && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 <a name="section-7"></a>
