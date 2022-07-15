@@ -19,6 +19,8 @@ use App\Jobs\Notifications\AndroidPushNotification;
 use App\Transformers\Requests\TripRequestTransformer;
 use App\Models\User;
 use App\Transformers\Requests\UserRequestForDispatcherAppTransformer;
+use Sk\Geohash\Geohash;
+use Kreait\Firebase\Database;
 
 /**
  * @group Dispatcher-trips-apis
