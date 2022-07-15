@@ -117,7 +117,7 @@ if(str_contains((string)request()->path(),'translations')){
       @endphp
 
         @if(auth()->user()->can('manage-owner'))
-       <!--  <li class="treeview {{ 'manage_owners' == $main_menu ? 'active menu-open' : '' }}">
+        <li class="treeview {{ 'manage_owners' == $main_menu ? 'active menu-open' : '' }}">
         <a href="javascript: void(0);">
           <i class="fa fa-code-fork"></i>
           <span> @lang('pages_names.owners') </span>
@@ -134,7 +134,7 @@ if(str_contains((string)request()->path(),'translations')){
          </ul>
            
             </li>
-         -->
+        
             @endif
 
     

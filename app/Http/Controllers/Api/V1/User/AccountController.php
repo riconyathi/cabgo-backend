@@ -24,9 +24,14 @@ class AccountController extends ApiController
             $user = User::where('id', auth()->user()->id)->companyKey()->first();
             $driver_details = $user->driver;
             $user = fractal($driver_details, new DriverProfileTransformer)->parseIncludes(['onTripRequest.userDetail','onTripRequest.requestBill','metaRequest.userDetail']);
-        } else {
+        } else if(auth()->user()->hasRole(Role::USER)) {
             $user = User::where('id', auth()->user()->id)->companyKey()->first();
             $user = fractal($user, new UserTransformer)->parseIncludes(['onTripRequest.driverDetail','onTripRequest.requestBill','metaRequest.driverDetail','favouriteLocations','laterMetaRequest.driverDetail']);
+        }else{
+
+            $user = User::where('id', auth()->user()->id)->first();
+
+            $user = fractal($user, new OwnerProfileTransformer);
         }
 
         if(auth()->user()->hasRole(Role::DISPATCHER)){

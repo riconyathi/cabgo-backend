@@ -84,7 +84,7 @@ class DriverSignupController extends LoginController
 
         $country_code = $this->country->where('dial_code', $request->input('country'))->exists();
 
-        $validate_exists_email = $this->user->belongsTorole(Role::DRIVER)->where('email', $request->email)->exists();
+        $validate_exists_email = $this->user->belongsTorole([Role::DRIVER,Role::OWNER])->where('email', $request->email)->exists();
 
         if ($validate_exists_email) {
             $this->throwCustomException('Provided email has already been taken');
@@ -93,14 +93,14 @@ class DriverSignupController extends LoginController
         // $mobile = $this->otpHandler->getMobileFromUuid($mobileUuid);
         $mobile = $request->mobile;
 
-        $validate_exists_mobile = $this->user->belongsTorole(Role::DRIVER)->where('mobile', $mobile)->exists();
+        $validate_exists_mobile = $this->user->belongsTorole([Role::DRIVER,Role::OWNER])->where('mobile', $mobile)->exists();
 
         if ($validate_exists_mobile) {
             $this->throwCustomException('Provided mobile has already been taken');
         }
         // if ($request->has('refferal_code')) {
         //     // Validate Referral code
-        //     $referred_user_record = $this->user->belongsTorole(Role::DRIVER)->where('refferal_code', $request->refferal_code)->first();
+        //     $referred_user_record = $this->user->belongsTorole([Role::DRIVER,Role::OWNER])->where('refferal_code', $request->refferal_code)->first();
         //     if (!$referred_user_record) {
         //         $this->throwCustomException('Provided Referral code is not valid', 'refferal_code');
         //     }
@@ -187,12 +187,12 @@ class DriverSignupController extends LoginController
     {
         $mobile = $request->mobile;
 
-        $validate_exists_mobile = $this->user->belongsTorole(Role::DRIVER)->where('mobile', $mobile)->exists();
+        $validate_exists_mobile = $this->user->belongsTorole([Role::DRIVER,Role::OWNER])->where('mobile', $mobile)->exists();
 
 
         if($request->has('email')){
 
-            $validate_exists_email = $this->user->belongsTorole(Role::DRIVER)->where('email', $request->email)->exists();
+            $validate_exists_email = $this->user->belongsTorole([Role::DRIVER,Role::OWNER])->where('email', $request->email)->exists();
 
         if ($validate_exists_email) {
             $this->throwCustomException('Provided email has already been taken');
@@ -221,7 +221,7 @@ class DriverSignupController extends LoginController
     {
         $mobile = $request->mobile;
 
-        $validate_exists_mobile = $this->user->belongsTorole(Role::DRIVER)->where('mobile', $mobile)->exists();
+        $validate_exists_mobile = $this->user->belongsTorole([Role::DRIVER,Role::OWNER])->where('mobile', $mobile)->exists();
 
         if ($validate_exists_mobile) {
             return $this->respondSuccess(null, 'mobile_exists');
@@ -257,5 +257,111 @@ class DriverSignupController extends LoginController
         $body = trans('push_notifications.referral_earnings_notify_body');
 
         $reffered_user->user->notify(new AndroidPushNotification($title, $body));
+    }
+
+
+    /**
+     * Owner Register
+     * @bodyParam name string required name of the owner
+     * @bodyParam company_name string required name of the the company
+     * @bodyParam address string required address of the the company
+     * @bodyParam city string required city of the the company
+     * @bodyParam tax_number string required tax_number of the the company
+     * @bodyParam country string required country dial code of the the company
+     * @bodyParam postal_code string required postal_code of the the company
+     * @bodyParam mobile integer required mobile of owner
+     * @bodyParam email email required email of the owner
+     * @bodyParam device_token string required device_token of the owner
+     * @bodyParam service_location_id uuid required service location of the owner. it can be listed from service location list apis
+     * @bodyParam login_by tinyInt required from which device the owner registered
+     * @return \Illuminate\Http\JsonResponse
+     * @responseFile responses/auth/register.json
+     * 
+     * */
+    public function ownerRegister(Request $request){
+
+        $request->validate([
+            'company_name' => 'required|unique:owners,company_name,NULL,id,deleted_at,NULL',
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'mobile'=>'required|unique:users,mobile',
+            'address'=>'required|min:10',
+            'postal_code'=>'required|numeric',
+            'city'=>'required',
+            'service_location_id' => 'sometimes|required',
+            'tax_number' => 'required',
+            'device_token'=>'required',
+            'login_by'=>'required|in:android,ios',
+            'country'=>'required|exists:countries,dial_code',
+        ]);
+
+
+         $created_params = $request->only(['service_location_id','company_name','owner_name','mobile','email','address','postal_code','city','tax_number']);
+
+         $created_params['owner_name'] = $request->name;
+
+         $created_params['approve'] = false;
+
+        if ($request->input('service_location_id')) {
+            $timezone = ServiceLocation::where('id', $request->input('service_location_id'))->pluck('timezone')->first();
+        } else {
+            $timezone = env('SYSTEM_DEFAULT_TIMEZONE');
+        }
+
+        $country_id = $this->country->where('dial_code', $request->input('country'))->pluck('id')->first();
+
+        $profile_picture = null;
+
+        if ($uploadedFile = $this->getValidatedUpload('profile', $request)) {
+            $profile_picture = $this->imageUploader->file($uploadedFile)
+                ->saveDriverProfilePicture();
+        }
+
+        $validate_exists_email = $this->user->belongsTorole([Role::DRIVER,Role::OWNER])->where('email', $request->email)->exists();
+
+        if ($validate_exists_email) {
+            $this->throwCustomException('Provided email has already been taken');
+        }
+
+        // $mobile = $this->otpHandler->getMobileFromUuid($mobileUuid);
+        $mobile = $request->mobile;
+
+        $validate_exists_mobile = $this->user->belongsTorole([Role::DRIVER,Role::OWNER])->where('mobile', $mobile)->exists();
+
+        if ($validate_exists_mobile) {
+            $this->throwCustomException('Provided mobile has already been taken');
+        }
+
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'mobile' => $mobile,
+            'mobile_confirmed' => true,
+            'fcm_token'=>$request->input('device_token'),
+            'login_by'=>$request->input('login_by'),
+            'timezone'=>$timezone,
+            'country'=>$country_id,
+            'profile_picture'=>$profile_picture,
+            'refferal_code'=>str_random(6),
+        ];
+
+        DB::beginTransaction();
+        try {
+
+        $user = $this->user->create($data);
+
+        $user->attachRole(Role::OWNER);
+
+        $user->owner()->create($created_params);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            Log::error('Error while Registering a owner account. Input params : ' . json_encode($request->all()));
+            return $this->respondBadRequest('Unknown error occurred. Please try again later or contact us if it continues.');
+        }
+        DB::commit();
+        return $this->authenticateAndRespond($user, $request, $needsToken=true);
+
     }
 }
