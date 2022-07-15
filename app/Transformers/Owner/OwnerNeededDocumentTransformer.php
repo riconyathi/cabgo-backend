@@ -17,7 +17,7 @@ class OwnerNeededDocumentTransformer extends Transformer
     * @var array
     */
     protected $availableIncludes = [
-        'owner_document',
+        'driver_document',
     ];
     /**
      * Resources that can be included default.
@@ -25,7 +25,7 @@ class OwnerNeededDocumentTransformer extends Transformer
      * @var array
      */
     protected $defaultIncludes = [
-        'owner_document',
+        'driver_document',
     ];
     /**
      * A Fractal transformer.
@@ -70,7 +70,7 @@ class OwnerNeededDocumentTransformer extends Transformer
      * @param OwnerNeededDocument $ownerneededdocument
      * @return \League\Fractal\Resource\Collection|\League\Fractal\Resource\NullResource
      */
-    public function includeOwnerDocument(OwnerNeededDocument $ownerneededdocument)
+    public function includeDriverDocument(OwnerNeededDocument $ownerneededdocument)
     {
         $document = $ownerneededdocument->ownerDocument()->where('owner_id', auth()->user()->owner->id)->first();
 
