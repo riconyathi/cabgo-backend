@@ -101,6 +101,8 @@ class DriverDocumentController extends BaseController
     {
         $created_params = $request->only(['document_id','identify_number','expiry_date']);
 
+        if (auth()->user()->hasRole(Role::DRIVER)) {
+
         $created_params['document_status'] =DriverDocumentStatus::UPLOADED_AND_WAITING_FOR_APPROVAL;
 
         $document_exists = auth()->user()->driver->driverDocument()->where('document_id', $request->document_id)->exists();
@@ -126,7 +128,34 @@ class DriverDocumentController extends BaseController
         }
 
         $driver_documents = DriverDocument::where('driver_id', $driver_id)->get();
+    }else{
 
+        $created_params['document_status'] =DriverDocumentStatus::UPLOADED_AND_WAITING_FOR_APPROVAL;
+
+        $document_exists = auth()->user()->owner->ownerDocument()->where('document_id', $request->document_id)->exists();
+
+        if ($document_exists) {
+            $created_params['document_status'] =DriverDocumentStatus::REUPLOADED_AND_WAITING_FOR_APPROVAL;
+        }
+        $owner_id = auth()->user()->owner->id;
+
+        $created_params['owner_id'] = $owner_id;
+
+        if ($uploadedFile = $this->getValidatedUpload('document', $request)) {
+            $created_params['image'] = $this->imageUploader->file($uploadedFile)
+                ->saveOwnerDocument($owner_id);
+        }
+        // Check if document exists
+        $owner_documents = OwnerDocument::where('owner_id', $owner_id)->where('document_id', $request->input('document_id'))->first();
+
+        if ($owner_documents) {
+            OwnerDocument::where('owner_id', $owner_id)->where('document_id', $request->input('document_id'))->update($created_params);
+        } else {
+            OwnerDocument::create($created_params);
+        }
+
+
+    }
         // $result = fractal($driver_documents, new DriverDocumentTransformer);
 
         return $this->respondSuccess();
