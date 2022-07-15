@@ -91,9 +91,9 @@ if(str_contains((string)request()->path(),'translations')){
           </li>
           @endif  
           @if(auth()->user()->can('manage-owner-needed-document'))
-          <li class="{{ 'owner_needed_document' == $sub_menu ? 'active' : '' }}">
+         <!--  <li class="{{ 'owner_needed_document' == $sub_menu ? 'active' : '' }}">
             <a href="{{url('/owner_needed_doc')}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.owner_needed_doc')</a>
-          </li>
+          </li> -->
           @endif 
           @if(auth()->user()->can('package-type'))
           <li class="{{ 'package_type' == $sub_menu ? 'active' : '' }}">
