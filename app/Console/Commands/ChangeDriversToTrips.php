@@ -61,7 +61,7 @@ class ChangeDriversToTrips extends Command
             $request_ids = $request_meta->pluck('request_id');
 
             foreach ($meta_ids as $key => $meta_id) {
-                $request_meta_detable = RequestMeta::whereIn('id', $meta_id)->first();
+                $request_meta_detable = RequestMeta::where('id', $meta_id)->first();
                 $driver = $request_meta_detable->driver;
                 $driver->available = true;
                 $driver->save();
@@ -88,7 +88,7 @@ class ChangeDriversToTrips extends Command
             // Send Notifications to users
             // dispatch(new NoDriverFoundNotifyJob($no_driver_request_ids));
             // Send Request to other drivers
-            dispatch(new SendRequestToNextDriversJob($next_driver_request_meta_id));
+            dispatch(new SendRequestToNextDriversJob($next_driver_request_meta_id,$this->database));
 
             $this->info('success');
         } catch (\Exception $e) {
