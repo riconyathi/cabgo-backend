@@ -51,7 +51,7 @@ class OwnerProfileTransformer extends Transformer
             'postal_code' => $user->postal_code,
             'city' => $user->city,
             'tax_number' => $user->tax_number,
-            'name' => $user->name,
+            'name' => $user->owner_name,
             'email' => $user->email,
             'mobile' => $user->mobile,
             'profile_picture' => $user->profile_picture,

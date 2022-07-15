@@ -296,7 +296,7 @@ class DriverSignupController extends LoginController
         ]);
 
 
-         $created_params = $request->only(['service_location_id','company_name','owner_name','mobile','email','address','postal_code','city','tax_number']);
+         $created_params = $request->only(['service_location_id','company_name','owner_name','mobile','email','address','postal_code','city','tax_number','name']);
 
          $created_params['owner_name'] = $request->name;
 
