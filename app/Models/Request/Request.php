@@ -328,7 +328,7 @@ class Request extends Model
 
     public function getRequestUnitAttribute()
     {
-        if ($this->unit == 1) {
+        if ($this->unit == '1') {
             return 'Km';
         } else {
             return 'Miles';

@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Api\V1\Driver;
 use Illuminate\Http\Request;
 use App\Models\Admin\DriverDocument;
 use App\Models\Admin\DriverNeededDocument;
+use App\Models\Admin\OwnerNeededDocument;
 use App\Http\Controllers\Api\V1\BaseController;
 use App\Base\Constants\Masters\DriverDocumentStatus;
 use App\Transformers\DriverNeededDocumentTransformer;
 use App\Transformers\Driver\DriverDocumentTransformer;
 use App\Http\Requests\Driver\DriverDocumentUploadRequest;
 use App\Base\Services\ImageUploader\ImageUploaderContract;
+use App\Transformers\Owner\OwnerNeededDocumentTransformer;
+use App\Base\Constants\Auth\Role;
+use App\Models\Admin\OwnerDocument;
 
 /**
  * @group Driver Document Management
@@ -40,16 +44,16 @@ class DriverDocumentController extends BaseController
     * @responseFile responses/driver/ListAllDocumentNeededWithUploadedDocuments.json
     */
     public function index()
-    {
+    {   
+
+        if (auth()->user()->hasRole(Role::DRIVER)) {
+
         $driver_id = auth()->user()->driver->id;
 
         $driverneededdocumentQuery  = DriverNeededDocument::active()->get();
 
-        // $driverneededdocument = filter($driverneededdocumentQuery, new DriverNeededDocumentTransformer)->get();
+        $neededdocument =  fractal($driverneededdocumentQuery, new DriverNeededDocumentTransformer);
 
-        $driverneededdocument =  fractal($driverneededdocumentQuery, new DriverNeededDocumentTransformer);
-
-        // @TODO needs to be changed after document upload api completion
         foreach (DriverNeededDocument::active()->get() as $key => $needed_document) {
             if (DriverDocument::where('driver_id', $driver_id)->where('document_id', $needed_document->id)->exists()) {
                 $uploaded_document = true;
@@ -58,7 +62,26 @@ class DriverDocumentController extends BaseController
             }
         }
 
-        $formated_document = $this->formatResponseData($driverneededdocument);
+        }else{
+
+            $owner_id = auth()->user()->owner->id;
+
+            $ownerneededdocumentQuery  = OwnerNeededDocument::active()->get();
+
+            $neededdocument =  fractal($ownerneededdocumentQuery, new OwnerNeededDocumentTransformer);
+
+            foreach (OwnerNeededDocument::active()->get() as $key => $needed_document) {
+            if (OwnerDocument::where('owner_id', $owner_id)->where('document_id', $needed_document->id)->exists()) {
+                $uploaded_document = true;
+            } else {
+                $uploaded_document = false;
+            }
+        }
+
+        }
+        
+
+        $formated_document = $this->formatResponseData($neededdocument);
 
         return response()->json(['success'=>true,"message"=>'success','enable_submit_button'=>$uploaded_document,'data'=>$formated_document['data']]);
     }
