@@ -88,9 +88,9 @@ class OwnerProfileTransformer extends Transformer
 
         $low_balance = false;
 
-        $driver_wallet = auth()->user()->driver->driverWallet;
+        $owner_wallet = auth()->user()->owner->ownerWalletDetail;
 
-        $wallet_balance= $driver_wallet?$driver_wallet->amount_balance:0;
+        $wallet_balance= $owner_wallet?$owner_wallet->amount_balance:0;
 
          $minimum_balance = get_settings(Settings::DRIVER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER);
 
@@ -108,6 +108,8 @@ class OwnerProfileTransformer extends Transformer
             }
                 
             }
+
+            $params['low_balance'] = $low_balance;
 
 
         return $params;

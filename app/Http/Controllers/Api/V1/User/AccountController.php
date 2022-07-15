@@ -8,6 +8,7 @@ use App\Base\Constants\Auth\Role;
 use App\Http\Controllers\ApiController;
 use App\Transformers\User\UserTransformer;
 use App\Transformers\Driver\DriverProfileTransformer;
+use App\Transformers\Owner\OwnerProfileTransformer;
 
 class AccountController extends ApiController
 {
@@ -31,7 +32,9 @@ class AccountController extends ApiController
 
             $user = User::where('id', auth()->user()->id)->first();
 
-            $user = fractal($user, new OwnerProfileTransformer);
+            $owner_details = $user->owner;
+
+            $user = fractal($owner_details, new OwnerProfileTransformer);
         }
 
         if(auth()->user()->hasRole(Role::DISPATCHER)){
