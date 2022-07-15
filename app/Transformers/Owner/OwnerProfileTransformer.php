@@ -66,6 +66,7 @@ class OwnerProfileTransformer extends Transformer
             'refferal_code'=>$user->user->refferal_code,
             'country_id'=>$user->user->countryDetail->id,
             'currency_symbol' => $user->user->countryDetail->currency_symbol,
+            'role'=>'owner'
         ];
 
         $current_date = Carbon::now();
