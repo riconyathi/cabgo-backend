@@ -275,6 +275,10 @@ String mapkey = 'your map key here';
       "user_ios_version": {
       ".read": true,
       ".write": true
+    },
+      "request-meta": {
+      ".read": true,
+      ".write": true,
     }
    }
  }
