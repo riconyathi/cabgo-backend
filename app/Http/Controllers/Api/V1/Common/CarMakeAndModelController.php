@@ -31,7 +31,7 @@ class CarMakeAndModelController extends BaseController
     */
     public function getCarMakes()
     {   
-        dd(request()->server('SERVER_ADDR'));
+        // dd(request()->server('SERVER_ADDR'));
 
         return $this->respondSuccess($this->car_make->active()->orderBy('name')->get());
     }
