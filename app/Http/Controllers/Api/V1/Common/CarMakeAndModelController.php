@@ -25,17 +25,13 @@ class CarMakeAndModelController extends BaseController
         $this->database = $database;
     }
 
-
-     public function sortByDistance($a, $b) {
-        return $a['distance'] - $b['distance'];
-    }
-
     /**
     * Get All Car makes
     *
     */
     public function getCarMakes()
     {   
+        dd(request()->server('SERVER_ADDR'));
 
         return $this->respondSuccess($this->car_make->active()->orderBy('name')->get());
     }
