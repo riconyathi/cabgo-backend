@@ -223,11 +223,11 @@ class EtaTransformer extends Transformer
         $pickup_time_in_seconds = 0;
         $wait_time_in_seconds = 180; // can be change
 
-        $distance_in_unit = ($distance_in_unit - $type_prices->base_distance);
+        $calculatable_distance = ($distance_in_unit - $type_prices->base_distance);
         
-        if($distance_in_unit < 0 ){
+        if($calculatable_distance < 0 ){
 
-            $distance_in_unit = 0;
+            $calculatable_distance = 0;
         }   
 
         $price_per_distance = $type_prices->price_per_distance;
@@ -252,7 +252,7 @@ class EtaTransformer extends Transformer
 
         }
 
-        $distance_price = ($distance_in_unit * $price_per_distance);
+        $distance_price = ($calculatable_distance * $price_per_distance);
 
         $time_price = ($dropoff_time_in_seconds / 60) * $type_prices->price_per_time;
         $base_price = $type_prices->base_price;
