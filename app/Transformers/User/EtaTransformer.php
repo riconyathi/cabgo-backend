@@ -86,7 +86,7 @@ class EtaTransformer extends Transformer
 
             if ($dropoff_distance_in_meters) {
                 $distance_in_unit = $dropoff_distance_in_meters / 1000;
-                if ($zone_type->zone->unit=="2") {
+                if ($zone_type->zone->unit==2) {
                     $distance_in_unit = kilometer_to_miles($distance_in_unit);
 
                 }
@@ -182,7 +182,7 @@ class EtaTransformer extends Transformer
         $response['currency'] = get_settings('currency_symbol');
         $response['currency_name'] = get_settings('currency_code');
         $response['type_name'] = $zone_type->vehicleType->name;
-        $response['unit'] = $zone_type->unit;
+        $response['unit'] = $zone_type->zone->unit;
         $response['unit_in_words_without_lang'] = $unit_in_words;
         $response['unit_in_words'] = $translated_unit_in_words;
         $response['driver_arival_estimation'] = $driver_arival_estimation;
