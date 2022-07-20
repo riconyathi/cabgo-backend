@@ -22,12 +22,12 @@
                         </button>
                     </div> --}}
 
-                    @if(env('APP_FOR')!='demo')
+                   
                     <div class="col-12 text-right">
                         <a href="{{url('package_type/create')}}" class="btn btn-primary btn-sm">
                             <i class="mdi mdi-plus-circle mr-2"></i>@lang('view_pages.add_package_type')</a>
                     </div>
-                    @endif
+                   
                 </div>
             </div>
 

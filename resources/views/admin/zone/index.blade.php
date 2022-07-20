@@ -28,14 +28,13 @@
                             </div>
 
 
-                    @if(env('APP_FOR')!='demo')
                             <div class="col-md-7 text-center text-md-right">
                                 <a href="{{ url('zone/create') }}" class="btn btn-primary btn-sm">
                                     <i class="mdi mdi-plus-circle mr-2"></i>@lang('view_pages.add_zone')</a>
                                 <!--  <a class="btn btn-danger">
                                         Export</a> -->
                             </div>
-                    @endif
+              
                             <!-- <div class="box-controls pull-right">
                     <div class="lookup lookup-circle lookup-right">
                       <input type="text" name="s">

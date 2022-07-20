@@ -107,11 +107,7 @@ class ZoneController extends BaseController
     */
     public function zoneEdit($id)
     {
-        if (env('APP_FOR')=='demo') {
-            $message = trans('succes_messages.you_are_not_authorised');
-
-            return redirect('zone')->with('warning', $message);
-        }
+       
 
         $zone = $this->zone->where('id', $id)->first();
         $page = trans('pages_names.add_zone');
@@ -164,6 +160,12 @@ class ZoneController extends BaseController
      */
     public function store(CreateZoneRequest $request)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone')->with('warning', $message);
+        }
+
         $created_params = $request->only(['unit']);
         $created_params['service_location_id'] = $request->admin_id;
         $set = [];
@@ -217,6 +219,12 @@ class ZoneController extends BaseController
     */
     public function update(Zone $zone, CreateZoneRequest $request)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone')->with('warning', $message);
+        }
+
         // dd($request->coordinates);
         $updated_params = $request->only(['unit']);
         $updated_params['service_location_id'] = $request->admin_id;
@@ -336,6 +344,13 @@ class ZoneController extends BaseController
     */
     public function assignTypesStore(AssignZoneTypeRequest $request, Zone $zone)
     {
+
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone/assigned/types/'.$zone->id)->with('warning', $message);
+        }
+
         $payment = implode(',', $request->payment_type);
 
         // To save default type
@@ -388,6 +403,12 @@ class ZoneController extends BaseController
     */
     public function delete(Zone $zone)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone')->with('warning', $message);
+        }
+
         $zone->delete();
         $message = trans('succes_messages.zone_deleted_succesfully');
         return $message;
@@ -418,6 +439,12 @@ class ZoneController extends BaseController
      */
     public function typesPriceUpdate(AssignZoneTypeRequest $request, ZoneType $zone_type)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone/assigned/types/'.$zone->id)->with('warning', $message);
+        }
+
          $zone_type->update([
             'payment_type' => implode(',', $request->payment_type),
             'bill_status' => true
@@ -458,6 +485,12 @@ class ZoneController extends BaseController
 
     public function toggleZoneStatus(Zone $zone)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone')->with('warning', $message);
+        }
+        
         $status = $zone->isActive() ? false : true;
         $zone->update(['active' => $status]);
 
@@ -466,6 +499,12 @@ class ZoneController extends BaseController
     }
     public function toggleStatus(ZoneType $zone_type)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone')->with('warning', $message);
+        }
+
         $status = $zone_type->isActive() ? false : true;
         $zone_type->update(['active' => $status]);
 
@@ -479,6 +518,12 @@ class ZoneController extends BaseController
     */
     public function deleteZoneType(ZoneType $zone_type)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone/assigned/types/'.$zone->id)->with('warning', $message);
+        }
+        
         $zone_type->delete();
 
         $message = trans('succes_messages.zone_type_deleted_succesfully');
@@ -659,6 +704,12 @@ class ZoneController extends BaseController
 
     public function packageStore(ZoneTypePackagePriceRequest $request,ZoneType $zone_type)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone/types/zone_package_price/index/'.$zone_type->id)->with('warning', $message);
+        }
+
         // dd($request->all());
          $zonePackage = $zone_type->zoneTypePackage()->create([
             'base_price' => $request->base_price,
@@ -692,6 +743,11 @@ class ZoneController extends BaseController
 
      public function packageUpdate(ZoneTypePackagePriceRequest $request,ZoneTypePackagePrice $package)
     {
+         if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone/types/zone_package_price/index/'.$zone_type->id)->with('warning', $message);
+        }
         // dd($request->all());
          $zonePackage = $package->update([
             'base_price' => $request->base_price,
@@ -720,6 +776,12 @@ class ZoneController extends BaseController
 
     public function PackagetoggleStatus(ZoneTypePackagePrice $package)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('zone')->with('warning', $message);
+        }
+
         $status = $package->active == 1 ? 0 : 1;
         
         $pack = ZoneTypePackagePrice::find($package->id);

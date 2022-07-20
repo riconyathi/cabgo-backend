@@ -132,6 +132,12 @@ class AdminController extends BaseController
      */
     public function store(CreateAdminRequest $request)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('admins')->with('warning', $message);
+        }
+
         $created_params = $request->only(['service_location_id', 'first_name', 'last_name','mobile','email','address','state','city','country']);
         $created_params['pincode'] = $request->postal_code;
         $created_params['created_by'] = auth()->user()->id;
@@ -173,11 +179,7 @@ class AdminController extends BaseController
 
     public function getById(AdminDetail $admin)
     {
-        if (env('APP_FOR')=='demo') {
-            $message = trans('succes_messages.you_are_not_authorised');
-
-            return redirect('admins')->with('warning', $message);
-        }
+        
 
         $page = trans('pages_names.edit_admin');
 
@@ -199,6 +201,12 @@ class AdminController extends BaseController
 
     public function update(AdminDetail $admin, UpdateAdminRequest $request)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('admins')->with('warning', $message);
+        }
+
         $updatedParams = $request->only(['service_location_id', 'first_name', 'last_name','mobile','email','address','state','city','country']);
         $updatedParams['pincode'] = $request->postal_code;
 
@@ -226,6 +234,12 @@ class AdminController extends BaseController
     }
     public function toggleStatus(User $user)
     {
+        if (env('APP_FOR')=='demo') {
+            $message = trans('succes_messages.you_are_not_authorised');
+
+            return redirect('admins')->with('warning', $message);
+        }
+        
         $status = $user->isActive() ? false: true;
         $user->update(['active' => $status]);
 

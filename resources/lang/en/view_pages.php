@@ -131,7 +131,7 @@ return array (
   'base_price' => 'Base Price',
   'kilometer' => 'Kilometer',
   'price_per_distance' => 'Price Per Distance',
-  'waiting_charge' => 'Waiting Charge',
+  'waiting_charge' => 'Waiting Charge Per Minutes',
   'base_distance' => 'Base Distance',
   'select_base_distance' => 'Select Base Distance',
   'price_per_time' => 'Price Per Time',

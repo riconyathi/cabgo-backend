@@ -55,18 +55,17 @@
 
         <div class="dropdown-menu" x-placement="bottom-start">
              <a class="dropdown-item" href="{{url('zone/mapview',$result->id)}}"><i class="fa fa-eye"></i>@lang('view_pages.map_view')</a>
-            @if(env('APP_FOR')!='demo')
+            
              <a class="dropdown-item" href="{{url('zone/edit',$result->id)}}"><i class="fa fa-pencil"></i>@lang('view_pages.edit')</a>
-             @endif
+          
            <a class="dropdown-item" href="{{url('zone/assigned/types',$result->id)}}"><i class="fa fa-plus"></i>@lang('view_pages.assign_types')</a>
-            @if(env('APP_FOR')!='demo')
+            
             @if($result->active)
             <a class="dropdown-item" href="{{url('zone/toggle_status',$result->id)}}">
             <i class="fa fa-dot-circle-o"></i>@lang('view_pages.inactive')</a>
             @else
             <a class="dropdown-item" href="{{url('zone/toggle_status',$result->id)}}">
             <i class="fa fa-dot-circle-o"></i>@lang('view_pages.active')</a>
-            @endif
             @endif
 
            <a class="dropdown-item" href="{{url('zone/surge',$result->id)}}"><i class="fa fa-book"></i>@lang('view_pages.surge_price')</a>

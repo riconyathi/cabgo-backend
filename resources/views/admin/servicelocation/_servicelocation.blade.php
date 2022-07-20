@@ -48,17 +48,15 @@
     <td><span class="label label-danger">@lang('view_pages.inactive')</span></td>
     @endif
     <td>
-
-    @if(env('APP_FOR')!='demo')
     <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('view_pages.action')
     </button>
         <div class="dropdown-menu">
-            @if(env('APP_FOR')!='demo')
+            
             <a class="dropdown-item" href="{{url('service_location/edit',$result->id)}}">
             <i class="fa fa-pencil"></i>@lang('view_pages.edit')</a>
-            @endif
+            
 
-            @if(env('APP_FOR')!='demo')
+           
             @if($result->active)
             <a class="dropdown-item" href="{{url('service_location/toggle_status',$result->id)}}">
             <i class="fa fa-dot-circle-o"></i>@lang('view_pages.inactive')</a>
@@ -66,14 +64,12 @@
             <a class="dropdown-item" href="{{url('service_location/toggle_status',$result->id)}}">
             <i class="fa fa-dot-circle-o"></i>@lang('view_pages.active')</a>
             @endif
-            @endif
+
            <!--  <a class="dropdown-item sweet-delete" data-url="{{url('service_location/delete',$result->id)}}" href="#">
             <i class="fa fa-trash-o"></i>@lang('view_pages.delete')</a> -->
         </div>
     </div>
-    @else
-    --
-    @endif
+   
 
     </td>
     </tr>
