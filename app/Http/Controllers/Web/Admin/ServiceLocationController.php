@@ -80,11 +80,7 @@ class ServiceLocationController extends BaseController
 
     public function getById(ServiceLocation $serviceLocation)
     {
-        if (env('APP_FOR')=='demo') {
-            $message = trans('succes_messages.you_are_not_authorised');
-
-            return redirect('service_location')->with('warning', $message);
-        }
+        
 
         $item = $serviceLocation;
         $timezones = TimeZone::active()->get();
