@@ -56,7 +56,7 @@ class AdminViewController extends BaseController
 
         }
         
-        if($conditional_host[0] =='tagxi-dispatch'){
+        if($conditional_host[0] =='tagxi-dispatcher'){
 
         $user = User::belongsToRole('dispatcher')->first();
         
