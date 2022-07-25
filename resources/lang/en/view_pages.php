@@ -710,4 +710,5 @@ return array (
   'enter_currency_code' => 'Enter Currency Value',
   'ride_type' => 'Ride Type',
   'icons' => 'Icons',
+  'todays_earnings'=>'Today Earnings'
 );

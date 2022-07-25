@@ -56,7 +56,7 @@ class AdminViewController extends BaseController
 
         }
         
-        if($conditional_host[0] =='tagxi-dispatcher'){
+        if($conditional_host[0] =='tagxi-dispatch'){
 
         $user = User::belongsToRole('dispatcher')->first();
         
@@ -89,7 +89,7 @@ class AdminViewController extends BaseController
     public function driverPrfDashboardView(Driver $driver)
     {
         $main_menu = 'driver_profile_dashboard';
-
+        
         $sub_menu = null;
         $item = $driver;
         // $request_detail = $driver->requestDetail()->OrderBy('id','asc')->first();

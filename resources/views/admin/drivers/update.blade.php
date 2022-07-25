@@ -256,7 +256,7 @@
                                     <div class="col-6">
                                         <label for="icon">@lang('view_pages.profile')</label><br>
                                         <img id="blah" src="#" alt=""><br>
-                                        <input type="file" id="icon" onchange="readURL(this)" name="icon"
+                                        <input type="file" id="icon" onchange="readURL(this)" name="profile"
                                             style="display:none">
                                         <button class="btn btn-primary btn-sm" type="button" onclick="$('#icon').click()"
                                             id="upload">@lang('view_pages.browse')</button>

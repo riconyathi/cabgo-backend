@@ -226,7 +226,7 @@ class DriverController extends BaseController
 
         if ($uploadedFile = $this->getValidatedUpload('profile', $request)) {
             $created_params['profile'] = $this->imageUploader->file($uploadedFile)
-                ->saveDriverProfilePicture();
+                ->saveProfilePicture();
         }
 
         $user->attachRole(RoleSlug::DRIVER);
@@ -285,7 +285,13 @@ class DriverController extends BaseController
             return redirect()->back()->withErrors(['mobile'=>'Provided mobile hs already been taken'])->withInput();
         }
 
+        $user_param = $request->only(['profile']);
 
+        if ($uploadedFile = $this->getValidatedUpload('profile', $request)) {
+            $user_param['profile'] = $this->imageUploader->file($uploadedFile)
+                ->saveProfilePicture();
+        }
+        
         $driver->update(['name'=>$request->input('name'),
             'email'=>$request->input('email'),
             'mobile'=>$request->input('mobile'),
@@ -298,7 +304,8 @@ class DriverController extends BaseController
 
         $driver->user->update(['name'=>$request->input('name'),
             'email'=>$request->input('email'),
-            'mobile'=>$request->input('mobile')
+            'mobile'=>$request->input('mobile'),
+            'profile_picture'=>$user_param['profile']
         ]);
 
         $message = trans('succes_messages.driver_added_succesfully');

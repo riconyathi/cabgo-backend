@@ -137,7 +137,7 @@
                         <div class="row">
                             <div class="col-md-2 m-auto text-right">
                                 <img class="avatar avatar-xxl avatar-bordered"
-                                    src="{{$item->user->profile_pic ?: asset('/assets/img/user-dummy.svg') }}" alt="">
+                                    src="{{$item->user->profile_picture ?: asset('/assets/img/user-dummy.svg') }}" alt="">
                             </div>
                             <div class="col-md-4 col-12">
                                 <div class="profile-user-info">
@@ -249,7 +249,7 @@
                     </div>
                     <!--/.bg-holder-->
                     <div class="card-body position-relative">
-                        <h6>>@lang('view_pages.todays_earnings')
+                        <h6>@lang('view_pages.todays_earnings')
                         </h6>
                         <div class="display-4 fs-4 mb-2 font-weight-normal font-sans-serif text-success"
                             data-countup="{&quot;endValue&quot;:58.386,&quot;decimalPlaces&quot;:2,&quot;suffix&quot;:&quot;k&quot;}">
@@ -592,12 +592,10 @@
 
         
 
-
-        <div class="row">
+        <!-- Shift History Starts here -->
+        <!-- <div class="row">
             <div class="col-md-12">
                 <div class="row">
-
-
                     <div class="col-12">
                         <div class="box">
                             <div class="box-header with-border">
@@ -652,10 +650,9 @@
                     </div>
                 </div>
             </div>
+        </div> -->
 
-
-           
-        </div>
+        <!-- Shift History Ends Here -->
        
 
     </section>
