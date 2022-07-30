@@ -10,6 +10,8 @@ use App\Console\Commands\AssignDriversForScheduledRides;
 use App\Console\Commands\AssignDriversForRegularRides;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\ClearDemoDatabase;
+use App\Console\Commands\ClearRequestTable;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -24,7 +26,9 @@ class Kernel extends ConsoleKernel
         AssignDriversForScheduledRides::class,
         OfflineUnAvailableDrivers::class,
         AssignDriversForRegularRides::class,
-        ClearDemoDatabase::class
+        ClearDemoDatabase::class,
+        ClearRequestTable::class,
+
     ];
 
     /**
