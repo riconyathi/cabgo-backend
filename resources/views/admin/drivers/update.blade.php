@@ -77,7 +77,7 @@
                                                 <option value='male'
                                                     {{ old('gender', $item->gender) == 'male' ? 'selected' : '' }}>
                                                     @lang('view_pages.male')</option>
-                                                <option value='fe-male'
+                                                <option value='female'
                                                     {{ old('gender', $item->gender) == 'female' ? 'selected' : '' }}>
                                                     @lang('view_pages.female')</option>
                                                 <option value='others'
