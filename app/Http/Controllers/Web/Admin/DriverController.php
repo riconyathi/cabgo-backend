@@ -281,8 +281,11 @@ class DriverController extends BaseController
             return redirect()->back()->withErrors(['mobile'=>'Provided mobile hs already been taken'])->withInput();
         }
 
+
         $user_param = $request->only(['profile']);
 
+        $user_param['profile']=null;
+        
         if ($uploadedFile = $this->getValidatedUpload('profile', $request)) {
             $user_param['profile'] = $this->imageUploader->file($uploadedFile)
                 ->saveProfilePicture();
