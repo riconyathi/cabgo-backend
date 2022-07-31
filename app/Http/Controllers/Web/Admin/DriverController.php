@@ -115,13 +115,13 @@ class DriverController extends BaseController
         if (access()->hasRole(RoleSlug::SUPER_ADMIN)) {
                 $query = Driver::where('approve', true)->orderBy('created_at', 'desc');
                 if (env('APP_FOR')=='demo') {
-                    $query = Driver::whereHas('user', function ($query) {
+                    $query = Driver::where('approve', true)->whereHas('user', function ($query) {
                         $query->whereCompanyKey(auth()->user()->company_key);
                     })->orderBy('created_at', 'desc');
                 }
             } else {
                 $this->validateAdmin();
-                $query = $this->driver->where('service_location_id', auth()->user()->admin->service_location_id)->orderBy('created_at', 'desc');
+                $query = $this->driver->where('approve', true)->where('service_location_id', auth()->user()->admin->service_location_id)->orderBy('created_at', 'desc');
                 // $query = Driver::orderBy('created_at', 'desc');
             }
             $results = $queryFilter->builder($query)->customFilter(new DriverFilter)->paginate();
@@ -143,13 +143,13 @@ class DriverController extends BaseController
                 $query = Driver::where('approve', false)->orderBy('created_at', 'desc');
 
                 if (env('APP_FOR')=='demo') {
-                    $query = Driver::whereHas('user', function ($query) {
+                    $query = Driver::where('approve', false)->whereHas('user', function ($query) {
                         $query->whereCompanyKey(auth()->user()->company_key);
                     })->orderBy('created_at', 'desc');
                 }
             } else {
                 $this->validateAdmin();
-                $query = $this->driver->where('service_location_id', auth()->user()->admin->service_location_id)->orderBy('created_at', 'desc');
+                $query = $this->driver->where('approve', false)->where('service_location_id', auth()->user()->admin->service_location_id)->orderBy('created_at', 'desc');
                 // $query = Driver::orderBy('created_at', 'desc');
             }
             $results = $queryFilter->builder($query)->customFilter(new DriverFilter)->paginate();
@@ -266,10 +266,10 @@ class DriverController extends BaseController
 
     public function update(Driver $driver, UpdateDriverRequest $request)
     {
-        $updatedParams = $request->only(['service_location_id', 'name','mobile','email','address','gender','vehicle_type','car_make','car_model','car_color','car_number']);
+        // dd($driver);
+        $updatedParams = $request->only(['service_location_id', 'name','mobile','email','gender','vehicle_type','car_make','car_model','car_color','car_number']);
 
         $user = $driver->user;
-
         $validate_exists_email = $this->user->belongsTorole(Role::DRIVER)->where('email', $request->email)->where('id', '!=', $user->id)->exists();
 
         $validate_exists_mobile = $this->user->belongsTorole(Role::DRIVER)->where('mobile', $request->mobile)->where('id', '!=', $user->id)->exists();
@@ -299,6 +299,8 @@ class DriverController extends BaseController
             'car_color'=>$request->input('car_color'),
             'car_number'=>$request->input('car_number'),
             'vehicle_type'=>$request->input('type'),
+            'service_location_id'=>$request->service_location_id
+
         ]);
 
         $driver->user->update(['name'=>$request->input('name'),
@@ -610,6 +612,7 @@ class DriverController extends BaseController
             $query->companyKey();
         })->where('driver_id',$driver->id)->orderBy('created_at','desc')->paginate(20);
 
+        $bankInfo = $driver->user->bankInfo;
 
         $amount = DriverWallet::where('user_id',$driver->id)->first();
 
