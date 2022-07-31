@@ -179,8 +179,8 @@
                                             <span class="text-danger">{{ $errors->first('car_number') }}</span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
+
+                                    <div class="form-group">
                                     <div class="col-6">
                                         <label for="icon">@lang('view_pages.profile')</label><br>
                                         <img id="blah" src="#" alt=""><br>
@@ -193,6 +193,9 @@
                                         <span class="text-danger">{{ $errors->first('icon') }}</span>
                                     </div>
                                 </div>
+                                
+                                </div>
+                                
 
 
                                 <div class="form-group">
