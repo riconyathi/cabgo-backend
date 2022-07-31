@@ -75,10 +75,6 @@ class DriverController extends BaseController
 
     // protected $callable_gateway_class;
 
-
-
-
-
     /**
      * DriverController constructor.
      *
@@ -538,10 +534,19 @@ class DriverController extends BaseController
         $page = trans('pages_names.drivers');
         $main_menu = 'drivers';
         $sub_menu = 'driver_ratings';
-        $results = Driver::whereHas('user',function($query){
-            $query->companyKey();
-        })->paginate(20);
-        return view('admin.drivers.driver-ratings', compact('page', 'main_menu', 'sub_menu','results'));
+       
+        return view('admin.drivers.driver-ratings', compact('page', 'main_menu', 'sub_menu'));
+
+    }
+
+    public function fetchDriverRatings(QueryFilterContract $queryFilter){
+
+        $query = Driver::query();
+
+        $results = $queryFilter->builder($query)->customFilter(new DriverFilter)->paginate();
+
+
+        return view('admin.drivers._driver-ratings', compact('results'))->render();
 
     }
 

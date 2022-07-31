@@ -145,7 +145,7 @@
                     e.preventDefault();
                     search_keyword = $('#search_keyword').val();
 
-                    fetch('drivers/fetch?search=' + search_keyword)
+                    fetch('fetch/approval-pending-drivers?search=' + search_keyword)
                         .then(response => response.text())
                         .then(html => {
                             document.querySelector('#js-drivers-partial-target').innerHTML = html
@@ -176,7 +176,7 @@
                         }
                     });
 
-                    fetch('drivers/fetch?' + query)
+                    fetch('fetch/approval-pending-drivers?' + query)
                         .then(response => response.text())
                         .then(html => {
                             document.querySelector('#js-drivers-partial-target').innerHTML = html
@@ -206,7 +206,7 @@
                             cache: false,
                             success: function(res) {
 
-                                fetch('drivers/fetch?search=' + search_keyword + '&' + query)
+                                fetch('fetch/approval-pending-drivers?search=' + search_keyword + '&' + query)
                                     .then(response => response.text())
                                     .then(html => {
                                         document.querySelector('#js-drivers-partial-target')

@@ -28,7 +28,6 @@
 
                             <form method="post" class="form-horizontal" action="{{ url('notifications/push/send') }}" enctype="multipart/form-data">
                                 @csrf
-
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">

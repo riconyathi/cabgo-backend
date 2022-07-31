@@ -7,6 +7,7 @@ use App\Models\Master\CarModel;
 use App\Http\Controllers\Api\V1\BaseController;
 use Carbon\Carbon;
 use Kreait\Firebase\Database;
+use Sk\Geohash\Geohash;
 
 /**
  * @group Vehicle Management
@@ -30,8 +31,7 @@ class CarMakeAndModelController extends BaseController
     *
     */
     public function getCarMakes()
-    {   
-        // dd(request()->server('SERVER_ADDR'));
+    { 
 
         return $this->respondSuccess($this->car_make->active()->orderBy('name')->get());
     }

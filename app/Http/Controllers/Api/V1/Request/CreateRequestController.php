@@ -296,7 +296,12 @@ class CreateRequestController extends BaseController
 
                 $distance = distance_between_two_coordinates($pick_lat,$pick_lng,$fire_driver['l'][0],$fire_driver['l'][1],'K');
 
-                $firebase_drivers[$fire_driver['id']]['distance']= $distance;
+                if($distance <= $driver_search_radius){
+
+                    $firebase_drivers[$fire_driver['id']]['distance']= $distance;
+
+                }
+                // $firebase_drivers[$fire_driver['id']]['distance']= $distance;
 
             }      
 

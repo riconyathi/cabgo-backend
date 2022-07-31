@@ -146,7 +146,7 @@
                     e.preventDefault();
                     search_keyword = $('#search_keyword').val();
 
-                    fetch('drivers/fetch?search=' + search_keyword)
+                    fetch('drivers/fetch/approved?search=' + search_keyword)
                         .then(response => response.text())
                         .then(html => {
                             document.querySelector('#js-drivers-partial-target').innerHTML = html
@@ -177,7 +177,7 @@
                         }
                     });
 
-                    fetch('drivers/fetch?' + query)
+                    fetch('drivers/fetch/approved?' + query)
                         .then(response => response.text())
                         .then(html => {
                             document.querySelector('#js-drivers-partial-target').innerHTML = html
@@ -208,7 +208,7 @@
                             cache: false,
                             success: function(res) {
 
-                                fetch('drivers/fetch?search=' + search_keyword + '&' + query)
+                                fetch('drivers/fetch/approved?search=' + search_keyword + '&' + query)
                                     .then(response => response.text())
                                     .then(html => {
                                         document.querySelector('#js-drivers-partial-target')
