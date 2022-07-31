@@ -21,7 +21,7 @@ class UpdateDriverRequest extends BaseRequest
             // 'state'=>'max:100',
             // 'city'=>'required',
             // 'country'=>'required|exists:countries,id',
-            'gender'=>'required|in:male,female,others',
+            // 'gender'=>'required|in:male,female,others',
             // 'is_company_driver' => 'sometimes|required|in:0,1',
             'company'=>'sometimes',
             'type' => 'sometimes|required'
