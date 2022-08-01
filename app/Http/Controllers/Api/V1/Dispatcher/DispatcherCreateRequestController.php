@@ -63,7 +63,11 @@ class DispatcherCreateRequestController extends BaseController
         */
 
         // Validate payment option is available.
-        // @TODO
+        
+        if ($request->has('is_later') && $request->is_later) {
+            return $this->createRideLater($request);
+        }
+
         // get type id
         $zone_type_detail = ZoneType::where('id', $request->vehicle_type)->first();
         $type_id = $zone_type_detail->type_id;
@@ -141,6 +145,10 @@ class DispatcherCreateRequestController extends BaseController
 
         // Send notification to the very first driver
         $first_meta_driver = $selected_drivers[0]['driver_id'];
+
+        // Add first Driver into Firebase Request Meta
+        $this->database->getReference('request-meta/'.$request_detail->id)->set(['driver_id'=>$first_meta_driver,'request_id'=>$request_detail->id,'user_id'=>$request_detail->user_id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+
         $request_result =  fractal($request_detail, new TripRequestTransformer)->parseIncludes('userDetail');
 
         $socket_data = new \stdClass();
@@ -149,16 +157,12 @@ class DispatcherCreateRequestController extends BaseController
         $socket_data->result = $request_result;
 
         $driver = Driver::find($first_meta_driver);
-        // Form a socket sturcture using users'id and message with event name
-        // $socket_message = structure_for_socket($driver->id, 'driver', $socket_data, 'create_request');
 
-        // dispatch(new NotifyViaSocket('transfer_msg', $socket_message));
-
-        // dispatch(new NotifyViaMqtt('create_request_'.$driver->id, json_encode($socket_data), $driver->id));
 
         foreach ($selected_drivers as $key => $selected_driver) {
             $request_detail->requestMeta()->create($selected_driver);
         }
+
         // @TODO send sms & email to the user
         // } catch (\Exception $e) {
         //     DB::rollBack();
@@ -215,25 +219,67 @@ class DispatcherCreateRequestController extends BaseController
     */
     public function getFirebaseDrivers($request, $type_id)
     {
-        $pick_lat = $request->pick_lat;
+       $pick_lat = $request->pick_lat;
         $pick_lng = $request->pick_lng;
 
         // NEW flow
+        $pick_lat = $request->pick_lat;
+        $pick_lng = $request->pick_lng;
 
+        // NEW flow        
         $driver_search_radius = get_settings('driver_search_radius')?:30;
-        
-        $client = new \GuzzleHttp\Client();
-        $url = env('NODE_APP_URL').':'.env('NODE_APP_PORT').'/'.$pick_lat.'/'.$pick_lng.'/'.$type_id.'/'.$driver_search_radius;
 
-        $res = $client->request('GET', "$url");
-        if ($res->getStatusCode() == 200) {
-            $fire_drivers = \GuzzleHttp\json_decode($res->getBody()->getContents());
-            if (empty($fire_drivers->data)) {
-                $this->throwCustomException('no drivers available');
-            } else {
+        $radius = kilometer_to_miles($driver_search_radius);
+
+        $calculatable_radius = ($radius/2);
+
+        $calulatable_lat = 0.0144927536231884 * $calculatable_radius;
+        $calulatable_long = 0.0181818181818182 * $calculatable_radius;
+
+        $lower_lat = ($pick_lat - $calulatable_lat);
+        $lower_long = ($pick_lng - $calulatable_long);
+
+        $higher_lat = ($pick_lat + $calulatable_lat);
+        $higher_long = ($pick_lng + $calulatable_long);
+
+        $g = new Geohash();
+
+        $lower_hash = $g->encode($lower_lat,$lower_long, 12);
+        $higher_hash = $g->encode($higher_lat,$higher_long, 12);
+
+        $conditional_timestamp = Carbon::now()->subMinutes(7)->timestamp;
+
+        $vehicle_type = $type_id;
+
+        $fire_drivers = $this->database->getReference('drivers')->orderByChild('g')->startAt($lower_hash)->endAt($higher_hash)->getValue();
+        
+        $firebase_drivers = [];
+
+        $i=-1;
+
+        foreach ($fire_drivers as $key => $fire_driver) {
+            $i +=1; 
+            $driver_updated_at = Carbon::createFromTimestamp($fire_driver['updated_at'] / 1000)->timestamp;
+
+            if($fire_driver['vehicle_type']==$vehicle_type && $fire_driver['is_active']==1 && $fire_driver['is_available']==1 && $conditional_timestamp < $driver_updated_at){
+
+                $distance = distance_between_two_coordinates($pick_lat,$pick_lng,$fire_driver['l'][0],$fire_driver['l'][1],'K');
+
+                $firebase_drivers[$fire_driver['id']]['distance']= $distance;
+
+            }      
+
+        }
+
+        asort($firebase_drivers);
+
+        if (!empty($firebase_drivers)) {
+           
                 $nearest_driver_ids = [];
-                foreach ($fire_drivers->data as $key => $fire_driver) {
-                    $nearest_driver_ids[] = $fire_driver->id;
+
+                foreach ($firebase_drivers as $key => $firebase_driver) {
+                    
+                    $nearest_driver_ids[]=$key;
                 }
 
                 $driver_search_radius = get_settings('driver_search_radius')?:30;
@@ -248,13 +294,13 @@ class DispatcherCreateRequestController extends BaseController
                 $nearest_drivers = Driver::where('active', 1)->where('approve', 1)->where('available', 1)->where('vehicle_type', $type_id)->whereIn('id', $nearest_driver_ids)->whereNotIn('id', $meta_drivers)->limit(10)->get();
 
                 if ($nearest_drivers->isEmpty()) {
-                    $this->throwCustomException('all drivers are busy');
+                    return $this->respondFailed('all drivers are busy');
                 }
 
-                return $nearest_drivers;
-            }
+                return $this->respondSuccess($nearest_drivers, 'drivers_list');
+            
         } else {
-            $this->throwCustomException('there is an error-getting-drivers');
+            return $this->respondFailed('no drivers available');
         }
     }
 
@@ -288,5 +334,90 @@ class DispatcherCreateRequestController extends BaseController
         return $this->respondSuccess($request_result, $message);
 
 
+    }
+
+     /**
+    * Create Ride later trip
+    */
+    public function createRideLater(CreateTripRequest $request)
+    {
+        /**
+        * @TODO validate if the user has any trip with same time period
+        *
+        */
+        // get type id
+        $zone_type_detail = ZoneType::where('id', $request->vehicle_type)->first();
+        $type_id = $zone_type_detail->type_id;
+
+        // Get currency code of Request
+        $service_location = $zone_type_detail->zone->serviceLocation;
+        $currency_code = get_settings('currency_code');;
+
+        // fetch unit from zone
+        $unit = $zone_type_detail->zone->unit;
+        // Fetch user detail
+        $user_detail = auth()->user();
+        // Get last request's request_number
+        $request_number = $this->request->orderBy('updated_at', 'DESC')->pluck('request_number')->first();
+        if ($request_number) {
+            $request_number = explode('_', $request_number);
+            $request_number = $request_number[1]?:000000;
+        } else {
+            $request_number = 000000;
+        }
+        // Generate request number
+        $request_number = 'REQ_'.sprintf("%06d", $request_number+1);
+
+        // Convert trip start time as utc format
+        $timezone = auth()->user()->timezone?:env('SYSTEM_DEFAULT_TIMEZONE');
+
+        $trip_start_time = Carbon::parse($request->trip_start_time, $timezone)->setTimezone('UTC')->toDateTimeString();
+
+
+        $request_params = [
+            'request_number'=>$request_number,
+            'is_later'=>true,
+            'zone_type_id'=>$request->vehicle_type,
+            'trip_start_time'=>$trip_start_time,
+            'if_dispatch'=>true,
+            'dispatcher_id'=>$user_detail->admin->id,
+            'payment_opt'=>$request->payment_opt,
+            'unit'=>$unit,
+            'requested_currency_code'=>$currency_code,
+            'service_location_id'=>$service_location->id];
+
+        // store request details to db
+        DB::beginTransaction();
+        try {
+            $request_detail = $this->request->create($request_params);
+            // request place detail params
+            $request_place_params = [
+            'pick_lat'=>$request->pick_lat,
+            'pick_lng'=>$request->pick_lng,
+            'drop_lat'=>$request->drop_lat,
+            'drop_lng'=>$request->drop_lng,
+            'pick_address'=>$request->pick_address,
+            'drop_address'=>$request->drop_address];
+            // store request place details
+            $request_detail->requestPlace()->create($request_place_params);
+
+            // $ad_hoc_user_params = $request->only(['name','phone_number']);
+            $ad_hoc_user_params['name'] = $request->pickup_poc_name;
+            $ad_hoc_user_params['mobile'] = $request->pickup_poc_mobile;
+
+            // Store ad hoc user detail of this request
+            $request_detail->adHocuserDetail()->create($ad_hoc_user_params);
+
+            $request_result =  fractal($request_detail, new TripRequestTransformer)->parseIncludes('userDetail');
+            // @TODO send sms & email to the user
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            Log::error('Error while Create new schedule request. Input params : ' . json_encode($request->all()));
+            return $this->respondBadRequest('Unknown error occurred. Please try again later or contact us if it continues.');
+        }
+        DB::commit();
+
+        return $this->respondSuccess($request_result, 'Request Scheduled Successfully');
     }
 }
