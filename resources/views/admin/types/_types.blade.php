@@ -62,7 +62,7 @@
                     @endif
 </td> -->
 
-<td><img class="img-circle" src="{{$result->icon}}" alt=""></td>
+<td><img class="img-circle" src="{{asset($result->icon)}}" alt=""></td>
 @if($result->active)
 <td><button class="btn btn-success btn-sm">@lang('view_pages.active')</button></td>
 @else

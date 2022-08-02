@@ -179,12 +179,11 @@
                                             <span class="text-danger">{{ $errors->first('car_number') }}</span>
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                     <div class="col-6">
-                                        <label for="icon">@lang('view_pages.profile')</label><br>
-                                        <img id="blah" src="#" alt=""><br>
-                                        <input type="file" id="icon" onchange="readURL(this)" name="profile"
+                                        <label for="profile_picture">@lang('view_pages.profile')</label><br>
+                         <img class="user-image" id="blah" src="{{asset( $item->user->profile_picture) }}" alt=" "><br>
+                                        <input type="file" id="icon" onchange="readURL(this)" name="profile_picture"
                                             style="display:none">
                                         <button class="btn btn-primary btn-sm" type="button" onclick="$('#icon').click()"
                                             id="upload">@lang('view_pages.browse')</button>

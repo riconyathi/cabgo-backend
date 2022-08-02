@@ -186,8 +186,9 @@ class DriverController extends BaseController
      * @param \App\Http\Requests\Admin\Driver\CreateDriverRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(CreateDriverRequest $request)
+  public function store(CreateDriverRequest $request)
     {
+
         $created_params = $request->only(['service_location_id', 'name','mobile','email','address','gender','vehicle_type','car_make','car_model','car_color','car_number']);
 
 
@@ -202,7 +203,7 @@ class DriverController extends BaseController
             return redirect()->back()->withErrors(['mobile'=>'Provided mobile hs already been taken'])->withInput();
         }
         $created_params['vehicle_type'] = $request->input('type');
-        $created_params['postal_code'] = $request->postal_code;
+        // $created_params['postal_code'] = $request->postal_code;
         $created_params['uuid'] = driver_uuid();
 
         $service_location = ServiceLocation::find($request->service_location_id);
@@ -220,9 +221,9 @@ class DriverController extends BaseController
         ]);
 
 
-        if ($uploadedFile = $this->getValidatedUpload('profile', $request)) {
-            $created_params['profile'] = $this->imageUploader->file($uploadedFile)
-                ->saveProfilePicture();
+        if ($uploadedFile = $this->getValidatedUpload('profile_pic', $request)) {
+            $created_params['profile_pic'] = $this->imageUploader->file($uploadedFile)
+                ->saveDriverProfilePicture();
         }
 
         $user->attachRole(RoleSlug::DRIVER);
@@ -264,7 +265,7 @@ class DriverController extends BaseController
     }
 
 
-    public function update(Driver $driver, UpdateDriverRequest $request)
+      public function update(Driver $driver, UpdateDriverRequest $request)
     {
         // dd($driver);
         $updatedParams = $request->only(['service_location_id', 'name','mobile','email','gender','vehicle_type','car_make','car_model','car_color','car_number']);
@@ -286,7 +287,7 @@ class DriverController extends BaseController
 
         $user_param['profile']=null;
         
-        if ($uploadedFile = $this->getValidatedUpload('profile', $request)) {
+        if ($uploadedFile = $this->getValidatedUpload('profile_picture', $request)) {
             $user_param['profile'] = $this->imageUploader->file($uploadedFile)
                 ->saveProfilePicture();
         }
