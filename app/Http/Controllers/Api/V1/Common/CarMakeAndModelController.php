@@ -46,4 +46,15 @@ class CarMakeAndModelController extends BaseController
     {
         return $this->respondSuccess($this->car_model->where('make_id', $make_id)->active()->orderBy('name')->get());
     }
+
+
+    /**
+     * Test Api
+     * 
+     * */
+    public function testApi(){
+
+        dd(request()->server('SERVER_ADDR'));
+
+    }
 }

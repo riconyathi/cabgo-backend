@@ -77,7 +77,7 @@ class DriverProfileTransformer extends Transformer
             'company_key'=>$user->user->company_key,
             'show_instant_ride'=>false,
             'country_id'=>$user->user->countryDetail->id,
-            'currency_symbol' => $user->user->countryDetail->currency_symbol,
+            'currency_symbol' => get_settings(Settings::CURRENCY),
             'role'=>'driver'
         ];
 
