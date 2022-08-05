@@ -15,7 +15,7 @@ class Fleet extends Model
     use UuidModel,SoftDeletes,HasActive;
 
     protected $fillable = [
-        'owner_id','brand','model','license_number','permission_number','vehicle_type','active','fleet_id','qr_image','approve'
+        'owner_id','brand','model','license_number','permission_number','vehicle_type','active','fleet_id','qr_image','approve','car_color'
     ];
 
     public function vehicleType(){
