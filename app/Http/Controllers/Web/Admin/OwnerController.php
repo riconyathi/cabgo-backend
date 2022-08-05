@@ -46,7 +46,7 @@ class OwnerController extends BaseController
      *
      * @param \App\Models\Admin\Owner $owner
      */
-    public function __construct(Owner $owner, User $user,ImageUploaderContract $imageUploader,Database $database))
+    public function __construct(Owner $owner, User $user,ImageUploaderContract $imageUploader,Database $database)
     {
         $this->owner = $owner;
         $this->user = $user;
