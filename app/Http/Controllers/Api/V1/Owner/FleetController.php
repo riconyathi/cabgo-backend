@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Driver;
+namespace App\Http\Controllers\Api\V1\Owner;
 
 use App\Models\Admin\Driver;
 use Illuminate\Support\Carbon;

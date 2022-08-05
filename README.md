@@ -95,20 +95,3 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
  }
 
 
-Fleet Owner Apis
-----------------
-1. List Fleets Api
-
-URL: api/v1/owner/list-fleets
-Method: GET
-
-2. Add Fleet
-
-URL: api/v1/owner/add-fleet
-
-Method: POST
-
-Params
-------
-car_make,car_model,car_number,vehicle_type,car_color
-
