@@ -21,6 +21,8 @@ use App\Models\Admin\OwnerDocument;
 use App\Models\Admin\OwnerNeededDocument;
 use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
+use Kreait\Firebase\Database;
+
 
 class OwnerController extends BaseController
 {
@@ -44,11 +46,13 @@ class OwnerController extends BaseController
      *
      * @param \App\Models\Admin\Owner $owner
      */
-    public function __construct(Owner $owner, User $user,ImageUploaderContract $imageUploader)
+    public function __construct(Owner $owner, User $user,ImageUploaderContract $imageUploader,Database $database))
     {
         $this->owner = $owner;
         $this->user = $user;
         $this->imageUploader = $imageUploader;
+        $this->database = $database;
+
     }
 
     public function index(ServiceLocation $area)
@@ -211,6 +215,8 @@ class OwnerController extends BaseController
         $owner->update([
             'approve' => $status
         ]);
+
+        $this->database->getReference('owners/'.$owner->id)->update(['approve'=>(int)$status,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
         $message = trans('succes_messages.owner_approve_status_changed_succesfully');
 

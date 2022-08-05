@@ -76,15 +76,6 @@ class ProfileController extends ApiController
 
         }
 
-        
-         if($request->email){
-             $validate_exists_email = $this->user->belongsTorole(Role::USER)->where('email', $request->email)->where('id','!=',$user->id)->exists();
-
-        if ($validate_exists_email) {
-            $this->throwCustomException('Provided email has already been taken');
-        }
-
-        }
 
         $user->update($data);
         $user = fractal($user->fresh(), new UserTransformer);
@@ -115,14 +106,7 @@ class ProfileController extends ApiController
 
         }
 
-        if($request->email){
-             $validate_exists_email = $this->user->belongsTorole(Role::DRIVER)->where('email', $request->email)->where('id','!=',$user->id)->exists();
-
-        if ($validate_exists_email) {
-            $this->throwCustomException('Provided email has already been taken');
-        }
-
-        }
+       
        
 
         if ($uploadedFile = $this->getValidatedUpload('profile_picture', $request)) {

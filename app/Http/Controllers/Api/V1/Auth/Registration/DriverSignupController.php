@@ -352,7 +352,10 @@ class DriverSignupController extends LoginController
 
         $user->attachRole(Role::OWNER);
 
-        $user->owner()->create($created_params);
+        $owner = $user->owner()->create($created_params);
+
+        $this->database->getReference('owners/'.$owner->id)->set(['id'=>$owner->id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+
 
         } catch (\Exception $e) {
             DB::rollBack();
