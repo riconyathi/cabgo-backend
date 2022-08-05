@@ -46,6 +46,7 @@ class DriverProfileTransformer extends Transformer
     {
         $params = [
             'id' => $user->id,
+            'owner_id' => $user->owner_id,
             'name' => $user->name,
             'email' => $user->email,
             'mobile' => $user->mobile,
