@@ -13,7 +13,12 @@
 <div class="box">
 
     <div class="box-header with-border">
+
+                <div>
+                    <strong class="text-danger" style="font-size: 18px;">Note: We are currently working on this update, you may get this update soon</strong>
+                </div><br>
         <div class="row text-right">
+
 
                             <div class="col-2">
                                 <div class="form-group">
