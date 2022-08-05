@@ -63,7 +63,17 @@ class LoginController extends BaseLoginController
 }*/
     public function loginDriver(GenericAppLoginRequest $request)
     {
+
+        if($request->has('role') && $request->role=='driver'){
+            return $this->loginUserAccountApp($request, Role::DRIVER);
+        }
+
+        if($request->has('role') && $request->role=='owner'){
+            return $this->loginUserAccountApp($request, Role::OWNER);
+        }
+            
         return $this->loginUserAccountApp($request, Role::DRIVER);
+
     }
 
 

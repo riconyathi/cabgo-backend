@@ -187,20 +187,38 @@ class DriverSignupController extends LoginController
     {
         $mobile = $request->mobile;
 
-        $validate_exists_mobile = $this->user->belongsTorole([Role::DRIVER,Role::OWNER])->where('mobile', $mobile)->exists();
+
+        $validate_exists_mobile = $this->user->belongsTorole(Role::DRIVER)->where('mobile', $mobile)->exists();
+
+        if($request->has('role') && $request->role=='driver'){
+
+            $validate_exists_mobile = $this->user->belongsTorole(Role::DRIVER)->where('mobile', $mobile)->exists();
+        
+        }
+        if($request->has('role') && $request->role=='owner'){
+
+             $validate_exists_mobile = $this->user->belongsTorole(Role::OWNER)->where('mobile', $mobile)->exists();
+        }
 
 
         if($request->has('email')){
 
-            $validate_exists_email = $this->user->belongsTorole([Role::DRIVER,Role::OWNER])->where('email', $request->email)->exists();
+        $validate_exists_email = $this->user->belongsTorole(Role::DRIVER)->where('email', $request->email)->exists();
+
+        if($request->has('role')&& $request->role=='driver'){
+
+            $validate_exists_email = $this->user->belongsTorole(Role::DRIVER)->where('email', $request->email)->exists();
+        }
+        if($request->has('role')&& $request->role=='owner'){
+
+            $validate_exists_email = $this->user->belongsTorole(Role::OWNER)->where('email', $request->email)->exists();
+        }
 
         if ($validate_exists_email) {
             $this->throwCustomException('Provided email has already been taken');
         }
         
         }
-        
-
 
         if ($validate_exists_mobile) {
             $this->throwCustomException('Provided mobile has already been taken');
@@ -221,7 +239,17 @@ class DriverSignupController extends LoginController
     {
         $mobile = $request->mobile;
 
-        $validate_exists_mobile = $this->user->belongsTorole([Role::DRIVER,Role::OWNER])->where('mobile', $mobile)->exists();
+        $validate_exists_mobile = $this->user->belongsTorole(Role::DRIVER)->where('mobile', $mobile)->exists();
+
+        if($request->has('role') && $request->role=='driver'){
+
+        $validate_exists_mobile = $this->user->belongsTorole(Role::DRIVER)->where('mobile', $mobile)->exists();
+
+        }
+        if($request->has('role') && $request->role=='owner'){
+
+            $validate_exists_mobile = $this->user->belongsTorole(Role::OWNER)->where('mobile', $mobile)->exists();
+        }   
 
         if ($validate_exists_mobile) {
             return $this->respondSuccess(null, 'mobile_exists');
