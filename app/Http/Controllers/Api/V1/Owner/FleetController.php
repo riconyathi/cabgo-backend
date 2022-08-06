@@ -7,6 +7,7 @@ use Illuminate\Support\Carbon;
 use App\Transformers\Driver\DriverProfileTransformer;
 use App\Http\Controllers\Api\V1\BaseController;
 use App\Models\Admin\Fleet;
+use Illuminate\Http\Request;
 
 class FleetController extends BaseController
 {
@@ -41,7 +42,7 @@ class FleetController extends BaseController
      * 
      * 
      * */
-    public function storeFleet(){
+    public function storeFleet(Request $request){
 
         $created_params = $request->only(['vehicle_type','car_color']);
 
