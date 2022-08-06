@@ -22,7 +22,7 @@ Route::prefix('owner')->namespace('Owner')->middleware('auth')->group(function (
     Route::middleware(role_middleware(Role::OWNER))->group(function () {
             
         Route::get('list-fleets','FleetController@index');
-        Route::get('add-fleet','FleetController@storeFleet');
+        Route::post('add-fleet','FleetController@storeFleet');
         
     });
 });
