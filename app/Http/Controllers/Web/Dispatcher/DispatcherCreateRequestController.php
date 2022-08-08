@@ -156,7 +156,6 @@ class DispatcherCreateRequestController extends BaseController
         $request_result =  fractal($request_detail, new TripRequestTransformer)->parseIncludes('userDetail');
 
 
-        $push_data = ['notification_enum'=>PushEnums::REQUEST_CREATED,'result'=>$pus_request_detail];
         $title = trans('push_notifications.new_request_title');
         $body = trans('push_notifications.new_request_body');
 
