@@ -48,9 +48,10 @@ class FleetTransformer extends Transformer
             'brand'=>$fleet->carBrand->name,
             'model'=>$fleet->carModel->name,
             'approve'=>$fleet->approve,
-            'car_color'=>$fleet->car_color
+            'car_color'=>$fleet->car_color,
+            'type_icon'=>$fleet->vehicleType->icon
         ];
-        
+
         return $params;
     }
 
