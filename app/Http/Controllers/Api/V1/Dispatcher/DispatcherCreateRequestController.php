@@ -23,7 +23,6 @@ use Sk\Geohash\Geohash;
 use Kreait\Firebase\Database;
 use App\Base\Constants\Auth\Role;
 use Carbon\Carbon;
-use App\Jobs\Notifications\AndroidPushNotification;
 
 /**
  * @group Dispatcher-trips-apis
