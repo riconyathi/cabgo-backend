@@ -72,6 +72,7 @@ class DispatcherCreateRequestController extends BaseController
 
         // get type id
         $zone_type_detail = ZoneType::where('id', $request->vehicle_type)->first();
+
         $type_id = $zone_type_detail->type_id;
 
         // Get currency code of Request
@@ -81,7 +82,12 @@ class DispatcherCreateRequestController extends BaseController
         // $nearest_drivers =  $this->getDrivers($request, $type_id);
         $nearest_drivers =  $this->getFirebaseDrivers($request, $type_id);
 
+        if ($nearest_drivers->getData()->success == false) {
+            return $nearest_drivers;
+        }
 
+        $nearest_drivers = $nearest_drivers->getData()->data;
+        
         // fetch unit from zone
         $unit = $zone_type_detail->zone->unit;
         // Fetch user detail
@@ -377,7 +383,7 @@ class DispatcherCreateRequestController extends BaseController
         $user_detail = auth()->user();
 
         $country= $user_detail->admin->serviceLocationDetail->country;
-        
+
         // Get last request's request_number
         $request_number = $this->request->orderBy('updated_at', 'DESC')->pluck('request_number')->first();
         if ($request_number) {
