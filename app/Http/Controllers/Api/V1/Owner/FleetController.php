@@ -49,7 +49,8 @@ class FleetController extends BaseController
         $created_params['brand'] = $request->car_make;
         $created_params['model'] = $request->car_model;
         $created_params['license_number'] = $request->car_number;
-
+        $created_params['owner_id'] = auth()->user()->id;
+        
         $fleet = $this->fleet->create($created_params);
 
         return $this->respondSuccess();

@@ -87,25 +87,6 @@
 
         </div>
     </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="transport_type">@lang('view_pages.tansport_type')
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <select name="transport_type" id="transport_type" class="form-control" required>
-                                                <option value="">@lang('view_pages.select_tansport_type')</option>
-                                                <option value='male'
-                                                    {{ old('transport_type', $type->is_taxi) == 'taxi' ? 'selected' : '' }}>
-                                                    @lang('view_pages.taxi')</option>
-                                                <option value='fe-male'
-                                                    {{ old('transport_type', $type->is_taxi) == 'fe-male' ? 'selected' : '' }}>
-                                                    @lang('view_pages.delivery')</option>
-                                            </select>
-                                            <span class="text-danger">{{ $errors->first('transport_type') }}</span>
-
-                                        </div>
-
-                                    </div>
 </div>
 
     <div class="form-group">

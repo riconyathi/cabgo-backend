@@ -139,7 +139,7 @@ return array (
   'payment_type' => 'Payment Type',
   'bill_status' => 'Bill Status',
   'show_bill_status' => 'Show Bill Status',
-  'distance_price' => 'Additional Disatance Price Per Km',
+  'distance_price' => 'Additional Distance Price Per Km',
   'surge_price' => 'Surge',
   'start_time' => 'Start Time',
   'end_time' => 'End Time',

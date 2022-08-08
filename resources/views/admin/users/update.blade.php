@@ -114,7 +114,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="profile_picture">@lang('view_pages.profile')</label><br>
- <img class="user-image" id="blah" src="{{asset( $item->user->profile_picture) }}" alt=" "><br>
+ <img class="user-image" id="blah" src="{{asset( $results->profile_picture) }}" alt=" "><br>
                                             <input type="file" id="profile" onchange="readURL(this)" name="profile_picture"
                                                 style="display:none">
                                             <button class="btn btn-primary btn-sm" type="button"
