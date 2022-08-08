@@ -374,6 +374,9 @@ class DispatcherCreateRequestController extends BaseController
         $unit = $zone_type_detail->zone->unit;
         // Fetch user detail
         $user_detail = auth()->user();
+
+        $country= $user_detail->admin->serviceLocationDetail->country;
+        
         // Get last request's request_number
         $request_number = $this->request->orderBy('updated_at', 'DESC')->pluck('request_number')->first();
         if ($request_number) {
@@ -406,6 +409,14 @@ class DispatcherCreateRequestController extends BaseController
         // store request details to db
         DB::beginTransaction();
         try {
+
+            $user_params= [
+            'name'=>$request->customer_name,
+            'mobile'=>$request->phone_number,
+            'country'=>$country,
+            'refferal_code'=>str_random(6),
+            'mobile_confirmed'=>true
+            ];
             $request_detail = $this->request->create($request_params);
             // request place detail params
             $request_place_params = [
@@ -424,6 +435,11 @@ class DispatcherCreateRequestController extends BaseController
 
             // Store ad hoc user detail of this request
             $request_detail->adHocuserDetail()->create($ad_hoc_user_params);
+
+
+            $user = User::create($user_params);
+
+
 
             $request_result =  fractal($request_detail, new TripRequestTransformer)->parseIncludes('userDetail');
             // @TODO send sms & email to the user

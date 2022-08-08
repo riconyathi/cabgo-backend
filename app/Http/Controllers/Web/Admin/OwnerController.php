@@ -177,7 +177,7 @@ class OwnerController extends BaseController
 
     public function delete(Owner $owner)
     {
-        $owner->delete();
+        $owner->user()->delete();
 
         $message = trans('succes_messages.owner_deleted_succesfully');
         // return $message;
