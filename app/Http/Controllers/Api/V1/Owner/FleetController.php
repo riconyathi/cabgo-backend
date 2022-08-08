@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\BaseController;
 use App\Models\Admin\Fleet;
 use Illuminate\Http\Request;
 use App\Transformers\Driver\DriverTransformer;
+use App\Transformers\Owner\FleetTransformer;
 
 class FleetController extends BaseController
 {
@@ -34,8 +35,7 @@ class FleetController extends BaseController
     {
         $fleets = Fleet::where('owner_id',auth()->user()->id)->get();
 
-        $result = fractal($fleets, new DriverTransformer);
-
+        $result = fractal($fleets, new FleetTransformer);
 
         return $this->respondSuccess($result,'fleet_listed');
     }
@@ -73,11 +73,8 @@ class FleetController extends BaseController
 
         $drivers = Driver::where('owner_id',$owner_id)->get();
 
-        
-
         $result = fractal($drivers, new DriverTransformer);
-        $result = fractal($dri
-            vers, new DriverTransformer);
+    
 
         return $this->respondOk($result);
 

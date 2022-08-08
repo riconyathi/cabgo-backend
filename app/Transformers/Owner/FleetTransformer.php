@@ -50,8 +50,7 @@ class FleetTransformer extends Transformer
             'approve'=>$fleet->approve,
             'car_color'=>$fleet->car_color
         ];
-
-
+        
         return $params;
     }
 
