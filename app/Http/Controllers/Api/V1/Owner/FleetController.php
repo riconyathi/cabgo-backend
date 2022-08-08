@@ -8,6 +8,7 @@ use App\Transformers\Driver\DriverProfileTransformer;
 use App\Http\Controllers\Api\V1\BaseController;
 use App\Models\Admin\Fleet;
 use Illuminate\Http\Request;
+use App\Transformers\Driver\DriverTransformer;
 
 class FleetController extends BaseController
 {
@@ -31,7 +32,10 @@ class FleetController extends BaseController
     */
     public function index()
     {
-        $result = Fleet::where('owner_id',auth()->user()->id)->get();
+        $fleets = Fleet::where('owner_id',auth()->user()->id)->get();
+
+        $result = fractal($fleets, new DriverTransformer);
+
 
         return $this->respondSuccess($result,'fleet_listed');
     }
@@ -50,10 +54,51 @@ class FleetController extends BaseController
         $created_params['model'] = $request->car_model;
         $created_params['license_number'] = $request->car_number;
         $created_params['owner_id'] = auth()->user()->id;
-        
+
         $fleet = $this->fleet->create($created_params);
 
         return $this->respondSuccess();
+    }
+
+
+
+    /**
+     * List Drivers For Assign Drivers
+     * 
+     * 
+     * */
+    public function listDrivers()
+    {
+        $owner_id = auth()->user()->owner->id;
+
+        $drivers = Driver::where('owner_id',$owner_id)->get();
+
+        
+
+        $result = fractal($drivers, new DriverTransformer);
+        $result = fractal($dri
+            vers, new DriverTransformer);
+
+        return $this->respondOk($result);
+
+    }
+
+    /**
+     * Assign Drivers
+     * 
+     * 
+     * */
+    public function assignDriver(Request $request,Fleet $fleet)
+    {
+        $driver = Driver::whereId($request->driver_id)->first();
+            
+        $driver->update([
+            'fleet_id' => $fleet->id,
+            'vehicle_type' => $fleet->vehicle_type
+        ]);
+
+        return $this->respondSuccess();
+        
     }
 
 

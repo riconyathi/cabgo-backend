@@ -15,7 +15,7 @@ class Fleet extends Model
     use UuidModel,SoftDeletes,HasActive;
 
     protected $fillable = [
-        'owner_id','brand','model','license_number','permission_number','vehicle_type','active','fleet_id','qr_image','approve','car_color'
+        'owner_id','brand','model','license_number','permission_number','vehicle_type','active','fleet_id','qr_image','approve','car_color','driver_id'
     ];
 
     public function vehicleType(){
@@ -46,7 +46,7 @@ class Fleet extends Model
         return  $this->carBrand->name .' - '. $this->carModel->name .' ('.$this->vehicleType->name.')';
     }
 
-    public function driver(){
-        return $this->hasOne(Driver::class,'fleet_id','id');
+    public function driverDetail(){
+        return $this->belongsTo(Driver::class,'driver_id','id');
     }
 }

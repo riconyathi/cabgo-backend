@@ -162,6 +162,12 @@ class Driver extends Model
     {
         return $this->belongsTo(CarMake::class, 'car_make', 'id');
     }
+
+    public function fleetDetail()
+    {
+        return $this->belongsTo(Fleet::class, 'fleet_id', 'id');
+    }
+
     public function carModel()
     {
         return $this->belongsTo(CarModel::class, 'car_model', 'id');

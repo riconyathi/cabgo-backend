@@ -21,6 +21,7 @@ use App\Models\User;
 use App\Transformers\Requests\UserRequestForDispatcherAppTransformer;
 use Sk\Geohash\Geohash;
 use Kreait\Firebase\Database;
+use App\Base\Constants\Auth\Role;
 
 /**
  * @group Dispatcher-trips-apis
@@ -84,6 +85,9 @@ class DispatcherCreateRequestController extends BaseController
         $unit = $zone_type_detail->zone->unit;
         // Fetch user detail
         $user_detail = auth()->user();
+
+        $country= $user_detail->admin->serviceLocationDetail->country;
+
         // Get last request's request_number
         $request_number = $this->request->orderBy('updated_at', 'DESC')->pluck('request_number')->first();
         if ($request_number) {
@@ -94,6 +98,14 @@ class DispatcherCreateRequestController extends BaseController
         }
         // Generate request number
         $request_number = 'REQ_'.sprintf("%06d", $request_number+1);
+
+        $user_params= [
+            'name'=>$request->customer_name,
+            'mobile'=>$request->phone_number,
+            'country'=>$country,
+            'refferal_code'=>str_random(6),
+            'mobile_confirmed'=>true
+        ];
 
         $request_params = [
             'request_number'=>$request_number,
@@ -121,6 +133,11 @@ class DispatcherCreateRequestController extends BaseController
         $ad_hoc_user_params = $request->only(['customer_name','phone_number']);
         // Store ad hoc user detail of this request
         $request_detail->adHocuserDetail()->create($ad_hoc_user_params);
+
+        $user = User::create($user_params);
+        
+        $user->attachRole(Role::USER);
+
 
         $selected_drivers = [];
         $notification_android = [];
