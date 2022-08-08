@@ -40,7 +40,8 @@
             <thead>
                 <tr>
                     <th> @lang('view_pages.s_no')</th>
-                    <th> @lang('view_pages.name')</th>
+                    <th> @lang('view_pages.driver_name')</th>
+                    <th> @lang('view_pages.document_name')</th>
                     <th> @lang('view_pages.expiry_date')</th>
                     <th> @lang('view_pages.status')</th>
                     <th> @lang('view_pages.comment')</th>
@@ -79,6 +80,9 @@
                     <input type="hidden" name="comment[]" class="comment" value="{{$doc_comment}}">
 
                     <td>{{ $i++ }}</td>
+                    <td>
+                        {{ $driver->name }}
+                    </td>
                     <td>
                         {{ $item->name }}
                     </td>

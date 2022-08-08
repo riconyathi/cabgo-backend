@@ -55,6 +55,8 @@ class Permission
     const MANAGE_CARMODEL = 'manage-carmodel';
     const MANAGE_NEEDED_DOC = 'manage-needed-document';
     const MANAGE_OWNER_NEEDED_DOC = 'manage-owner-needed-document';
+    const MANAGE_FLEET_NEEDED_DOC = 'manage-fleet-needed-document';
+
 
     // Manage Owner
     const MANAGE_OWNER = 'manage-owner';

@@ -495,7 +495,17 @@ Route::middleware('auth:web')->group(function () {
                     Route::get('toggle_status/{needed_doc}', 'OwnerNeededDocumentController@toggleStatus');
                     Route::get('delete/{needed_doc}', 'OwnerNeededDocumentController@delete');
                 }); 
-
+          // Fleet Needed Document CRUD
+            Route::group(['prefix' => 'fleet_needed_doc',  'middleware' => 'permission:manage-fleet-needed-document'], function () {
+                Route::get('/', 'FleetNeededDocumentController@index');
+                Route::get('/fetch', 'FleetNeededDocumentController@fetch');
+                Route::get('/create', 'FleetNeededDocumentController@create');
+                Route::post('store', 'FleetNeededDocumentController@store');
+                Route::get('/{needed_doc}', 'FleetNeededDocumentController@getById');
+                Route::post('update/{needed_doc}', 'FleetNeededDocumentController@update');
+                Route::get('toggle_status/{needed_doc}', 'FleetNeededDocumentController@toggleStatus');
+                Route::get('delete/{needed_doc}', 'FleetNeededDocumentController@delete');
+                }); 
         // Package type CRUD
         Route::group(['prefix' => 'package_type',  'middleware' => 'permission:package-type'], function () {
             Route::get('/', 'PackageTypeController@index');

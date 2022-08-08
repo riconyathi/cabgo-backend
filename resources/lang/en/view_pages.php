@@ -710,5 +710,7 @@ return array (
   'enter_currency_code' => 'Enter Currency Value',
   'ride_type' => 'Ride Type',
   'icons' => 'Icons',
-  'todays_earnings'=>'Today Earnings'
+  'todays_earnings'=>'Today Earnings',
+  'user_payment_history' => 'User Payment History',
+  'add_fleet_needed_doc' => 'Add Fleet Needed Doc',
 );
