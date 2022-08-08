@@ -23,6 +23,7 @@ use Sk\Geohash\Geohash;
 use Kreait\Firebase\Database;
 use App\Base\Constants\Auth\Role;
 use Carbon\Carbon;
+use App\Jobs\Notifications\AndroidPushNotification;
 
 /**
  * @group Dispatcher-trips-apis
@@ -87,7 +88,7 @@ class DispatcherCreateRequestController extends BaseController
         }
 
         $nearest_drivers = $nearest_drivers->getData()->data;
-        
+
         // fetch unit from zone
         $unit = $zone_type_detail->zone->unit;
         // Fetch user detail
@@ -157,13 +158,6 @@ class DispatcherCreateRequestController extends BaseController
             $selected_drivers[$i]["assign_method"] = 1;
             $selected_drivers[$i]["created_at"] = date('Y-m-d H:i:s');
             $selected_drivers[$i]["updated_at"] = date('Y-m-d H:i:s');
-            if ($i == 0) {
-                if ($driver->user->login_by == 1) {
-                    $notification_android[] = $driver->user->device_token;
-                } else {
-                    $notification_ios[] = $driver->user->device_token;
-                }
-            }
             $i++;
         }
 
@@ -182,6 +176,8 @@ class DispatcherCreateRequestController extends BaseController
 
         $driver = Driver::find($first_meta_driver);
 
+        $notifable_driver = $driver->user;
+        $notifable_driver->notify(new AndroidPushNotification($title, $body));
 
         foreach ($selected_drivers as $key => $selected_driver) {
             $request_detail->requestMeta()->create($selected_driver);

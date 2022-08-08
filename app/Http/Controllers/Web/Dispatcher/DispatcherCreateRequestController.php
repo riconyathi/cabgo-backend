@@ -20,6 +20,7 @@ use Carbon\Carbon;
 use App\Base\Constants\Setting\Settings;
 use Sk\Geohash\Geohash;
 use Kreait\Firebase\Database;
+use App\Jobs\Notifications\AndroidPushNotification;
 
 /**
  * @group Dispatcher-trips-apis
@@ -160,7 +161,10 @@ class DispatcherCreateRequestController extends BaseController
         $mqtt_object->result = $request_result;
 
         $driver = Driver::find($first_meta_driver);
-       
+        
+        $notifable_driver = $driver->user;
+        $notifable_driver->notify(new AndroidPushNotification($title, $body));
+
         // Send notify via Mqtt
         // dispatch(new NotifyViaMqtt('create_request_'.$driver->id, json_encode($mqtt_object), $driver->id));
 
