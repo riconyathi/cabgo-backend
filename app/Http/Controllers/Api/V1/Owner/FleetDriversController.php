@@ -97,6 +97,7 @@ class FleetDriversController extends BaseController
         $created_params = $request->only(['name','mobile','email','address']);
 
         $created_params['service_location_id'] = $owner_detail->service_location_id;
+        $created_params['owner_id'] = $owner_detail->id;
 
         $driver = $user->driver()->create($created_params);
 
