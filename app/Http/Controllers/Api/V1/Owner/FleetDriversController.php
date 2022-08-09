@@ -10,18 +10,27 @@ use App\Models\Admin\Fleet;
 use Illuminate\Http\Request;
 use App\Transformers\Driver\DriverTransformer;
 use App\Transformers\Owner\FleetTransformer;
+use App\Base\Services\ImageUploader\ImageUploaderContract;
+use Kreait\Firebase\Database;
+
 
 class FleetDriversController extends BaseController
 {
     protected $driver;
     protected $fleet;
+    protected $imageUploader;
+    protected $database;
 
 
-    public function __construct(Driver $driver,Fleet $fleet)
+    public function __construct(Driver $driver,Fleet $fleet,Database $database,ImageUploaderContract $imageUploader)
     {
         $this->driver = $driver;
 
         $this->fleet = $fleet;
+
+        $this->database = $database;
+        
+        $this->imageUploader = $imageUploader;
     }
 
 

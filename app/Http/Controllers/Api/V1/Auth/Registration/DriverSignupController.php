@@ -19,6 +19,7 @@ use App\Base\Services\OTP\Handler\OTPHandlerContract;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Requests\Auth\Registration\DriverRegistrationRequest;
 use App\Jobs\Notifications\Auth\Registration\UserRegistrationNotification;
+use App\Base\Services\ImageUploader\ImageUploaderContract;
 
 /**
  * @group SignUp-And-Otp-Validation
@@ -32,16 +33,18 @@ class DriverSignupController extends LoginController
     protected $otpHandler;
     protected $country;
     protected $database;
+    protected $imageUploader;
 
 
 
-    public function __construct(User $user, Driver $driver, Country $country, OTPHandlerContract $otpHandler, Database $database)
+    public function __construct(User $user, Driver $driver, Country $country, OTPHandlerContract $otpHandler, Database $database,ImageUploaderContract $imageUploader)
     {
         $this->user = $user;
         $this->driver = $driver;
         $this->otpHandler = $otpHandler;
         $this->country = $country;
         $this->database = $database;
+        $this->imageUploader = $imageUploader;
     }
 
     /**
