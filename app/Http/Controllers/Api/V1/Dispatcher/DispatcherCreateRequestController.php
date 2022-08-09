@@ -129,9 +129,10 @@ class DispatcherCreateRequestController extends BaseController
         // DB::beginTransaction();
         // try {
 
-            $user = User::where('mobile',$request->phone_number)->first();
+            $user = User::where('mobile',$request->phone_number)->belongsTorole('user')->first();
             if(!$user){
-                $user = User::create($user_params);                
+                $user = User::create($user_params); 
+                $user->attachRole(Role::USER);
             }
         
         $request_params['user_id'] = $user->id;
@@ -152,7 +153,6 @@ class DispatcherCreateRequestController extends BaseController
         // $request_detail->adHocuserDetail()->create($ad_hoc_user_params);
 
         
-        $user->attachRole(Role::USER);
 
 
         $selected_drivers = [];
@@ -431,10 +431,12 @@ class DispatcherCreateRequestController extends BaseController
             'mobile_confirmed'=>true
             ];
 
-            $user = User::where('mobile',$request->phone_number)->first();
+            $user = User::where('mobile',$request->phone_number)->belongsTorole('user')->first();
             if(!$user){
-                $user = User::create($user_params);                
+                $user = User::create($user_params); 
+                $user->attachRole(Role::USER);
             }
+        
 
             $request_params['user_id'] = $user->id;
 
