@@ -82,7 +82,7 @@ class FleetDriversController extends BaseController
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'mobile' => $mobile,
+            'mobile' => $request->mobile,
             'mobile_confirmed' => true,
             'timezone'=>auth()->user()->timezone,
             'country'=>auth()->user()->country,
