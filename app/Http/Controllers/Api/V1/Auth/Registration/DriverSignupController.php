@@ -20,7 +20,6 @@ use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Requests\Auth\Registration\DriverRegistrationRequest;
 use App\Jobs\Notifications\Auth\Registration\UserRegistrationNotification;
 use App\Base\Services\ImageUploader\ImageUploaderContract;
-use App\Models\User;
 
 /**
  * @group SignUp-And-Otp-Validation
