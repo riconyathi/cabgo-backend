@@ -95,6 +95,11 @@ if(str_contains((string)request()->path(),'translations')){
             <a href="{{url('/owner_needed_doc')}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.owner_needed_doc')</a>
           </li>
           @endif 
+          @if(auth()->user()->can('manage-fleet-needed-document'))
+          <li class="{{ 'fleet_needed_document' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/fleet_needed_doc')}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.fleet_needed_doc')</a>
+          </li>
+          @endif 
           @if(auth()->user()->can('package-type'))
           <li class="{{ 'package_type' == $sub_menu ? 'active' : '' }}">
             <a href="{{url('/package_type')}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.package_type')</a>

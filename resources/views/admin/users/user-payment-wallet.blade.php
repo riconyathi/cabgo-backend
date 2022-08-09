@@ -85,6 +85,7 @@
         <tr>
             <th> @lang('view_pages.s_no')</th>
             <th> @lang('view_pages.request_id')</th>
+            <th> @lang('view_pages.name')</th>
             <th> @lang('view_pages.transaction_id')</th>
             <th> @lang('view_pages.amount')</th>
             <th> @lang('view_pages.remarks')</th>
@@ -99,6 +100,7 @@
         <tr>
             <td>{{ $key+1 }} </td>
             <td>{{$result->requestDetail->request_number ?? '-' }}</td>
+            <td>{{$item->name ?? '-' }}</td>
             <td>{{$result->transaction_id}}</td>
             @if ($result->is_credit == 1)
                 <td><button class="btn btn-success btn-sm">{{$result->amount}}</button></td>

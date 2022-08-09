@@ -130,4 +130,8 @@ return array (
   'edit_fleet' => 'Edit Fleet',
   'my_profile' => 'My Profile',
   'logout' => 'Logout',
+  'fleet_needed_doc' => 'Fleet Needed Document',
+  'add_owner_needed_doc' => 'Add Owner Needed Doc',
+  
+
 );

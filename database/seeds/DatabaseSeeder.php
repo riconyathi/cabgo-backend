@@ -18,5 +18,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(DriverNeededDocumentSeeder::class);
         $this->call(CarMakeAndModelSeeder::class);
         $this->call(SettingsSeeder::class);
+        $this->call(CancellationReasonSeeder::class);
+        $this->call(ComplaintTitleSeeder::class);
+
+        
     }
 }
