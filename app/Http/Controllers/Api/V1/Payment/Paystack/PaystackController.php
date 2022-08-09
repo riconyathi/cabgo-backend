@@ -20,6 +20,8 @@ use App\Base\Constants\Setting\Settings;
 use App\Jobs\Notifications\AndroidPushNotification;
 use App\Jobs\NotifyViaMqtt;
 use App\Base\Constants\Masters\PushEnums;
+use App\Models\Payment\OwnerWallet;
+use App\Models\Payment\OwnerWalletHistory;
 
 /**
  * @group Paystack Payment Gateway
@@ -111,10 +113,14 @@ class PaystackController extends ApiController
             $wallet_model = new UserWallet();
             $wallet_add_history_model = new UserWalletHistory();
             $user_id = auth()->user()->id;
-        } else {
-            $wallet_model = new DriverWallet();
-            $wallet_add_history_model = new DriverWalletHistory();
-            $user_id = auth()->user()->driver->id;
+        } elseif($user->hasRole('driver')) {
+                    $wallet_model = new DriverWallet();
+                    $wallet_add_history_model = new DriverWalletHistory();
+                    $user_id = $user->driver->id;
+        }else {
+                    $wallet_model = new OwnerWallet();
+                    $wallet_add_history_model = new OwnerWalletHistory();
+                    $user_id = $user->driver->id;
         }
 
         $user_wallet = $wallet_model::firstOrCreate([

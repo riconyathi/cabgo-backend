@@ -20,6 +20,8 @@ use App\Models\Payment\WalletWithdrawalRequest;
 use App\Http\Controllers\Api\V1\BaseController;
 use App\Base\Constants\Masters\WithdrawalRequestStatus;
 use App\Base\Constants\Setting\Settings;
+use App\Models\Payment\OwnerWalletHistory;
+use App\Transformers\Payment\OwnerWalletHistoryTransformer;
 
 /**
  * @group Payment
@@ -207,13 +209,29 @@ class PaymentController extends BaseController
                 $default_card_id = $default_card->id;
             }
 
-        } else {
+        } elseif(access()->hasRole(Role::DRIVER)) {
             $query = DriverWalletHistory::where('user_id', auth()->user()->driver->id)->orderBy('created_at', 'desc');
             $result = filter($query, new DriverWalletHistoryTransformer)->defaultSort('-created_at')->paginate();
 
             $driver_wallet = auth()->user()->driver->driverWallet;
 
             $wallet_balance= $driver_wallet->amount_balance;
+            $currency_code = get_settings('currency_code');
+            $currency_symbol = get_settings('currency_symbol');
+
+            $default_card = CardInfo::where('user_id', auth()->user()->id)->where('is_default', true)->first();
+            $default_card_id = null;
+            if ($default_card) {
+                $default_card_id = $default_card->id;
+            }
+        }else{
+
+            $query = OwnerWalletHistory::where('user_id', auth()->user()->owner->id)->orderBy('created_at', 'desc');
+            $result = filter($query, new OwnerWalletHistoryTransformer)->defaultSort('-created_at')->paginate();
+
+            $owner_wallet = auth()->user()->owner->ownerWalletDetail;
+
+            $wallet_balance= $owner_wallet->amount_balance;
             $currency_code = get_settings('currency_code');
             $currency_symbol = get_settings('currency_symbol');
 
