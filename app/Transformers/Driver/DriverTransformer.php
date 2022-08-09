@@ -55,6 +55,7 @@ class DriverTransformer extends Transformer
             'service_location_id'=>$user->service_location_id,
             'vehicle_type_id'=> $user->vehicle_type,
             'vehicle_type_name'=>$user->vehicle_type_name,
+            'vehicle_type_icon'=>$user->vehicle_type_image,
             'car_make'=>$user->car_make,
             'car_model'=>$user->car_model,
             'car_make_name'=>$user->car_make_name,
