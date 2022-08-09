@@ -22,7 +22,7 @@ class FleetDriversController extends BaseController
     protected $database;
 
 
-    public function __construct(Driver $driver,Fleet $fleet,Database $database,ImageUploaderContract $imageUploader)
+    public function __construct(Driver $driver,Fleet $fleet,Database $database,ImageUploaderContract $imageUploader,User $user)
     {
         $this->driver = $driver;
 
@@ -31,6 +31,8 @@ class FleetDriversController extends BaseController
         $this->database = $database;
         
         $this->imageUploader = $imageUploader;
+
+        $this->user = $user;
     }
 
 
