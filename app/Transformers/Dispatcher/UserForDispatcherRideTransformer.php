@@ -30,7 +30,7 @@ class UserForDispatcherRideTransformer extends Transformer
      * @var array
      */
     protected $defaultIncludes = [
-
+        'tripRequestHistory'
     ];
 
     /**
