@@ -129,7 +129,10 @@ class DispatcherCreateRequestController extends BaseController
         // DB::beginTransaction();
         // try {
 
-        $user = User::create($user_params);
+            $user = User::where('mobile',$request->phone_number)->first();
+            if(!$user){
+                $user = User::create($user_params);                
+            }
         
         $request_params['user_id'] = $user->id;
 
@@ -428,7 +431,10 @@ class DispatcherCreateRequestController extends BaseController
             'mobile_confirmed'=>true
             ];
 
-            $user = User::create($user_params);
+            $user = User::where('mobile',$request->phone_number)->first();
+            if(!$user){
+                $user = User::create($user_params);                
+            }
 
             $request_params['user_id'] = $user->id;
 
