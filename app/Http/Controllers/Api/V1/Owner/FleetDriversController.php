@@ -13,6 +13,8 @@ use App\Transformers\Owner\FleetTransformer;
 use App\Base\Services\ImageUploader\ImageUploaderContract;
 use Kreait\Firebase\Database;
 use App\Models\User;
+use App\Models\Access\Role;
+
 
 class FleetDriversController extends BaseController
 {
