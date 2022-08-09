@@ -57,6 +57,11 @@ class FleetDriversController extends BaseController
 
     /**
      * Add Driver
+     * @bodyParam name string required name of the driver
+     * @bodyParam email string required email of the driver
+     * @bodyParam mobile string required mobile of the driver
+     * @bodyParam address string required address of the driver
+     * @bodyParam profile string required profile pic of the driver
      * 
      * 
      * */

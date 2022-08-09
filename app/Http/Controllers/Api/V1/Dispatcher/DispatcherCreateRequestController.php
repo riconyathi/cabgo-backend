@@ -23,6 +23,8 @@ use Sk\Geohash\Geohash;
 use Kreait\Firebase\Database;
 use App\Base\Constants\Auth\Role;
 use Carbon\Carbon;
+use App\Transformers\User\UserForDispatcherRideTransformer;
+
 
 /**
  * @group Dispatcher-trips-apis
@@ -347,9 +349,7 @@ class DispatcherCreateRequestController extends BaseController
 
         if($user){
             
-            $query = $this->request->where('user_id', $user->id)->orderBy('created_at', 'desc')->where('is_completed',true)->get();
-
-            $request_result =  fractal($query, new UserRequestForDispatcherAppTransformer);
+            $request_result =  fractal($user, new UserForDispatcherRideTransformer);
 
             $message = 'user_exists';
         }
