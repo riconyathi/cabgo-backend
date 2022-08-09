@@ -23,7 +23,7 @@ use Sk\Geohash\Geohash;
 use Kreait\Firebase\Database;
 use App\Base\Constants\Auth\Role;
 use Carbon\Carbon;
-use App\Transformers\User\UserForDispatcherRideTransformer;
+use App\Transformers\Dispatcher\UserForDispatcherRideTransformer;
 
 
 /**

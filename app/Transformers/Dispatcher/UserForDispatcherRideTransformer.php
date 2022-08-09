@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Transformers\User;
+namespace App\Transformers\Dispatcher;
 
 use App\Models\User;
 use App\Base\Constants\Auth\Role;
