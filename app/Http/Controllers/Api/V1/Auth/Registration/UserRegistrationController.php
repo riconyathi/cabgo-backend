@@ -163,7 +163,7 @@ class UserRegistrationController extends LoginController
 
         $user->attachRole(Role::USER);
 
-        $this->dispatch(new UserRegistrationNotification($user));
+        // $this->dispatch(new UserRegistrationNotification($user));
 
         event(new UserRegistered($user));
 

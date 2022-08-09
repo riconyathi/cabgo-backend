@@ -162,7 +162,7 @@ class DriverSignupController extends LoginController
 
         // $this->otpHandler->delete($mobileUuid);
         $user->attachRole(Role::DRIVER);
-        $this->dispatch(new UserRegistrationNotification($user));
+        // $this->dispatch(new UserRegistrationNotification($user));
         event(new UserRegistered($user));
         // } catch (\Exception $e) {
         //     DB::rollBack();
