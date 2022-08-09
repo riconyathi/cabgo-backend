@@ -76,7 +76,6 @@ class FleetDriversController extends BaseController
                 ->saveDriverProfilePicture();
         }
 
-        $this->database->getReference('drivers/'.$driver->id)->set(['id'=>$driver->id,'vehicle_type'=>null,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
         $user = User::create([
             'name' => $request->input('name'),
@@ -96,6 +95,8 @@ class FleetDriversController extends BaseController
         $created_params['service_location_id'] = $owner_detail->service_location_id;
 
         $driver = $user->driver()->create($created_params);
+
+         $this->database->getReference('drivers/'.$driver->id)->set(['id'=>$driver->id,'vehicle_type'=>null,'active'=>0,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
         return $this->respondSuccess(null,'driver_added_succesfully');
 
