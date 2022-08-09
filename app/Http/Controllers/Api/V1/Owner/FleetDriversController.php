@@ -64,8 +64,8 @@ class FleetDriversController extends BaseController
 
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'mobile'=>'required|unique:users,mobile',
+            'email' => 'required',
+            'mobile'=>'required',
             'address'=>'required|min:10',
             'profile'=>'required'
         ]);
