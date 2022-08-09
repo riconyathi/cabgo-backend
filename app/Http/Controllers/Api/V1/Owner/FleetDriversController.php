@@ -72,7 +72,6 @@ class FleetDriversController extends BaseController
             'email' => 'required',
             'mobile'=>'required',
             'address'=>'required|min:10',
-            'profile'=>'required'
         ]);
 
         $owner_detail = auth()->user()->owner;
