@@ -75,7 +75,7 @@
 @endif
 <td>{{$result->email}}</td>
 <td>{{$result->mobile}}</td>
-<td>{{$result->vehicleType->name}}</td>
+<td>{{$result->vehicleType?$result->vehicleType->name:'-'}}</td>
 <td>
     <a href="{{ url('drivers/document/view',$result->id) }}" class="btn btn-social-icon btn-bitbucket">
         <i class="fa fa-file-text"></i>
