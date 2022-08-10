@@ -717,5 +717,4 @@ return array (
   'fleet_drivers' => 'Fleet Drivers',
   'add_fleet_driver' => 'Add Fleet Driver',
   'select_owner' => 'Select Owner',
-
 );

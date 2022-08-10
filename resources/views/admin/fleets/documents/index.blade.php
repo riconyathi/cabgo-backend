@@ -26,7 +26,7 @@
 <div class="box">
 
     <div class="box-header with-border">
-        <a href="{{ url('drivers') }}">
+        <a href="{{ url('fleets') }}">
             <button class="btn btn-danger btn-sm pull-right" type="submit">
                 <i class="mdi mdi-keyboard-backspace mr-2"></i>
                 @lang('view_pages.back')
