@@ -25,6 +25,8 @@ use App\Models\User;
 use App\Base\Constants\Masters\PushEnums;
 use App\Jobs\NotifyViaMqtt;
 use App\Models\Payment\UserWallet;
+use App\Models\Payment\OwnerWallet;
+use App\Models\Payment\OwnerWalletHistory;
 
 /**
  * @group Cash-free Paymentgateway
@@ -200,9 +202,14 @@ class CashfreePaymentController extends ApiController
                     $wallet_model = new UserWallet();
                     $wallet_add_history_model = new UserWalletHistory();
                     $user_id = $user->id;
-                } else {
+
+                } elseif($user->hasRole('driver')) {
                     $wallet_model = new DriverWallet();
                     $wallet_add_history_model = new DriverWalletHistory();
+                    $user_id = $user->driver->id;
+                }else {
+                    $wallet_model = new OwnerWallet();
+                    $wallet_add_history_model = new OwnerWalletHistory();
                     $user_id = $user->driver->id;
                 }
 

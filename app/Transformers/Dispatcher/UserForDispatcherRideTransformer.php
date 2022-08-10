@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Transformers\User;
+namespace App\Transformers\Dispatcher;
 
 use App\Models\User;
 use App\Base\Constants\Auth\Role;
@@ -10,9 +10,11 @@ use App\Transformers\Requests\TripRequestTransformer;
 use App\Models\Admin\Sos;
 use App\Transformers\Common\SosTransformer;
 use App\Transformers\User\FavouriteLocationsTransformer;
+use App\Base\Constants\Setting\Settings;
+use Carbon\Carbon;
+use App\Transformers\Requests\UserRequestForDispatcherAppTransformer;
 
-
-class TripUserTransformer extends Transformer
+class UserForDispatcherRideTransformer extends Transformer
 {
     /**
      * Resources that can be included if requested.
@@ -20,7 +22,7 @@ class TripUserTransformer extends Transformer
      * @var array
      */
     protected $availableIncludes = [
-       
+        'tripRequestHistory'
     ];
     /**
      * Resources that can be included default.
@@ -28,7 +30,7 @@ class TripUserTransformer extends Transformer
      * @var array
      */
     protected $defaultIncludes = [
-
+        'tripRequestHistory'
     ];
 
     /**
@@ -56,19 +58,26 @@ class TripUserTransformer extends Transformer
             'refferal_code'=>$user->refferal_code,
             'currency_code'=>get_settings('currency_code'),
             'currency_symbol'=>get_settings('currency_symbol'),
-            //'map_key'=>get_settings('google_map_key'),
-            'show_rental_ride'=>false,
-            // 'created_at' => $user->converted_created_at->toDateTimeString(),
-            // 'updated_at' => $user->converted_updated_at->toDateTimeString(),
         ];
 
-        $referral_comission = get_settings('referral_commision_for_user');
-        $referral_comission_string = 'Refer a friend and earn'.$user->countryDetail->currency_symbol.''.$referral_comission;
-        $params['referral_comission_string'] = $referral_comission_string;
+
         return $params;
     }
 
     
-    
+    /**
+     * Include the request of the user.
+     *
+     * @param User $user
+     * @return \League\Fractal\Resource\Collection|\League\Fractal\Resource\NullResource
+     */
+    public function includeTripRequestHistory(User $user)
+    {
+        $request = $user->requestDetail()->orderBy('created_at', 'desc')->where('is_completed',true)->get();
 
+        return $request
+        ? $this->collection($request, new UserRequestForDispatcherAppTransformer)
+        : $this->null();
+    }
+     
 }

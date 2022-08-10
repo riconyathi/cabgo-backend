@@ -11,8 +11,8 @@ class OwnerWalletHistory extends Model
 
     protected $fillable = ['user_id', 'card_id', 'transaction_id', 'amount','conversion','merchant','admin_id','request_id','remarks','is_credit'];
 
-    public function owner()
+    public function ownerDetail()
     {
-        return $this->belongsTo(Owner::class, 'owner_id', 'id');
+        return $this->belongsTo(Owner::class, 'user_id', 'id');
     }
 }

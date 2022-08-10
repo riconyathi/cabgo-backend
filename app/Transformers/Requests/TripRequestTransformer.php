@@ -194,7 +194,7 @@ class TripRequestTransformer extends Transformer
      */
     public function includeUserDetail(RequestModel $request)
     {
-        if ($request->if_dispatch || $request->user_id==null) {
+        if ($request->user_id==null) {
             // @TODO need to redirect with adhoc user transformer
             $userDetail = $request->adHocuserDetail;
             return $userDetail

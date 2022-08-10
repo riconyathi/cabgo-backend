@@ -23,6 +23,8 @@ use Sk\Geohash\Geohash;
 use Kreait\Firebase\Database;
 use App\Base\Constants\Auth\Role;
 use Carbon\Carbon;
+use App\Transformers\Dispatcher\UserForDispatcherRideTransformer;
+
 
 /**
  * @group Dispatcher-trips-apis
@@ -126,6 +128,15 @@ class DispatcherCreateRequestController extends BaseController
         // store request details to db
         // DB::beginTransaction();
         // try {
+
+            $user = User::where('mobile',$request->phone_number)->belongsTorole('user')->first();
+            if(!$user){
+                $user = User::create($user_params); 
+                $user->attachRole(Role::USER);
+            }
+        
+        $request_params['user_id'] = $user->id;
+
         $request_detail = $this->request->create($request_params);
         // request place detail params
         $request_place_params = [
@@ -139,11 +150,9 @@ class DispatcherCreateRequestController extends BaseController
         $request_detail->requestPlace()->create($request_place_params);
         $ad_hoc_user_params = $request->only(['customer_name','phone_number']);
         // Store ad hoc user detail of this request
-        $request_detail->adHocuserDetail()->create($ad_hoc_user_params);
+        // $request_detail->adHocuserDetail()->create($ad_hoc_user_params);
 
-        $user = User::create($user_params);
         
-        $user->attachRole(Role::USER);
 
 
         $selected_drivers = [];
@@ -347,9 +356,7 @@ class DispatcherCreateRequestController extends BaseController
 
         if($user){
             
-            $query = $this->request->where('user_id', $user->id)->orderBy('created_at', 'desc')->where('is_completed',true)->get();
-
-            $request_result =  fractal($query, new UserRequestForDispatcherAppTransformer);
+            $request_result =  fractal($user, new UserForDispatcherRideTransformer);
 
             $message = 'user_exists';
         }
@@ -413,8 +420,8 @@ class DispatcherCreateRequestController extends BaseController
             'service_location_id'=>$service_location->id];
 
         // store request details to db
-        DB::beginTransaction();
-        try {
+        // DB::beginTransaction();
+        // try {
 
             $user_params= [
             'name'=>$request->customer_name,
@@ -423,6 +430,16 @@ class DispatcherCreateRequestController extends BaseController
             'refferal_code'=>str_random(6),
             'mobile_confirmed'=>true
             ];
+
+            $user = User::where('mobile',$request->phone_number)->belongsTorole('user')->first();
+            if(!$user){
+                $user = User::create($user_params); 
+                $user->attachRole(Role::USER);
+            }
+        
+
+            $request_params['user_id'] = $user->id;
+
             $request_detail = $this->request->create($request_params);
             // request place detail params
             $request_place_params = [
@@ -440,22 +457,18 @@ class DispatcherCreateRequestController extends BaseController
             $ad_hoc_user_params['mobile'] = $request->pickup_poc_mobile;
 
             // Store ad hoc user detail of this request
-            $request_detail->adHocuserDetail()->create($ad_hoc_user_params);
-
-
-            $user = User::create($user_params);
-
+            // $request_detail->adHocuserDetail()->create($ad_hoc_user_params);
 
 
             $request_result =  fractal($request_detail, new TripRequestTransformer)->parseIncludes('userDetail');
             // @TODO send sms & email to the user
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error($e);
-            Log::error('Error while Create new schedule request. Input params : ' . json_encode($request->all()));
-            return $this->respondBadRequest('Unknown error occurred. Please try again later or contact us if it continues.');
-        }
-        DB::commit();
+        // } catch (\Exception $e) {
+        //     DB::rollBack();
+        //     Log::error($e);
+        //     Log::error('Error while Create new schedule request. Input params : ' . json_encode($request->all()));
+        //     return $this->respondBadRequest('Unknown error occurred. Please try again later or contact us if it continues.');
+        // }
+        // DB::commit();
 
         return $this->respondSuccess($request_result, 'Request Scheduled Successfully');
     }
