@@ -74,6 +74,11 @@ Route::middleware('auth:web')->group(function () {
         Route::post('update/decline/reason', 'FleetController@updateFleetDeclineReason')->name('updateFleetDeclineReason');
         Route::get('assign_driver/{fleet}', 'FleetController@assignDriverView')->name('assignFleetToDriverView');
         Route::post('assign_driver/{fleet}', 'FleetController@assignDriver')->name('assignFleetToDriver');
+        Route::get('document/view/{fleet}', 'FleetDocumentController@index')->name('FleetDocumentView');
+        Route::get('upload/document/{fleet}/{needed_document}', 'FleetDocumentController@documentUploadView');
+        Route::post('upload/document/{fleet}/{needed_document}', 'FleetDocumentController@uploadDocument')->name('updateOwnerDocument');
+        Route::post('approve/documents', 'FleetDocumentController@approveFleetDocument')->name('approveFleetDocument');
+
     });
 
     // Driver Management
@@ -165,6 +170,8 @@ Route::middleware('auth:web')->group(function () {
             Route::get('delete/{company}', 'CompanyController@delete');
         });
 
+//drivers
+
     Route::group(['prefix' => 'drivers'], function () {
         // prefix('drivers')->group(function () {
         Route::get('/', 'DriverController@index');
@@ -209,6 +216,38 @@ Route::middleware('auth:web')->group(function () {
        Route::get('fetch/negative-balance-drivers', 'DriverController@NegativeBalanceFetch');
         });
 
+//Fleet drivers
+
+    Route::group(['prefix' => 'fleet-drivers'], function () {
+        // prefix('drivers')->group(function () {
+        Route::get('/', 'FleetDriverController@index');
+        Route::get('/fetch/approved', 'FleetDriverController@getApprovedFleetDrivers');
+
+        Route::get('/waiting-for-approval', 'FleetDriverController@approvalPending');
+        // Route::get('/fetch', 'DriverController@getAllDrivers');
+        Route::get('/fetch/approval-pending-drivers', 'FleetDriverController@getApprovalPendingFleetDrivers');
+        Route::get('/fetch/driver-ratings', 'FleetDriverController@fetchFleetDriverRatings');
+
+        Route::get('/create', 'FleetDriverController@create');
+        Route::post('store', 'FleetDriverController@store');
+        Route::get('/{driver}', 'FleetDriverController@getById');
+        Route::get('request-list/{driver}', 'FleetDriverController@DriverTripRequestIndex');
+        Route::get('request-list/{driver}/fetch', 'FleetDriverController@FleetDriverTripRequest');
+        Route::get('payment-history/{driver}', 'FleetDriverController@FleetDriverPaymentHistory');
+        Route::post('payment-history/{driver}', 'FleetDriverController@StoreFleetDriverPaymentHistory');
+        Route::post('update/{driver}', 'FleetDriverController@update');
+        Route::get('toggle_status/{driver}', 'FleetDriverController@toggleStatus');
+        Route::get('toggle_approve/{driver}/{approval_status}', 'FleetDriverController@toggleApprove');
+        Route::get('toggle_available/{driver}', 'FleetDriverController@toggleAvailable');
+        Route::get('delete/{driver}', 'FleetDriverController@delete');
+        Route::get('document/view/{driver}', 'FleetDriverDocumentController@index');
+        Route::get('upload/document/{driver}/{needed_document}', 'FleetDriverDocumentController@documentUploadView');
+        Route::post('upload/document/{driver}/{needed_document}', 'FleetDriverDocumentController@uploadDocument');
+        Route::post('approve/documents', 'FleetDriverDocumentController@approveFleetDriverDocument')->name('approveFleetDriverDocument');
+        Route::get('get/carmodel', 'FleetDriverController@getCarModel')->name('getCarModel');
+        Route::post('update/decline/reason', 'FleetDriverController@UpdateDriverDeclineReason')->name('UpdateFleetDriverDeclineReason');
+       
+        });
         Route::group(['prefix' => 'admins',  'middleware' => 'permission:admin'], function () {
             // prefix('admins')->group(function () {
             Route::get('/', 'AdminController@index');

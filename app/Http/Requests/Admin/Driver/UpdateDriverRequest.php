@@ -24,7 +24,8 @@ class UpdateDriverRequest extends BaseRequest
             // 'gender'=>'required|in:male,female,others',
             // 'is_company_driver' => 'sometimes|required|in:0,1',
             'company'=>'sometimes',
-            'type' => 'sometimes|required'
+            'type' => 'sometimes|required',
+            'owner_id' => 'required',
 
 
         ];

@@ -56,6 +56,8 @@ class Permission
     const MANAGE_NEEDED_DOC = 'manage-needed-document';
     const MANAGE_OWNER_NEEDED_DOC = 'manage-owner-needed-document';
     const MANAGE_FLEET_NEEDED_DOC = 'manage-fleet-needed-document';
+    const VIEW_FLEET_DRIVERS = 'view-fleet-drivers';
+    const FLEET_DRIVERS_MENU = 'fleet-drivers-menu';
 
 
     // Manage Owner

@@ -283,7 +283,43 @@ if(str_contains((string)request()->path(),'translations')){
        
       </li>
       @endif
+       @if(auth()->user()->can('fleet-drivers-menu'))
+            @if (auth()->user()->hasRole('owner'))
+                @php
+                    $route = 'company/drivers';
+                @endphp
+            @else
+                @php
+                    $route = 'fleet-drivers';
+                @endphp
+            @endif
 
+     
+      <li class="treeview {{ 'fleet-drivers' == $main_menu ? 'active menu-open' : '' }}">
+        <a href="javascript: void(0);">
+          <i class="fa fa-users"></i>
+          <span> @lang('pages_names.fleet_drivers') </span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-right pull-right"></i>
+          </span>
+        </a>
+
+        <ul class="treeview-menu">
+          @if(auth()->user()->can('view-fleet-drivers'))
+          <li class="{{ 'driver_details' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url($route)}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.approved_fleet_drivers')</a>
+          </li>
+          @endif
+
+          @if(auth()->user()->can('view-fleet-drivers'))
+          <li class="{{ 'driver_approval_pending' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/fleet-drivers/waiting-for-approval')}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.pending_approvals')</a>
+          </li>
+          @endif
+        </ul> 
+       
+      </li>
+      @endif
       @if(auth()->user()->can('user-menu'))
       <li class="treeview {{ 'users' == $main_menu ? 'active menu-open' : '' }}">
         <a href="javascript: void(0);">

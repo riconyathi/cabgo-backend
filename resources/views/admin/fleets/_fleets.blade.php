@@ -12,7 +12,8 @@
                                  <th>{{ trans('view_pages.vehicle_type')}}</th>
                                  <th>{{ trans('view_pages.car_brand')}}</th>
                                  <th>{{ trans('view_pages.car_model')}}</th>
-                                 <th>{{ trans('view_pages.qr_code')}}</th>
+                                <th> @lang('view_pages.document_view')</th>
+                                 <!-- <th>{{ trans('view_pages.qr_code')}}</th> -->
                                  <th>{{ trans('view_pages.license_number')}}</th>
                                  <th>{{ trans('view_pages.status')}}</th> 
                                 <th>{{ trans('view_pages.action')}}</th>
@@ -36,7 +37,13 @@
                                     <td>{{ $result->vehicleType->name }}</td>
                                     <td>{{ $result->carBrand->name }}</td>
                                     <td>{{ $result->carModel->name }}</td>
-                                    <td>
+                                    <td class="manage-driver text-center">
+                                    <a href="{{url('fleets/document/view', $result->id) }}" class="btn btn-social-icon btn-bitbucket">
+                                    <i class="fa fa-file-code-o"></i>
+                                    </a>
+                                    </td>
+
+<!--                                     <td>
                                         @if ($result->approve)
                                             <a href="{{ $result->qr_code_image }}" download title="Click to Download">
                                                 <img src="{{ $result->qr_code_image }}" alt="" width="30" height="30">    
@@ -45,7 +52,7 @@
                                             -
                                         @endif
                                         
-                                    </td>
+                                    </td> -->
                                     <td>{{ $result->license_number }}</td>
                                     <td>
                                         @if($result->approve)
