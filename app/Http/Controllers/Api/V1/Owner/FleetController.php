@@ -87,11 +87,21 @@ class FleetController extends BaseController
     public function assignDriver(Request $request,Fleet $fleet)
     {
         $driver = Driver::whereId($request->driver_id)->first();
-            
+        
+        if($fleet->driverDetail){
+
+            $fleet->driverDetail()->update(['fleet_id'=>null,'vehicle_type'=>null]);
+
+        }
+
+        $fleet->update(['driver_id'=>$request->driver_id]);
+
+
         $driver->update([
             'fleet_id' => $fleet->id,
             'vehicle_type' => $fleet->vehicle_type
         ]);
+
 
         return $this->respondSuccess();
         
