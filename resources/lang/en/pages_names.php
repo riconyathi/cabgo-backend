@@ -71,7 +71,7 @@ return array (
   'master' => 'Master Data',
   'carmake' => 'Car Make',
   'carmodel' => 'Car Model',
-  'needed_doc' => 'Needed Document',
+  'needed_doc' => 'Driver Needed Document',
   'owner_needed_doc' => 'Owner Needed Document',
   'package_type' => 'Package Type',
   'view_package_type' => 'Package Type View',
@@ -132,6 +132,8 @@ return array (
   'logout' => 'Logout',
   'fleet_needed_doc' => 'Fleet Needed Document',
   'add_owner_needed_doc' => 'Add Owner Needed Doc',
-  
+  'fleet_drivers'  => 'Fleet Drivers',
+  'approved_fleet_drivers' => 'Approved Fleet Drivers',
+  'pending_approvals' => 'Approval Pending Fleet Drivers',
 
 );

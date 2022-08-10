@@ -713,4 +713,9 @@ return array (
   'todays_earnings'=>'Today Earnings',
   'user_payment_history' => 'User Payment History',
   'add_fleet_needed_doc' => 'Add Fleet Needed Doc',
+  'document_for' => 'Document For',
+  'fleet_drivers' => 'Fleet Drivers',
+  'add_fleet_driver' => 'Add Fleet Driver',
+  'select_owner' => 'Select Owner',
+
 );
