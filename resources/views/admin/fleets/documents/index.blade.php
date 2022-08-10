@@ -248,7 +248,7 @@ $(document).on('click','.approve',function(){
 });
 
 $(document).on('click','#approveDocument',function(){
-    var url = "{{url('fleets/by_area') }}/"+"{{$fleet->service_location_id}}";
+    var url = "{{url('fleets') }}/"+"{{$fleet->service_location_id}}";
 
     $.ajax({
         url: '{{ route("approveFleetDocument") }}',
