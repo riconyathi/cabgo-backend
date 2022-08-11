@@ -334,6 +334,13 @@ class EarningsController extends BaseController
     */
     public function earningsReport($from_date, $to_date)
     {
+
+        if(access()->hasRole(Role::OWNER)){
+
+            return $this->ownerEarningsReport();
+
+        }
+
         $driver = auth()->user()->driver;
 
         $timezone = auth()->user()->timezone?:env('SYSTEM_DEFAULT_TIMEZONE');
@@ -383,5 +390,61 @@ class EarningsController extends BaseController
         $converted_to_date = Carbon::parse($to_date)->format('jS M Y');
 
         return response()->json(['success'=>true,'message'=>'earnings_report','data'=>['from_date'=>$converted_from_date,'to_date'=>$converted_to_date,'total_trips_count'=>$total_trips,'total_trip_kms'=>$total_trip_kms,'total_earnings'=>$total_earnings,'total_cash_trip_amount'=>$total_cash_trip_amount,'total_wallet_trip_amount'=>$total_wallet_trip_amount,'total_cash_trip_count'=>$total_cash_trip_count,'total_wallet_trip_count'=>$total_wallet_trip_count,'currency_symbol'=>$currency_symbol,'total_hours_worked'=>$total_hours_worked]]);
+    }
+
+
+    /**
+     * Owner Earnings Report
+     * 
+     * 
+     * */
+    public function ownerEarningsReport()
+    {
+
+
+        $owner = auth()->user()->owner;
+
+        $timezone = auth()->user()->timezone?:env('SYSTEM_DEFAULT_TIMEZONE');
+
+        $weeks = [$from_date,$to_date];
+
+        $total_trips = $this->request->where('owner_id', $owner->id)->where('is_completed', 1)->whereBetween('trip_start_time', $weeks)->get()->count();
+
+        if ($total_trips==0) {
+            $disable_previous_week = true;
+        }
+        // Total Trip kms
+        $total_trip_kms = $this->request->where('owner_id', $owner->id)->where('is_completed', 1)->whereBetween('trip_start_time', $weeks)->sum('total_distance');
+
+        // Total Earnings
+        $total_earnings = RequestBill::whereHas('requestDetail', function ($query) use ($owner,$weeks) {
+            $query->where('owner_id', $owner->id)->where('is_completed', 1)->whereBetween('trip_start_time', $weeks);
+        })->sum('driver_commision');
+
+        //Total cash trip amount
+        $total_cash_trip_amount = RequestBill::whereHas('requestDetail', function ($query) use ($owner,$weeks) {
+            $query->where('owner_id', $owner->id)->where('is_completed', 1)->whereBetween('trip_start_time', $weeks)->where('payment_opt', '1'); //cash
+        })->sum('driver_commision');
+
+
+        $total_hours_worked = 0;
+        $total_hours_worked = $total_hours_worked>60?round($total_hours_worked/60, 3).' Hrs':$total_hours_worked.' Mins';
+
+        // Total Wallet trip amount
+        $total_wallet_trip_amount = RequestBill::whereHas('requestDetail', function ($query) use ($owner,$weeks) {
+            $query->where('owner_id', $owner->id)->where('is_completed', 1)->whereBetween('trip_start_time', $weeks)->where('payment_opt', '2'); //cash
+        })->sum('driver_commision');
+
+        $total_cash_trip_count = $this->request->where('owner_id', $owner->id)->where('is_completed', 1)->whereBetween('trip_start_time', $weeks)->where('payment_opt', '1')->get()->count();
+
+        $total_wallet_trip_count = $this->request->where('owner_id', $owner->id)->where('is_completed', 1)->whereBetween('trip_start_time', $weeks)->where('payment_opt', '2')->get()->count();
+
+        $currency_symbol = get_settings('currency_symbol');
+
+        $converted_from_date = Carbon::parse($from_date)->format('jS M Y');
+        $converted_to_date = Carbon::parse($to_date)->format('jS M Y');
+
+        return response()->json(['success'=>true,'message'=>'earnings_report','data'=>['from_date'=>$converted_from_date,'to_date'=>$converted_to_date,'total_trips_count'=>$total_trips,'total_trip_kms'=>$total_trip_kms,'total_earnings'=>$total_earnings,'total_cash_trip_amount'=>$total_cash_trip_amount,'total_wallet_trip_amount'=>$total_wallet_trip_amount,'total_cash_trip_count'=>$total_cash_trip_count,'total_wallet_trip_count'=>$total_wallet_trip_count,'currency_symbol'=>$currency_symbol,'total_hours_worked'=>$total_hours_worked]]);
+
     }
 }
