@@ -22,6 +22,7 @@ Route::prefix('dispatcher')->namespace('Dispatcher')->middleware('auth')->group(
         Route::prefix('request')->group(function () {
             Route::post('create', 'DispatcherCreateRequestController@createRequest');
             Route::post('find-user-data','DispatcherCreateRequestController@findUserData');
+            Route::get('request-detail/{request}','DispatcherCreateRequestController@requestDetail');
         });
     });
 });

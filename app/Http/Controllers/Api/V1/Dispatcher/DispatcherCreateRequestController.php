@@ -472,4 +472,20 @@ class DispatcherCreateRequestController extends BaseController
 
         return $this->respondSuccess($request_result, 'Request Scheduled Successfully');
     }
+
+    /** 
+     * Find Request Detail
+     * 
+     * 
+     * */
+    public function requestDetail(Request $request){
+
+        $includes = ['driverDetail','requestBill','userDetail'];
+
+        $request_result = fractal($request, new TripRequestTransformer)->parseIncludes($includes);
+
+        return $this->respondSuccess($request_result, 'Request Listed Successfully');
+
+
+    }
 }
