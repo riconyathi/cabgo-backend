@@ -23,6 +23,7 @@ use Kreait\Firebase\Database;
 use App\Base\Constants\Auth\Role;
 use Carbon\Carbon;
 use App\Http\Requests\Request\CancelTripRequest;
+use App\Base\Constants\Masters\UserType;
 
 /**
  * @group Dispatcher-trips-apis
