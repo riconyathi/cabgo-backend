@@ -138,7 +138,7 @@ class ImageUploader implements ImageUploaderContract
     {
         $this->validateFile();
 
-        $config = $this->config('fleets.upload.documents');
+        $config = $this->config('fleets.upload.images');
 
         $this->setDefaultResize(data_get($config, 'image.store_resolution'));
 
