@@ -385,6 +385,9 @@ class DriverSignupController extends LoginController
 
         $owner = $user->owner()->create($created_params);
 
+        $owner_wallet = $owner->ownerWalletDetail()->create(['amount_added'=>0]);
+        
+
         $this->database->getReference('owners/'.$owner->id)->set(['id'=>$owner->id,'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
 

@@ -231,7 +231,14 @@ class PaymentController extends BaseController
 
             $owner_wallet = auth()->user()->owner->ownerWalletDetail;
 
-            $wallet_balance= $owner_wallet->amount_balance;
+            if(!$owner_wallet){
+
+                $wallet_balance = 0;
+
+            }else{
+                $wallet_balance= $owner_wallet->amount_balance;
+
+            }   
             $currency_code = get_settings('currency_code');
             $currency_symbol = get_settings('currency_symbol');
 
