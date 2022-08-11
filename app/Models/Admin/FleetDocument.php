@@ -27,6 +27,10 @@ class FleetDocument extends Model
     
     public function uploadPath()
     {
-        return config('base.fleets.upload.images.path');
+        if (!$this->fleet()->exists()) {
+            return null;
+        }
+
+        return folder_merge(config('base.fleets.upload.images.path'), $this->fleet->id);
     }
 }
