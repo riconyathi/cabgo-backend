@@ -22,7 +22,7 @@ class FleetDocument extends Model
 
     public function getImageAttribute($value){
 
-        return Storage::disk(env('FILESYSTEM_DRIVER'))->url(file_path($this->uploadPath(), $image));
+        return Storage::disk(env('FILESYSTEM_DRIVER'))->url(file_path($this->uploadPath(), $value));
     }
     
     public function uploadPath()
