@@ -48,14 +48,14 @@ class FleetNeededDocumentTransformer extends Transformer
             'document_status_string'=>DriverDocumentStatusString::NOT_UPLOADED
         ];
 
-        $driver_document = FleetDocument::where('document_id', $fleetneededdocument->id)->where('owner_id', auth()->user()->owner->id)->first();
+        $fleet_document = FleetDocument::where('document_id', $fleetneededdocument->id)->where('fleet_id', request()->fleet_id)->first();
 
-        if ($driver_document) {
+        if ($fleet_document) {
             $params['is_uploaded'] = true;
-            $params['document_status']= $driver_document->document_status;
+            $params['document_status']= $fleet_document->document_status;
 
             foreach (DriverDocumentStatus::DocumentStatus() as $key=> $document_string) {
-                if ($driver_document->document_status==$key) {
+                if ($fleet_document->document_status==$key) {
                     $params['document_status_string'] = $document_string;
                 }
             }
