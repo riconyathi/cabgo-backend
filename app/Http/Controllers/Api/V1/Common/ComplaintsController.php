@@ -42,8 +42,10 @@ class ComplaintsController extends BaseController
     {
         if (access()->hasRole(Role::USER)) {
             $user_type = 'user';
-        } else {
+        } elseif(access()->hasRole(Role::DRIVER)) {
             $user_type = 'driver';
+        }else{
+            $user_type = 'owner';
         }
 
         $complaint_type='general';
