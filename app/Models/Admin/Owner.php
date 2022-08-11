@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use App\Models\Payment\OwnerWallet;
 use App\Models\Payment\OwnerWalletHistory;
+use Carbon\Carbon;
 
 class Owner extends Model
 {
