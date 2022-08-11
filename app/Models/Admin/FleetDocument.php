@@ -20,20 +20,7 @@ class FleetDocument extends Model
         return $this->belongsTo(Fleet::class,'fleet_id','id');
     }
 
-    public function getRegistrationCertificateImageAttribute(){
-        $image = $this->whereName('registration_certificate')->pluck('image')->first();
-        if (empty($image)) {
-            return null;
-        }
-
-        return Storage::disk(env('FILESYSTEM_DRIVER'))->url(file_path($this->uploadPath(), $image));
-    }
-
-    public function getVehicleBackSideImageAttribute(){
-        $image = $this->whereName('vehicle_back_side')->pluck('image')->first();
-        if (empty($image)) {
-            return null;
-        }
+    public function getImageAttribute($value){
 
         return Storage::disk(env('FILESYSTEM_DRIVER'))->url(file_path($this->uploadPath(), $image));
     }
