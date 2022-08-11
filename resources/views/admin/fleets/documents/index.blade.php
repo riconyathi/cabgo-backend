@@ -167,7 +167,7 @@
                 <img src="" class="imagepreview" style="width: 100%;">
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-danger btn-sm float-right"> @lang('view_pages.close')</button>
+                <button type="button" data-bs-dismiss="modal" class="btn btn-danger btn-sm float-right"> @lang('view_pages.close')</button>
                 <a href="" class="downloadImage" download>
                     <button type="button" class="btn btn-success btn-sm float-right mr-2">@lang('view_pages.download')</button>
                 </a>
