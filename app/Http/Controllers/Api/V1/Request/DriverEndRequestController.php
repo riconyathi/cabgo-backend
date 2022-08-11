@@ -218,6 +218,7 @@ class DriverEndRequestController extends BaseController
         $calculated_bill['requested_currency_symbol'] = $requested_currency_symbol;
         // @TODO need to take admin commision from driver wallet
         if ($request_detail->payment_opt==PaymentType::CASH) {
+            
             // Deduct the admin commission + tax from driver walllet
             $admin_commision_with_tax = $calculated_bill['admin_commision_with_tax'];
             $driver_wallet = $request_detail->driverDetail->driverWallet;

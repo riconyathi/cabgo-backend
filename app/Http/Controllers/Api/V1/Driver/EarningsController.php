@@ -337,7 +337,7 @@ class EarningsController extends BaseController
 
         if(access()->hasRole(Role::OWNER)){
 
-            return $this->ownerEarningsReport();
+            return $this->ownerEarningsReport($from_date, $to_date);
 
         }
 
@@ -398,7 +398,7 @@ class EarningsController extends BaseController
      * 
      * 
      * */
-    public function ownerEarningsReport()
+    public function ownerEarningsReport($from_date, $to_date)
     {
 
 
