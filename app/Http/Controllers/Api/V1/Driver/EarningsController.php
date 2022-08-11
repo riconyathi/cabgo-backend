@@ -10,6 +10,7 @@ use App\Models\Admin\DriverAvailability;
 use App\Base\Constants\Master\PaymentType;
 use App\Http\Controllers\Api\V1\BaseController;
 use App\Base\Constants\Setting\Settings;
+use App\Base\Constants\Auth\Role;
 
 /**
  * @group Driver Earnings
