@@ -456,7 +456,7 @@ class PaymentController extends BaseController
                 $this->throwCustomException('You cannot make multiple request. please wait for your existing request approval');
             }
 
-        }else{
+        }elseif(access()->hasRole(Role::DRIVER)){
             
             $user_info = auth()->user()->driver;
 
@@ -468,6 +468,39 @@ class PaymentController extends BaseController
             $driver_wallet = auth()->user()->driver->driverWallet;
 
             $wallet_balance= $driver_wallet->amount_balance;
+
+            if($wallet_balance <=0){
+
+                $this->throwCustomException('Your wallet balance is too low');
+
+            }
+
+             if($wallet_balance < $request->requested_amount){
+
+                $this->throwCustomException('Yout wallet balance is too low than your requested amount');
+
+            }
+
+            // $user_info->withdrawalRequestsHistory()->where('status',0)->exists();
+
+            $exists_request = WalletWithdrawalRequest::where('driver_id',$user_info->id)->where('status',0)->exists();
+
+            if($exists_request==true){
+                $this->throwCustomException('You cannot make multiple request. please wait for your existing request approval');
+            }
+
+        }else{
+
+            $user_info = auth()->user()->owner;
+
+            $currency_code = get_settings('currency_symbol');
+
+            $created_params['requested_currency'] = $currency_code;
+            $created_params['owner_id'] = auth()->user()->owner->id;
+
+            $owner_wallet = auth()->user()->owner->ownerWalletDetail;
+
+            $wallet_balance= $owner_wallet->amount_balance;
 
             if($wallet_balance <=0){
 
