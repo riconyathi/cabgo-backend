@@ -228,7 +228,7 @@ class DriverEndRequestController extends BaseController
             $owner_wallet->amount_balance -= $admin_commision_with_tax;
             $owner_wallet->save();
 
-            $driver_wallet_history = $request_detail->driverDetail->owner->ownerWalletHistoryDetail()->create([
+            $owner_wallet_history = $request_detail->driverDetail->owner->ownerWalletHistoryDetail()->create([
                 'amount'=>$admin_commision_with_tax,
                 'transaction_id'=>str_random(6),
                 'remarks'=>WalletRemarks::ADMIN_COMMISSION_FOR_REQUEST,
@@ -274,6 +274,24 @@ class DriverEndRequestController extends BaseController
                 'is_credit'=>false]);
 
                 // @TESTED to add driver commision if the payment type is wallet
+                if($request_detail->driverDetail->owner()->exists()){
+
+                $driver_commision = $calculated_bill['driver_commision'];
+                $owner_wallet = $request_detail->driverDetail->owner->ownerWalletDetail;
+                $owner_wallet->amount_added += $driver_commision;
+                $owner_wallet->amount_balance += $driver_commision;
+                $owner_wallet->save();
+
+                $owner_wallet_history = $request_detail->driverDetail->owner->ownerWalletHistoryDetail()->create([
+                'amount'=>$driver_commision,
+                'transaction_id'=>$request_detail->id,
+                'remarks'=>WalletRemarks::TRIP_COMMISSION_FOR_DRIVER,
+                'is_credit'=>true
+            ]);
+
+
+                }else{
+
                 $driver_commision = $calculated_bill['driver_commision'];
                 $driver_wallet = $request_detail->driverDetail->driverWallet;
                 $driver_wallet->amount_added += $driver_commision;
@@ -286,11 +304,27 @@ class DriverEndRequestController extends BaseController
                 'remarks'=>WalletRemarks::TRIP_COMMISSION_FOR_DRIVER,
                 'is_credit'=>true
             ]);
+                }
+
             } else {
                 $request_detail->payment_opt = PaymentType::CASH;
                 $request_detail->save();
                 $admin_commision_with_tax = $calculated_bill['admin_commision_with_tax'];
-                $driver_wallet = $request_detail->driverDetail->driverWallet;
+
+                if($request_detail->driverDetail->owner()->exists()){
+                     $owner_wallet = $request_detail->driverDetail->owner->ownerWalletDetail;
+            $owner_wallet->amount_spent += $admin_commision_with_tax;
+            $owner_wallet->amount_balance -= $admin_commision_with_tax;
+            $owner_wallet->save();
+
+            $owner_wallet_history = $request_detail->driverDetail->owner->ownerWalletHistoryDetail()->create([
+                'amount'=>$admin_commision_with_tax,
+                'transaction_id'=>str_random(6),
+                'remarks'=>WalletRemarks::ADMIN_COMMISSION_FOR_REQUEST,
+                'is_credit'=>false
+            ]);
+        }else{
+             $driver_wallet = $request_detail->driverDetail->driverWallet;
                 $driver_wallet->amount_spent += $admin_commision_with_tax;
                 $driver_wallet->amount_balance -= $admin_commision_with_tax;
                 $driver_wallet->save();
@@ -301,6 +335,8 @@ class DriverEndRequestController extends BaseController
                 'remarks'=>WalletRemarks::ADMIN_COMMISSION_FOR_REQUEST,
                 'is_credit'=>false
             ]);
+        }
+               
             }
         }
         // @TODO need to add driver commision if the payment type is wallet
