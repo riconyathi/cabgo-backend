@@ -125,6 +125,14 @@ class DispatcherCreateRequestController extends BaseController
             'unit'=>$unit,
             'requested_currency_code'=>$currency_code,
             'service_location_id'=>$service_location->id];
+
+        if($request->has('rental_pack_id') && $request->rental_pack_id){
+
+            $request_params['is_rental'] = true;
+            
+            $request_params['rental_package_id'] = $request->rental_pack_id;
+        }
+
         // store request details to db
         // DB::beginTransaction();
         // try {
@@ -418,6 +426,14 @@ class DispatcherCreateRequestController extends BaseController
             'unit'=>$unit,
             'requested_currency_code'=>$currency_code,
             'service_location_id'=>$service_location->id];
+
+        if($request->has('rental_pack_id') && $request->rental_pack_id){
+
+            $request_params['is_rental'] = true;
+            
+            $request_params['rental_package_id'] = $request->rental_pack_id;
+        }
+
 
         // store request details to db
         // DB::beginTransaction();
