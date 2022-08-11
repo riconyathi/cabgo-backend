@@ -242,7 +242,7 @@ class EarningsController extends BaseController
 
     public function ownerWeeklyEarningsIndex()
     {
-        $owner = auth()->user()->driver;
+        $owner = auth()->user()->owner;
         $current_date = Carbon::now();
         $disable_next_week = true;
         $disable_previous_week = false;
