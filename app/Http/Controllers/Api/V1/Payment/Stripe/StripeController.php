@@ -25,6 +25,7 @@ use App\Base\Constants\Masters\PushEnums;
 use App\Base\Constants\Setting\Settings;
 use App\Models\Payment\OwnerWallet;
 use App\Models\Payment\OwnerWalletHistory;
+use App\Transformers\Payment\OwnerWalletTransformer;
 
 /**
  * @group Stripe Payment Gateway
@@ -187,8 +188,11 @@ class StripeController extends ApiController
 
                 if (access()->hasRole(Role::USER)) {
                 $result =  fractal($user_wallet, new WalletTransformer);
-                } else {
+                } elseif(access()->hasRole(Role::DRIVER)) {
                 $result =  fractal($user_wallet, new DriverWalletTransformer);
+                }else{
+                $result =  fractal($user_wallet, new OwnerWalletTransformer);
+
                 }
 
         return $this->respondSuccess($result, 'money_added_successfully');
