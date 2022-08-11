@@ -76,7 +76,7 @@ Route::middleware('auth:web')->group(function () {
         Route::post('assign_driver/{fleet}', 'FleetController@assignDriver')->name('assignFleetToDriver');
         Route::get('document/view/{fleet}', 'FleetDocumentController@index')->name('FleetDocumentView');
         Route::get('upload/document/{fleet}/{needed_document}', 'FleetDocumentController@documentUploadView');
-        Route::post('upload/document/{fleet}/{needed_document}', 'FleetDocumentController@uploadDocument')->name('updateOwnerDocument');
+        Route::post('upload/document/{fleet}/{needed_document}', 'FleetDocumentController@uploadDocument')->name('updateFleetDocument');
         Route::post('approve/documents', 'FleetDocumentController@approveFleetDocument')->name('approveFleetDocument');
 
     });

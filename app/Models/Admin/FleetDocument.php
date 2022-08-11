@@ -13,7 +13,7 @@ class FleetDocument extends Model
     use UuidModel,SoftDeletes,HasActive;
 
     protected $fillable = [
-        'fleet_id','name','image','expiry_date','document_id','document_status'
+        'fleet_id','name','image','expiry_date','document_id','document_status','comment'
     ];
 
     public function fleet(){

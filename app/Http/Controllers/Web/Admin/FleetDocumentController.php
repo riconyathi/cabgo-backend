@@ -31,6 +31,7 @@ class FleetDocumentController extends BaseController
     public function __construct(ImageUploaderContract $imageUploader)
     {
         $this->imageUploader = $imageUploader;
+
     }
 
     public function index(Fleet $fleet)
@@ -75,7 +76,7 @@ class FleetDocumentController extends BaseController
     {
         $status = true;
 
-        $owner = Fleet::find($request->fleet_id);
+        $fleet = Fleet::find($request->fleet_id);
         foreach ($request->document_id as $key => $document) {
             if ($document != '') {
                 $fleetDoc = FleetDocument::whereId($document)->first();
@@ -153,8 +154,8 @@ class FleetDocumentController extends BaseController
         }
 
         $fleet_details = $user->fleet;
-        // $fleet_result = fractal($fleet_details, new DriverTransformer);
-        // $formated_driver = $this->formatResponseData($driver_result);
+        $fleet_result = fractal($fleet_details, new FleetTransformer);
+        $formated_driver = $this->formatResponseData($fleet_result);
 
         $socket_params = $formated_fleet['data'];
         $socket_data = new \stdClass();
