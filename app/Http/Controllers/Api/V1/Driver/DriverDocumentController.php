@@ -162,7 +162,7 @@ class DriverDocumentController extends BaseController
         }else{
 
 
-            $created_params['document_status'] =DriverDocumentStatus::UPLOADED_AND_WAITING_FOR_APPROVAL;
+        $created_params['document_status'] =DriverDocumentStatus::UPLOADED_AND_WAITING_FOR_APPROVAL;
 
         $document_exists = auth()->user()->owner->ownerDocument()->where('document_id', $request->document_id)->exists();
 
