@@ -66,7 +66,7 @@ class RazerpayController extends ApiController
         }else {
                     $wallet_model = new OwnerWallet();
                     $wallet_add_history_model = new OwnerWalletHistory();
-                    $user_id = $user->driver->id;
+                    $user_id = $user->owner->id;
         }
 
         $user_wallet = $wallet_model::firstOrCreate([
