@@ -84,8 +84,11 @@ class ComplaintsController extends BaseController
         }
         if (access()->hasRole(Role::USER)) {
             $created_params['user_id'] = auth()->user()->id;
-        } else {
+        }elseif(access()->hasRole(Role::DRIVER)) {
             $created_params['driver_id'] = auth()->user()->driver->id;
+        }else{
+            $created_params['owner_id'] = auth()->user()->owner->id;
+
         }
 
         $created_params['status'] = ComplaintType::NEW_COMPLAINT;
