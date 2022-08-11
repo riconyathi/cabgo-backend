@@ -119,7 +119,7 @@ class FleetController extends BaseController
      * */
     public function neededDocuments(){
 
-        dd(request()->all());
+        dd(request()->fleet_id);
 
         $ownerneededdocumentQuery  = FleetNeededDocument::active()->get();
 
