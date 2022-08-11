@@ -10,6 +10,10 @@ use App\Models\Admin\Fleet;
 use Illuminate\Http\Request;
 use App\Transformers\Driver\DriverTransformer;
 use App\Transformers\Owner\FleetTransformer;
+use App\Base\Services\ImageUploader\ImageUploaderContract;
+use App\Models\Admin\FleetNeededDocument;
+use App\Transformers\Owner\FleetNeededDocumentTransformer;
+use App\Models\Admin\FleetDocument;
 
 class FleetController extends BaseController
 {
@@ -17,11 +21,13 @@ class FleetController extends BaseController
     protected $fleet;
 
 
-    public function __construct(Driver $driver,Fleet $fleet)
+    public function __construct(Driver $driver,Fleet $fleet,ImageUploaderContract $imageUploader)
     {
         $this->driver = $driver;
 
         $this->fleet = $fleet;
+
+        $this->imageUploader = $imageUploader;
     }
 
     /**
@@ -105,6 +111,31 @@ class FleetController extends BaseController
 
         return $this->respondSuccess();
         
+    }
+
+    /**
+     * List of Fleet Needed Documents
+     * 
+     * */
+    public function neededDocuments(){
+
+        $ownerneededdocumentQuery  = FleetNeededDocument::active()->get();
+
+        $neededdocument =  fractal($ownerneededdocumentQuery, new FleetNeededDocumentTransformer);
+
+            foreach (FleetNeededDocument::active()->get() as $key => $needed_document) {
+            if (FleetDocument::where('fleet_id', request()->input()->fleet_id)->where('document_id', $needed_document->id)->exists()) {
+                $uploaded_document = true;
+            } else {
+                $uploaded_document = false;
+            }
+        }
+
+
+        $formated_document = $this->formatResponseData($neededdocument);
+
+        return response()->json(['success'=>true,"message"=>'success','enable_submit_button'=>$uploaded_document,'data'=>$formated_document['data']]);
+
     }
 
 

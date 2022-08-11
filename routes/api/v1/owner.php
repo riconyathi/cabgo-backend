@@ -20,8 +20,8 @@ use App\Base\Constants\Auth\Role;
 
 Route::prefix('owner')->namespace('Owner')->middleware('auth')->group(function () {
     Route::middleware(role_middleware(Role::OWNER))->group(function () {
-            
         Route::get('list-fleets','FleetController@index');
+        Route::get('fleet/documents/needed','FleetController@neededDocuments');
         Route::get('list-drivers','FleetController@listDrivers');
         Route::post('assign-driver/{fleet}','FleetController@assignDriver');
         Route::post('add-fleet','FleetController@storeFleet');

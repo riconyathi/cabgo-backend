@@ -34,7 +34,7 @@ class CreateRequestsTable extends Migration
             $table->boolean('is_cancelled')->default(0);
             $table->uuid('reason')->nullable();
             $table->string('custom_reason')->nullable();
-            $table->enum('cancel_method', [0,1,2])->comment('0 => Automatic,1 => User,2 => Driver');
+            $table->enum('cancel_method', [0,1,2,3])->comment('0 => Automatic,1 => User,2 => Driver,3=> Dispatcher');
             $table->double('total_distance', 15, 2)->default(0);
             $table->double('total_time', 15, 2)->default(0);
             $table->string('payment_opt')->comment('0 => card,1 => cash,2 => wallet,3=>wallet/cash');

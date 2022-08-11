@@ -23,6 +23,7 @@ Route::prefix('dispatcher')->namespace('Dispatcher')->middleware('auth')->group(
             Route::post('create', 'DispatcherCreateRequestController@createRequest');
             Route::post('find-user-data','DispatcherCreateRequestController@findUserData');
             Route::get('request-detail/{request}','DispatcherCreateRequestController@requestDetail');
+            Route::post('cancel-ride','DispatcherRequestStateController@cancelRide');
         });
     });
 });
