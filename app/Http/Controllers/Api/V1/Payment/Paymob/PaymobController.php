@@ -18,6 +18,8 @@ use App\Models\Payment\DriverWallet;
 use App\Base\Constants\Masters\WalletRemarks;
 use App\Models\Payment\OwnerWallet;
 use App\Models\Payment\OwnerWalletHistory;
+use App\Transformers\Payment\OwnerWalletTransformer;
+
 
 /**
  * @group Paymob Payment Gateway
@@ -82,8 +84,11 @@ class PaymobController extends ApiController
 
         if (access()->hasRole(Role::USER)) {
             $result =  fractal($user_wallet, new WalletTransformer);
-        } else {
-            $result =  fractal($user_wallet, new DriverWalletTransformer);
+        } elseif(access()->hasRole(Role::DRIVER)) {
+        $result =  fractal($user_wallet, new DriverWalletTransformer);
+        }else{
+        $result =  fractal($user_wallet, new OwnerWalletTransformer);
+
         }
 
         return $this->respondSuccess($result, 'money_added_successfully');

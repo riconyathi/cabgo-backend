@@ -21,6 +21,7 @@ use App\Jobs\NotifyViaMqtt;
 use App\Base\Constants\Masters\PushEnums;
 use App\Models\Payment\OwnerWallet;
 use App\Models\Payment\OwnerWalletHistory;
+use App\Transformers\Payment\OwnerWalletTransformer;
 
 /**
  * @group Razerpay Payment Gateway
@@ -100,9 +101,12 @@ class RazerpayController extends ApiController
 
                 if (access()->hasRole(Role::USER)) {
                 $result =  fractal($user_wallet, new WalletTransformer);
-                } else {
-                $result =  fractal($user_wallet, new DriverWalletTransformer);
-                }
+                } elseif(access()->hasRole(Role::DRIVER)) {
+                    $result =  fractal($user_wallet, new DriverWalletTransformer);
+                    }else{
+                    $result =  fractal($user_wallet, new OwnerWalletTransformer);
+
+                    }
 
         return $this->respondSuccess($result, 'money_added_successfully');
     }
