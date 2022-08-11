@@ -15,6 +15,8 @@ use App\Base\Services\ImageUploader\ImageUploaderContract;
 use App\Transformers\Owner\OwnerNeededDocumentTransformer;
 use App\Base\Constants\Auth\Role;
 use App\Models\Admin\OwnerDocument;
+use App\Models\Admin\FleetDocument;
+use App\Models\Admin\Fleet;
 
 /**
  * @group Driver Document Management
@@ -130,7 +132,37 @@ class DriverDocumentController extends BaseController
         $driver_documents = DriverDocument::where('driver_id', $driver_id)->get();
     }else{
 
+        if($request->has('fleet_id') && $request->fleet_id){
+
         $created_params['document_status'] =DriverDocumentStatus::UPLOADED_AND_WAITING_FOR_APPROVAL;
+
+        $fleet = Fleet::where('id',$request->fleet_id)->first();
+
+        $document_exists = $fleet->fleetDocument()->where('document_id', $request->document_id)->exists();
+
+        if ($document_exists) {
+            $created_params['document_status'] =DriverDocumentStatus::REUPLOADED_AND_WAITING_FOR_APPROVAL;
+        }
+
+        $created_params['fleet_id'] = $fleet->id;
+
+        if ($uploadedFile = $this->getValidatedUpload('document', $request)) {
+            $created_params['image'] = $this->imageUploader->file($uploadedFile)
+                ->saveFleetDocument($fleet->id);
+        }
+        // Check if document exists
+        $fleet_documents = FleetDocument::where('fleet_id', $fleet->id)->where('document_id', $request->input('document_id'))->first();
+
+        if ($fleet_documents) {
+            FleetDocument::where('fleet_id', $fleet->id)->where('document_id', $request->input('document_id'))->update($created_params);
+        } else {
+            FleetDocument::create($created_params);
+        }
+
+        }else{
+
+
+            $created_params['document_status'] =DriverDocumentStatus::UPLOADED_AND_WAITING_FOR_APPROVAL;
 
         $document_exists = auth()->user()->owner->ownerDocument()->where('document_id', $request->document_id)->exists();
 
@@ -154,6 +186,9 @@ class DriverDocumentController extends BaseController
             OwnerDocument::create($created_params);
         }
 
+
+        }
+        
 
     }
         // $result = fractal($driver_documents, new DriverDocumentTransformer);
