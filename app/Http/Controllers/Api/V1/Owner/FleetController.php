@@ -119,14 +119,12 @@ class FleetController extends BaseController
      * */
     public function neededDocuments(){
 
-        dd(request()->fleet_id);
-
         $ownerneededdocumentQuery  = FleetNeededDocument::active()->get();
 
         $neededdocument =  fractal($ownerneededdocumentQuery, new FleetNeededDocumentTransformer);
 
             foreach (FleetNeededDocument::active()->get() as $key => $needed_document) {
-            if (FleetDocument::where('fleet_id', request()->input()->fleet_id)->where('document_id', $needed_document->id)->exists()) {
+            if (FleetDocument::where('fleet_id', request()->fleet_id)->where('document_id', $needed_document->id)->exists()) {
                 $uploaded_document = true;
             } else {
                 $uploaded_document = false;

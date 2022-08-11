@@ -72,7 +72,7 @@ class FleetNeededDocumentTransformer extends Transformer
      */
     public function includeFleetDocument(FleetNeededDocument $fleetneededdocument)
     {
-        $document = $fleetneededdocument->fleetDocument()->where('fleet_id', request()->input()->fleet_id)->first();
+        $document = $fleetneededdocument->fleetDocument()->where('fleet_id', request()->fleet_id)->first();
 
         return $document
         ? $this->item($document, new FleetDocumentTransformer)
