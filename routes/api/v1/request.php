@@ -22,7 +22,7 @@ Route::prefix('request')->namespace('Request')->middleware('auth')->group(functi
      * These routes use the middleware group 'role'.
      * These routes are accessible only by a user with the 'user' role.
      */
-    Route::middleware(role_middleware(Role::USER))->group(function () {
+    Route::middleware(role_middleware([Role::USER,Role::DISPATCHER]))->group(function () {
         // List Packages
         Route::post('list-packages', 'EtaController@listPackages');
 
