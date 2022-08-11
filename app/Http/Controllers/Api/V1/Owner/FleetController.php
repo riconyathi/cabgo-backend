@@ -119,6 +119,8 @@ class FleetController extends BaseController
      * */
     public function neededDocuments(){
 
+        dd(request()->input()->all());
+        
         $ownerneededdocumentQuery  = FleetNeededDocument::active()->get();
 
         $neededdocument =  fractal($ownerneededdocumentQuery, new FleetNeededDocumentTransformer);
