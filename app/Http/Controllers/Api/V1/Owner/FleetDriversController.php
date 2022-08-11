@@ -105,7 +105,7 @@ class FleetDriversController extends BaseController
 
         $driver = $user->driver()->create($created_params);
 
-         $this->database->getReference('drivers/'.$driver->id)->set(['id'=>$driver->id,'vehicle_type'=>null,'active'=>0,'updated_at'=> Database::SERVER_TIMESTAMP]);
+         $this->database->getReference('drivers/'.$driver->id)->set(['id'=>$driver->id,'vehicle_type'=>'fleet-owner-type','active'=>0,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
         return $this->respondSuccess(null,'driver_added_succesfully');
 
