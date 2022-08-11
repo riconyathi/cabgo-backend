@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use App\Models\Payment\OwnerWallet;
+use App\Models\Payment\OwnerWalletHistory;
 
 class Owner extends Model
 {
@@ -59,6 +60,11 @@ class Owner extends Model
     public function ownerWalletDetail()
     {
         return $this->hasOne(OwnerWallet::class, 'user_id', 'id');
+    }
+
+    public function ownerWalletHistoryDetail()
+    {
+        return $this->hasMany(OwnerWalletHistory::class, 'user_id', 'id');
     }
 
 }

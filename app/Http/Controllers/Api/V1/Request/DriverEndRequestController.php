@@ -218,10 +218,27 @@ class DriverEndRequestController extends BaseController
         $calculated_bill['requested_currency_symbol'] = $requested_currency_symbol;
         // @TODO need to take admin commision from driver wallet
         if ($request_detail->payment_opt==PaymentType::CASH) {
-            
+
             // Deduct the admin commission + tax from driver walllet
             $admin_commision_with_tax = $calculated_bill['admin_commision_with_tax'];
-            $driver_wallet = $request_detail->driverDetail->driverWallet;
+            if($request_detail->driverDetail->owner()->exists()){
+
+            $owner_wallet = $request_detail->driverDetail->owner->ownerWalletDetail;
+            $owner_wallet->amount_spent += $admin_commision_with_tax;
+            $owner_wallet->amount_balance -= $admin_commision_with_tax;
+            $owner_wallet->save();
+
+            $driver_wallet_history = $request_detail->driverDetail->owner->ownerWalletHistoryDetail()->create([
+                'amount'=>$admin_commision_with_tax,
+                'transaction_id'=>str_random(6),
+                'remarks'=>WalletRemarks::ADMIN_COMMISSION_FOR_REQUEST,
+                'is_credit'=>false
+            ]);
+
+
+            }else{
+
+                $driver_wallet = $request_detail->driverDetail->driverWallet;
             $driver_wallet->amount_spent += $admin_commision_with_tax;
             $driver_wallet->amount_balance -= $admin_commision_with_tax;
             $driver_wallet->save();
@@ -232,6 +249,10 @@ class DriverEndRequestController extends BaseController
                 'remarks'=>WalletRemarks::ADMIN_COMMISSION_FOR_REQUEST,
                 'is_credit'=>false
             ]);
+
+            }
+            
+
         } elseif ($request_detail->payment_opt==PaymentType::CARD) {
             // @TODO in future
         } else { //PaymentType::WALLET
