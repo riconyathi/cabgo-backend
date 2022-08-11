@@ -71,6 +71,14 @@ class RequestAcceptRejectController extends BaseController
             $updated_params = ['driver_id'=>auth()->user()->driver->id,
             'accepted_at'=>date('Y-m-d H:i:s'),
             'is_driver_started'=>true];
+
+            if(auth()->user()->driver->owner_id){
+
+                $updated_params['owner_id'] = auth()->user()->driver->owner_id;
+
+                $updated_params['fleet_id'] = auth()->user()->driver->fleet_id;
+            }
+
             $request_detail->update($updated_params);
             $request_detail->fresh();
             // Delete all Meta records of the request
