@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Models\Admin\Driver;
 use App\Models\User;
-
+use App\Models\Admin\Owner;
 
 class WalletWithdrawalRequest extends Model
 {
@@ -23,7 +23,7 @@ class WalletWithdrawalRequest extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'driver_id', 'requested_amount', 'status','requested_currency'
+        'user_id', 'driver_id', 'requested_amount', 'status','requested_currency','owner_id'
     ];
 
     /**
@@ -80,6 +80,11 @@ class WalletWithdrawalRequest extends Model
     public function userDetail()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function ownerDetail()
+    {
+        return $this->belongsTo(Owner::class, 'user_id', 'id');
     }
 
 }

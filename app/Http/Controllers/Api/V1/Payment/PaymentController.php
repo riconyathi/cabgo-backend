@@ -382,7 +382,8 @@ class PaymentController extends BaseController
         $wallet_balance= $user_wallet->amount_balance;
 
 
-        }else{
+        }elseif(access()->hasRole(Role::DRIVER)){
+
             $user = auth()->user()->driver;
 
             $query = WalletWithdrawalRequest::where('driver_id',$user->id);
@@ -396,6 +397,20 @@ class PaymentController extends BaseController
 
             $wallet_balance= $driver_wallet->amount_balance;
 
+        }else{
+
+            $user = auth()->user()->owner;
+
+            $query = WalletWithdrawalRequest::where('owner_id',$user->id);
+
+            $result = filter($query, new WalletWithdrawalRequestsTransformer)->defaultSort('-created_at')->paginate();
+
+
+            // $result = fractal($query, new WalletWithdrawalRequestsTransformer);
+
+            $owner_wallet = auth()->user()->owner->ownerWalletDetail;
+
+            $wallet_balance= $owner_wallet->amount_balance;
         }
 
         return response()->json(['success'=>true,'message'=>'withdrawal-requests-listed','withdrawal_history'=>$result,'wallet_balance'=>$wallet_balance]);
