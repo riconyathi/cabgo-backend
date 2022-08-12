@@ -61,7 +61,7 @@ return array (
   'promo_codes' => 'رمز ترويجي',
   'notifications' => 'إعلام مخصص',
   'push_notification' => 'دفع الإخطار',
-  'map_view' => 'عين الله',
+  'map_view' => 'عين الله to اقدا',
   'map_view_mapbox' => 'خريطة عين الله',
   'driver_duties_report' => 'تقرير واجبات السائق',
   'user_complaints' => 'شكوى المستخدم',
