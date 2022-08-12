@@ -15,6 +15,7 @@ use App\Models\Traits\HasActiveCompanyKey;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use App\Models\Admin\CancellationReason;
 use App\Models\Master\PackageType;
+use App\Models\Admin\Owner;
 
 class Request extends Model
 {
@@ -112,6 +113,10 @@ class Request extends Model
     public function driverDetail()
     {
         return $this->belongsTo(Driver::class, 'driver_id', 'id');
+    }
+    public function ownerDetail()
+    {
+        return $this->belongsTo(Owner::class, 'owner_id', 'id');
     }
 
     public function userDetail()

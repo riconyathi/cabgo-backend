@@ -44,7 +44,7 @@ class Permission
     const REPORTS = 'reports';
     const USER_REPORT = 'user-report';
     const DRIVER_REPORT = 'driver-report';
-    const TRAVEL_REPORT = 'travel-report';
+    const FINANCE_REPORT = 'finance-report';
     const MANAGE_MAP = 'manage-map';
     const HEAT_MAP = 'heat-map';
     const MANAGE_PROMO = 'manage-promo';
@@ -58,6 +58,8 @@ class Permission
     const MANAGE_FLEET_NEEDED_DOC = 'manage-fleet-needed-document';
     const VIEW_FLEET_DRIVERS = 'view-fleet-drivers';
     const FLEET_DRIVERS_MENU = 'fleet-drivers-menu';
+    const OWNER_COMPLAINT = 'owner-complaint';
+    const OWNER_REPORT = 'owner-report';
 
 
     // Manage Owner
