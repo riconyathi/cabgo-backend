@@ -26,5 +26,6 @@ Route::prefix('owner')->namespace('Owner')->middleware('auth')->group(function (
         Route::post('assign-driver/{fleet}','FleetController@assignDriver');
         Route::post('add-fleet','FleetController@storeFleet');
         Route::post('add-drivers','FleetDriversController@addDriver');
+        Route::get('delete-driver/{driver}','FleetDriversController@deleteDriver');
     });
 });

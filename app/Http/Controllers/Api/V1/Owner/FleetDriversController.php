@@ -111,6 +111,21 @@ class FleetDriversController extends BaseController
 
     }
 
+    /**
+     * Delete Drivers
+     * 
+     * 
+     * */
+    public function deleteDriver(Driver $driver){
+
+
+         $driver->user()->delete();
+
+        return $this->respondSuccess(null,'driver_deleted_succesfully');
+
+
+    }
+
     
 
 }

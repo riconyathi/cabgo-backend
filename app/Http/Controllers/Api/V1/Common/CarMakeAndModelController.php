@@ -6,7 +6,6 @@ use App\Models\Master\CarMake;
 use App\Models\Master\CarModel;
 use App\Http\Controllers\Api\V1\BaseController;
 use Carbon\Carbon;
-use Kreait\Firebase\Database;
 use Sk\Geohash\Geohash;
 
 /**
@@ -19,11 +18,10 @@ class CarMakeAndModelController extends BaseController
     protected $car_make;
     protected $car_model;
 
-    public function __construct(CarMake $car_make, CarModel $car_model,Database $database)
+    public function __construct(CarMake $car_make, CarModel $car_model)
     {
         $this->car_make = $car_make;
         $this->car_model = $car_model;
-        $this->database = $database;
     }
 
     /**
