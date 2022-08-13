@@ -160,6 +160,9 @@ class AssignDriversForScheduledRides extends Command
                         if ($request->attempt_for_schedule>5) {
                             $no_driver_request_ids = [];
                             $no_driver_request_ids[0] = $request->id;
+
+                             $this->database->getReference('requests/'.$request->id)->update(['no_driver'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+                             
                             dispatch(new NoDriverFoundNotifyJob($no_driver_request_ids));
                         }
                     } else {
