@@ -163,7 +163,7 @@ class AssignDriversForRegularRides extends Command
 
                             $this->database->getReference('requests/'.$request->id)->update(['no_driver'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
-                            $database->getReference('request-meta/'.$request->id)->remove();
+                            $this->$database->getReference('request-meta/'.$request->id)->remove();
 
 
                             dispatch(new NoDriverFoundNotifyJob($no_driver_request_ids));
