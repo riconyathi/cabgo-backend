@@ -85,7 +85,6 @@ class FleetController extends BaseController
 
         }
 
-
         $result = fractal($drivers, new DriverTransformer);
 
         return $this->respondOk($result);
@@ -101,6 +100,10 @@ class FleetController extends BaseController
     {
         $driver = Driver::whereId($request->driver_id)->first();
         
+        $request->validate([
+        'driver_id' => 'required',
+        ]);
+
         if($fleet->driver_id==$request->driver_id){
             
             return $this->respondSuccess();
