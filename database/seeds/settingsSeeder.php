@@ -164,6 +164,13 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => null,
         ],
+        SettingSlug::OWNER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER => [
+            'category'=>SettingCategory::WALLET,
+            'value' => -10000,
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
         // Installation settings
         // SettingSlug::GOOGLE_BROWSER_KEY => [
         //     'category'=>SettingCategory::INSTALLATION,

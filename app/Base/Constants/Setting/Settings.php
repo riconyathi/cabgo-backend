@@ -37,6 +37,7 @@ class Settings
     const MAPBOX_KEY='map_box_key';
     const ENABLE_BRAIN_TREE='enable_brain_tree';
     const DRIVER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER='driver-wallet-minimum-amount-to-get-order';
+    const OWNER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER='owner-wallet-minimum-amount-to-get-order';
     const FIREBASE_DB_URL='firebase-db-url';
     const FIREBASE_API_KEY='firebase-api-key';
     const FIREBASE_AUTH_DOMAIN='firebase-auth-domain';
