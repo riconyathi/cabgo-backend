@@ -425,6 +425,9 @@ class CreateRequestController extends BaseController
             // store request place details
             $request_detail->requestPlace()->create($request_place_params);
 
+            // Add Request detail to firebase database
+         $this->database->getReference('requests/'.$request_detail->id)->update(['request_id'=>$request_detail->id,'request_number'=>$request_detail->request_number,'service_location_id'=>$service_location->id,'user_id'=>$request_detail->user_id,'pick_address'=>$request->pick_address,'active'=>1,'date'=>$request_detail->converted_trip_start_time,'updated_at'=> Database::SERVER_TIMESTAMP]);
+
             $request_result =  fractal($request_detail, new TripRequestTransformer)->parseIncludes('userDetail');
             // @TODO send sms & email to the user
         } catch (\Exception $e) {

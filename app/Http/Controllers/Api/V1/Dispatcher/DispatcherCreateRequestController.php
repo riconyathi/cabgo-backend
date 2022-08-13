@@ -156,6 +156,10 @@ class DispatcherCreateRequestController extends BaseController
             'drop_address'=>$request->drop_address];
         // store request place details
         $request_detail->requestPlace()->create($request_place_params);
+
+        // Add Request detail to firebase database
+         $this->database->getReference('requests/'.$request_detail->id)->update(['request_id'=>$request_detail->id,'request_number'=>$request_detail->request_number,'service_location_id'=>$service_location->id,'user_id'=>$request_detail->user_id,'pick_address'=>$request->pick_address,'active'=>1,'date'=>$request_detail->converted_created_at,'updated_at'=> Database::SERVER_TIMESTAMP]);
+         
         $ad_hoc_user_params = $request->only(['customer_name','phone_number']);
         // Store ad hoc user detail of this request
         // $request_detail->adHocuserDetail()->create($ad_hoc_user_params);
@@ -467,6 +471,8 @@ class DispatcherCreateRequestController extends BaseController
             'drop_address'=>$request->drop_address];
             // store request place details
             $request_detail->requestPlace()->create($request_place_params);
+
+            $this->database->getReference('requests/'.$request_detail->id)->update(['request_id'=>$request_detail->id,'request_number'=>$request_detail->request_number,'service_location_id'=>$service_location->id,'user_id'=>$request_detail->user_id,'pick_address'=>$request->pick_address,'active'=>1,'date'=>$request_detail->converted_trip_start_time,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
             // $ad_hoc_user_params = $request->only(['name','phone_number']);
             $ad_hoc_user_params['name'] = $request->pickup_poc_name;
