@@ -152,7 +152,7 @@ class AssignDriversForRegularRides extends Command
 
                     $nearest_drivers = Driver::where('active', 1)->where('approve', 1)->where('available', 1)->where('vehicle_type', $type_id)->whereIn('id', $nearest_driver_ids)->whereNotIn('id', $meta_drivers)->whereNotIn('id',$rejected_drivers)->limit(10)->get();
 
-                    if (!$nearest_drivers) {
+                    if ($nearest_drivers->isEmpty()) {
                         $this->info('no-drivers-available');
                         // @TODO Update attempt to the requests
                         $request->attempt_for_schedule += 1;
@@ -164,9 +164,9 @@ class AssignDriversForRegularRides extends Command
                         }
                     } else {
 
-                        Log::info("driverssss");
-                        Log::info($nearest_drivers);
-                        Log::info("driverssss");
+                        // Log::info("driverssss");
+                        // Log::info($nearest_drivers);
+                        // Log::info("driverssss");
 
                         $selected_drivers = [];
                         $i = 0;
