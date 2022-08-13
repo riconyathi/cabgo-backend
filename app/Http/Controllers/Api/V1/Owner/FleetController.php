@@ -79,6 +79,15 @@ class FleetController extends BaseController
 
         $drivers = Driver::where('owner_id',$owner_id)->get();
 
+
+        if(request()->has('fleet_id') && request()->fleet_id){
+
+        $drivers = Driver::where('owner_id',$owner_id)->where('fleet_id','!=',request()->fleet_id)->get();
+
+
+        }
+
+
         $result = fractal($drivers, new DriverTransformer);
 
         return $this->respondOk($result);
