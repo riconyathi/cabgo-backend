@@ -18,6 +18,8 @@ use App\Transformers\Requests\CronTripRequestTransformer;
 use App\Models\Request\DriverRejectedRequest;
 use Sk\Geohash\Geohash;
 use Kreait\Firebase\Database;
+use Illuminate\Support\Facades\Log;
+
 
 class AssignDriversForRegularRides extends Command
 {
@@ -65,7 +67,7 @@ class AssignDriversForRegularRides extends Command
         // dd($sub_5_min);
 
         if ($requests->count()==0) {
-            return $this->info('no-schedule-rides-found');
+            return $this->info('no-regular-rides-found');
         }
 
         // dd(DB::getQueryLog());
@@ -161,6 +163,11 @@ class AssignDriversForRegularRides extends Command
                             dispatch(new NoDriverFoundNotifyJob($no_driver_request_ids));
                         }
                     } else {
+
+                        Log::info("driverssss");
+                        Log::info($nearest_drivers);
+                        Log::info("driverssss");
+
                         $selected_drivers = [];
                         $i = 0;
                         foreach ($nearest_drivers as $driver) {
