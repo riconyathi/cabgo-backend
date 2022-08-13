@@ -94,6 +94,11 @@ class FleetController extends BaseController
     {
         $driver = Driver::whereId($request->driver_id)->first();
         
+        if($fleet->driver_id==$request->driver_id){
+            
+            return $this->respondSuccess();
+
+        }
         if($fleet->driverDetail){
 
             $fleet->driverDetail()->update(['fleet_id'=>null,'vehicle_type'=>null]);
