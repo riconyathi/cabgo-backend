@@ -100,6 +100,12 @@ class FleetController extends BaseController
 
         }
 
+        if($driver->fleetDetail){
+
+            $driver->fleetDetail()->update(['driver_id'=>null]);
+
+        }
+
         $fleet->update(['driver_id'=>$request->driver_id]);
 
 
