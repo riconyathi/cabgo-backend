@@ -449,6 +449,9 @@ Route::middleware('auth:web')->group(function () {
             Route::get('/drivers', 'ComplaintController@driverComplaint');
              Route::get('/drivers/general', 'ComplaintController@driverGeneralComplaint');
             Route::get('/drivers/request', 'ComplaintController@driverRequestComplaint');
+            Route::get('/owner', 'ComplaintController@ownerComplaint');
+             Route::get('/owner/general', 'ComplaintController@ownerGeneralComplaint');
+            Route::get('/owner/request', 'ComplaintController@ownerRequestComplaint');
             Route::get('/taken/{complaint}', 'ComplaintController@takeComplaint');
             Route::get('/solved/{complaint}', 'ComplaintController@solveComplaint');
         });
@@ -457,6 +460,10 @@ Route::middleware('auth:web')->group(function () {
         Route::group(['prefix' => 'reports',  'middleware' => 'permission:reports'], function () {
             Route::get('/user', 'ReportController@userReport')->name('userReport');
             Route::get('/driver', 'ReportController@driverReport')->name('driverReport');
+
+            Route::get('/owner', 'ReportController@ownerReport')->name('ownerReport');
+
+
             Route::get('/driver-duties', 'ReportController@driverDutiesReport')->name('driverDutiesReport');
             Route::get('/travel', 'ReportController@travelReport')->name('travelReport');
             Route::any('/download', 'ReportController@downloadReport')->name('downloadReport');

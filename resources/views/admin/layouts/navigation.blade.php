@@ -381,9 +381,7 @@ if(str_contains((string)request()->path(),'translations')){
         <a href="{{url('/cancellation')}}">
           <i class="fa fa-ban"></i> <span>@lang('pages_names.cancellation')</span>
         </a>
-      </li> 
-
-     
+      </li>  
       @endif
 
       @if(auth()->user()->can('complaint-title'))
@@ -444,6 +442,29 @@ if(str_contains((string)request()->path(),'translations')){
              </ul>
           </li>
           @endif
+
+          @if(auth()->user()->can('owner-complaint'))
+          <li class="treeview {{ 'owner-complaint' == $sub_menu ? 'active' : '' }}">
+             <a href="javascript: void(0);">
+                <i class="fa fa-circle-thin"></i>
+                <span> @lang('pages_names.owner_complaints') </span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-right pull-right"></i>
+                </span>
+              </a>
+
+          {{--   <a href="{{url('/complaint/owner')}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.owner_complaints')</a> --}}
+             <ul class="treeview-menu">
+               <li class="{{ 'owner-general-complaint' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/complaint/owner/general')}}">@lang('pages_names.general_complaints')</a></li>
+            
+               <li class="{{ 'owner-request-complaint' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/complaint/owner/request')}}">@lang('pages_names.request_complaints')</a></li>
+             </ul>
+          </li>
+          @endif
+
+
         </ul>
       </li>
       @endif
@@ -477,9 +498,15 @@ if(str_contains((string)request()->path(),'translations')){
           </li> -->
           @endif
 
-          @if(auth()->user()->can('travel-report'))
-          <li class="{{ 'travel_report' == $sub_menu ? 'active' : '' }}">
-            <a href="{{url('/reports/travel')}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.travel_report')</a>
+          @if(auth()->user()->can('owner-report'))
+          <li class="{{ 'owner_report' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/reports/owner')}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.owner_report')</a>
+          </li>
+          @endif
+
+          @if(auth()->user()->can('finance-report'))
+          <li class="{{ 'finance_report' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/reports/travel')}}"><i class="fa fa-circle-thin"></i>@lang('pages_names.finance_report')</a>
           </li>
           @endif
         </ul>

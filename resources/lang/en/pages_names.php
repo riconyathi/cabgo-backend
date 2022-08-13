@@ -55,7 +55,7 @@ return array (
   'reports' => 'Report',
   'user_report' => 'User Report',
   'driver_report' => 'Driver Report',
-  'travel_report' => 'Travel Report',
+  'finance_report' => 'Finance Report',
   'heat_map' => 'Heat Map',
   'manage-map' => 'Geofencing View',
   'promo_codes' => 'Promo Code',
@@ -135,5 +135,6 @@ return array (
   'fleet_drivers'  => 'Fleet Drivers',
   'approved_fleet_drivers' => 'Approved Fleet Drivers',
   'pending_approvals' => 'Approval Pending Fleet Drivers',
-
+  'owner_complaints' => 'Owner Complaint',
+  'owner_report' => 'Owner Report',
 );

@@ -4,6 +4,7 @@
             <th> @lang('view_pages.s_no')</th>
             <th> @lang('view_pages.company_name')</th>
             <th> @lang('view_pages.owner_name')</th>
+            <th> @lang('view_pages.no_of_vehicles')</th>
             <th> @lang('view_pages.email')</th>
             <th> @lang('view_pages.mobile')</th>
             <th> @lang('view_pages.approve_status')</th>
@@ -25,6 +26,7 @@
                     <td>{{ $i++ }} </td>
                     <td> {{ $result->company_name }}</td>
                     <td> {{ $result->owner_name }}</td>
+                    <td> {{ $result->no_of_vehicles }}</td>
                     <td>{{ $result->email }}</td>
                     <td>{{ $result->mobile }}</td>
 

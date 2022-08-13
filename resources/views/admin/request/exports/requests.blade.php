@@ -8,12 +8,12 @@
             <th> @lang('trip_end_time')</th>
             <th> @lang('view_pages.user_name')</th>
             <th> @lang('view_pages.driver_name')</th>
+            <th> @lang('view_pages.owner_name')</th>
             <th> @lang('view_pages.trip_status')</th>
             <th> @lang('view_pages.is_paid_status')</th>
             <th> @lang('view_pages.payment_option')</th>
             <th> @lang('view_pages.vehicle_type')</th>
             <th> @lang('view_pages.ride_type')</th> 
-
             <th> @lang('view_pages.trip_time')</th>
             <th> @lang('view_pages.trip_distance')</th>
             <th> @lang('view_pages.driver_commission')</th>               
@@ -34,6 +34,12 @@
                 <td>{{ $result->converted_completed_at ?? '-' }}</td>
                 <td>{{$result->userDetail ? $result->userDetail->name : '-'}}</td>
                 <td>{{$result->driverDetail ? $result->driverDetail->name : '-'}}</td>
+
+                @if($result->owner_id)
+                <td>{{$result->ownerDetail ? $result->ownerDetail->owner_name : '-'}}</td>
+                @else
+                <td>{{"Individual"}}</td>
+                @endif
 
                 @if($result->is_cancelled == 1)
                     <td><span class="label label-danger">@lang('view_pages.cancelled')</span></td>

@@ -8,6 +8,7 @@ use App\Base\Constants\Masters\UserType;
 use App\Http\Controllers\Controller;
 use App\Jobs\Notifications\AndroidPushNotification;
 use App\Models\Admin\Complaint;
+use App\Models\Admin\Owner;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Admin\Driver;
@@ -101,6 +102,43 @@ class ComplaintController extends Controller
         return view('admin.complaints.driver.index', compact('page', 'main_menu', 'sub_menu','results'));
     }
 
+    public function ownerComplaint()
+    {
+        $page = trans('pages_names.driver_complaints');
+
+        $main_menu = 'complaints';
+        $sub_menu = 'owner-complaint';
+
+        $results = $this->complaint->where('owner_id', '!=', null)->paginate(10);
+
+        return view('admin.complaints.owner.index', compact('page', 'main_menu', 'sub_menu', 'results'));
+    }
+
+    public function ownerGeneralComplaint()
+    {
+        $page = trans('pages_names.general_complaints');
+
+        $main_menu = 'complaints';
+         $sub_menu = 'owner-general-complaint';
+
+        $results = $this->complaint->where('owner_id', '!=', null)->where('complaint_type','general')->paginate(10);
+
+        return view('admin.complaints.owner.index', compact('page', 'main_menu', 'sub_menu', 'results'));
+    }
+    public function ownerRequestComplaint()
+    {
+        $page = trans('pages_names.request_complaints');
+
+        $main_menu = 'complaints';
+        $sub_menu = 'owner-request-complaint';
+
+        $results = $this->complaint->where('owner_id', '!=', null)->where('complaint_type','request_help')->paginate(10);
+
+        return view('admin.complaints.owner.index', compact('page', 'main_menu', 'sub_menu','results'));
+    }
+
+
+
     public function takeComplaint(Complaint $complaint)
     {
         $complaint->update([
@@ -110,10 +148,11 @@ class ComplaintController extends Controller
 
         if($complaint->user_id){
         $user = User::whereId($complaint->user_id)->first();            
-        }else{
+        }elseif($complaint->driver_id){
 
             $user = Driver::whereId($complaint->driver_id)->first()->user;
-
+        }else{
+            $user = Owner::whereId($complaint->owner_id)->first()->user;
         }
 
         $title = trans('push_notifications.complaint_taken_title');
@@ -135,10 +174,11 @@ class ComplaintController extends Controller
 
         if($complaint->user_id){
         $user = User::whereId($complaint->user_id)->first();            
-        }else{
+        }elseif($complaint->driver_id){
 
             $user = Driver::whereId($complaint->driver_id)->first()->user;
-
+        }else{
+            $user = Owner::whereId($complaint->owner_id)->first()->user;
         }
 
         $title = trans('push_notifications.complaint_solved_title');
