@@ -52,11 +52,7 @@
                         </div>
 
                         <div class="col-12 btn-group mt-3">
-                            <ul class="admin-add-btn">
-                                <li>
                                     <button type="submit" class="btn btn-primary mr-1 waves-effect waves-light">{{ trans('view_pages.update')}}</button>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </form>
