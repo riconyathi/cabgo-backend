@@ -27,6 +27,7 @@ use App\Http\Requests\Auth\Registration\UserRegistrationRequest;
 use App\Http\Requests\Auth\Registration\SendRegistrationOTPRequest;
 use App\Http\Requests\Auth\Registration\ValidateRegistrationOTPRequest;
 use App\Jobs\Notifications\Auth\Registration\UserRegistrationNotification;
+use App\Base\Services\ImageUploader\ImageUploaderContract;
 
 /**
  * @group SignUp-And-Otp-Validation
@@ -52,6 +53,8 @@ class UserRegistrationController extends LoginController
 
     protected $smsContract;
 
+    protected $imageUploader;
+
     protected $country;
 
     /**
@@ -60,12 +63,14 @@ class UserRegistrationController extends LoginController
      * @param \App\Models\User $user
      * @param \App\Base\Services\OTP\Handler\OTPHandlerContract $otpHandler
      */
-    public function __construct(User $user, OTPHandlerContract $otpHandler, Country $country, SMSContract $smsContract)
+    public function __construct(User $user, OTPHandlerContract $otpHandler, Country $country, SMSContract $smsContract,ImageUploaderContract $imageUploader)
     {
         $this->user = $user;
         $this->otpHandler = $otpHandler;
         $this->country = $country;
         $this->smsContract = $smsContract;
+        $this->imageUploader = $imageUploader;
+
     }
 
     /**
@@ -135,6 +140,14 @@ class UserRegistrationController extends LoginController
             // Add referral commission to the referred user
             $this->addCommissionToRefferedUser($referred_user_record);
         }
+
+        $profile_picture = null;
+
+        if ($uploadedFile = $this->getValidatedUpload('profile_picture', $request)) {
+            $profile_picture = $this->imageUploader->file($uploadedFile)
+                ->saveDriverProfilePicture();
+        }
+
         // DB::beginTransaction();
         // try {
         $user_params = [
@@ -146,6 +159,7 @@ class UserRegistrationController extends LoginController
             'login_by'=>$request->input('login_by'),
             'country'=>$country_id,
             'refferal_code'=>str_random(6),
+            'profile_picture'=>$profile_picture
         ];
 
         if (env('APP_FOR')=='demo' && $request->has('company_key') && $request->input('company_key')) {

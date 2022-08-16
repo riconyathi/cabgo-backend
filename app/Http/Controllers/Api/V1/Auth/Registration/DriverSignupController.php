@@ -121,7 +121,7 @@ class DriverSignupController extends LoginController
 
         $profile_picture = null;
 
-        if ($uploadedFile = $this->getValidatedUpload('profile', $request)) {
+        if ($uploadedFile = $this->getValidatedUpload('profile_picture', $request)) {
             $profile_picture = $this->imageUploader->file($uploadedFile)
                 ->saveDriverProfilePicture();
         }
