@@ -32,4 +32,6 @@ return array (
   'reminder_push_body' => 'Please open the Laravel app to get ride requests',
   'amount_credited_to_your_wallet_title' => 'Amount Added Succesfully',
   'amount_credited_to_your_wallet_body' => 'Amount Credited to Your Wallet Succesfully',
+  'new_fleet_assigned_title'=>'New Fleet Assigned For you',
+  'new_fleet_assigned_body'=>'New Fleet assigned for you'
 );

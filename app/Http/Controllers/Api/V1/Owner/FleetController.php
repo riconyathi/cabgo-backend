@@ -14,6 +14,9 @@ use App\Base\Services\ImageUploader\ImageUploaderContract;
 use App\Models\Admin\FleetNeededDocument;
 use App\Transformers\Owner\FleetNeededDocumentTransformer;
 use App\Models\Admin\FleetDocument;
+use App\Jobs\Notifications\AndroidPushNotification;
+use Kreait\Firebase\Database;
+
 
 class FleetController extends BaseController
 {
@@ -21,13 +24,16 @@ class FleetController extends BaseController
     protected $fleet;
 
 
-    public function __construct(Driver $driver,Fleet $fleet,ImageUploaderContract $imageUploader)
+    public function __construct(Driver $driver,Fleet $fleet,ImageUploaderContract $imageUploader,Database $database)
     {
         $this->driver = $driver;
 
         $this->fleet = $fleet;
 
         $this->imageUploader = $imageUploader;
+
+        $this->database = $database;
+
     }
 
     /**
@@ -133,6 +139,15 @@ class FleetController extends BaseController
             'vehicle_type' => $fleet->vehicle_type
         ]);
 
+        $driver->fresh();
+
+        $title = trans('push_notifications.new_fleet_assigned_title');
+        $body = trans('push_notifications.new_fleet_assigned_body');
+
+        $notifable_driver = $driver->user;
+        $notifable_driver->notify(new AndroidPushNotification($title, $body));
+
+        $this->database->getReference('drivers/'.$driver->id)->update(['fleet_changed'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
         return $this->respondSuccess();
         
