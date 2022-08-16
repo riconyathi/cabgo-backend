@@ -200,9 +200,7 @@ class FleetController extends BaseController
                 $message = trans('succes_messages.driver_document_not_approved');
                 return redirect('fleets/document/view/'.$fleet->id);
             }
-            $driver->update([
-            'reason' => null
-        ]);
+
         }
 
         $fleet->update([
