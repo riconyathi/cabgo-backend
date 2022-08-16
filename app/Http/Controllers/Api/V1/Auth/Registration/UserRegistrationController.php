@@ -159,7 +159,8 @@ class UserRegistrationController extends LoginController
             'login_by'=>$request->input('login_by'),
             'country'=>$country_id,
             'refferal_code'=>str_random(6),
-            'profile_picture'=>$profile_picture
+            'profile_picture'=>$profile_picture,
+            'lang'=>$request->input('lang')
         ];
 
         if (env('APP_FOR')=='demo' && $request->has('company_key') && $request->input('company_key')) {
