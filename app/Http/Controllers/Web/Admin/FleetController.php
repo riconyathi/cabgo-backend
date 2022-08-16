@@ -17,6 +17,7 @@ use App\Models\Master\CarMake;
 use App\Models\Master\CarModel;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Models\Admin\FleetNeededDocument;
 
 class FleetController extends BaseController
 {
@@ -177,6 +178,33 @@ class FleetController extends BaseController
     public function toggleApprove(Fleet $fleet)
     {
         $status = $fleet->approve == 1 ? 0 : 1;
+
+
+        if ($status) {
+            $err = false;
+            $neededDoc = FleetNeededDocument::count();
+
+            $uploadedDoc = count($fleet->fleetDocument);
+
+            if ($neededDoc != $uploadedDoc) {
+                return redirect('fleet/document/view/'.$fleet->id);
+            }
+
+            foreach ($fleet->fleetDocument as $fleetDoc) {
+                if ($fleetDoc->document_status != 1) {
+                    $err = true;
+                }
+            }
+
+            if ($err) {
+                $message = trans('succes_messages.driver_document_not_approved');
+                return redirect('fleets/document/view/'.$fleet->id);
+            }
+            $driver->update([
+            'reason' => null
+        ]);
+        }
+
         $fleet->update([
             'approve' => $status
         ]);
