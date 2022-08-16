@@ -61,22 +61,7 @@
                             </div>
                         </div>
 
-                      {{--   <div class="col-sm-4 float-left mb-md-3">
-                            <div class="form-group">
-                                <label for="model">@lang('view_pages.car_model')<span class="text-danger">*</span></label>
-                                <select name="model" id="model"  class="form-control select2" required>
-                                    <option value="" selected disabled>@lang('view_pages.select')</option>
-                                     @foreach ($carmodel as $key => $model)
-                                        <option value="{{ $model->id }}" {{ old('model') == $model->id ? 'selected' : '' }}>
-                                            {{ $model->name }}</option>
-                                    @endforeach
-                                </select>
-                                 <span class="text-danger">{{ $errors->first('model') }}</span>
-
-                                
-                            </div>
-                        </div>
- --}}
+                     
                         <div class="col-sm-6 float-left mb-md-3">
                             <div class="form-group">
                                 <label for="license_number">{{ trans('view_pages.license_number')}}<span class="text-danger">*</span></label>
@@ -85,105 +70,8 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-6 float-left mb-md-3">
-                            <div class="form-group">
-                                <label for="permission_number">{{ trans('view_pages.permission_number')}}<span class="text-danger">*</span></label>
-                                <input id="permission_number" name="permission_number" placeholder="{{ trans('view_pages.permission_number')}}" type="text" class="form-control" value="{{ old('permission_number') }}" required>
-                                <span class="text-danger">{{ $errors->first('permission_number') }}</span>
-                            </div>
-                        </div>
-
-                        {{-- <div class="col-sm-6 float-left mb-md-3">
-                            <div class="form-group">
-                                <label for="">@lang('view_pages.chassis') <span class="text-danger">*</span></label>
-                                <select name="chassis" id="chassis" class="form-control">
-                                    <option value="" selected disabled>@lang('view_pages.select')</option>
-                                    <option value="low" {{ old('chassis') == 'low' ? 'selected' : '' }}>@lang('view_pages.low')</option>
-                                    <option value="high" {{ old('chassis') == 'high' ? 'selected' : '' }}>@lang('view_pages.high')</option>
-                                </select>
-                                <span class="text-danger">{{ $errors->first('chassis') }}</span>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 float-left mb-md-3">
-                            <div class="form-group">
-                                <label for="">@lang('view_pages.seats') <span class="text-danger">*</span></label>
-                                <select name="seats" id="seats" class="form-control">
-                                    <option value="" selected disabled>@lang('view_pages.select')</option>
-                                </select>
-                                <span class="text-danger">{{ $errors->first('seats') }}</span>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 float-left mb-md-3">
-                            <div class="form-group">
-                                <label for="">@lang('view_pages.luggage') <span class="text-danger">*</span></label>
-                                <select name="luggage" id="luggage" class="form-control">
-                                    <option value="" selected disabled>@lang('view_pages.select')</option>
-                                </select>
-                                <span class="text-danger">{{ $errors->first('luggage') }}</span>
-                            </div>
-                        </div> --}}
-
-                       {{--  <div class="col-sm-6 float-left mb-md-3">
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" id="class_one" name="class_one">
-                                <label class="form-check-label" for="class_one">
-                                    @lang('view_pages.class_one')
-                                </label>
-                            </div>
-                        </div>
- --}}
-                       {{--  <div class="col-sm-6 float-left mb-md-3">
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" id="class_two" name="class_two">
-                                <label class="form-check-label" for="class_two">
-                                    @lang('view_pages.class_two')
-                                </label>
-                            </div>
-                        </div> --}}
-
-                        <div class="col-sm-12">
-                            <h4 class="card-title mb-4">@lang('view_pages.vehicle_documnents')</h4>
-                        </div><hr>
-
-                        <div class="col-md-6 float-left">
-                            <div class="form-group profile-img">
-                                <label>{{ trans('view_pages.vehicle_registration_cert')}}</label>
-                                <div class="col-12" style="display: inline;">
-                                    <div class="col-md-12 float-left p-0">
-                                        <img class='img-upload' width="100px" class="rounded avatar-lg" />
-                                    </div>
-                                    <div class="col-md-12 float-left input-group p-0">
-                                        <span class="input-group-btn">
-                                            <span class="btn btn-default btn-file">
-                                                Browse… <input type="file" class="imgInp" name="registration_certificate" id="registration_certificate" required>
-                                            </span>
-                                        </span>
-                                        <input type="text" class="form-control" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 float-left">
-                            <div class="form-group profile-img">
-                                <label for="vehicle_back_side">{{ trans('view_pages.vehicle_back_side')}} </label>
-                                <div class="col-12" style="display: inline;">
-                                    <div class="col-md-12 float-left p-0">
-                                        <img class='img-upload' width="100px" class="rounded avatar-lg" />
-                                    </div>
-                                    <div class="col-md-12 float-left input-group p-0">
-                                        <span class="input-group-btn">
-                                    <span class="btn btn-default btn-file">
-                                        Browse… <input type="file" class="imgInp" name="vehicle_back_side" id="vehicle_back_side" required>
-                                    </span>
-                                        </span>
-                                        <input type="text" class="form-control" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
+                       
                         </div>
 
                         <div class="form-group">
