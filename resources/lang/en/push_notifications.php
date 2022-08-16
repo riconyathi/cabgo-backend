@@ -37,6 +37,9 @@ return array (
   'fleet_approved_title'=>'Fleet Got Approved',
   'fleet_approved_body'=>'Fleet Got Approved, Now you can assign driver for your fleet',
   'fleet_declined_title'=>'Fleet Got Declined by Admin',
-  'fleet_declined_body'=>'Fleet Got Declined by Admin, Please Contact Admin'
+  'fleet_declined_body'=>'Fleet Got Declined by Admin, Please Contact Admin',
+  'fleet_removed_from_your_account_title'=>'Fleet Removed From Your Account',
+  'fleet_removed_from_your_account_body'=>'Fleet Removed From Your Account, Please Wait For Assigning Fleet',
+
 
 );

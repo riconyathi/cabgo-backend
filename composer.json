@@ -16,7 +16,6 @@
         "barryvdh/laravel-translation-manager": "^0.5.8",
         "binarytorch/larecipe": "^2.4",
         "braintree/braintree_php": "^4.7",
-        "consoletvs/charts": "^6.5",
         "fedeisas/laravel-mail-css-inliner": "^2.3",
         "fideloper/proxy": "^4.0",
         "franzose/closure-table": "^5.1",
