@@ -187,7 +187,7 @@ class FleetController extends BaseController
             $uploadedDoc = count($fleet->fleetDocument);
 
             if ($neededDoc != $uploadedDoc) {
-                return redirect('fleet/document/view/'.$fleet->id);
+                return redirect('fleets/document/view/'.$fleet->id);
             }
 
             foreach ($fleet->fleetDocument as $fleetDoc) {
