@@ -18,6 +18,7 @@ use App\Models\Master\CarModel;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Admin\FleetNeededDocument;
+use App\Jobs\Notifications\AndroidPushNotification;
 
 class FleetController extends BaseController
 {
@@ -206,6 +207,21 @@ class FleetController extends BaseController
         $fleet->update([
             'approve' => $status
         ]);
+
+        $fleet->fresh();
+
+        $user = $fleet->user;
+
+        $title = trans('push_notifications.fleet_declined_title');
+        $body = trans('push_notifications.fleet_declined_body');
+
+        if($status){
+            $title = trans('push_notifications.fleet_approved_title');
+            $body = trans('push_notifications.fleet_approved_body');
+    
+        }
+        
+        $user->notify(new AndroidPushNotification($title, $body));
 
         $message = trans('succes_messages.fleet_approval_status_changed_succesfully');
         return redirect('fleets')->with('success', $message);

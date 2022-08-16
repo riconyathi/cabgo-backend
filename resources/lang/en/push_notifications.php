@@ -33,5 +33,10 @@ return array (
   'amount_credited_to_your_wallet_title' => 'Amount Added Succesfully',
   'amount_credited_to_your_wallet_body' => 'Amount Credited to Your Wallet Succesfully',
   'new_fleet_assigned_title'=>'New Fleet Assigned For you',
-  'new_fleet_assigned_body'=>'New Fleet assigned for you'
+  'new_fleet_assigned_body'=>'New Fleet assigned for you',
+  'fleet_approved_title'=>'Fleet Got Approved',
+  'fleet_approved_body'=>'Fleet Got Approved, Now you can assign driver for your fleet',
+  'fleet_declined_title'=>'Fleet Got Declined by Admin',
+  'fleet_declined_body'=>'Fleet Got Declined by Admin, Please Contact Admin'
+
 );
