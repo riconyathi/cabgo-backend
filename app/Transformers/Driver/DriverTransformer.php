@@ -48,6 +48,7 @@ class DriverTransformer extends Transformer
             'mobile' => $user->user->countryDetail->dial_code.$user->mobile,
             'profile_picture' => $user->profile_picture,
             'active' => (bool)$user->active,
+            'fleet_id'=>$user->fleet_id,
             'approve' => (bool)$user->approve,
             'available' => (bool)$user->available,
             'uploaded_document'=>false,
