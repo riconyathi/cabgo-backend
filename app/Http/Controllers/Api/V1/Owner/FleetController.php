@@ -117,14 +117,14 @@ class FleetController extends BaseController
         }
         if($fleet->driverDetail){
 
-            $driver = $fleet->driverDetail;
+            $fleet_driver = $fleet->driverDetail;
 
             $title = trans('push_notifications.fleet_removed_from_your_account_title');
             $body = trans('push_notifications.fleet_removed_from_your_account_body');
 
-            $this->database->getReference('drivers/'.$driver->id)->update(['fleet_changed'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
+            $this->database->getReference('drivers/'.$fleet_driver->id)->update(['fleet_changed'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
-            $notifable_driver = $driver->user;
+            $notifable_driver = $fleet_driver->user;
             $notifable_driver->notify(new AndroidPushNotification($title, $body));
 
             $fleet->driverDetail()->update(['fleet_id'=>null,'vehicle_type'=>null]);
