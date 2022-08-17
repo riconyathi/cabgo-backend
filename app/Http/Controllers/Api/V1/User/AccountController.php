@@ -26,8 +26,9 @@ class AccountController extends ApiController
 
         if (auth()->user()->hasRole(Role::DRIVER)) {
 
-
             $driver_details = $user->driver;
+
+            dd($driver_details);
 
             $user = fractal($driver_details, new DriverProfileTransformer)->parseIncludes(['onTripRequest.userDetail','onTripRequest.requestBill','metaRequest.userDetail']);
 
@@ -44,8 +45,7 @@ class AccountController extends ApiController
         if(auth()->user()->hasRole(Role::DISPATCHER)){
 
             $user = User::where('id',auth()->user()->id)->first();
-
-            
+   
         }
 
         return $this->respondOk($user);
