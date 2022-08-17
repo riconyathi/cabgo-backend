@@ -82,6 +82,15 @@ class DriverProfileTransformer extends Transformer
             'role'=>'driver'
         ];
 
+
+        if($user->fleet_id){
+            $params['car_make_name'] = $user->fleetDetail->carBrand->name;
+            $params['car_model_name'] = $user->fleetDetail->carModel->name;
+            $params['car_number'] = $user->fleetDetail->license_number;
+            $params['car_color'] = $user->fleetDetail->car_color;
+
+        }
+        
         $current_date = Carbon::now();
 
         $total_earnings = RequestBill::whereHas('requestDetail', function ($query) use ($user,$current_date) {
