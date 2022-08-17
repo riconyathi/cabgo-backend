@@ -14,3 +14,7 @@
     - [Admin-App](/{{route}}/{{version}}/admin-user-manual)
     - [Required-Admin-App-Setup](/{{route}}/{{version}}/required-setup)
 
+- ## Common Issues
+
+    - [Server-App-Issues](/{{route}}/{{version}}/server-app-issues)
+    - [Flutter-App-Issues](/{{route}}/{{version}}/flutter-issues)

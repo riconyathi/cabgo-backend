@@ -109,10 +109,8 @@ Steps
 <a name="section-4"></a>
 ## Map Configuration
 
-* To create zone & see map view  & other map functionalities we need to add google map key in .env file. here is an example below
-```php
-GOOGLE_MAP_KEY=AIzaSyBeTRs1icwooRpk7ErjCEQCwu0OQowVt9J
-```
+* To create zone & see map view  & other map functionalities we need to add google map key in admin app settings section.
+
 
 <a name="section-5"></a>
 ## Firebase Configuration

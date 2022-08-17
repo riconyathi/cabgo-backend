@@ -241,16 +241,17 @@ String mapkey = 'your map key here';
 * <strong> Update the rules part with below content</strong>
 
 ```flutter
-{
+  {
   "rules": {
     "drivers": {
       ".read": true,
       ".write":true,
-        ".indexOn":["is_active","g","vehicle_type","l"],
+        ".indexOn":["is_active","g","service_location_id","vehicle_type","l","ownerid"],
       },
     "requests": {
       ".read": true,
-      ".write": true
+      ".write": true,
+        ".indexOn":["service_location_id"],
     },
        "SOS": {
       ".read": true,
@@ -279,6 +280,12 @@ String mapkey = 'your map key here';
       "request-meta": {
       ".read": true,
       ".write": true,
+        ".indexOn":["driver_id","user_id"]
+    },
+      "owners": {
+      ".read": true,
+      ".write": true,
+        ".indexOn":["driver_id","user_id"]
     }
    }
  }
@@ -527,7 +534,7 @@ var options = {
 
 1. change app version
 
-* <strong> Note : File Location "project/pubsec.yaml" </strong>
+<strong> Note : File Location "project/pubsec.yaml" </strong>
 
 ```flutter
 version: 1.0.2+3
@@ -552,7 +559,7 @@ version: 1.0.2+3
 
 1. replace the jks key details in file,
 
-* <strong> Note : File Location "project/android/key.properties as given below" </strong>
+<strong> Note : File Location "project/android/key.properties as given below" </strong>
 	
 ```flutter
 storePassword=password you entered while creating jks file
