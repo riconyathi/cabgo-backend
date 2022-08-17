@@ -22,15 +22,21 @@ class AccountController extends ApiController
     public function me()
     {
         if (auth()->user()->hasRole(Role::DRIVER)) {
-            $user = User::where('id', auth()->user()->id)->companyKey()->first();
+
+            $user = User::where('id', auth()->user()->id)->belongsTorole('driver')->companyKey()->first();
+
             $driver_details = $user->driver;
+
             $user = fractal($driver_details, new DriverProfileTransformer)->parseIncludes(['onTripRequest.userDetail','onTripRequest.requestBill','metaRequest.userDetail']);
+
         } else if(auth()->user()->hasRole(Role::USER)) {
-            $user = User::where('id', auth()->user()->id)->companyKey()->first();
+
+            $user = User::where('id', auth()->user()->id)->belongsTorole('user')->companyKey()->first();
+
             $user = fractal($user, new UserTransformer)->parseIncludes(['onTripRequest.driverDetail','onTripRequest.requestBill','metaRequest.driverDetail','favouriteLocations','laterMetaRequest.driverDetail']);
         }else{
 
-            $user = User::where('id', auth()->user()->id)->first();
+            $user = User::where('id', auth()->user()->id)->belongsTorole('owner')->first();
 
             $owner_details = $user->owner;
 
