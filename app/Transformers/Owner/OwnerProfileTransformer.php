@@ -54,7 +54,7 @@ class OwnerProfileTransformer extends Transformer
             'name' => $user->owner_name,
             'email' => $user->email,
             'mobile' => $user->mobile,
-            'profile_picture' => $user->profile_picture,
+            'profile_picture' => $user->user->profile_picture,
             'active' => (bool)$user->active,
             'approve' => (bool)$user->approve,
             'available' => (bool)$user->available,
