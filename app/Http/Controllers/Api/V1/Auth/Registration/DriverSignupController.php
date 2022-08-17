@@ -101,17 +101,7 @@ class DriverSignupController extends LoginController
         if ($validate_exists_mobile) {
             $this->throwCustomException('Provided mobile has already been taken');
         }
-        // if ($request->has('refferal_code')) {
-        //     // Validate Referral code
-        //     $referred_user_record = $this->user->belongsTorole([Role::DRIVER,Role::OWNER])->where('refferal_code', $request->refferal_code)->first();
-        //     if (!$referred_user_record) {
-        //         $this->throwCustomException('Provided Referral code is not valid', 'refferal_code');
-        //     }
-        //     // Add referral commission to the referred user
-        //     $referred_user_record = $referred_user_record->driver;
-        //     $this->addCommissionToRefferedUser($referred_user_record);
-        // }
-
+        
         if (!$country_code) {
             $this->throwCustomException('unable to find country');
         }
@@ -125,9 +115,9 @@ class DriverSignupController extends LoginController
             $profile_picture = $this->imageUploader->file($uploadedFile)
                 ->saveDriverProfilePicture();
         }
-        // DB::beginTransaction();
-        // try {
-        // $mobile = $this->otpHandler->getMobileFromUuid($mobileUuid);
+        DB::beginTransaction();
+        try {
+
         $data = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -154,7 +144,6 @@ class DriverSignupController extends LoginController
         $created_params['active'] = false; //@TODO need to remove in future
             $driver = $user->driver()->create($created_params); //Create drivers table data
 
-            // $database = $this->database->getReference('drivers')->getValue();
         // // Store records to firebase
         $this->database->getReference('drivers/'.$driver->id)->set(['id'=>$driver->id,'vehicle_type'=>$request->input('vehicle_type'),'active'=>1,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
@@ -164,17 +153,15 @@ class DriverSignupController extends LoginController
         // Create Empty Wallet to the driver
         $driver_wallet = $driver->driverWallet()->create(['amount_added'=>0]);
 
-        // $this->otpHandler->delete($mobileUuid);
         $user->attachRole(Role::DRIVER);
         // $this->dispatch(new UserRegistrationNotification($user));
         event(new UserRegistered($user));
-        // } catch (\Exception $e) {
-        //     DB::rollBack();
-        //     Log::error($e);
-        //     Log::error('Error while Registering a driver account. Input params : ' . json_encode($request->all()));
-        //     return $this->respondBadRequest('Unknown error occurred. Please try again later or contact us if it continues.');
-        // }
-        // DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error while Registering a driver account. Input params : ' . json_encode($request->all()));
+            return $this->respondBadRequest('Unknown error occurred. Please try again later or contact us if it continues.');
+        }
+        DB::commit();
         return $this->authenticateAndRespond($user, $request, $needsToken=true);
     }
 
