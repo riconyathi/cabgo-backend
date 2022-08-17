@@ -106,7 +106,9 @@ class ProfileController extends ApiController
 
         }
 
-       
+         $driver_params['approve'] = 0;
+
+         $driver_params['reason'] = 'profile-info-updated';
        
 
         if ($uploadedFile = $this->getValidatedUpload('profile_picture', $request)) {
@@ -120,7 +122,7 @@ class ProfileController extends ApiController
 
             $driver_params['approve'] = 0;
 
-            $driver_params['reason'] = 'profile-pic-changed';
+            $driver_params['reason'] = 'profile-info-updated';
 
         }
 
