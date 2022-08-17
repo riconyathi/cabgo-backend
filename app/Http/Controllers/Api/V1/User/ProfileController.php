@@ -14,6 +14,7 @@ use App\Base\Constants\Auth\Role;
 use App\Models\User;
 use App\Models\Request\FavouriteLocation;
 use App\Models\Payment\UserBankInfo;
+use Kreait\Firebase\Database;
 
 /**
  * @group Profile-Management
@@ -37,11 +38,14 @@ class ProfileController extends ApiController
      *
      * @param ImageUploaderContract $imageUploader
      */
-    public function __construct(ImageUploaderContract $imageUploader,User $user)
+    public function __construct(ImageUploaderContract $imageUploader,User $user,Database $database)
     {
         $this->imageUploader = $imageUploader;
 
         $this->user = $user;
+
+        $this->database = $database;
+
     }
 
     /**
@@ -107,7 +111,7 @@ class ProfileController extends ApiController
         }
 
         $driver_params = $request->only(['vehicle_type','car_make','car_model','car_color','car_number','name','email','vehicle_year']);
-        
+
 
          $driver_params['approve'] = false;
 
@@ -142,6 +146,13 @@ class ProfileController extends ApiController
 
         }
 
+        if($driver_params['approve']==false){
+
+            $status=0;
+
+            $this->database->getReference('drivers/'.$user->driver->id)->update(['approve'=>(int)$status,'updated_at'=> Database::SERVER_TIMESTAMP]);
+
+        }
         $user->driver()->update($driver_params);
 
         $driver_details = $user->driver;
