@@ -81,7 +81,13 @@ class TripRequestTransformer extends Transformer
             'show_request_eta_amount'=>true,
             'ride_user_rating'=>0,
             'ride_driver_rating'=>0,
-            'if_dispatch'=>false
+            'if_dispatch'=>false,
+            'converted_trip_start_time'=>$request->converted_trip_start_time,
+            'converted_arrived_at'=>$request->converted_arrived_at,
+            'converted_accepted_at'=>$request->converted_accepted_at,
+            'converted_completed_at'=>$request->converted_completed_at,
+            'converted_cancelled_at'=>$request->converted_cancelled_at,
+            'converted_created_at'=>$request->converted_created_at,
         ];
 
         $maximum_time_for_find_drivers_for_regular_ride = (get_settings(Settings::MAXIMUM_TIME_FOR_FIND_DRIVERS_FOR_REGULAR_RIDE) * 60);
