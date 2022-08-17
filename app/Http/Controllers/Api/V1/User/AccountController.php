@@ -28,7 +28,7 @@ class AccountController extends ApiController
 
             $driver_details = $user->driver;
 
-            dd($driver_details);
+            dd($user);
 
             $user = fractal($driver_details, new DriverProfileTransformer)->parseIncludes(['onTripRequest.userDetail','onTripRequest.requestBill','metaRequest.userDetail']);
 
