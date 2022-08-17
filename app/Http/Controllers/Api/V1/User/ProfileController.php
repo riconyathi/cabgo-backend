@@ -117,11 +117,25 @@ class ProfileController extends ApiController
         if ($uploadedFile = $this->getValidatedUpload('profile_pic', $request)) {
             $user_params['profile_picture'] = $this->imageUploader->file($uploadedFile)
                 ->saveProfilePicture();
+
+            $driver_params['approve'] = 0;
+
+            $driver_params['reason'] = 'profile-pic-changed';
+
         }
 
         $user->update($user_params);
 
         $driver_params = $request->only(['vehicle_type','car_make','car_model','car_color','car_number','name','email','vehicle_year']);
+
+        if($request->has('vehicle_type') && $request->vehicle_type){
+
+            $driver_params['approve'] = 0;
+
+            $driver_params['reason'] = 'vehicle-info-updated';
+
+
+        }
 
         $user->driver()->update($driver_params);
 
