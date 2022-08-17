@@ -111,7 +111,19 @@ class DriverProfileTransformer extends Transformer
 
         $wallet_balance= $driver_wallet?$driver_wallet->amount_balance:0;
 
-         $minimum_balance = get_settings(Settings::DRIVER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER);
+
+
+        $minimum_balance = get_settings(Settings::DRIVER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER);
+
+            if($user->owner_id){
+
+            $minimum_balance = get_settings(Settings::OWNER_WALLET_MINIMUM_AMOUNT_TO_GET_ORDER);
+
+            $owner_wallet = $user->owner->ownerWalletDetail;
+
+            $wallet_balance= $owner_wallet?$owner_wallet->amount_balance:0;
+                
+            }
 
             if($minimum_balance >=0){
                 if ($minimum_balance > $wallet_balance) {
