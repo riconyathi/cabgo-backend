@@ -106,7 +106,7 @@ class ProfileController extends ApiController
 
         }
 
-         $driver_params['approve'] = 0;
+         $driver_params['approve'] = false;
 
          $driver_params['reason'] = 'profile-info-updated';
        
@@ -120,7 +120,7 @@ class ProfileController extends ApiController
             $user_params['profile_picture'] = $this->imageUploader->file($uploadedFile)
                 ->saveProfilePicture();
 
-            $driver_params['approve'] = 0;
+            $driver_params['approve'] = false;
 
             $driver_params['reason'] = 'profile-info-updated';
 
@@ -132,7 +132,7 @@ class ProfileController extends ApiController
 
         if($request->has('vehicle_type') && $request->vehicle_type){
 
-            $driver_params['approve'] = 0;
+            $driver_params['approve'] = false;
 
             $driver_params['reason'] = 'vehicle-info-updated';
 
