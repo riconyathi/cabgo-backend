@@ -14,6 +14,8 @@ use App\Base\Services\ImageUploader\ImageUploaderContract;
 use Kreait\Firebase\Database;
 use App\Models\User;
 use App\Base\Constants\Auth\Role;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 class FleetDriversController extends BaseController
@@ -84,6 +86,8 @@ class FleetDriversController extends BaseController
                 ->saveDriverProfilePicture();
         }
 
+        DB::beginTransaction();
+        try {
 
         $user = User::create([
             'name' => $request->input('name'),
@@ -104,6 +108,13 @@ class FleetDriversController extends BaseController
         $created_params['owner_id'] = $owner_detail->id;
 
         $driver = $user->driver()->create($created_params);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error while Registering a driver account. Input params : ' . json_encode($request->all()));
+            return $this->respondBadRequest('Unknown error occurred. Please try again later or contact us if it continues.');
+        }
+        DB::commit();
 
          $this->database->getReference('drivers/'.$driver->id)->set(['id'=>$driver->id,'vehicle_type'=>'fleet-owner-type','active'=>0,'updated_at'=> Database::SERVER_TIMESTAMP]);
 
