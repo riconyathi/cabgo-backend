@@ -45,6 +45,7 @@ class DriverTransformer extends Transformer
             'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
+            'owner_id'=>$user->owner_id,
             'mobile' => $user->user->countryDetail->dial_code.$user->mobile,
             'profile_picture' => $user->profile_picture,
             'active' => (bool)$user->active,
