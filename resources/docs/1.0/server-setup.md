@@ -27,7 +27,7 @@ We are strongly prefer any Server with ubuntu OS. Because it is quite easy to se
 ## Installation Requirements
 
 1. Apache
-2. PHP7.4 & above
+2. PHP7.2
 3. mysql
 4. phpmyadmin
 5. composer
@@ -61,7 +61,7 @@ We are strongly prefer any Server with ubuntu OS. Because it is quite easy to se
 * Reference Link : https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-20-04
 
 <a name="section-6"></a>
-## 4.Install PHP7.4 & above
+## 4.Install PHP7.2
 Please follow the instrctions from the reference link below. And Install the php extensions below.
 <strong>bcmath,bz2,intl,gd,mbstring,mysql,zip,fpm,curl,xml</strong>
 

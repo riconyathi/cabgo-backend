@@ -45,49 +45,9 @@
 <a name="serializer-issue"></a>
 ## Data Array Serializer Issue
 
-* This issue has reported because the php version. Please make sure that you are using php7.3 OR Php7.4
-
-* Even using php7.4 still if the issue comes, please replace the content in below mentioned file.
-	* File Path: App\Base\Serializers\CustomDataArraySerializer.php
+* This issue has reported because the php version. Please make sure that you are using php7.2
 
 
-```php
-<?php
-
-namespace App\Base\Serializers;
-
-use League\Fractal\Serializer\DataArraySerializer;
-
-class CustomDataArraySerializer extends DataArraySerializer
-{
-    /**
-     * {@inheritDoc}
-     */
-    public function collection(?string $resourceKey, array $data): array
-    {
-        return ['data' => $data];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function item(?string $resourceKey, array $data): array
-    {
-        return ['data' => $data];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function null(): ?array
-    {
-        // return ['data' => []];
-        return null;
-    }
-}
-
-
-```
 
 <a name="access-client-issue"></a>
 ## Personal Access Client Not Found
