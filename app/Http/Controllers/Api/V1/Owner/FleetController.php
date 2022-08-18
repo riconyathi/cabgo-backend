@@ -83,14 +83,12 @@ class FleetController extends BaseController
     {
         $owner_id = auth()->user()->owner->id;
 
-        dd($owner_id);
-        
 
-        $drivers = Driver::where('owner_id',$owner_id)->get();
+        $drivers = Driver::where('owner_id','=',$owner_id)->get();
 
         if(request()->has('fleet_id') && request()->fleet_id){
 
-        $drivers = Driver::where('owner_id',$owner_id)->where('approve',true)->orWhere('fleet_id','!=',request()->fleet_id)->get();
+        $drivers = Driver::where('owner_id','=',$owner_id)->where('approve',true)->orWhere('fleet_id','!=',request()->fleet_id)->get();
 
         }
 
