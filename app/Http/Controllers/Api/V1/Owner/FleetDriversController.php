@@ -78,6 +78,16 @@ class FleetDriversController extends BaseController
 
         $owner_detail = auth()->user()->owner;
 
+        $validate_exists_mobile = User::belongsTorole(Role::DRIVER)->where('mobile', $request->mobile)->exists();
+        $validate_exists_email = User::belongsTorole(Role::DRIVER)->where('email', $request->email)->exists();
+
+        if ($validate_exists_mobile) {
+            $this->throwCustomException('Provided mobile has already been taken');
+        }
+
+        if ($validate_exists_email) {
+            $this->throwCustomException('Provided email has already been taken');
+        }
 
         $profile_picture = null;
 
