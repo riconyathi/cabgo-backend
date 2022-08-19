@@ -74,7 +74,7 @@ class FrontPageController extends Controller
            if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
             //$user=User::get();
             $firstname=$request->first_name;
@@ -130,7 +130,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
 
 
@@ -191,7 +191,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
          $userId=Auth::id();
          $driverioslink=$request->input('driverioslink');
@@ -225,7 +225,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
 
           $userId=Auth::id();
@@ -274,7 +274,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
 
          $userId = Auth::id();
@@ -340,7 +340,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
 
          $userId = Auth::id();
@@ -386,7 +386,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
 
          $userId = Auth::id();
@@ -527,7 +527,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
 
          $userId = Auth::id();
@@ -703,7 +703,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
 
          $userId = Auth::id();
@@ -743,7 +743,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
 
         $userId = Auth::id();
@@ -783,7 +783,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
 
         $userId = Auth::id();
@@ -823,7 +823,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
 
         $userId = Auth::id();
@@ -861,7 +861,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
 
           $userId = Auth::id();
@@ -908,7 +908,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
     
          $data=FrontPage::first();
@@ -1001,7 +1001,7 @@ class FrontPageController extends Controller
          if (env('APP_FOR')=='demo') {
             $message = trans('succes_messages.you_are_not_authorised');
 
-            return redirect('zone')->with('warning', $message);
+            return redirect()->back()->with('warning', $message);
            }
 
 

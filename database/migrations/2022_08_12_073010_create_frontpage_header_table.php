@@ -118,13 +118,13 @@ class CreateFrontpageHeaderTable extends Migration
             $table->Text('driverandroidlink');
             $table->Text('userioslink');
             $table->Text('userandroidlink');
-            $table->tinytext('menucolor');
-            $table->tinytext('menutextcolor');
-            $table->tinytext('menutexthover');
-            $table->tinytext('firstrowbgcolor');
-            $table->tinytext('hdriverdownloadcolor');
-            $table->tinytext('hownumberbgcolor');
-            $table->tinytext('footerbgcolor');
+            $table->Text('menucolor');
+            $table->Text('menutextcolor');
+            $table->Text('menutexthover');
+            $table->Text('firstrowbgcolor');
+            $table->Text('hdriverdownloadcolor');
+            $table->Text('hownumberbgcolor');
+            $table->Text('footerbgcolor');
         });
     }
 
