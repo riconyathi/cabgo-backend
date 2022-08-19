@@ -1,6 +1,5 @@
 <?php
 
-namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
@@ -16,7 +15,7 @@ class FrontpageHeaderTableSeeder extends Seeder
     {
         
 
-        \DB::table('landingpagecms')->delete();
+        //\DB::table('landingpagecms')->delete();
         
         \DB::table('landingpagecms')->insert(array (
             0 => 
