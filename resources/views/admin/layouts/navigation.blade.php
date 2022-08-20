@@ -550,7 +550,62 @@ if(str_contains((string)request()->path(),'translations')){
         </a>
       </li>
       @endif
+      @if(auth()->user())
+      <li class="treeview {{ 'cms' == $main_menu ? 'active menu-open' : '' }}">
+        <a href="javascript: void(0);">
+          <i class="fa fa-file-pdf-o"></i>
+          <span> CMS </span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-right pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="{{ 'cms_frontpage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/frontpagecms')}}"><i class="fa fa-circle-thin"></i>Home Page CMS</a>
+          </li>
+          <li class="{{ 'cms_safetypage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/safetypagecms')}}"><i class="fa fa-circle-thin"></i>Safety Page CMS</a>
+          </li>
+          <li class="{{ 'cms_servicepage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/servicepage')}}"><i class="fa fa-circle-thin"></i>Serviceas Page CMS</a>
+          </li>
+          <li class="{{ 'cms_privacypage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/privacypagecms')}}"><i class="fa fa-circle-thin"></i>Privacy Page CMS</a>
+          </li>
+          <li class="{{ 'cms_dmvpage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/dmvpagecms')}}"><i class="fa fa-circle-thin"></i>DMV Page CMS</a>
+          </li>
+          <li class="{{ 'cms_complaincepage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/complaincepagecms')}}"><i class="fa fa-circle-thin"></i>Complaince Page CMS</a>
+          </li>
+          <li class="{{ 'cms_termspage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/termspagecms')}}"><i class="fa fa-circle-thin"></i>Terms Page CMS</a>
+          </li>
+          <li class="{{ 'cms_drreqpage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/drreqpagecms')}}"><i class="fa fa-circle-thin"></i>Driver Req. Page CMS</a>
+          </li>
+          <li class="{{ 'cms_applydriverpage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/applydriverpagecms')}}"><i class="fa fa-circle-thin"></i>Apply To Drive</a>
+          </li>
+          <li class="{{ 'cms_howdriverpage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/howdriverpagecms')}}"><i class="fa fa-circle-thin"></i>How It Works Page CMS</a>
+          </li>
+          <li class="{{ 'cms_contactpage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/contactpagecms')}}"><i class="fa fa-circle-thin"></i>Contact Us Page CMS</a>
+          </li>
+          <li class="{{ 'cms_playstorepage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/playstorepagecms')}}"><i class="fa fa-circle-thin"></i>Playstore Link Page CMS</a>
+          </li>
+          <li class="{{ 'cms_footerpage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/footerpagecms')}}"><i class="fa fa-circle-thin"></i>Footer Page CMS</a>
+          </li>
+          <li class="{{ 'cms_colorthemepage' == $sub_menu ? 'active' : '' }}">
+            <a href="{{url('/cms/colorthemepagecms')}}"><i class="fa fa-circle-thin"></i>Color Theme Page CMS</a>
+          </li>
 
+        </ul>
+      </li>
+      @endif
       <!--  @if(auth()->user()->can('view-companies'))
           <li class="{{'company' == $main_menu ? 'active' : '' }}">
             <a href="{{url('/company')}}">

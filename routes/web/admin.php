@@ -38,6 +38,41 @@ Route::middleware('guest')->namespace('Admin')->group(function () {
 });
 
 Route::middleware('auth:web')->group(function () {
+
+        //cMS
+    Route::group(['prefix' => 'cms'], function () {
+    
+            Route::post('/frontpagecmsadd','FrontPageController@frontpageadd')->name('frontpagecmsadd');
+            Route::get('/frontpagecms', 'FrontPageController@frontpage')->name('frontpagecms');
+            Route::post('/safetypageadd','FrontPageController@safetypagecmsadd')->name('safetypageadd');
+            Route::get('/safetypagecms', 'FrontPageController@safetypagecms')->name('safetypagecms');
+            Route::post('/servicepageadd','FrontPageController@servicepagecmsadd')->name('servicepageadd');
+            Route::get('/servicepage', 'FrontPageController@servicepagecms')->name('servicepage');
+            Route::post('/privacypageadd','FrontPageController@privacypagecmsadd')->name('privacypageadd');
+            Route::get('/privacypagecms', 'FrontPageController@privacypagecms')->name('privacypagecms');
+            Route::post('/dmvpageadd','FrontPageController@dmvpagecmsadd')->name('dmvpageadd');
+            Route::get('/dmvpagecms', 'FrontPageController@dmvpagecms')->name('dmvpagecms');
+            Route::post('/complaincepageadd','FrontPageController@complaincepagecmsadd')->name('complaincepageadd');
+            Route::get('/complaincepagecms', 'FrontPageController@complaincepagecms')->name('complaincepagecms');
+            Route::post('/termspageadd','FrontPageController@termspagecmsadd')->name('termspageadd');
+            Route::get('/termspagecms', 'FrontPageController@termspagecms')->name('termspagecms');
+            Route::post('/drreqpageadd','FrontPageController@drreqpagecmsadd')->name('drreqpageadd');
+            Route::get('/drreqpagecms', 'FrontPageController@drreqpagecms')->name('drreqpagecms');
+            Route::post('/applydriverpageadd','FrontPageController@applydriverpagecmsadd')->name('applydriverpageadd');
+            Route::get('/applydriverpagecms', 'FrontPageController@applydriverpagecms')->name('applydriverpagecms');
+            Route::post('/howdriverpageadd','FrontPageController@howdriverpagecmsadd')->name('howdriverpageadd');
+            Route::get('/howdriverpagecms', 'FrontPageController@howdriverpagecms')->name('howdriverpagecms');
+            Route::post('/contactpageadd','FrontPageController@contactpagecmsadd')->name('contactpageadd');
+            Route::get('/contactpagecms', 'FrontPageController@contactpagecms')->name('contactpagecms');
+            Route::post('/playstorepageadd','FrontPageController@playstorepagecmsadd')->name('playstorepageadd');
+            Route::get('/playstorepagecms', 'FrontPageController@playstorepagecms')->name('playstorepagecms');
+            Route::post('/footerpageadd','FrontPageController@footerpagecmsadd')->name('footerpageadd');
+            Route::get('/footerpagecms', 'FrontPageController@footerpagecms')->name('footerpagecms');
+            Route::post('/colorthemepageadd','FrontPageController@colorthemepagecmsadd')->name('colorthemepageadd');
+            Route::get('/colorthemepagecms', 'FrontPageController@colorthemepagecms')->name('colorthemepagecms');
+
+    });
+
     Route::namespace('Admin')->group(function () {
         Route::get('dispatcher-request','AdminViewController@dispatchRequest');
     // Owner Management (Company Management)

@@ -717,4 +717,13 @@ return array (
   'fleet_drivers' => 'Fleet Drivers',
   'add_fleet_driver' => 'Add Fleet Driver',
   'select_owner' => 'Select Owner',
+  'fav-icon'=>'Fav Icon',
+  'running-text'=>'Running Text',
+  'banner-image'=>'Banner Image',
+  'play-store-app-image'=>'Play Store Image',
+  'tab-view-image'=>'First Row View Image',
+  'tab-head-text'=>'First Row Heading Text',
+  'tab-sub-text'=>'First Row Sub Text',
+  'second-tab-view-image'=>'Second Row View Image',
+  'second-tab-head-text'=>'Second Row Heading Text',
 );
