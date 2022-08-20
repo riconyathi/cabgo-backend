@@ -2,6 +2,8 @@
 
 
 use Illuminate\Database\Seeder;
+use App\Models\Cms\FrontPage;
+
 
 class FrontpageHeaderTableSeeder extends Seeder
 {
@@ -15,7 +17,12 @@ class FrontpageHeaderTableSeeder extends Seeder
     {
         
 
-        //\DB::table('landingpagecms')->delete();
+        $cms = FrontPage::first();
+
+        if($cms){
+            goto end;
+
+        }
         
         \DB::table('landingpagecms')->insert(array (
             0 => 
@@ -843,5 +850,7 @@ General Inquiries: <a href="mailto:info@tyt.us"> info@tyt.us</a></p>',
             ));
         
         
+        end:
+
     }
 }

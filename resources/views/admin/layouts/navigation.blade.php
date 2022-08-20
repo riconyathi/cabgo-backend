@@ -585,7 +585,7 @@ if(str_contains((string)request()->path(),'translations')){
             <a href="{{url('/cms/drreqpagecms')}}"><i class="fa fa-circle-thin"></i>Driver Req. Page CMS</a>
           </li>
           <li class="{{ 'cms_applydriverpage' == $sub_menu ? 'active' : '' }}">
-            <a href="{{url('/cms/applydriverpagecms')}}"><i class="fa fa-circle-thin"></i>Apply To Drive Requirement Page CMS</a>
+            <a href="{{url('/cms/applydriverpagecms')}}"><i class="fa fa-circle-thin"></i>Apply To Drive</a>
           </li>
           <li class="{{ 'cms_howdriverpage' == $sub_menu ? 'active' : '' }}">
             <a href="{{url('/cms/howdriverpagecms')}}"><i class="fa fa-circle-thin"></i>How It Works Page CMS</a>
