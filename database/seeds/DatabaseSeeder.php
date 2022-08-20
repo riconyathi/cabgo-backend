@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingsSeeder::class);
         $this->call(CancellationReasonSeeder::class);
         $this->call(ComplaintTitleSeeder::class);
+        $this->call(FrontpageHeaderTableSeeder::class);
 
         
     }
