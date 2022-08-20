@@ -397,6 +397,26 @@ android:label="project name"
           notificationTitle: "Location background service running",
 ```
 
+3. Change App url to awake driver app from background while getting ride
+  <strong>Note: File Location "project/lib/functions/functions.dart" </strong>
+
+  ```flutter
+  if (duration == 0 || duration == 0.0) {
+            if (isBackground == true && platform == TargetPlatform.android) {
+              launch('urlname://'); //example:tagxi-driver://
+            } else if (platform != TargetPlatform.android) {
+  ```
+
+
+
+<strong> Note: File Location "project/android/app/src/main/AndroidManifest.xml" </strong>
+
+```flutter
+<category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="urlname" /> //example:tagxi-driver
+    </intent-filter>
+```
+
 <a name="section-10"></a>
 ## change payment gateway keys
 
