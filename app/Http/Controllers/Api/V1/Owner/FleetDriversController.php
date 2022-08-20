@@ -139,10 +139,11 @@ class FleetDriversController extends BaseController
      * */
     public function deleteDriver(Driver $driver){
 
+        $driver->fleetDetail()->update(['driver_id'=>null]);
+
         $this->database->getReference('drivers/'.$driver->id)->remove();
 
         $driver->user()->delete();
-
 
         return $this->respondSuccess(null,'driver_deleted_succesfully');
 

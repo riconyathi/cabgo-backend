@@ -4,6 +4,7 @@ namespace App\Models\Payment;
 
 use App\Base\Uuid\UuidModel;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class OwnerWallet extends Model
 {
