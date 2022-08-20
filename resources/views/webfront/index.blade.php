@@ -26,7 +26,7 @@
 
 <div id="home" class="container-fluid mt-10">
 
-    <div class="row bg-cover" data-jarallax data-speed=".8" style="background: #f6db9d !important;background-image: url(img/pattern-1.svg)">
+    <div class="row bg-cover" data-jarallax data-speed=".8" style="background: {{ $data->firstrowbgcolor }} !important;background-image: url(img/pattern-1.svg)">
         <div class="col-md-6 p-0">
             <img src="{{ asset($p.$data->bannerimage) }}" alt="" class="w-100">
         </div>
@@ -139,8 +139,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </section>

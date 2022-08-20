@@ -75,13 +75,13 @@
             </h4>
             <div class="row">
                 <div class="col-6 mb-1">
-                    <a href="{{asset('$p.$data->playstorelink1')}}" target="_blank">
-                    <img src="{{asset('$p.$data->driverioslink')}}" alt="" class="w-100 w-md-75 wow slideInLeft animated" style="visibility: visible;">
+                    <a href="{{ url($data->driverandroidlink) }}" target="_blank">
+                    <img src="{{asset($p.$data->playstoreicon2)}}" alt="" class="w-100 w-md-75 wow slideInLeft animated" style="visibility: visible;">
                 </a>
                 </div>
                 <div class="col-6 mb-1">
-                    <a href="{{asset('$p.$data->playstorelink2')}}" target="_blank">
-                        <img src="{{asset('$p.$data->driverandroidlink')}}" alt="" class="w-100 w-md-75 wow slideInRight animated" style="visibility: visible;">
+                    <a href="{{url($data->driverioslink)}}" target="_blank">
+                        <img src="{{asset($p.$data->playstoreicon1)}}" alt="" class="w-100 w-md-75 wow slideInRight animated" style="visibility: visible;">
                     </a>
                 </div>
             </div>

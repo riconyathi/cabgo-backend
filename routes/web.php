@@ -21,7 +21,6 @@ Route::namespace('Web')->group(function () {
     include_route_files('web');
     
 
-    Route::get('/logins', 'HomeController@index')->name('login');
     Route::get('/', 'FrontPageController@index')->name('index');
     Route::get('/driverpage', 'FrontPageController@driverp')->name('driverpage');
     Route::get('/howdriving', 'FrontPageController@howdrive')->name('howdriving');

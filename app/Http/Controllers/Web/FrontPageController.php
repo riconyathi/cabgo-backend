@@ -17,6 +17,36 @@ class FrontPageController extends Controller
 
     public function index()
     {
+        $host_name = request()->getHost();
+
+        $conditional_host = explode('.',$host_name);
+
+        if($conditional_host[0] =='tagxi-docs'){
+
+        return redirect('user-manual');
+
+        }
+        
+        if($conditional_host[0] =='tagxi-server'){
+
+            $user = User::belongsToRole('super-admin')->first();
+
+            auth('web')->login($user, true);
+            
+            return redirect('dashboard');
+
+
+        }
+        
+        if($conditional_host[0] =='tagxi-dispatch'){
+
+        $user = User::belongsToRole('dispatcher')->first();
+        
+        auth('web')->login($user, true);
+
+        return redirect('dispatch/dashboard');
+
+        }
 
         $data=FrontPage::first();
         $p=Storage::disk(env('FILESYSTEM_DRIVER'))->url(file_path($this->uploadPath(),''));
