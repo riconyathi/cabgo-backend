@@ -15,6 +15,24 @@
 ## Introduction
 You are almost finished and ready to setup your back end part. once you setup jenkins and taken a build or just uploaded the laravel project in your project path. Please follow the below steps for running the server app.
 
+* Admin App & Dispatcher App Link
+
+    Admin App: http://your-base-url/login
+
+    Default Access For Admin
+
+     email: admin@admin.com <br>
+
+     password: 123456789 <br>
+
+
+ Dispatcher App :  http://your-base-url/dispatch-login
+
+
+
+
+
+
 <a name="section-2"></a>
 ## Setup Instructions
 

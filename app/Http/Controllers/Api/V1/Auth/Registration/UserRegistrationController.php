@@ -145,7 +145,7 @@ class UserRegistrationController extends LoginController
 
         if ($uploadedFile = $this->getValidatedUpload('profile_picture', $request)) {
             $profile_picture = $this->imageUploader->file($uploadedFile)
-                ->saveDriverProfilePicture();
+                ->saveProfilePicture();
         }
 
         // DB::beginTransaction();
