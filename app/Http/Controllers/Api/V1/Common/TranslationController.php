@@ -17,11 +17,11 @@ class TranslationController extends BaseController
     public function index()
     {
         $client = new Client();
-        $get_api_key = env('GOOGLE_SHEET_KEY');
+        $get_api_key = get_settings('google_map_key');
 
         // $sheet_id = '1J7F9JXssbN8mzSOatEF9-MLfC7Odz0SWZItX7fLSwU8';
 
-        $sheet_id = env('GOOGLE_SHEET_ID');
+        $sheet_id = get_settings('google_sheet_id');
         
         $response = $client->get('https://sheets.googleapis.com/v4/spreadsheets/'.$sheet_id.'/values:batchGet?ranges=Settings!A:Z&key='.$get_api_key.'&ranges=Sheet1!A:Z&ranges=Update-Config!A:Z');
 

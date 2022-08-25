@@ -20,8 +20,8 @@
     var heatmapData = [];
     var pickLat = [];
     var pickLng = [];
-     var default_lat = '{{$default_lat ?? env("DEFAULT_LAT")}}';
-    var default_lng = '{{$default_lng ?? env("DEFAULT_LNG")}}';
+    var default_lat = '{{ $default_lat ??  get_settings('default_latitude') }}';
+    var default_lng = '{{ $default_lng ?? get_settings('default_longitude') }}';
     var driverLat,driverLng,bearing,type;
 
     // Your web app's Firebase configuration
