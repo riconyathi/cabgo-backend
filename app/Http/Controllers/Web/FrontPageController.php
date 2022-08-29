@@ -120,7 +120,11 @@ class FrontPageController extends Controller
             ];
             //dd($data);
             //$user = $this->user->create($emailbody);
-            $this->dispatch(new ContactusNotification($data));   
+            $this->dispatch(new ContactusNotification($data));  
+
+        $message = 'message-sent-successfully';
+            
+        return redirect('contactus')->with('success', $message); 
     }
     public function privacypage()
     {
@@ -129,10 +133,7 @@ class FrontPageController extends Controller
         return view ('webfront.privacy',compact('data','p'));
     }
     public function termspage()
-    {  
-        $data=FrontPage::first();
-        $p=Storage::disk(env('FILESYSTEM_DRIVER'))->url(file_path($this->uploadPath(),''));
-        return view ('webfront.compliance',compact('data','p'));
+    { 
 
         $data=FrontPage::first();
         $p=Storage::disk(env('FILESYSTEM_DRIVER'))->url(file_path($this->uploadPath(),''));

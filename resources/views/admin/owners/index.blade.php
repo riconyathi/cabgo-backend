@@ -14,9 +14,9 @@
 
     <div class="box-header with-border">
 
-                <div>
+                <!-- <div>
                     <strong class="text-danger" style="font-size: 18px;">Note: We are currently working on this update, you may get this update soon</strong>
-                </div><br>
+                </div><br> -->
         <div class="row text-right">
 
 
