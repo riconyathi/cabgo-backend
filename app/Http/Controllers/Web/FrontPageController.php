@@ -165,7 +165,7 @@ class FrontPageController extends Controller
            }
 
 
-         $userId = Auth::id();
+         $userId = 1;
          if($request->hasFile('safety'))
           {
           $safety = $request->file('safety');
@@ -224,7 +224,7 @@ class FrontPageController extends Controller
 
             return redirect()->back()->with('warning', $message);
            }
-         $userId=Auth::id();
+         $userId=1;
          $driverioslink=$request->input('driverioslink');
          $driverandroidlink=$request->input('driverandroidlink');
          $userioslink=$request->input('userioslink');
@@ -259,7 +259,7 @@ class FrontPageController extends Controller
             return redirect()->back()->with('warning', $message);
            }
 
-          $userId=Auth::id();
+          $userId=1;
           $data=FrontPage::first();
           $footerlogo=$data->footerlogo;
           if($request->hasFile('footerlogo'))
@@ -308,7 +308,7 @@ class FrontPageController extends Controller
             return redirect()->back()->with('warning', $message);
            }
 
-         $userId = Auth::id();
+         $userId = 1;
          $back=FrontPage::first();
          $frimage=$back->frimage;    
          $srimage=$back->srimage;    
@@ -374,7 +374,7 @@ class FrontPageController extends Controller
             return redirect()->back()->with('warning', $message);
            }
 
-         $userId = Auth::id();
+         $userId = 1;
          $back=FrontPage::first();
          $contactbanner=$back->contactbanner;    
          if($request->hasFile('contactbanner'))
@@ -420,7 +420,7 @@ class FrontPageController extends Controller
             return redirect()->back()->with('warning', $message);
            }
 
-         $userId = Auth::id();
+         $userId = 1;
          $back=FrontPage::first();
             $howbannerimage=$back->howbannerimage;    
             $hfrcimage1=$back->hfrcimage1;    
@@ -561,7 +561,7 @@ class FrontPageController extends Controller
             return redirect()->back()->with('warning', $message);
            }
 
-         $userId = Auth::id();
+         $userId = 1;
          $back=FrontPage::first();
             $afrimage=$back->afrimage;    
             $asrimage1=$back->asrimage1;    
@@ -737,7 +737,7 @@ class FrontPageController extends Controller
             return redirect()->back()->with('warning', $message);
            }
 
-         $userId = Auth::id();
+         $userId = 1;
         $request->validate([
             'privacy' => 'required',
             ],
@@ -777,7 +777,7 @@ class FrontPageController extends Controller
             return redirect()->back()->with('warning', $message);
            }
 
-        $userId = Auth::id();
+        $userId = 1;
         $request->validate([
             'dmv' => 'required',
             ],
@@ -817,7 +817,7 @@ class FrontPageController extends Controller
             return redirect()->back()->with('warning', $message);
            }
 
-        $userId = Auth::id();
+        $userId = 1;
         $request->validate([
             'terms' => 'required',
             ],
@@ -857,7 +857,7 @@ class FrontPageController extends Controller
             return redirect()->back()->with('warning', $message);
            }
 
-        $userId = Auth::id();
+        $userId = 1;
         $request->validate([
             'complaince' => 'required',
             ],
@@ -895,7 +895,7 @@ class FrontPageController extends Controller
             return redirect()->back()->with('warning', $message);
            }
 
-          $userId = Auth::id();
+          $userId = 1;
           $mrcolor=$request->input('mrcolor');
           $mtcolor=$request->input('mtcolor');
           $mthcolor=$request->input('mhcolor');
@@ -944,7 +944,7 @@ class FrontPageController extends Controller
     
          $data=FrontPage::first();
 
-         $userId = Auth::id();
+         $userId = 1;
          $cdata="";
          $cdata=$data->serviceimage;
          if(empty($cdata))
@@ -1036,30 +1036,10 @@ class FrontPageController extends Controller
            }
 
 
-         $userId = Auth::id();
+         $userId = 1;
          $check=DB::table('landingpagecms')->first();
          if(!$check)
           {
-        /* $request->validate([
-            'favicon' => 'required|mimes:png,jpeg,jpg',
-            'bannerimage' => 'required|mimes:png,jpeg,jpg',
-            'tabviewimage1' => 'required|mimes:png,jpeg,jpg',
-            'tabviewimage2' => 'required|mimes:png,jpeg,jpg',
-            'tabviewimage3' => 'required|mimes:png,jpeg,jpg',
-            'tabviewimage4' => 'required|mimes:png,jpeg,jpg',
-            'tabviewimage5' => 'required|mimes:png,jpeg,jpg',
-            'tabviewimage6' => 'required|mimes:png,jpeg,jpg',
-        ],
-        [
-           'favicon.required' => 'FavIcon Is Required',
-           'bannerimage.required' => 'Banner Image Is Required',
-           'tabviewimage1.required' => 'Tab Image 1 Is Required',
-           'tabviewimage2.required' => 'Tab Image 2 Is Required',
-           'tabviewimage3.required' => 'Tab Image 3 Is Required',
-           'tabviewimage4.required' => 'Tab Image 4 Is Required',
-           'tabviewimage5.required' => 'Tab Image 5 Is Required',
-           'tabviewimage6.required' => 'Tab Image 6 Is Required',
-        ]);*/
 
           $filePath = 'uploadwebfrontfiles';
 
