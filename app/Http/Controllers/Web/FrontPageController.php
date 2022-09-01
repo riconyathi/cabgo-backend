@@ -120,11 +120,7 @@ class FrontPageController extends Controller
             ];
             //dd($data);
             //$user = $this->user->create($emailbody);
-            $this->dispatch(new ContactusNotification($data));  
-
-        $message = 'message-sent-successfully';
-            
-        return redirect('contactus')->with('success', $message); 
+            $this->dispatch(new ContactusNotification($data));   
     }
     public function privacypage()
     {
@@ -133,7 +129,10 @@ class FrontPageController extends Controller
         return view ('webfront.privacy',compact('data','p'));
     }
     public function termspage()
-    { 
+    {  
+        $data=FrontPage::first();
+        $p=Storage::disk(env('FILESYSTEM_DRIVER'))->url(file_path($this->uploadPath(),''));
+        return view ('webfront.compliance',compact('data','p'));
 
         $data=FrontPage::first();
         $p=Storage::disk(env('FILESYSTEM_DRIVER'))->url(file_path($this->uploadPath(),''));
@@ -978,18 +977,22 @@ class FrontPageController extends Controller
          }
          else
           {
-            $simagename=$data->serviceimage;
+            $simagename='';
          if($request->hasFile('serviceimage'))
           {
-            
+
+            // dd($request->file('serviceimage'));
+
              foreach($request->file('serviceimage') as $key => $file)
             {
               $path1 = Storage::put($this->uploadPath(), $file);
               $p1=explode('//',$path1);
               $simagename.=$p1[1].",";
+
             }
+
           $simagename=substr_replace($simagename, "", -1);  
-          
+
           }
           $serviceheadtext=$request->input('serviceheadtext');
           $servicesubtext=$request->input('servicesubtext');
@@ -1040,6 +1043,26 @@ class FrontPageController extends Controller
          $check=DB::table('landingpagecms')->first();
          if(!$check)
           {
+        /* $request->validate([
+            'favicon' => 'required|mimes:png,jpeg,jpg',
+            'bannerimage' => 'required|mimes:png,jpeg,jpg',
+            'tabviewimage1' => 'required|mimes:png,jpeg,jpg',
+            'tabviewimage2' => 'required|mimes:png,jpeg,jpg',
+            'tabviewimage3' => 'required|mimes:png,jpeg,jpg',
+            'tabviewimage4' => 'required|mimes:png,jpeg,jpg',
+            'tabviewimage5' => 'required|mimes:png,jpeg,jpg',
+            'tabviewimage6' => 'required|mimes:png,jpeg,jpg',
+        ],
+        [
+           'favicon.required' => 'FavIcon Is Required',
+           'bannerimage.required' => 'Banner Image Is Required',
+           'tabviewimage1.required' => 'Tab Image 1 Is Required',
+           'tabviewimage2.required' => 'Tab Image 2 Is Required',
+           'tabviewimage3.required' => 'Tab Image 3 Is Required',
+           'tabviewimage4.required' => 'Tab Image 4 Is Required',
+           'tabviewimage5.required' => 'Tab Image 5 Is Required',
+           'tabviewimage6.required' => 'Tab Image 6 Is Required',
+        ]);*/
 
           $filePath = 'uploadwebfrontfiles';
 

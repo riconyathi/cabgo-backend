@@ -165,5 +165,17 @@ class PaystackController extends ApiController
         return $this->respondSuccess($result, 'money_added_successfully');
     }
 
+    /**
+     * 
+     * 
+     * 
+     * */
+    public function webHook(Request $request)
+    {
+
+        dd($request->all());
+
+    }
+
     
 }

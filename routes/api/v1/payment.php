@@ -88,6 +88,7 @@ Route::prefix('payment')->namespace('Payment')->middleware('auth')->group(functi
     Route::prefix('paystack')->namespace('Paystack')->group(function(){
         Route::post('initialize','PaystackController@initialize');
         Route::post('add-money', 'PaystackController@addMoneyToWallet');
+        Route::any('web-hook', 'PaystackController@webHook');
 
     });
 
