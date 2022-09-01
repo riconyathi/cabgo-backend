@@ -61,9 +61,12 @@ class PaystackController extends ApiController
 
         $amount = $request->amount;
 
+        $reference = auth()->user()->id;
+        
         $query = [
             'email'=> $customer_email,
-            'amount'=>$request->amount
+            'amount'=>$request->amount,
+            'reference'=>$reference
             ];
 
         $ch = curl_init();
@@ -175,7 +178,7 @@ class PaystackController extends ApiController
     {
 
             $response = $request->all();
-            
+
             Log::info($response);
         
 
