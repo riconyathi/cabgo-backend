@@ -136,6 +136,21 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => null,
         ],
+        SettingSlug::DEFAULT_LAT => [
+            'category'=>SettingCategory::GENERAL,
+            'value' => 11.21215,
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
+        SettingSlug::DEFAULT_LONG => [
+            'category'=>SettingCategory::GENERAL,
+            'value' => 76.54545,
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
+
         // SettingSlug::DEFAULT__LANGUAGE_CODE_FOR_MOBILE_APP => [
         //     'category'=>SettingCategory::GENERAL,
         //     'value' =>  'en-GB',
@@ -419,7 +434,7 @@ class SettingsSeeder extends Seeder
 
         SettingSlug::GOOGLE_MAP_KEY => [
             'category'=>SettingCategory::MAP_SETTINGS,
-            'value' => 'AIzaSyBeVRs1icwooRpk7ErjCEQCwu0OQowVt9I',
+            'value' => 'AIzaSyB4KttZBNVcz6Q52gaIgKK8-3h2Qk8RA3Y',
             'field' => SettingValueType::PASSWORD,
             'option_value' => null,
             'group_name' => null,
@@ -431,6 +446,13 @@ class SettingsSeeder extends Seeder
             'option_value' => null,
             'group_name' => null,
         ], 
+        SettingSlug::GOOGLE_SHEET_ID => [
+            'category'=>SettingCategory::MAP_SETTINGS,
+            'value' => '1sOIs6oiLv-xrc3cNq2rvOv9ItXoux2MZJE_gdnBT7co',
+            'field' => SettingValueType::TEXT,
+            'option_value' => null,
+            'group_name' => null,
+        ],
          SettingSlug::FIREBASE_DB_URL => [
             'category'=>SettingCategory::FIREBASE_SETTINGS,
             'value' => 'https://your-db.firebaseio.com',

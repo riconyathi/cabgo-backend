@@ -726,4 +726,7 @@ return array (
   'tab-sub-text'=>'First Row Sub Text',
   'second-tab-view-image'=>'Second Row View Image',
   'second-tab-head-text'=>'Second Row Heading Text',
-);
+  'default_latitude' => 'Default Latitude',
+  'default_longitude' => 'Default Longitude',
+  'google_sheet_id' => 'Google Sheet Id',
+  );

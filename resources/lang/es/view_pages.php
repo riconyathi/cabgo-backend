@@ -710,4 +710,5 @@ return array (
   'enter_currency_code' => 'Ingrese el valor de la moneda',
   'ride_type' => 'Tipo de viaje',
   'icons' => 'Iconos',
+
 );
