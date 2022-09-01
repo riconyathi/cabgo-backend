@@ -100,7 +100,27 @@ class DriverCancelRequestController extends BaseController
             $cancellation_fee = $zone_type_price->cancellation_fee;
 
             $requested_driver = $request_detail->driverDetail;
-            $driver_wallet = $requested_driver->driverWallet;
+
+            if($request_detail->driverDetail->owner()->exists()){
+
+            $owner_wallet = $request_detail->driverDetail->owner->ownerWalletDetail;
+            $owner_wallet->amount_spent += $cancellation_fee;
+            $owner_wallet->amount_balance -= $cancellation_fee;
+            $owner_wallet->save();
+
+            // Add the history
+            $owner_wallet_history = $request_detail->driverDetail->owner->ownerWalletHistoryDetail()->create([
+                'amount'=>$admin_commision_with_tax,
+                'transaction_id'=>$request_detail->id,
+                'remarks'=>WalletRemarks::CANCELLATION_FEE,
+                'request_id'=>$request_detail->id,
+                'is_credit'=>false
+            ]);
+
+
+            }else{
+
+                $driver_wallet = $requested_driver->driverWallet;
             $driver_wallet->amount_spent += $cancellation_fee;
             $driver_wallet->amount_balance -= $cancellation_fee;
             $driver_wallet->save();
@@ -112,6 +132,9 @@ class DriverCancelRequestController extends BaseController
             'remarks'=>WalletRemarks::CANCELLATION_FEE,
             'request_id'=>$request_detail->id,
             'is_credit'=>false]);
+
+            }
+            
 
             $request_detail->requestCancellationFee()->create(['driver_id'=>$request_detail->driver_id,'is_paid'=>true,'cancellation_fee'=>$cancellation_fee,'paid_request_id'=>$request_detail->id]);
         }
