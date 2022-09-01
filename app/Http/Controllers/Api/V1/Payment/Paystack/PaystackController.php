@@ -23,6 +23,7 @@ use App\Base\Constants\Masters\PushEnums;
 use App\Models\Payment\OwnerWallet;
 use App\Models\Payment\OwnerWalletHistory;
 use App\Transformers\Payment\OwnerWalletTransformer;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @group Paystack Payment Gateway
@@ -173,7 +174,10 @@ class PaystackController extends ApiController
     public function webHook(Request $request)
     {
 
-        dd($request->all());
+            $response = $request->all();
+            
+            Log::info($response);
+        
 
     }
 
