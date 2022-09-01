@@ -110,7 +110,7 @@ class DriverCancelRequestController extends BaseController
 
             // Add the history
             $owner_wallet_history = $request_detail->driverDetail->owner->ownerWalletHistoryDetail()->create([
-                'amount'=>$admin_commision_with_tax,
+                'amount'=>$cancellation_fee,
                 'transaction_id'=>$request_detail->id,
                 'remarks'=>WalletRemarks::CANCELLATION_FEE,
                 'request_id'=>$request_detail->id,
