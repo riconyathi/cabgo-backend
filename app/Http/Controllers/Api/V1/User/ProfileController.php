@@ -144,13 +144,15 @@ class ProfileController extends ApiController
             $driver_params['reason'] = 'vehicle-info-updated';
 
 
-        }
+        }   
+
+           $owner = $user->owner()->exists();
+
 
         if($driver_params['approve']==false){
 
             $status=0;
 
-           $owner = $user->owner()->exists();
 
             if(!$owner){
                 $this->database->getReference('drivers/'.$user->driver->id)->update(['approve'=>(int)$status,'updated_at'=> Database::SERVER_TIMESTAMP]);    
@@ -160,7 +162,14 @@ class ProfileController extends ApiController
             }
             
         }
-        $user->driver()->update($driver_params);
+
+        if(!$owner){
+            $user->driver()->update($driver_params);
+
+        }else{
+            $user->owner()->update($driver_params);
+
+        }
 
         $driver_details = $user->driver;
 
