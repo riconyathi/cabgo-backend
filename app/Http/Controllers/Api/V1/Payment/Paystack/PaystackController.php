@@ -176,11 +176,63 @@ class PaystackController extends ApiController
      * */
     public function webHook(Request $request)
     {
-
             $response = $request->all();
 
             Log::info($response);
         
+        $transaction_id = $request->data['id'];
+
+        $user_id = $request->data['reference'];
+
+        $user = User::find($user_id);
+        
+
+        if ($user->hasRole('user')) {
+        $wallet_model = new UserWallet();
+        $wallet_add_history_model = new UserWalletHistory();
+        } elseif($user->hasRole('driver')) {
+                    $wallet_model = new DriverWallet();
+                    $wallet_add_history_model = new DriverWalletHistory();
+                    $user_id = $user->driver->id;
+        }else {
+                    $wallet_model = new OwnerWallet();
+                    $wallet_add_history_model = new OwnerWalletHistory();
+                    $user_id = $user->owner->id;
+        }
+
+        $user_wallet = $wallet_model::firstOrCreate([
+            'user_id'=>$user_id]);
+        $user_wallet->amount_added += $request->amount;
+        $user_wallet->amount_balance += $request->amount;
+        $user_wallet->save();
+        $user_wallet->fresh();
+
+        $wallet_add_history_model::create([
+            'user_id'=>$user_id,
+            'amount'=>$request->amount,
+            'transaction_id'=>$transaction_id,
+            'remarks'=>WalletRemarks::MONEY_DEPOSITED_TO_E_WALLET,
+            'is_credit'=>true]);
+
+
+                $pus_request_detail = json_encode($request->all());
+        
+                $socket_data = new \stdClass();
+                $socket_data->success = true;
+                $socket_data->success_message  = PushEnums::AMOUNT_CREDITED;
+                $socket_data->result = $request->all();
+
+                $title = trans('push_notifications.amount_credited_to_your_wallet_title');
+                $body = trans('push_notifications.amount_credited_to_your_wallet_body');
+
+                // dispatch(new NotifyViaMqtt('add_money_to_wallet_status'.$user_id, json_encode($socket_data), $user_id));
+                
+                $user->notify(new AndroidPushNotification($title, $body));
+
+               $result = $this->respondSuccess(null,'money_added_successfully');
+
+            Log::info($result);
+
 
     }
 
