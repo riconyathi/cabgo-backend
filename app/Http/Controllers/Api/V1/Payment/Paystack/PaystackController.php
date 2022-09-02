@@ -180,8 +180,6 @@ class PaystackController extends ApiController
     public function webHook(Request $request)
     {
             $response = $request->all();
-
-            Log::info($response);
         
         $transaction_id = $request->data['id'];
 
@@ -237,8 +235,6 @@ class PaystackController extends ApiController
                 $user->notify(new AndroidPushNotification($title, $body));
 
                $result = $this->respondSuccess(null,'money_added_successfully');
-
-            Log::info($result);
 
 
     }
