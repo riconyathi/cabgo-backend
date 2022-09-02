@@ -189,6 +189,8 @@ class PaystackController extends ApiController
 
         $user_id = $exploded_reference[1];
 
+        $requested_amount = ($request->data['amount']/100);
+
         $user = User::find($user_id);
         
 
@@ -207,14 +209,14 @@ class PaystackController extends ApiController
 
         $user_wallet = $wallet_model::firstOrCreate([
             'user_id'=>$user_id]);
-        $user_wallet->amount_added += $request->data['amount'];
-        $user_wallet->amount_balance += $request->data['amount'];
+        $user_wallet->amount_added += $requested_amount;
+        $user_wallet->amount_balance += $requested_amount;
         $user_wallet->save();
         $user_wallet->fresh();
 
         $wallet_add_history_model::create([
             'user_id'=>$user_id,
-            'amount'=>$request->data['amount'],
+            'amount'=>$requested_amount,
             'transaction_id'=>$transaction_id,
             'remarks'=>WalletRemarks::MONEY_DEPOSITED_TO_E_WALLET,
             'is_credit'=>true]);
