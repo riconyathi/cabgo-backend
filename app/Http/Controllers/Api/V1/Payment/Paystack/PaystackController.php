@@ -24,6 +24,7 @@ use App\Models\Payment\OwnerWallet;
 use App\Models\Payment\OwnerWalletHistory;
 use App\Transformers\Payment\OwnerWalletTransformer;
 use Illuminate\Support\Facades\Log;
+use App\Models\User;
 
 /**
  * @group Paystack Payment Gateway
