@@ -98,6 +98,7 @@ class ProfileController extends ApiController
 
         $user = auth()->user();
 
+        $owner = $user->owner()->exists();
 
         $mobile = $request->mobile;
 
@@ -115,7 +116,9 @@ class ProfileController extends ApiController
 
          $driver_params['approve'] = false;
 
-         $driver_params['reason'] = 'profile-info-updated';
+         if(!$owner){
+         $driver_params['reason'] = 'profile-info-updated';            
+         }
        
 
         if ($uploadedFile = $this->getValidatedUpload('profile_picture', $request)) {
@@ -129,7 +132,9 @@ class ProfileController extends ApiController
 
             $driver_params['approve'] = false;
 
-            $driver_params['reason'] = 'profile-info-updated';
+            if(!$owner){
+                $driver_params['reason'] = 'profile-info-updated';                
+            }
 
         }
 
@@ -146,7 +151,6 @@ class ProfileController extends ApiController
 
         }   
 
-           $owner = $user->owner()->exists();
 
 
         if($driver_params['approve']==false){
