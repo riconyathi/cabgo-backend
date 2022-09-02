@@ -62,11 +62,13 @@ class PaystackController extends ApiController
         $amount = $request->amount;
 
         $reference = auth()->user()->id;
-        
+            
+        $current_timestamp = Carbon::now()->timestamp;
+
         $query = [
             'email'=> $customer_email,
             'amount'=>$request->amount,
-            'reference'=>$reference
+            'reference'=>$current_timestamp.'-'.$reference
             ];
 
         $ch = curl_init();
@@ -182,7 +184,9 @@ class PaystackController extends ApiController
         
         $transaction_id = $request->data['id'];
 
-        $user_id = $request->data['reference'];
+        $exploded_reference = explode('-', $request->data['reference']);
+
+        $user_id = $exploded_reference[1];
 
         $user = User::find($user_id);
         
