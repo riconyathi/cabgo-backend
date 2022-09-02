@@ -150,8 +150,15 @@ class ProfileController extends ApiController
 
             $status=0;
 
-            $this->database->getReference('drivers/'.$user->driver->id)->update(['approve'=>(int)$status,'updated_at'=> Database::SERVER_TIMESTAMP]);
+           $owner = $user->owner()->exists();
 
+            if(!$owner){
+                $this->database->getReference('drivers/'.$user->driver->id)->update(['approve'=>(int)$status,'updated_at'=> Database::SERVER_TIMESTAMP]);    
+            }else{
+
+                $driver_params['approve']=true;
+            }
+            
         }
         $user->driver()->update($driver_params);
 
